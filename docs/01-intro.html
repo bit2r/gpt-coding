@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./02-var.html" rel="next">
 <link href="./index.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -278,7 +278,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"out-height":"","out-width":"700px","comment":"","fig-width":7,"message":"true","warning":"true","results":"markup","context":"interactive","read-only":"false","dpi":72,"fig-height":5,"output":"true","classes":"","autorun":"false","label":"r-intro-hello-world-again","fig-cap":""},"code":"print(\"헬로 R!\")","id":1},{"options":{"out-height":"","out-width":"700px","comment":"","fig-width":7,"message":"true","warning":"true","results":"markup","context":"interactive","read-only":"false","dpi":72,"fig-height":5,"output":"true","classes":"","autorun":"false","label":"r-intro-conversation","fig-cap":""},"code":"print('당신은 하늘에서 오는 전설적인 신이 분명합니다')\nprint('오랫동안 당신을 기다려왔습니다')\nprint('전설에 따르면 겨자를 곁들였을 때 아주 맛있을 거라고 해요')\nprint('다른 언급이 없다면, 오늘 밤 잔치를 벌일 것입니다')","id":2},{"options":{"out-height":"","out-width":"700px","comment":"","fig-width":7,"message":"true","warning":"true","results":"markup","context":"interactive","read-only":"false","dpi":72,"fig-height":5,"output":"true","classes":"","autorun":"false","label":"r-intro-variable","fig-cap":""},"code":"x <- 6\nx\n#> [1] 6\ny <-  x * 7\ny\n#> [1] 42","id":3},{"options":{"out-height":"","out-width":"700px","comment":"","fig-width":7,"message":"true","warning":"true","results":"markup","context":"interactive","read-only":"false","dpi":72,"fig-height":5,"output":"true","classes":"","autorun":"false","label":"r-intro-count-words","fig-cap":""},"code":"library(stringr)\n\ntext_v <- paste(\"the clown ran after the car and the car ran into\",\n                \"the tent and the tent fell down on the clown and the car\")\nsplit_word <- str_split(text_v, \" \") %>% unlist()\ntable(split_word) |> sort(decreasing=TRUE) |> head(1)","id":4},{"options":{"out-height":"","out-width":"700px","comment":"","fig-width":7,"message":"true","warning":"true","results":"markup","context":"interactive","read-only":"false","dpi":72,"fig-height":5,"output":"true","classes":"","autorun":"false","label":"r-intro-ex-variable","fig-cap":""},"code":"x <- 76\nx <- x + 1\nx","id":5}];
+globalThis.qwebrCellDetails = [{"options":{"autorun":"false","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"r-intro-hello-world-again","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":1,"code":"print(\"헬로 R!\")"},{"options":{"autorun":"false","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"r-intro-conversation","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":2,"code":"print('당신은 하늘에서 오는 전설적인 신이 분명합니다')\nprint('오랫동안 당신을 기다려왔습니다')\nprint('전설에 따르면 겨자를 곁들였을 때 아주 맛있을 거라고 해요')\nprint('다른 언급이 없다면, 오늘 밤 잔치를 벌일 것입니다')"},{"options":{"autorun":"false","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"r-intro-variable","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":3,"code":"x <- 6\nx\n#> [1] 6\ny <-  x * 7\ny\n#> [1] 42"},{"options":{"autorun":"false","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"r-intro-count-words","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":4,"code":"library(stringr)\n\ntext_v <- paste(\"the clown ran after the car and the car ran into\",\n                \"the tent and the tent fell down on the clown and the car\")\nsplit_word <- str_split(text_v, \" \") %>% unlist()\ntable(split_word) |> sort(decreasing=TRUE) |> head(1)"},{"options":{"autorun":"false","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"r-intro-ex-variable","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":5,"code":"x <- 76\nx <- x + 1\nx"}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1150,7 +1150,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"options":{"out-height":"","out-width":"700px","comment":"","fig-width":7,"message":"true","warning":"true","results":"markup","context":"interactive","read-only":"false","dpi":72,"fig-height":5,"output":"true","classes":"","autorun":"","label":"","fig-cap":""},"code":"print(\"헬로 파이썬!\")","id":1},{"options":{"out-height":"","out-width":"700px","comment":"","fig-width":7,"message":"true","warning":"true","results":"markup","context":"interactive","read-only":"false","dpi":72,"fig-height":5,"output":"true","classes":"","autorun":"","label":"py-intro-conversation","fig-cap":""},"code":"print('You must be the legendary god that comes from the sky')\nprint('We have been waiting for you for a long time')\nprint('Our legend says you will be very tasty with mustard')\nprint('We will have a feast tonight unless you say')","id":2},{"options":{"out-height":"","out-width":"700px","comment":"","fig-width":7,"message":"true","warning":"true","results":"markup","context":"interactive","read-only":"false","dpi":72,"fig-height":5,"output":"true","classes":"","autorun":"","label":"","fig-cap":""},"code":"text = 'the clown ran after the car and the car ran into the tent and the tent fell down on the clown and the car'\n\nwords = text.split()\ncounts = dict()\n\nfor word in words:\n  counts[word] = counts.get(word,0) + 1\n\nbigcount = None\nbigword = None\n\nfor word,count in counts.items():\n  if bigcount is None or count > bigcount:\n    bigword = word\n    bigcount = count\n\nprint(bigword, bigcount)","id":3}];
+globalThis.qpyodideCellDetails = [{"options":{"autorun":"","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":1,"code":"print(\"헬로 파이썬!\")"},{"options":{"autorun":"","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"py-intro-conversation","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":2,"code":"print('You must be the legendary god that comes from the sky')\nprint('We have been waiting for you for a long time')\nprint('Our legend says you will be very tasty with mustard')\nprint('We will have a feast tonight unless you say')"},{"options":{"autorun":"","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":3,"code":"text = 'the clown ran after the car and the car ran into the tent and the tent fell down on the clown and the car'\n\nwords = text.split()\ncounts = dict()\n\nfor word in words:\n  counts[word] = counts.get(word,0) + 1\n\nbigcount = None\nbigword = None\n\nfor word,count in counts.items():\n  if bigcount is None or count > bigcount:\n    bigword = word\n    bigcount = count\n\nprint(bigword, bigcount)"}];
 
 
 </script><script type="module">
@@ -1366,6 +1366,29 @@ globalThis._qpyodideGetInstance = function() {
   <div class="sidebar-item-container"> 
   <a href="./01-intro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 학습 이유</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
   </div>
 </li>
       </ul>
@@ -1885,9 +1908,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">"헬로 월드!"</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>“$”은 운영시스템 명령어 프롬프트이고, “R hello.R”는 문자열을 출력하는 한줄 R 프로그램을 담고 있는 “hello.R” 파일을 화면에 출력하라는 명령어입니다.</p>
-<p>인터랙트브 모드에서 R 코드 입력하는 방식 대신에 R 인터프리터를 호출해서 “hello.R” 파일로부터 소스코드를 읽도록 지시합니다.</p>
-<p>이 새로운 방식은 R 프로그램을 끝마치기 위해 <code><a href="https://rdrr.io/r/base/quit.html">quit()</a></code>를 사용할 필요가 없다는 점에서 편리합니다. 파일에서 소스코드를 읽을 때, 파일 끝까지 읽게 되면 자동으로 R이 종료됩니다.</p>
+<p>“$”은 운영시스템 명령어 프롬프트이고, “R hello.R”는 문자열을 출력하는 한줄 R 프로그램을 담고 있는 “hello.R” 파일을 화면에 출력하라는 명령어다.</p>
+<p>인터랙트브 모드에서 R 코드 입력하는 방식 대신에 R 인터프리터를 호출해서 “hello.R” 파일로부터 소스코드를 읽도록 지시한다.</p>
+<p>이 새로운 방식은 R 프로그램을 끝마치기 위해 <code><a href="https://rdrr.io/r/base/quit.html">quit()</a></code>를 사용할 필요가 없다는 점에서 편리하다. 파일에서 소스코드를 읽을 때, 파일 끝까지 읽게 되면 자동으로 R이 종료된다.</p>
 </section><section id="r-intro-what-is-a-program" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="r-intro-what-is-a-program">
 <span class="header-section-number">1.7</span> 프로그램이란 무엇인가?</h2>
 <p><strong>프로그램(Program)</strong>의 가장 본질적인 정의는 특정 작업을 수행할 수 있도록 조작된 일련의 R 문장의 집합이다. 가장 간단한 <code>hello.R</code> 스크립트도 프로그램이다. 한줄의 프로그램이 특별히 유익하고 쓸모가 있는 것은 아니지만 엄격한 의미에서 R 프로그램이 맞다.</p>
@@ -2492,8 +2515,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="참고문헌">
-        <span class="nav-page-text">참고문헌</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./02-var.html" class="pagination-link" aria-label="변수, 표현식, 문장">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -3154,7 +3177,7 @@ qpyodideCellDetails.map(
       qpyodideCreateCell(entry);
     }
   );
-</script><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});
+</script><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
