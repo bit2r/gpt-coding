@@ -278,7 +278,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"autorun":"false","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"r-intro-hello-world-again","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":1,"code":"print(\"헬로 R!\")"},{"options":{"autorun":"false","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"r-intro-conversation","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":2,"code":"print('당신은 하늘에서 오는 전설적인 신이 분명합니다')\nprint('오랫동안 당신을 기다려왔습니다')\nprint('전설에 따르면 겨자를 곁들였을 때 아주 맛있을 거라고 해요')\nprint('다른 언급이 없다면, 오늘 밤 잔치를 벌일 것입니다')"},{"options":{"autorun":"false","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"r-intro-variable","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":3,"code":"x <- 6\nx\n#> [1] 6\ny <-  x * 7\ny\n#> [1] 42"},{"options":{"autorun":"false","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"r-intro-count-words","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":4,"code":"library(stringr)\n\ntext_v <- paste(\"the clown ran after the car and the car ran into\",\n                \"the tent and the tent fell down on the clown and the car\")\nsplit_word <- str_split(text_v, \" \") %>% unlist()\ntable(split_word) |> sort(decreasing=TRUE) |> head(1)"},{"options":{"autorun":"false","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"r-intro-ex-variable","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":5,"code":"x <- 76\nx <- x + 1\nx"}];
+globalThis.qwebrCellDetails = [{"code":"print(\"헬로 R!\")","options":{"message":"true","label":"r-intro-hello-world-again","classes":"","output":"true","comment":"","fig-width":7,"out-width":"700px","warning":"true","autorun":"false","read-only":"false","dpi":72,"context":"interactive","fig-cap":"","results":"markup","fig-height":5,"out-height":""},"id":1},{"code":"print('당신은 하늘에서 오는 전설적인 신이 분명합니다')\nprint('오랫동안 당신을 기다려왔습니다')\nprint('전설에 따르면 겨자를 곁들였을 때 아주 맛있을 거라고 해요')\nprint('다른 언급이 없다면, 오늘 밤 잔치를 벌일 것입니다')","options":{"message":"true","label":"r-intro-conversation","classes":"","output":"true","comment":"","fig-width":7,"out-width":"700px","warning":"true","autorun":"false","read-only":"false","dpi":72,"context":"interactive","fig-cap":"","results":"markup","fig-height":5,"out-height":""},"id":2},{"code":"x <- 6\nx\n#> [1] 6\ny <-  x * 7\ny\n#> [1] 42","options":{"message":"true","label":"r-intro-variable","classes":"","output":"true","comment":"","fig-width":7,"out-width":"700px","warning":"true","autorun":"false","read-only":"false","dpi":72,"context":"interactive","fig-cap":"","results":"markup","fig-height":5,"out-height":""},"id":3},{"code":"library(stringr)\n\ntext_v <- paste(\"the clown ran after the car and the car ran into\",\n                \"the tent and the tent fell down on the clown and the car\")\nsplit_word <- str_split(text_v, \" \") %>% unlist()\ntable(split_word) |> sort(decreasing=TRUE) |> head(1)","options":{"message":"true","label":"r-intro-count-words","classes":"","output":"true","comment":"","fig-width":7,"out-width":"700px","warning":"true","autorun":"false","read-only":"false","dpi":72,"context":"interactive","fig-cap":"","results":"markup","fig-height":5,"out-height":""},"id":4},{"code":"x <- 76\nx <- x + 1\nx","options":{"message":"true","label":"r-intro-ex-variable","classes":"","output":"true","comment":"","fig-width":7,"out-width":"700px","warning":"true","autorun":"false","read-only":"false","dpi":72,"context":"interactive","fig-cap":"","results":"markup","fig-height":5,"out-height":""},"id":5}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1150,7 +1150,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"options":{"autorun":"","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":1,"code":"print(\"헬로 파이썬!\")"},{"options":{"autorun":"","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"py-intro-conversation","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":2,"code":"print('You must be the legendary god that comes from the sky')\nprint('We have been waiting for you for a long time')\nprint('Our legend says you will be very tasty with mustard')\nprint('We will have a feast tonight unless you say')"},{"options":{"autorun":"","classes":"","read-only":"false","context":"interactive","out-height":"","comment":"","dpi":72,"out-width":"700px","message":"true","label":"","results":"markup","output":"true","fig-width":7,"fig-cap":"","warning":"true","fig-height":5},"id":3,"code":"text = 'the clown ran after the car and the car ran into the tent and the tent fell down on the clown and the car'\n\nwords = text.split()\ncounts = dict()\n\nfor word in words:\n  counts[word] = counts.get(word,0) + 1\n\nbigcount = None\nbigword = None\n\nfor word,count in counts.items():\n  if bigcount is None or count > bigcount:\n    bigword = word\n    bigcount = count\n\nprint(bigword, bigcount)"}];
+globalThis.qpyodideCellDetails = [{"code":"print(\"헬로 파이썬!\")","options":{"message":"true","read-only":"false","classes":"","output":"true","comment":"","fig-width":7,"out-width":"700px","warning":"true","autorun":"","context":"interactive","dpi":72,"label":"","fig-cap":"","results":"markup","fig-height":5,"out-height":""},"id":1},{"code":"print('You must be the legendary god that comes from the sky')\nprint('We have been waiting for you for a long time')\nprint('Our legend says you will be very tasty with mustard')\nprint('We will have a feast tonight unless you say')","options":{"message":"true","read-only":"false","classes":"","output":"true","comment":"","fig-width":7,"out-width":"700px","warning":"true","autorun":"","context":"interactive","dpi":72,"label":"py-intro-conversation","fig-cap":"","results":"markup","fig-height":5,"out-height":""},"id":2},{"code":"text = 'the clown ran after the car and the car ran into the tent and the tent fell down on the clown and the car'\n\nwords = text.split()\ncounts = dict()\n\nfor word in words:\n  counts[word] = counts.get(word,0) + 1\n\nbigcount = None\nbigword = None\n\nfor word,count in counts.items():\n  if bigcount is None or count > bigcount:\n    bigword = word\n    bigcount = count\n\nprint(bigword, bigcount)","options":{"message":"true","read-only":"false","classes":"","output":"true","comment":"","fig-width":7,"out-width":"700px","warning":"true","autorun":"","context":"interactive","dpi":72,"label":"","fig-cap":"","results":"markup","fig-height":5,"out-height":""},"id":3}];
 
 
 </script><script type="module">
@@ -1389,6 +1389,35 @@ globalThis._qpyodideGetInstance = function() {
   <div class="sidebar-item-container"> 
   <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
   </div>
 </li>
       </ul>
@@ -3177,7 +3206,7 @@ qpyodideCellDetails.map(
       qpyodideCreateCell(entry);
     }
   );
-</script><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom"});
+</script><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

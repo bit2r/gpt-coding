@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://r2bit.com/gpt-coding/index.html</loc>
-    <lastmod>2024-02-28T09:58:23.716Z</lastmod>
-  </url>
-  <url>
     <loc>https://r2bit.com/gpt-coding/01-intro.html</loc>
     <lastmod>2024-02-29T04:44:00.558Z</lastmod>
   </url>
@@ -17,15 +13,19 @@
     <lastmod>2024-02-29T23:39:33.701Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/gpt-coding/references.html</loc>
-    <lastmod>2024-02-28T09:58:07.456Z</lastmod>
-  </url>
-  <url>
     <loc>https://r2bit.com/gpt-coding/04-func.html</loc>
     <lastmod>2024-03-01T09:09:38.543Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/05-loop.html</loc>
     <lastmod>2024-03-01T12:10:50.633Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/06-string.html</loc>
+    <lastmod>2024-03-01T12:25:47.041Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/references.html</loc>
+    <lastmod>2024-02-28T09:58:07.456Z</lastmod>
   </url>
 </urlset>
