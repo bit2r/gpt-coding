@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.9">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="이광춘">
-
 <title>챗GPT 코딩 – 3&nbsp; 조건부 실행</title>
 <style>
 code{white-space: pre-wrap;}
@@ -57,7 +54,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -65,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./04-func.html" rel="next">
 <link href="./02-var.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -79,8 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -106,9 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "검색",
     "search-label": "검색"
   }
-}</script>
-
-<script type="text/javascript">
+}</script><script type="text/javascript">
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -120,11 +113,8 @@ ga('send', {
   hitType: 'pageview',
   'anonymizeIp': true,
 });
-</script>
-<script defer="" data-domain="r2bit.com/gpt-quarto" src="https://plausible.io/js/script.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-  
+</script><script defer="" data-domain="r2bit.com/gpt-quarto" src="https://plausible.io/js/script.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <style type="text/css">
 .monaco-editor pre {
   background-color: unset !important;
@@ -288,10 +278,9 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-cont-true-false","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"5 == 5\n\n5 == 6"},{"id":2,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-cont-logical","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"typeof(TRUE)\n#> [1] \"logical\"\ntypeof(FALSE)\n#> [1] \"logical\""},{"id":3,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-cont-logical-true","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"17 & TRUE\n#> [1] TRUE"},{"id":4,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-cont-if","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"\nif (x > 0) {\n  print('x 는 양수')\n}"},{"id":5,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-cont-if-placeholder","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if (x > 0) {\n  # 아무것도 작성하지 않고 자리만 잡아둔다. 나중에 코드를 채워넣는다.\n}"},{"id":6,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-cont-console, eval=FALSE}","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"x <- 3\n\nif (x < 10) {\n  print('작다')\n}\n#> [1] \"작다\""},{"id":7,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-cont-alternative","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if (x %% 2 == 0){\n  print(\"x는 짝수\")\n} else {\n  print(\"x는 홀수\")\n}"},{"id":8,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-cont-chained","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if (x < y){\n  print(\"x는 y보다 작다\")\n} else if (x > y) {\n  print(\"x는 y보다 크다\")\n} else {\n  print(\"x와 y는 같다\")\n}"},{"id":9,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-cont-choice","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if (choice == 'a') {\n  print(\"잘못된 추측\")\n} else if(choice == 'b') {\n  print(\"좋은 추측\")\n} else if (choice == 'c') {\n  print('가깝지만 틀렸어요')\n}"},{"id":10,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-cont-nested","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if (x == y){\n  print(\"x와 y는 같다\")\n} else {\n  if (x > y) {\n    print(\"x는 y보다 크다\")\n  } else {\n    print(\"x는 y보다 작다\")\n  }\n}"},{"id":11,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-cont-code-review","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if (0 < x) {\n  if (x < 10) {\n    print('x는 한자리 양수.')\n  }\n}"},{"id":12,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-cont-code-simplify","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if (0 < x & x < 10) {\n  print(\"x는 한자리 양수.\")\n}"},{"id":13,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-var-fahren","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"inp <- readline(prompt = \"화씨 온도 입력해줘: \")\n\ntryCatch({\n  cel <- (as.numeric(inp) - 32.0) * 5.0 / 9.0\n  print(cel)\n}, warning = function(w) {\n  print(\"경고: 숫자를 입력해주세요!\")\n}, error = function(e) {\n  print(\"에러: 숫자를 입력해주세요!\")\n})"},{"id":14,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-var-short-circuit","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"x <- 6\ny <- 2\nx >= 2 & (x/y) > 2\n#> [1] TRUE\n\nx <- 1\ny <- 0\nx >= 2 & (x/y) > 2\n#> [1] FALSE\n\nx <- 6\ny <- 0\nx >= 2 & (x/y) > 2\n#> [1] TRUE"},{"id":15,"options":{"message":"true","warning":"true","context":"interactive","autorun":"false","output":"true","dpi":72,"results":"markup","fig-cap":"","label":"r-var-gardian-pattern","comment":"","read-only":"false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"x <- 1\ny <- 0\nx >= 2 & y != 0 & (x/y) > 2\n#> [1] FALSE\n\nx <- 6\ny <- 0\nx >= 2 & y != 0 & (x/y) > 2\n#> [1] FALSE\n\nx >= 2 & (x/y) > 2 & y != 0\n#> [1] FALSE"}];
+globalThis.qwebrCellDetails = [{"id":1,"code":"5 == 5\n\n5 == 6","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-cont-true-false","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":2,"code":"typeof(TRUE)\n#> [1] \"logical\"\ntypeof(FALSE)\n#> [1] \"logical\"","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-cont-logical","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":3,"code":"17 & TRUE\n#> [1] TRUE","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-cont-logical-true","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":4,"code":"\nif (x > 0) {\n  print('x 는 양수')\n}","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-cont-if","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":5,"code":"if (x > 0) {\n  # 아무것도 작성하지 않고 자리만 잡아둔다. 나중에 코드를 채워넣는다.\n}","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-cont-if-placeholder","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":6,"code":"x <- 3\n\nif (x < 10) {\n  print('작다')\n}\n#> [1] \"작다\"","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-cont-console, eval=FALSE}","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":7,"code":"if (x %% 2 == 0){\n  print(\"x는 짝수\")\n} else {\n  print(\"x는 홀수\")\n}","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-cont-alternative","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":8,"code":"if (x < y){\n  print(\"x는 y보다 작다\")\n} else if (x > y) {\n  print(\"x는 y보다 크다\")\n} else {\n  print(\"x와 y는 같다\")\n}","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-cont-chained","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":9,"code":"if (choice == 'a') {\n  print(\"잘못된 추측\")\n} else if(choice == 'b') {\n  print(\"좋은 추측\")\n} else if (choice == 'c') {\n  print('가깝지만 틀렸어요')\n}","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-cont-choice","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":10,"code":"if (x == y){\n  print(\"x와 y는 같다\")\n} else {\n  if (x > y) {\n    print(\"x는 y보다 크다\")\n  } else {\n    print(\"x는 y보다 작다\")\n  }\n}","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-cont-nested","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":11,"code":"if (0 < x) {\n  if (x < 10) {\n    print('x는 한자리 양수.')\n  }\n}","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-cont-code-review","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":12,"code":"if (0 < x & x < 10) {\n  print(\"x는 한자리 양수.\")\n}","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-cont-code-simplify","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":13,"code":"inp <- readline(prompt = \"화씨 온도 입력해줘: \")\n\ntryCatch({\n  cel <- (as.numeric(inp) - 32.0) * 5.0 / 9.0\n  print(cel)\n}, warning = function(w) {\n  print(\"경고: 숫자를 입력해주세요!\")\n}, error = function(e) {\n  print(\"에러: 숫자를 입력해주세요!\")\n})","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-var-fahren","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":14,"code":"x <- 6\ny <- 2\nx >= 2 & (x/y) > 2\n#> [1] TRUE\n\nx <- 1\ny <- 0\nx >= 2 & (x/y) > 2\n#> [1] FALSE\n\nx <- 6\ny <- 0\nx >= 2 & (x/y) > 2\n#> [1] TRUE","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-var-short-circuit","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":15,"code":"x <- 1\ny <- 0\nx >= 2 & y != 0 & (x/y) > 2\n#> [1] FALSE\n\nx <- 6\ny <- 0\nx >= 2 & y != 0 & (x/y) > 2\n#> [1] FALSE\n\nx >= 2 & (x/y) > 2 & y != 0\n#> [1] FALSE","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-var-gardian-pattern","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":16,"code":"signal_power <- 9\nnoise_power <- -10\n\nratio <- signal_power / noise_power\n\ndecibels <- 10 * log10(ratio)\ncat(\"데시벨(db):\", decibels)","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"false","dpi":72,"out-width":"700px","fig-cap":"","label":"r-var-debug","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}}];
 
-</script>
-<script type="module">
+</script><script type="module">
 // Declare startupMessageQWebR globally
 globalThis.qwebrStartupMessage = document.createElement("p");
 
@@ -384,8 +373,7 @@ function displayStartupMessage(showStartupMessage, showHeaderMessage) {
 }
 
 displayStartupMessage(qwebrShowStartupMessage, qwebrShowHeaderMessage);
-</script>
-<script type="module">
+</script><script type="module">
 // Supported Evaluation Types for Context
 globalThis.EvalTypes = Object.freeze({
   Interactive: 'interactive',
@@ -631,8 +619,7 @@ globalThis.createLoadingContainer = function(qwebrCounter) {
 
   return container;
 }
-</script>
-<script type="module">
+</script><script type="module">
 // Function to install a single package
 async function qwebrInstallRPackage(packageName) {
   await mainWebR.evalRVoid(`webr::install('${packageName}');`);
@@ -728,8 +715,7 @@ globalThis.qwebrInstance = import(qwebrCustomizedWebROptions.baseURL + "webr.mjs
 // Stop timer
 const initializeWebRTimerEnd = performance.now();
 
-</script>
-<script type="module">
+</script><script type="module">
 // Function to verify a given JavaScript Object is empty
 globalThis.qwebrIsObjectEmpty = function (arr) {
     return Object.keys(arr).length === 0;
@@ -1003,10 +989,8 @@ globalThis.qwebrExecuteCode = async function (
     }
 }
 
-</script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/editor/editor.main.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-  
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/editor/editor.main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <style type="text/css">
 .monaco-editor pre {
   background-color: unset !important;
@@ -1166,11 +1150,10 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"id":1,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-cont-true-false","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"5 == 5\n\n5 == 6"},{"id":2,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-cont-logical","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"type(True)\n#> <class 'bool'>\ntype(False)\n#> <class 'bool'>"},{"id":3,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-cont-logical-true","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"17 and True\n#> [1] True"},{"id":4,"options":{"warning":"true","context":"interactive","results":"markup","out-height":"","message":"true","fig-width":7,"read-only":"false","autorun":"","output":"true","dpi":72,"classes":"","fig-cap":"","comment":"","eval":"false","fig-height":5,"out-width":"700px","label":"py-cont-if"},"code":"\nif x > 0:\n    print('x 는 양수')"},{"id":5,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-cont-if-placeholder","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if x > 0:\n    pass # 아무것도 작성하지 않고 자리만 잡아둔다. 나중에 코드를 채워넣는다."},{"id":6,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-cont-console, eval=FALSE}","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"x = 3\n\nif x < 10:\n  print('작다')\n#> \"작다\""},{"id":7,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-cont-alternative","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if x % 2 == 0:\n    print(\"x는 짝수\")\nelse:\n    print(\"x는 홀수\")"},{"id":8,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-cont-chained","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if x < y:\n    print(\"x는 y보다 작다\")\nelif x > y:\n    print(\"x는 y보다 크다\")\nelse:\n    print(\"x와 y는 같다\")"},{"id":9,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-cont-choice","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if choice == 'a':\n    print(\"잘못된 추측\")\nelif choice == 'b':\n    print(\"좋은 추측\")\nelif choice == 'c':\n    print('가깝지만 틀렸어요')"},{"id":10,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-cont-nested","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if x == y:\n    print(\"x와 y는 같다\")\nelse:\n    if x > y:\n        print(\"x는 y보다 크다\")\n    else:\n        print(\"x는 y보다 작다\")"},{"id":11,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-cont-code-review","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if 0 < x:\n    if x < 10:\n        print('x는 한자리 양수.')"},{"id":12,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-cont-code-simplify","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"if 0 < x and x < 10:\n    print(\"x는 한자리 양수.\")"},{"id":13,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-var-fahren","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"\ninp = input('화씨 온도 입력해줘: ')\ntry:\n    fahr = float(inp)\n    cel = (fahr - 32.0) * 5.0 / 9.0\n    print(cel)\nexcept ValueError:\n    print('숫자를 입력해주세요!')"},{"id":14,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-var-short-circuit","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"x = 6\ny = 2\nx >= 2 and (x/y) > 2\n#> True\n\nx = 1\ny = 0\nx >= 2 and (x/y) > 2\n#> False\n\nx = 6\ny = 0\nx >= 2 and (x/y) > 2\n#> Traceback (most recent call last):\n#>   File \"<pyshell#28>\", line 1, in <module>\n#>     x >= 2 and (x/y) > 2\n#> ZeroDivisionError: division by zero"},{"id":15,"options":{"message":"true","warning":"true","context":"interactive","autorun":"","output":"true","dpi":72,"results":"markup","fig-cap":"","read-only":"false","comment":"","label":"py-var-gardian-pattern","out-height":"","fig-width":7,"fig-height":5,"out-width":"700px","classes":""},"code":"x = 1\ny = 0\nx >= 2 and y != 0 and (x/y) > 2\n#> False\n\nx = 6\ny = 0\nx >= 2 and y != 0 and (x/y) > 2\n#> False\n\nx >= 2 and (x/y) > 2 and y != 0\n#> Traceback (most recent call last):\n#>   File \"<pyshell#37>\", line 1, in <module>\n#>     x >= 2 and (x/y) > 2 and y != 0\n#> ZeroDivisionError: division by zero"}];
+globalThis.qpyodideCellDetails = [{"id":1,"code":"5 == 5\n\n5 == 6","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-cont-true-false","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":2,"code":"type(True)\n#> <class 'bool'>\ntype(False)\n#> <class 'bool'>","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-cont-logical","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":3,"code":"17 and True\n#> [1] True","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-cont-logical-true","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":4,"code":"\nif x > 0:\n    print('x 는 양수')","options":{"results":"markup","message":"true","out-height":"","autorun":"","fig-cap":"","classes":"","eval":"false","warning":"true","fig-height":5,"dpi":72,"out-width":"700px","comment":"","read-only":"false","label":"py-cont-if","fig-width":7,"output":"true","context":"interactive"}},{"id":5,"code":"if x > 0:\n    pass # 아무것도 작성하지 않고 자리만 잡아둔다. 나중에 코드를 채워넣는다.","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-cont-if-placeholder","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":6,"code":"x = 3\n\nif x < 10:\n  print('작다')\n#> \"작다\"","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-cont-console, eval=FALSE}","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":7,"code":"if x % 2 == 0:\n    print(\"x는 짝수\")\nelse:\n    print(\"x는 홀수\")","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-cont-alternative","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":8,"code":"if x < y:\n    print(\"x는 y보다 작다\")\nelif x > y:\n    print(\"x는 y보다 크다\")\nelse:\n    print(\"x와 y는 같다\")","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-cont-chained","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":9,"code":"if choice == 'a':\n    print(\"잘못된 추측\")\nelif choice == 'b':\n    print(\"좋은 추측\")\nelif choice == 'c':\n    print('가깝지만 틀렸어요')","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-cont-choice","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":10,"code":"if x == y:\n    print(\"x와 y는 같다\")\nelse:\n    if x > y:\n        print(\"x는 y보다 크다\")\n    else:\n        print(\"x는 y보다 작다\")","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-cont-nested","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":11,"code":"if 0 < x:\n    if x < 10:\n        print('x는 한자리 양수.')","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-cont-code-review","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":12,"code":"if 0 < x and x < 10:\n    print(\"x는 한자리 양수.\")","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-cont-code-simplify","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":13,"code":"\ninp = input('화씨 온도 입력해줘: ')\ntry:\n    fahr = float(inp)\n    cel = (fahr - 32.0) * 5.0 / 9.0\n    print(cel)\nexcept ValueError:\n    print('숫자를 입력해주세요!')","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-var-fahren","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":14,"code":"x = 6\ny = 2\nx >= 2 and (x/y) > 2\n#> True\n\nx = 1\ny = 0\nx >= 2 and (x/y) > 2\n#> False\n\nx = 6\ny = 0\nx >= 2 and (x/y) > 2\n#> Traceback (most recent call last):\n#>   File \"<pyshell#28>\", line 1, in <module>\n#>     x >= 2 and (x/y) > 2\n#> ZeroDivisionError: division by zero","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-var-short-circuit","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":15,"code":"x = 1\ny = 0\nx >= 2 and y != 0 and (x/y) > 2\n#> False\n\nx = 6\ny = 0\nx >= 2 and y != 0 and (x/y) > 2\n#> False\n\nx >= 2 and (x/y) > 2 and y != 0\n#> Traceback (most recent call last):\n#>   File \"<pyshell#37>\", line 1, in <module>\n#>     x >= 2 and (x/y) > 2 and y != 0\n#> ZeroDivisionError: division by zero","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-var-gardian-pattern","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}},{"id":16,"code":"import math\n\n# 초기 값 설정\nsignal_power = 9\nnoise_power = -10\n\n# signal-to-noise 비율 계산\nratio = signal_power / noise_power\n\n# 데시벨 계산\ndecibels = 10 * math.log10(ratio)\n\nprint(\"데시벨(db):\", decibels)","options":{"context":"interactive","results":"markup","output":"true","classes":"","message":"true","comment":"","out-height":"","autorun":"","dpi":72,"out-width":"700px","fig-cap":"","label":"py-var-debug","read-only":"false","fig-width":7,"fig-height":5,"warning":"true"}}];
 
 
-</script>
-<script type="module">
+</script><script type="module">
 // Declare startupMessageqpyodide globally
 globalThis.qpyodideStartupMessage = document.createElement("p");
 
@@ -1254,8 +1237,7 @@ function qpyodideDisplayStartupMessage(showStartupMessage) {
 }
 
 qpyodideDisplayStartupMessage(qpyodideShowStartupMessage);
-</script>
-<script type="module">
+</script><script type="module">
 // Create a logging setup
 globalThis.qpyodideMessageArray = []
 
@@ -1327,12 +1309,7 @@ globalThis._qpyodideGetInstance = function() {
     return qpyodideInstance;
 }
 
-</script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -1358,15 +1335,11 @@ window.Quarto = {
   typesetMath
 };
 </script>
-
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -1377,13 +1350,9 @@ window.Quarto = {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">챗GPT 코딩</a> 
         <div class="sidebar-tools-main">
@@ -1403,7 +1372,7 @@ window.Quarto = {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">서문</span></a>
@@ -1417,15 +1386,15 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 학습 이유</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
@@ -1434,8 +1403,8 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-var.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
@@ -1447,8 +1416,14 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -1456,16 +1431,14 @@ window.Quarto = {
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">목차</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
    
   <ul>
-  <li><a href="#r-cont-boolean" id="toc-r-cont-boolean" class="nav-link active" data-scroll-target="#r-cont-boolean"><span class="header-section-number">3.1</span> 부울 표현식</a></li>
+<li><a href="#r-cont-boolean" id="toc-r-cont-boolean" class="nav-link active" data-scroll-target="#r-cont-boolean"><span class="header-section-number">3.1</span> 부울 표현식</a></li>
   <li><a href="#r-cont-logical-operator" id="toc-r-cont-logical-operator" class="nav-link" data-scroll-target="#r-cont-logical-operator"><span class="header-section-number">3.2</span> 논리 연산자</a></li>
   <li><a href="#r-cont-run" id="toc-r-cont-run" class="nav-link" data-scroll-target="#r-cont-run"><span class="header-section-number">3.3</span> 조건문 실행</a></li>
   <li><a href="#r-cont-alternative" id="toc-r-cont-alternative" class="nav-link" data-scroll-target="#r-cont-alternative"><span class="header-section-number">3.4</span> 대안 실행</a></li>
@@ -1476,13 +1449,10 @@ window.Quarto = {
   <li><a href="#r-cont-debugging" id="toc-r-cont-debugging" class="nav-link" data-scroll-target="#r-cont-debugging"><span class="header-section-number">3.9</span> 디버깅</a></li>
   <li><a href="#r-cont-terminology" id="toc-r-cont-terminology" class="nav-link" data-scroll-target="#r-cont-terminology"><span class="header-section-number">3.10</span> 용어 정의</a></li>
   <li><a href="#r-cont-ex" id="toc-r-cont-ex" class="nav-link" data-scroll-target="#r-cont-ex">연습문제</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/03-cont.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/03-cont.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-<script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
-<script type="module" id="qwebr-monaco-editor-init">
+<main class="content" id="quarto-document-content"><script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script><script type="module" id="qwebr-monaco-editor-init">
 
   // Configure the Monaco Editor's loader
   require.config({
@@ -1490,8 +1460,7 @@ window.Quarto = {
       'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs'
     }
   });
-</script>
-<script type="module">
+</script><script type="module">
 // Global dictionary to store Monaco Editor instances
 globalThis.qwebrEditorInstances = {};
 
@@ -1654,9 +1623,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   };
   
 }
-</script>
-<script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/loader.js"></script>
-<script type="module" id="qpyodide-monaco-editor-init">
+</script><script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/loader.js"></script><script type="module" id="qpyodide-monaco-editor-init">
 
   // Configure the Monaco Editor's loader
   require.config({
@@ -1664,10 +1631,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
       'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'
     }
   });
-</script>
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-var.html">프로그래밍</a></li><li class="breadcrumb-item"><a href="./03-cont.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></a></li></ol></nav>
-<div class="quarto-title">
+</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-var.html">프로그래밍</a></li><li class="breadcrumb-item"><a href="./03-cont.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title"><span id="r-cont" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></h1>
 </div>
 
@@ -1682,14 +1646,14 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   
 
 
-</header>
-
-
-<section id="r-cont-boolean" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="r-cont-boolean"><span class="header-section-number">3.1</span> 부울 표현식</h2>
+</header><section id="r-cont-boolean" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="r-cont-boolean">
+<span class="header-section-number">3.1</span> 부울 표현식</h2>
 <p><strong>부울 표현식(boolean expression)</strong>은 참(TRUE) 혹은 거짓(FALSE)를 지닌 표현식이다. 다음 예제는 <code>==</code> 연산자를 사용하여 두 개 피연산자를 비교하여 값이 동일하면 참(TRUE), 그렇지 않으면 거짓(FALSE)을 산출한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div id="qwebr-insertion-location-1"></div>
@@ -1703,7 +1667,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p>참(TRUE)과 거짓(FALSE)은 논리형(logical) 자료형(type)에 속하는 특별한 값으로 문자열은 아니다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div id="qwebr-insertion-location-2"></div>
@@ -1726,10 +1693,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li>x != y <code>#</code> x는 y와 개체가 동일하지 않다.</li>
 </ul>
 <p>상기 연산자가 친숙할지 모르지만, R 기호는 수학 기호와 다르다. 일반적인 오류로 비교를 해서 동일하다는 의미로 <code>==</code> 연산자 대신에 <code>=</code> 를 사용하는 것이다. R에서 대입연산자로 <code>&lt;-</code>을 사용하지만, <code>=</code> 으로 사용해도 프로그램은 돌아간다. <code>=</code> 연산자는 대입 연산자이고, <code>==</code> 연산자는 비교 연산자다. <code>=&lt;</code>, <code>=&gt;</code> 같은 비교 연산자는 R에는 없다.</p>
-</section>
-<section id="r-cont-logical-operator" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="r-cont-logical-operator"><span class="header-section-number">3.2</span> 논리 연산자</h2>
-<p>세개 <strong>논리 연산자(logical operators)</strong>: <code>&amp;</code>, <code>||</code>, <code>!</code> 이 있다. 논리 연산자 의미는 수식기호 의미와 유사하다. 영어로 표현하면 <code>&amp;</code>은 <code>and</code>, <code>||</code>은 <code>or</code>, <code>!</code>은 <code>not</code>이 된다. 예를 들어,</p>
+</section><section id="r-cont-logical-operator" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="r-cont-logical-operator">
+<span class="header-section-number">3.2</span> 논리 연산자</h2>
+<p>세개 **논리 연산자(logical operators): <code>&amp;</code>, <code>||</code>, <code>!</code> 이 있다. 논리 연산자 의미는 수식기호 의미와 유사하다. 영어로 표현하면 <code>&amp;</code>은 <code>and</code>, <code>||</code>은 <code>or</code>, <code>!</code>은 <code>not</code>이 된다. 예를 들어,</p>
 <ul>
 <li><code>x &gt; 0 &amp; x &lt; 10</code></li>
 </ul>
@@ -1738,7 +1704,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>마지막으로 <code>!</code> 연산자는 부울 연산 표현식을 부정한다. <code>x &gt; y</code> 가 거짓이면, <code>! (x &gt; y)</code>은 참이다. 즉, x이 y 보다 작거나 같으면 참이다.</p>
 <p>엄밀히 말해서, 논리 연산자의 두 피연산자는 모두 부울 표현식이지만, R에서 그다지 엄격하지는 않다. 0 이 아닌 임의의 숫자 모두 “참(TRUE)”으로 해석된다. 일반적으로 참(TRUE)이면 <code>1</code>, 그렇지 않는 경우 <code>0</code>으로 표현해서 사용한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <div id="qwebr-insertion-location-3"></div>
@@ -1751,12 +1720,14 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p>이러한 유연함이 유용할 수 있으나, 혼란을 줄 수도 있으니 유의해서 사용해야 한다. 무슨 일을 하고 있는지 정확하게 알지 못한다면 피하는 것이 상책이다.</p>
-</section>
-<section id="r-cont-run" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="r-cont-run"><span class="header-section-number">3.3</span> 조건문 실행</h2>
+</section><section id="r-cont-run" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="r-cont-run">
+<span class="header-section-number">3.3</span> 조건문 실행</h2>
 <p>유용한 프로그램을 작성하기 위해서 거의 항상 조건을 확인하고 조건에 따라 프로그램 실행을 바꿀 수 있어야 한다. <strong>조건문(Conditional statements)</strong>은 그러한 능력을 부여한다. 가장 간단한 형태는 <code>if</code> 문이다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <div id="qwebr-insertion-location-4"></div>
@@ -1770,20 +1741,21 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p><code>if</code>문 뒤에 불 표현식(boolean expression)을 조건(condition)이라고 한다.</p>
 <div id="fig-cont-if" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-cont-if-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-cont-if-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="images/cont-if.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="그림&nbsp;3.1: if문 순서도"><img src="images/cont-if.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cont-if-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 그림&nbsp;3.1: <code>if</code>문 순서도
-</figcaption>
-</figure>
+</figcaption></figure>
 </div>
 <p>만약 조건문이 참이면, 첫번째 괄호로 둘러싼 문장이 실행된다. 만약 조건문이 거짓이면, 첫번째 괄호로 둘러싼 문장의 실행을 건너뛴다.</p>
 <p><code>if</code>문은 함수 정의, <code>for</code> 반복문과 동일한 구조를 가진다. <code>if</code>문은 <code>(</code>으로 시작되고, <code>)</code>으로 끝나는 헤더 머리부문과 괄호(<code>{</code>, <code>}</code>)로 둘러싼 몸통 블록(block)으로 구성된다. <code>if</code>문처럼 문장이 한 줄 이상에 걸쳐 작성되기 때문에 <strong>복합 문장(compound statements)</strong>이라고 한다.</p>
 <p><code>if</code>문 몸통 부문에 작성되는 실행 문장 숫자에 제한은 없으나 최소한 한 줄은 있어야 한다. 때때로, 몸통 부문에 어떤 문장도 없는 경우가 있다. 아직 코드를 작성하지 않아서 자리만 잡아 놓는 경우로, 그냥 놔두면 된다. 즉, 아무것도 작성하지 않고 괄호 내부를 비워 놓는다. 파이썬의 경우 아무것도 수행하지 않는 <code>pass</code>문을 넣어야 되는 것과 대비된다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
 <div id="qwebr-insertion-location-5"></div>
@@ -1797,7 +1769,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p><code>if</code>문을 R 인터프리터에서 타이핑하고 엔터를 치게 되면, 명령 프롬프트가 <code>+</code>로 바뀐다. 따라서 다음과 같이 <code>if</code>문 몸통 부분을 작성중에 있다는 것을 나타낸다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
 <div id="qwebr-insertion-location-6"></div>
@@ -1809,12 +1784,14 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-</section>
-<section id="r-cont-alternative" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="r-cont-alternative"><span class="header-section-number">3.4</span> 대안 실행</h2>
+</section><section id="r-cont-alternative" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="r-cont-alternative">
+<span class="header-section-number">3.4</span> 대안 실행</h2>
 <p><code>if</code>문의 두 번째 형태는 <strong>대안 실행(alternative execution)</strong>이다. 대안 실행의 경우 두 가지 경우의 수가 존재하고, 조건이 어느 방향으로 실행할 것인지 결정한다. 구문(Syntax)은 아래와 같다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
 <div id="qwebr-insertion-location-7"></div>
@@ -1828,22 +1805,22 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p>x를 2로 나누었을 때, 0 이되면, x는 짝수이고, 프로그램은 짝수(“x는 짝수”)라는 결과 메시지를 출력한다. 만약 조건이 거짓이라면, 두 번째 몸통 부문 문장이 실행된다.</p>
 <div id="fig-cont-if-else" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-cont-if-else-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-cont-if-else-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="images/cont-if-else.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="그림&nbsp;3.2: if-else문"><img src="images/cont-if-else.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cont-if-else-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 그림&nbsp;3.2: <code>if-else</code>문
-</figcaption>
-</figure>
+</figcaption></figure>
 </div>
 <p>조건은 참 혹은 거짓이어서, 대안 중 하나만 정확하게 실행된다. 대안을 <strong>분기(Branch)</strong>라고도 하는데 이유는 실행 흐름이 분기되기 때문이다.</p>
-</section>
-<section id="r-cont-chained" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="r-cont-chained"><span class="header-section-number">3.5</span> 연쇄 조건문</h2>
+</section><section id="r-cont-chained" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="r-cont-chained">
+<span class="header-section-number">3.5</span> 연쇄 조건문</h2>
 <p>때때로, 두 가지 이상의 경우의 수가 있으며, 두 가지 이상의 분기가 필요하다. 이와 같은 연산을 표현하는 방식이 <strong>연쇄 조건문(chained conditional)</strong>이다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
 <div id="qwebr-insertion-location-8"></div>
@@ -1859,7 +1836,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p><img src="images/cond-if-chained.png" class="img-fluid" alt="연쇄 조건문">{width = 100%}</p>
 <p><code>if else</code> 문의 갯수에 제한은 없다. <code>else</code> 절이 있다면, 거기서 끝마쳐야 하지만, 연쇄 조건문에 필히 있어야 하는 것은 아니다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
 <div id="qwebr-insertion-location-9"></div>
@@ -1872,12 +1852,14 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p>각 조건은 순서대로 점검한다. 만약 첫 번째가 거짓이면, 다음을 점검하고 계속 점검해 나간다. 순서대로 진행 중에 하나의 조건이 참이면, 해당 분기가 수행되고, <code>if</code>문 전체는 종료된다. 설사 하나 이상의 조건이 참이라고 하더라도, 첫 번째 참 분기만 수행된다.</p>
-</section>
-<section id="r-cont-nested" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="r-cont-nested"><span class="header-section-number">3.6</span> 중첩 조건문</h2>
+</section><section id="r-cont-nested" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="r-cont-nested">
+<span class="header-section-number">3.6</span> 중첩 조건문</h2>
 <p>하나의 조건문이 조건문 내부에 중첩될 수 있다. 다음과 같이 삼분 예제를 작성할 수 있다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
 <div id="qwebr-insertion-location-10"></div>
@@ -1890,11 +1872,21 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p>바깥 조건문에는 두 개의 분기가 있다. 첫 분기는 간단한 문장을 담고 있다. 두 번째 분기는 자체가 두 개의 분기를 가지고 있는 또 다른 <code>if</code>문을 담고 있다. 자체로 둘다 조건문이지만, 두 분기 모두 간단한 문장이다.</p>
-<p><img src="images/cond-if-nested.png" class="img-fluid" alt="중첩 조건문">{width = 100%}</p>
+<div id="fig-nested-if-stmt" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-nested-if-stmt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/cond-if-nested.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="그림&nbsp;3.3: 중첩 조건문"><img src="images/cond-if-nested.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nested-if-stmt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;3.3: 중첩 조건문
+</figcaption></figure>
+</div>
 <p>괄호를 사용하는 것이 구조를 명확히 하지만, <strong>중첩 조건문의 경우 가독성이 급격히 저하된다. 일반적으로, 가능하면 중첩 조건문을 피하는 것을 권장한다.</strong></p>
 <p>논리 연산자를 사용하여 중첩 조건문을 간략히 할 수 있다. 예를 들어, 단일 조건문으로 가지고 앞의 코드를 다음과 같이 재작성할 수 있다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
 <div id="qwebr-insertion-location-11"></div>
@@ -1908,7 +1900,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p><code>print</code>문은 두 개 조건문을 통과될 때만 실행돼서, <code>&amp;</code> 연산자와 동일한 효과를 거둘 수 있다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
 <div id="qwebr-insertion-location-12"></div>
@@ -1920,21 +1915,23 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-</section>
-<section id="r-cont-try-catch" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="r-cont-try-catch"><span class="header-section-number">3.7</span> <code>try</code>, <code>catch</code> 활용 예외처리</h2>
-<p>함수 <code>readline()</code>와 <code>as.integer()</code>을 사용하여 앞에서 사용자가 타이핑한 숫자를 읽어 정수로 파싱하는 프로그램 코드를 살펴보았다. 또한 이렇게 코딩하는 것이 얼마나 위험한 것인지도 살펴보았다.</p>
+</section><section id="r-cont-try-catch" class="level2" data-number="3.7"><h2 data-number="3.7" class="anchored" data-anchor-id="r-cont-try-catch">
+<span class="header-section-number">3.7</span> <code>try</code>, <code>catch</code> 활용 예외처리</h2>
+<p>함수 <code><a href="https://rdrr.io/r/base/readline.html">readline()</a></code>와 <code><a href="https://rdrr.io/r/base/integer.html">as.integer()</a></code>을 사용하여 앞에서 사용자가 타이핑한 숫자를 읽어 정수로 파싱하는 프로그램 코드를 살펴보았다. 또한 이렇게 코딩하는 것이 얼마나 위험한 것인지도 살펴보았다.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>speed <span class="ot">&lt;-</span> <span class="fu">readline</span>(<span class="at">prompt=</span>prompts)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 속도가 얼마나 됩니까? 뭐라고 하셨나요!!!</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(speed) <span class="sc">+</span> <span class="dv">5</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] NA</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">speed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readline.html">readline</a></span><span class="op">(</span>prompt<span class="op">=</span><span class="va">prompts</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 속도가 얼마나 됩니까? 뭐라고 하셨나요!!!</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">speed</span><span class="op">)</span> <span class="op">+</span> <span class="fl">5</span></span>
+<span><span class="co">#&gt; [1] NA</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>R 인터프리터에서 상기 문장을 실행하면, 인터프리터에서 새로운 프롬프트로 되고, “이런(oops)” 잠시 후에, 다음 문장 실행으로 넘어간다.</p>
 <p>하지만, 만약 코드가 R 스크립트로 실행이 되어 오류가 발생하면, 역추적해서 그 지점에서 즉시 멈추게 된다. 다음에 오는 문장은 실행하지 않는다.</p>
 <p>화씨 온도를 섭씨 온도로 변환하는 간단한 프로그램이 있다. 다소 길이가 긴데, R 콘솔에서 실행하는 코드와 쉘에서 실행할 때 사용자 입력을 받는 것을 달리 처리하기 위함이다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-13-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-13-1-tab">
 <div id="qwebr-insertion-location-13"></div>
@@ -1948,7 +1945,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p>이 코드를 실행해서 적절하지 않은 입력값을 넣게 되면, 다소 불친절한 오류 메시지와 함께 간단히 작동을 멈춘다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-14-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-14-1-tab">
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">D:\docs\r4inf\code</span><span class="op">&gt;</span> Rscript fahrenheit.R</span>
@@ -1973,14 +1973,16 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>이런 종류의 예측을 하거나, 예측하지 못한 오류를 다루기 위해서 R에는 “try / except”로 불리는 조건 실행 구조가 내장되어 있다. <code>try</code>와 <code>except</code>의 기본적인 생각은 일부 명령문에 문제가 있다는 것을 사전에 알고 있고, 만약 그 때문에 오류가 발생하게 된다면 대신 프로그램에 추가해서 명령문을 실행한다는 것이다. <code>except</code> 블록의 문장은 오류가 없다면 실행되지 않는다. 문장 실행에 대해서 R <code>try</code>, <code>except</code> 기능을 보험으로 생각할 수도 있다.</p>
 <p>R은 <code>tryCatch</code> 블록 문장을 우선 실행한다. 만약 모든 것이 순조롭다면, 코드를 실행하고 <code>error</code> 블록은 건너뛴다. 만약 <code>tryCatch</code> 블록에서 오류 <code>error</code> 혹은 경고 <code>warning</code>이 발생하면, R은 <code>tryCatch</code> 블록에서 빠져 나와 <code>warning</code>, <code>error</code> 문장을 수행한다.</p>
 <p><code>tryCatch</code>문으로 예외사항을 다루는 것을 예외 처리한다(catching an exception)고 부른다.예제에서 <code>warning</code> 절에서는 단순히 오류 메시지를 출력만 한다. 이유는 <code>as.numeric</code> 함수는 잘못된 자료형의 입력값을 받아 경고를 발생시키며 <code>NA</code>를 반환했기 때문에 <code>tryCatch</code>는 <code>error</code> 블록 대신 <code>warning</code> 블록을 실행했다. 대체로, 예외 처리를 통해서 경고하거나, 오류를 고치거나, 재시작하거나, 최소한 프로그램이 정상적으로 종료될 수 있게 한다.</p>
-</section>
-<section id="r-cont-short-circuit" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="r-cont-short-circuit"><span class="header-section-number">3.8</span> 논리 연산식 단락 평가</h2>
+</section><section id="r-cont-short-circuit" class="level2" data-number="3.8"><h2 data-number="3.8" class="anchored" data-anchor-id="r-cont-short-circuit">
+<span class="header-section-number">3.8</span> 논리 연산식 단락 평가</h2>
 <p><code>x &gt;= 2 &amp; (x/y) &gt; 2</code> 와 같은 논리 표현식을 R에서 처리할 때, 왼쪽에서부터 오른쪽으로 표현식을 평가한다. <code>&amp;</code> 정의 때문에 x 가 2보다 작다면, <code>x &gt;= 2</code>은 거짓(FALSE)으로, 전체적으로 <code>(x/y) &gt; 2</code> 이 참(TRUE) 혹은 거짓(FALSE) 이냐에 관계없이 거짓(FALSE)이 된다.</p>
 <p>나머지 논리 표현식을 평가해도 나아지는 것이 없다고 R이 자동으로 탐지할 때, 평가를 멈추고 나머지 논리 표현식에 대한 연산도 중지한다. 최종값이 이미 결정되었기 때문에 더 이상의 논리 표현식의 평가가 멈출 때, 이를 <strong>단락(Short-circuiting) 평가</strong>라고 한다.</p>
 <p>좋은 점처럼 보일 수 있지만, 단락 행동은 <strong>가디언 패턴(guardian pattern)</strong>으로 불리는 좀 더 똑똑한 기술로 연계된다. R 인터프리터의 다음 코드를 살펴보자.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-15-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-15-1-tab">
 <div id="qwebr-insertion-location-14"></div>
@@ -1995,7 +1997,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>세번째 연산은 일반적으로 실패하는데 이유는 <code>(x/y)</code> 연산을 평가할 때 y 가 0 이어서 실행오류가 발생된다. 하지만, R에서는 0으로 나누게 되면 <code>Inf</code>가 되어 계산결과는 참이 되어 전체적으로 참이 된다. 하지만, 두 번째 예제의 경우 거짓(FALSE)이 되지 않는데 이유는 <code>x &gt;= 2</code> 이 거짓(FALSE)으로, 전체가 거짓(FALSE)이 되어 단락(Short-circuiting) 평가 규칙에 의해 <code>(x/y)</code> 평가는 실행되지 않게 된다.</p>
 <p>평가 오류가 발생되기 전에 가디언(gardian) 평가식을 전략적으로 배치해서 논리 표현식을 다음과 같이 구성한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-16-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-1" role="tab" aria-controls="tabset-16-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-2" role="tab" aria-controls="tabset-16-2" aria-selected="false">파이썬</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-16-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-1" role="tab" aria-controls="tabset-16-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-2" role="tab" aria-controls="tabset-16-2" aria-selected="false">파이썬</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-16-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-16-1-tab">
 <div id="qwebr-insertion-location-15"></div>
@@ -2008,108 +2013,110 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p>첫 번째 논리 표현식은 <code>x &gt;= 2</code> 이 거짓(FALSE) 이라 <code>&amp;</code>에서 멈춘다. 두 번째 논리 표현식은 <code>x &gt;= 2</code> 이 참(TRUE), <code>y != 0</code> 은 거짓(FALSE) 이라 <code>(x/y)</code>까지 갈 필요가 없다. 세 번째 논리 표현식은 <code>(x/y)</code> 연산이 끝난 후에 <code>y != 0</code> 이 수행되어서 오류가 발생한다. 두 번째 표현식에서 y 가 0 이 아닐 때만, (x/y)을 실행하도록 <code>y != 0</code> 이 가디언(gardian) 역할을 수행한다고 말할 수 있다.</p>
-</section>
-<section id="r-cont-debugging" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="r-cont-debugging"><span class="header-section-number">3.9</span> 디버깅</h2>
-<p>오류가 발생했을 때, 파이썬 화면에 출력되는 역추적(traceback)에는 상당한 정보가 담겨있다. 하지만,특히 스택에 많은 프레임이 있는 경우 엄청나게 보여 엄두가 나지 않을 수도 있다. 대체로 가장 유용한 정보는 다음과 같은 것이 있다.</p>
+</section><section id="r-cont-debugging" class="level2" data-number="3.9"><h2 data-number="3.9" class="anchored" data-anchor-id="r-cont-debugging">
+<span class="header-section-number">3.9</span> 디버깅</h2>
+<p>오류가 발생했을 때, 화면에 출력되는 역추적(traceback)에는 상당한 정보가 담겨있다. 하지만,특히 스택에 많은 프레임이 있는 경우 엄청나게 보여 엄두가 나지 않을 수도 있다. 대체로 가장 유용한 정보는 다음과 같은 것이 있다.</p>
 <ul>
 <li>어떤 종류의 오류인가.</li>
 <li>어디서 발생했는가.</li>
 </ul>
 <p>구문 오류는 대체로 발견하기 쉽지만, 몇 가지는 애매하다. 파이썬의 경우 공백(space)과 탭(tab)의 차이가 눈에 보이지 않아 통상 무시하고 넘어가기 쉽기 때문에 공백 오류를 잡아내기가 까다롭다. R로 텍스트 데이터를 분석할 경우 눈에는 보이지 않지만 공백문자(White space) 문자가 여러가지 문제를 일으키는 경우가 많다. 특히 한글 인코딩과 결합될 경우 더욱 그렇다.</p>
 <p>대체로 오류 메시지는 문제가 어디에서 발견되었는지를 지칭하지만, 실제 오류는 코드 앞에 종종 선행하는 줄에 있을 수 있다.</p>
-<p>동일한 문제가 실행 오류에도 있다. 데시벨(decibels)로 신호 대비 잡음비를 계산한다고 가정하자. 공식은 <span class="math inline">\(SNR_{db} = 10 \log_{10} (P_{signal} / P_{noise})\)</span> 이다. R에서 아래와 같이 작성할 수 있다.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>signal_power <span class="ot">&lt;-</span> <span class="dv">9</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>noise_power <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ratio <span class="ot">&lt;-</span> signal_power <span class="sc">/</span> noise_power</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>decibels <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">*</span> <span class="fu">log10</span>(ratio)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(decibels)</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>signal_power</code> 와 <code>noise_power</code> 를 부동 소수점값으로 표현되어 R코드에는 문제가 없지만, 파이썬 2로 실행하게 되면 다음과 같은 오류가 나온다.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Traceback</span> (most recent call last)<span class="sc">:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>File <span class="st">"snr.py"</span>, line <span class="dv">5</span>, <span class="cf">in</span> ?</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>decibels <span class="ot">=</span> <span class="dv">10</span> <span class="sc">*</span> <span class="fu">math.log10</span>(ratio)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>OverflowError<span class="sc">:</span> math range error</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>오류 메지지가 5번째 줄에 있다고 지칭하지만, 잘못된 것은 없다. 실제 오류를 발견하기위해서,출력값이0인ratio값을print문을사용해서출력하는것이 도움이 된다. 문제는 4번째 줄에 있는데, 왜냐하면 두 정수를 나눌 때 내림 나눗 셈을 했기 때문입니다.</p>
-<p>대체로, 오류 메시지는 문제가 어디에서 발견되었는지를 알려주지만, 종종 문제의 원인이 어디에서 발생했는지는 알려주지 않는다.</p>
-</section>
-<section id="r-cont-terminology" class="level2" data-number="3.10">
-<h2 data-number="3.10" class="anchored" data-anchor-id="r-cont-terminology"><span class="header-section-number">3.10</span> 용어 정의</h2>
-<ul>
-<li>몸통 부문(body)**: 복합 문장 내부에 일련의 문장문</li>
-<li>부울 표현식(boolean expression)**: 참(TRUE) 혹은 거짓(FALSE)의 값을 가지는 표현식</li>
-<li>분기(branch)**: 조건문에서 대안 문장의 한 흐름</li>
-<li>연쇄 조건문(chained conditional)**: 일련의 대안 분기가 있는 조건문</li>
-<li>비교 연산자(comparison operator)**: 피연산자를 ==, !=, &gt;, &lt;, &gt;=, &lt;=로 비교하는 연산자</li>
-<li>조건문(conditional statement)**: 조건에 따라 명령의 흐름을 제어하는 명령문</li>
-<li>조건(condition)**: 조건문에서 어느 분기를 실행할지 결정하는 불 표현식</li>
-<li>복합문(compound statement)**: 머리부문(head)과 몸통부문(body)으로 구성된 문장. 머리부문은 콜론(:)으로 끝나며, 몸통부문은 머리부문을 기준으로 들여쓰기로 구별된다.</li>
-<li>가디언 패턴(guardian pattern)**: 단락(short circuit) 행동을 잘 이용하도록 논리 표현식을 구성하는 것</li>
-<li>논리 연산자(logical operator)**: 불 표현식을 결합하는 연산자 중의 하나 (and, or, not)</li>
-<li>중첩 조건문(nested conditional)**: 하나의 조건문이 다른 조건문 분기에 나타나는 조건문.</li>
-<li>역추적(traceback)**: 예외 사항이 발생했을 때 실행되고, 출력되는 함수 리스트</li>
-<li>단락(short circuit)**: 나머지 표현식 평가를 할 필요없이 최종 결과를 알기 때문에, 파이썬이 논리 표현식 평가를 진행하는 중간에 평가를 멈출 때.</li>
+<p>동일한 문제가 실행 오류에도 있다. 데시벨(decibels)로 신호 대비 잡음비를 계산한다고 가정하자. 공식은 <span class="math inline">\(\text{SNR}_{db} = 10 \log_{10} (P_{signal} / P_{noise})\)</span> 이다. R에서 아래와 같이 작성할 수 있다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-17-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-1" role="tab" aria-controls="tabset-17-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-17-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-2" role="tab" aria-controls="tabset-17-2" aria-selected="false">파이썬</a></li>
 </ul>
-</section>
-<section id="r-cont-ex" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="r-cont-ex">연습문제</h2>
+<div class="tab-content">
+<div id="tabset-17-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-17-1-tab">
+<div id="qwebr-insertion-location-16"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-17-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-17-2-tab">
+<div id="qpyodide-insertion-location-16"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p><code>signal_power</code> 와 <code>noise_power</code> 를 부동 소수점값으로 표현되어 R코드에는 <code>NaN</code>를 출력하며 문제가 없지만, 파이썬으로 실행하게 되면 다음과 같은 오류가 나온다.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Traceback</span> (most recent call last)<span class="sc">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  File <span class="st">"C:/Users/tidyverse/AppData/Local/Programs/Python/Python311/book.py"</span>, line <span class="dv">11</span>, <span class="cf">in</span> <span class="sc">&lt;</span>module<span class="sc">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    decibels <span class="ot">=</span> <span class="dv">10</span> <span class="sc">*</span> <span class="fu">math.log10</span>(ratio)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>ValueError<span class="sc">:</span> math domain error</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>오류 메지지가 7번째 줄에 있다고 지칭하지만, 잘못된 것은 없다. 실제 오류를 발견하기 위해서, 출력값이 음수인 <code>ratio</code>값을 <code>print</code>문을 사용해서 출력하는 것이 도움이 된다. 문제는 5번째 줄에 있는데, 왜냐하면 <code>noise_power</code>가 음수로 설정되어 있어 <code>signal_power / noise_power</code> 계산 자체는 문제가 없어 보이지만, 결과적으로 <code>ratio</code>는 음수가 된다. 따라서 <code>math.log10(ratio)</code> 호출 시 <code>ValueError</code>가 발생하는데 로그 함수는 음수에 대해 정의되지 않기 때문이다. 따라서 오류 메시지는 <code>math.log10</code> 함수 호출에서 발생하는 것처럼 보이지만, 실제 원인은 <code>noise_power</code>에 부적절한 값 설정에 있기 때문에 발생한다.</p>
+<p>대체로, 오류 메시지는 문제가 어디에서 발견되었는지를 알려주지만, 종종 문제의 원인이 어디에서 발생했는지는 알려주지 않는다.</p>
+</section><section id="r-cont-terminology" class="level2" data-number="3.10"><h2 data-number="3.10" class="anchored" data-anchor-id="r-cont-terminology">
+<span class="header-section-number">3.10</span> 용어 정의</h2>
+<ul>
+<li>몸통 부문(body): 복합 문장 내부에 일련의 문장문</li>
+<li>부울 표현식(boolean expression): 참(TRUE) 혹은 거짓(FALSE)의 값을 가지는 표현식</li>
+<li>분기(branch): 조건문에서 대안 문장의 한 흐름</li>
+<li>연쇄 조건문(chained conditional): 일련의 대안 분기가 있는 조건문</li>
+<li>비교 연산자(comparison operator): 피연산자를 ==, !=, &gt;, &lt;, &gt;=, &lt;=로 비교하는 연산자</li>
+<li>조건문(conditional statement): 조건에 따라 명령의 흐름을 제어하는 명령문</li>
+<li>조건(condition): 조건문에서 어느 분기를 실행할지 결정하는 불 표현식</li>
+<li>복합문(compound statement): 머리부문(head)과 몸통부문(body)으로 구성된 문장. 머리부문은 콜론(:)으로 끝나며, 몸통부문은 머리부문을 기준으로 들여쓰기로 구별된다.</li>
+<li>가디언 패턴(guardian pattern): 단락(short circuit) 행동을 잘 이용하도록 논리 표현식을 구성하는 것</li>
+<li>논리 연산자(logical operator): 불 표현식을 결합하는 연산자 중의 하나 (and, or, not)</li>
+<li>중첩 조건문(nested conditional): 하나의 조건문이 다른 조건문 분기에 나타나는 조건문.</li>
+<li>역추적(traceback): 예외 사항이 발생했을 때 실행되고, 출력되는 함수 리스트</li>
+<li>단락(short circuit): 나머지 표현식 평가를 할 필요없이 최종 결과를 알기 때문에, 파이썬이 논리 표현식 평가를 진행하는 중간에 평가를 멈출 때.</li>
+</ul></section><section id="r-cont-ex" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="r-cont-ex">연습문제</h2>
 <ol type="1">
 <li>40시간 이상 일할 경우 시급을 1.5배 더 종업원에게 지급하는 봉급계산 프로그램을 다시 작성하세요.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>시간을 입력하시오<span class="sc">:</span> <span class="fl">35.51</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>시급을 입력하시오<span class="sc">:</span> <span class="dv">7530</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>알바비<span class="sc">:</span> <span class="dv">263550</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>시간을 입력하시오<span class="sc">:</span> <span class="fl">35.51</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>시급을 입력하시오<span class="sc">:</span> <span class="dv">7530</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>알바비<span class="sc">:</span> <span class="dv">263550</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
-<li><code>tryCatch</code>를 사용하여 봉급계산 프로그램을 다시 작성하세요. 숫자가 아닌 입력값을 잘 처리해서 숫자 아닌 입력값이 들어왔을 때 메시지를 출력하고 정상적으로 프로그램을 종료하도록 합니다. 다음이 프로그램 출력 결과를 보여줍니다.</li>
+<li>
+<code>tryCatch</code>를 사용하여 봉급계산 프로그램을 다시 작성하세요. 숫자가 아닌 입력값을 잘 처리해서 숫자 아닌 입력값이 들어왔을 때 메시지를 출력하고 정상적으로 프로그램을 종료하도록 합니다. 프로그램 출력 결과는 다음과 같습니다.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>시간을 입력하시오<span class="sc">:</span> <span class="fl">35.51</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>시급을 입력하시오<span class="sc">:</span> 칠만원</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>오류, 다시 숫자를 입력하세요</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>시급을 입력하시오<span class="sc">:</span> <span class="dv">7</span>만원</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>오류, 다시 숫자를 입력하세요</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>시간을 입력하시오<span class="sc">:</span> <span class="fl">35.51</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>시급을 입력하시오<span class="sc">:</span> 칠만원</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>오류, 다시 숫자를 입력하세요</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>시급을 입력하시오<span class="sc">:</span> <span class="dv">7</span>만원</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>오류, 다시 숫자를 입력하세요</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="3" type="1">
 <li>0.0과 1.0 사이의 점수를 출력하는 프로그램을 작성하세요. 만약 점수가 범위 밖이면 오류를 출력합니다. 만약 점수가 0.0과 1.0 사이라면, 다음의 테이블에 따라 등급을 출력합니다.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>점수    등급</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;=</span> <span class="fl">0.9</span>   A</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;=</span> <span class="fl">0.8</span>   B</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;=</span> <span class="fl">0.7</span>   C</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;=</span> <span class="fl">0.6</span>   D</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span> <span class="fl">0.6</span>    F</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>점수를 입력하시오<span class="sc">:</span> <span class="fl">0.95</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>A</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>점수를 입력하시오<span class="sc">:</span> 만점</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>올바른 점수가 아닙니다.</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>점수를 입력하시오<span class="sc">:</span> <span class="fl">10.0</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>올바른 점수가 아닙니다.</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>점수를 입력하시오<span class="sc">:</span> <span class="fl">0.75</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>C</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>점수를 입력하시오<span class="sc">:</span> <span class="fl">0.5</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>F</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>점수    등급</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;=</span> <span class="fl">0.9</span>   A</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;=</span> <span class="fl">0.8</span>   B</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;=</span> <span class="fl">0.7</span>   C</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;=</span> <span class="fl">0.6</span>   D</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span> <span class="fl">0.6</span>    F</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>점수를 입력하시오<span class="sc">:</span> <span class="fl">0.95</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>A</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>점수를 입력하시오<span class="sc">:</span> 만점</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>올바른 점수가 아닙니다.</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>점수를 입력하시오<span class="sc">:</span> <span class="fl">10.0</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>올바른 점수가 아닙니다.</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>점수를 입력하시오<span class="sc">:</span> <span class="fl">0.75</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>C</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>점수를 입력하시오<span class="sc">:</span> <span class="fl">0.5</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>F</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
 <li>상기 보이는 것처럼 반복적으로 프로그램을 실행해서 다양한 다른 입력값을 테스트해 보세요.</li>
 </ol>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -2534,22 +2541,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./02-var.html" class="pagination-link" aria-label="변수, 표현식, 문장">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="참고문헌">
-        <span class="nav-page-text">참고문헌</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04-func.html" class="pagination-link" aria-label="함수">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
 <p>챗GPT 쿼토 책은 소프트웨어 카펜트리 ***** 번역한 것이 포함되어 있습니다.</p>
 </div>   
@@ -2560,8 +2564,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
 </div>
   </div>
-</footer>
-<script type="module">
+</footer><script type="module">
 // Handle cell initialization initialization
 qwebrCellDetails.map(
   (entry) => {
@@ -2672,8 +2675,7 @@ qwebrInstance.then(
     );  
   }
 );
-</script>
-<script type="module">
+</script><script type="module">
 /**
  * Factory function to create different types of cells based on options.
  * @param {Object} cellData - JSON object containing code, id, and options.
@@ -3199,8 +3201,7 @@ class SetupCell extends BaseCell {
         this.executeCode();
     }
 };
-</script>
-<script type="module">
+</script><script type="module">
 // Handle cell initialization initialization
 qpyodideCellDetails.map(
     (entry) => {
@@ -3208,8 +3209,7 @@ qpyodideCellDetails.map(
       qpyodideCreateCell(entry);
     }
   );
-</script>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false});
+</script><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
@@ -3234,8 +3234,6 @@ window.onload = () => {
 
 };
           </script>
-
-
 
 
 </body></html>
