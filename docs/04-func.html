@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.9">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="author" content="이광춘">
+
 <title>챗GPT 코딩 – 4&nbsp; 함수</title>
 <style>
 code{white-space: pre-wrap;}
@@ -54,6 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -61,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./05-loop.html" rel="next">
 <link href="./03-cont.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -72,7 +76,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -98,7 +103,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "검색",
     "search-label": "검색"
   }
-}</script><script type="text/javascript">
+}</script>
+
+<script type="text/javascript">
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -110,8 +117,11 @@ ga('send', {
   hitType: 'pageview',
   'anonymizeIp': true,
 });
-</script><script defer="" data-domain="r2bit.com/gpt-quarto" src="https://plausible.io/js/script.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+</script>
+<script defer="" data-domain="r2bit.com/gpt-quarto" src="https://plausible.io/js/script.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  
 <style type="text/css">
 .monaco-editor pre {
   background-color: unset !important;
@@ -275,9 +285,10 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"code":"max(c(1,2,3,4,5))\n#> 5\nmin(c(1,2,3,4,5))\n#> 1","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-min-max","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":2,"code":"length(c(1,2,3,4,5))","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-length","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":3,"code":"as.integer(\"32\")\n#> [1] 32\nas.integer(\"Hello\")\n#> [1] NA\n#> Warning message:\n#> NAs introduced by coercion ","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-integer","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":4,"code":"as.integer(\"3.99999\")\n#> [1] 3\nas.integer(\"-2.3\")  \n#> [1] -2","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-integer-conversion","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":5,"code":"as.numeric(32)\n#> [1] 32","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-float","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":6,"code":"as.character(32)\n#> [1] \"32\"\n\nas.character(3.14159)\n#> [1] \"3.14159\"","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-character","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":7,"code":"as.factor(c(\"남자\", \"여자\"))\n#> [1] 남자 여자","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-factor","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":8,"code":"for(i in 1:10) {\n  cat(runif(1),\"\\n\")\n}\n#> 0.3444183 \n#> 0.2856258 \n#> 0.4014798 \n#> 0.3888541 \n#> 0.4413798 \n#> 0.3312618 \n#> 0.8431148 \n#> 0.652076 \n#> 0.1545398 \n#> 0.02016021 ","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-random-number","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":9,"code":"sample(1:10, 5)\n#> [1] 6 4 9 2 1\n\nsample(c(\"민주당\", \"국민의힘\", \"녹색정의당\"), 1)\n#> [1] \"민주당\"","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-integer-random","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":10,"code":"signal_power <- 9\nnoise_power <- 10\nratio <- signal_power / noise_power\ndecibels <- 10 * log10(ratio)\n\nradians <- 0.7\nheight <- sin(radians)\n\ndegrees <- 45\nradians <- degrees / 360.0 * 2 * pi\nsin(radians)","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-radian-conversion","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":11,"code":"sqrt(2) / 2\n#> [1] 0.7071068","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-sqrt","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":12,"code":"print_lyrics <- function() {\n  print(\"나는 나무꾼이고, 괜찮아요.\")\n  print(\"나는 밤새도록 자고, 하루 종일 일해요.\")\n}","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-new-func","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":13,"code":"print_lyrics()\n#> [1] \"나는 나무꾼이고, 괜찮아요.\"\n#> [1] \"나는 밤새도록 자고, 하루 종일 일해요.\"\nclass(print_lyrics)\n#> [1] \"function\"","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-class-print","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":14,"code":"repeat_lyrics <- function() {\n  print_lyrics()\n  print_lyrics()\n}\n\nrepeat_lyrics()","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-repeat-func}","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":15,"code":"print_lyrics <- function() {\n  print(\"나는 나무꾼이고, 괜찮아요.\")\n  print(\"나는 밤새도록 자고, 하루 종일 일해요.\")\n}\n\nrepeat_lyrics <- function() {\n  print_lyrics()\n  print_lyrics()\n}\n\nrepeat_lyrics()","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-program","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":16,"code":"print_twice <- function(bruce){\n  cat(bruce, \"\\n\")\n  cat(bruce, \"\\n\")\n}","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-argument","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":17,"code":"print_twice('Spam')\n#> Spam \n#> Spam \nprint_twice(17)\n#> 17\n#> 17\nprint_twice(math.pi)\n#> 3.141593 \n#> 3.141593 ","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-argument-run","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":18,"code":"print_twice(rep(\"spam\",2))\n#> spam spam \n#> spam spam \nprint_twice(cos(pi))\n#> -1 \n#> -1 ","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-argument-run-ex","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":19,"code":"half_chicken <- \"요기, 닭 반마리요\"\nprint_twice(half_chicken)\n#> 요기, 닭 반마리요 \n#> 요기, 닭 반마리요 ","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-argument-variable","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":20,"code":"x <- cos(radians)\ngolden <- (sqrt(5) + 1) / 2","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-fruitful","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":21,"code":"sqrt(5)","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-interactive","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":22,"code":"result <- print_twice('Bing')\n#> Bing\n#> Bing\n\nprint(result)\n#> NULL","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-null","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":23,"code":"addtwo <- function(a, b){\n  added <- a + b\n  return(added)\n}\n\nx <- addtwo(3, 5)\ncat(x)\n#> 8","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-return-addtwo","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":24,"code":"fred <- function(){\n  print(\"Zap\")\n}\n\njane <- function(){\n  print(\"ABC\")\n}\n\njane()\nfred()\njane()","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","comment":"","output":"true","out-width":"700px","warning":"true","autorun":"false","results":"markup","out-height":"","classes":"","label":"r-func-ex2","fig-cap":"","fig-height":5,"read-only":"false"}}];
+globalThis.qwebrCellDetails = [{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-min-max","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"max(c(1,2,3,4,5))\n#> 5\nmin(c(1,2,3,4,5))\n#> 1","id":1},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-length","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"length(c(1,2,3,4,5))","id":2},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-integer","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"as.integer(\"32\")\n#> [1] 32\nas.integer(\"Hello\")\n#> [1] NA\n#> Warning message:\n#> NAs introduced by coercion ","id":3},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-integer-conversion","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"as.integer(\"3.99999\")\n#> [1] 3\nas.integer(\"-2.3\")  \n#> [1] -2","id":4},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-float","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"as.numeric(32)\n#> [1] 32","id":5},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-character","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"as.character(32)\n#> [1] \"32\"\n\nas.character(3.14159)\n#> [1] \"3.14159\"","id":6},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-factor","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"as.factor(c(\"남자\", \"여자\"))\n#> [1] 남자 여자","id":7},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-random-number","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"for(i in 1:10) {\n  cat(runif(1),\"\\n\")\n}\n#> 0.3444183 \n#> 0.2856258 \n#> 0.4014798 \n#> 0.3888541 \n#> 0.4413798 \n#> 0.3312618 \n#> 0.8431148 \n#> 0.652076 \n#> 0.1545398 \n#> 0.02016021 ","id":8},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-integer-random","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"sample(1:10, 5)\n#> [1] 6 4 9 2 1\n\nsample(c(\"민주당\", \"국민의힘\", \"녹색정의당\"), 1)\n#> [1] \"민주당\"","id":9},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-radian-conversion","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"signal_power <- 9\nnoise_power <- 10\nratio <- signal_power / noise_power\ndecibels <- 10 * log10(ratio)\n\nradians <- 0.7\nheight <- sin(radians)\n\ndegrees <- 45\nradians <- degrees / 360.0 * 2 * pi\nsin(radians)","id":10},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-sqrt","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"sqrt(2) / 2\n#> [1] 0.7071068","id":11},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-new-func","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"print_lyrics <- function() {\n  print(\"나는 나무꾼이고, 괜찮아요.\")\n  print(\"나는 밤새도록 자고, 하루 종일 일해요.\")\n}","id":12},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-class-print","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"print_lyrics()\n#> [1] \"나는 나무꾼이고, 괜찮아요.\"\n#> [1] \"나는 밤새도록 자고, 하루 종일 일해요.\"\nclass(print_lyrics)\n#> [1] \"function\"","id":13},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-repeat-func}","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"repeat_lyrics <- function() {\n  print_lyrics()\n  print_lyrics()\n}\n\nrepeat_lyrics()","id":14},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-program","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"print_lyrics <- function() {\n  print(\"나는 나무꾼이고, 괜찮아요.\")\n  print(\"나는 밤새도록 자고, 하루 종일 일해요.\")\n}\n\nrepeat_lyrics <- function() {\n  print_lyrics()\n  print_lyrics()\n}\n\nrepeat_lyrics()","id":15},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-argument","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"print_twice <- function(bruce){\n  cat(bruce, \"\\n\")\n  cat(bruce, \"\\n\")\n}","id":16},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-argument-run","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"print_twice('Spam')\n#> Spam \n#> Spam \nprint_twice(17)\n#> 17\n#> 17\nprint_twice(math.pi)\n#> 3.141593 \n#> 3.141593 ","id":17},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-argument-run-ex","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"print_twice(rep(\"spam\",2))\n#> spam spam \n#> spam spam \nprint_twice(cos(pi))\n#> -1 \n#> -1 ","id":18},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-argument-variable","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"half_chicken <- \"요기, 닭 반마리요\"\nprint_twice(half_chicken)\n#> 요기, 닭 반마리요 \n#> 요기, 닭 반마리요 ","id":19},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-fruitful","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"x <- cos(radians)\ngolden <- (sqrt(5) + 1) / 2","id":20},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-interactive","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"sqrt(5)","id":21},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-null","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"result <- print_twice('Bing')\n#> Bing\n#> Bing\n\nprint(result)\n#> NULL","id":22},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-return-addtwo","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"addtwo <- function(a, b){\n  added <- a + b\n  return(added)\n}\n\nx <- addtwo(3, 5)\nx\n#> 8","id":23},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"false","output":"true","results":"markup","label":"r-func-ex2","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"fred <- function(){\n  print(\"Zap\")\n}\n\njane <- function(){\n  print(\"ABC\")\n}\n\njane()\nfred()\njane()","id":24}];
 
-</script><script type="module">
+</script>
+<script type="module">
 // Declare startupMessageQWebR globally
 globalThis.qwebrStartupMessage = document.createElement("p");
 
@@ -370,7 +381,8 @@ function displayStartupMessage(showStartupMessage, showHeaderMessage) {
 }
 
 displayStartupMessage(qwebrShowStartupMessage, qwebrShowHeaderMessage);
-</script><script type="module">
+</script>
+<script type="module">
 // Supported Evaluation Types for Context
 globalThis.EvalTypes = Object.freeze({
   Interactive: 'interactive',
@@ -616,7 +628,8 @@ globalThis.createLoadingContainer = function(qwebrCounter) {
 
   return container;
 }
-</script><script type="module">
+</script>
+<script type="module">
 // Function to install a single package
 async function qwebrInstallRPackage(packageName) {
   await mainWebR.evalRVoid(`webr::install('${packageName}');`);
@@ -712,7 +725,8 @@ globalThis.qwebrInstance = import(qwebrCustomizedWebROptions.baseURL + "webr.mjs
 // Stop timer
 const initializeWebRTimerEnd = performance.now();
 
-</script><script type="module">
+</script>
+<script type="module">
 // Function to verify a given JavaScript Object is empty
 globalThis.qwebrIsObjectEmpty = function (arr) {
     return Object.keys(arr).length === 0;
@@ -986,8 +1000,10 @@ globalThis.qwebrExecuteCode = async function (
     }
 }
 
-</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/editor/editor.main.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+</script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/editor/editor.main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  
 <style type="text/css">
 .monaco-editor pre {
   background-color: unset !important;
@@ -1147,10 +1163,11 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"id":1,"code":"max('Hello world')\n#> 'w'\nmin('Hello world')\n#> ' '","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-min-max","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":2,"code":"len('Hello world')\n#> 11\nlen('헬로 월드')\n#> 5","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-length","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":3,"code":"int(\"32\")\n#> 32\nint(\"Hello\")\n#> ValueError: invalid literal for int() with base 10: 'Hello'","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"r-func-integer","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":4,"code":"int(float(\"3.99999\"))\n#> 3\nint(float(\"-2.3\"))\n#> -2","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-integer-conversion","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":5,"code":"float(32)\n#> 32.0\n\nfloat('3.14159')\n#> 3.14159","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-float","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":6,"code":"str(32)\n#> '32'\n\nstr(3.14159)\n#> '3.14159'","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-character","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":7,"code":"import pandas as pd\n\ngender = pd.Categorical( ['남자', '여자'])\nprint(gender)\n#> ['남자', '여자']\n#> Categories (2, object): ['남자', '여자']","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-factor","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":8,"code":"import random\n\nfor i in range(10):\n    x = random.random()\n    print(x)\n#> 0.8318304547821792\n#> 0.8234794434789235\n#> 0.28471866580983374\n#> 0.5866078785919248\n#> 0.6164709529949297\n#> 0.4074058984558365\n#> 0.205662425716703\n#> 0.2787639352073248\n#> 0.9022161090408308\n#> 0.54993934257844    ","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-random-number","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":9,"code":"import random\n\nrandom.randint(1, 10)\n#> 6\n\nparties = [\"민주당\", \"국민의힘\", \"녹색정의당\"]\nrandom.choice(parties)\n#> '녹색정의당'","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-integer-random","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":10,"code":"import math\n\nsignal_power = 9\nnoise_power = 10\nratio = signal_power / noise_power\ndecibels = 10 * math.log10(ratio)\n\nradians = 0.7\nheight = math.sin(radians)\n\ndegrees = 45\nradians = degrees / 360.0 * 2 * math.pi\nsin_value = math.sin(radians)\nprint(sin_value)\n#> 0.7071067811865476","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-radian-conversion","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":11,"code":"math.sqrt(2) / 2.0\n#> 0.7071067811865476","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-sqrt","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":12,"code":"def print_lyrics():\n    print(\"나는 나무꾼이고, 괜찮아요.\")\n    print(\"나는 밤새도록 자고, 하루 종일 일해요.\")","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-new-func","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":13,"code":"print_lyrics()\n#> 나는 나무꾼이고, 괜찮아요.\n#> 나는 밤새도록 자고, 하루 종일 일해요.\nclass(print_lyrics)\n#> function","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-class-print","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":14,"code":"def repeat_lyrics():\n    print_lyrics()\n    print_lyrics()\n\nrepeat_lyrics()","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-repeat-func}","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":15,"code":"def print_lyrics():\n    print(\"나는 나무꾼이고, 괜찮아요.\")\n    print(\"나는 밤새도록 자고, 하루 종일 일해요.\")\n    \ndef repeat_lyrics():\n    print_lyrics()\n    print_lyrics()\n    \nrepeat_lyrics()","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-program","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":16,"code":"def print_twice(bruce):\n    print(bruce)\n    print(bruce)","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-argument}","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":17,"code":"print_twice('Spam')\n#> Spam \n#> Spam \nprint_twice(17)\n#> 17\n#> 17\nprint_twice(pi)\n#> 3.141593 \n#> 3.141593 ","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-argument-run","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":18,"code":"print_twice(\"spam\"*4)\n#> spam spam \n#> spam spam \nprint_twice(math.cos(math.pi))\n#> -1.0\n#> -1.0","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-argument-run-ex","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":19,"code":"half_chicken = \"요기, 닭 반마리요\"\nprint_twice(half_chicken)\n#> 요기, 닭 반마리요 \n#> 요기, 닭 반마리요 ","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-argument-variable","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":20,"code":"x <- math.cos(radians)\ngolden <- (math.sqrt(5) + 1) / 2","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-fruitful","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":21,"code":"import math\nmath.sqrt(5)","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-interactive","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":22,"code":"result <- print_twice('Bing')\n#> NameError: name 'result' is not defined\n\ndef print_twice(bruce):\n    return bruce + '\\n' + bruce\n\nresult = print_twice('Bing')\nprint(result)\n#> Bing\n#> Bing","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-null","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":23,"code":"def addtwo(a, b):\n    added = a + b\n    return added\n\nx = addtwo(3, 5)\nprint(x)\n#> 8","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-return-addtwo","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}},{"id":24,"code":"def fred():\n    print(\"Zap\")\n\ndef jane():\n    print(\"ABC\")\n\njane()\nfred()\njane()","options":{"dpi":72,"fig-width":7,"context":"interactive","message":"true","results":"markup","output":"true","out-width":"700px","warning":"true","autorun":"","label":"py-func-ex2","out-height":"","classes":"","comment":"","fig-cap":"","fig-height":5,"read-only":"false"}}];
+globalThis.qpyodideCellDetails = [{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-min-max","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"max('Hello world')\n#> 'w'\nmin('Hello world')\n#> ' '","id":1},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-length","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"len('Hello world')\n#> 11\nlen('헬로 월드')\n#> 5","id":2},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"r-func-integer","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"int(\"32\")\n#> 32\nint(\"Hello\")\n#> ValueError: invalid literal for int() with base 10: 'Hello'","id":3},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-integer-conversion","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"int(float(\"3.99999\"))\n#> 3\nint(float(\"-2.3\"))\n#> -2","id":4},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-float","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"float(32)\n#> 32.0\n\nfloat('3.14159')\n#> 3.14159","id":5},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-character","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"str(32)\n#> '32'\n\nstr(3.14159)\n#> '3.14159'","id":6},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-factor","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"import pandas as pd\n\ngender = pd.Categorical( ['남자', '여자'])\nprint(gender)\n#> ['남자', '여자']\n#> Categories (2, object): ['남자', '여자']","id":7},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-random-number","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"import random\n\nfor i in range(10):\n    x = random.random()\n    print(x)\n#> 0.8318304547821792\n#> 0.8234794434789235\n#> 0.28471866580983374\n#> 0.5866078785919248\n#> 0.6164709529949297\n#> 0.4074058984558365\n#> 0.205662425716703\n#> 0.2787639352073248\n#> 0.9022161090408308\n#> 0.54993934257844    ","id":8},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-integer-random","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"import random\n\nrandom.randint(1, 10)\n#> 6\n\nparties = [\"민주당\", \"국민의힘\", \"녹색정의당\"]\nrandom.choice(parties)\n#> '녹색정의당'","id":9},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-radian-conversion","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"import math\n\nsignal_power = 9\nnoise_power = 10\nratio = signal_power / noise_power\ndecibels = 10 * math.log10(ratio)\n\nradians = 0.7\nheight = math.sin(radians)\n\ndegrees = 45\nradians = degrees / 360.0 * 2 * math.pi\nsin_value = math.sin(radians)\nprint(sin_value)\n#> 0.7071067811865476","id":10},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-sqrt","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"math.sqrt(2) / 2.0\n#> 0.7071067811865476","id":11},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-new-func","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"def print_lyrics():\n    print(\"나는 나무꾼이고, 괜찮아요.\")\n    print(\"나는 밤새도록 자고, 하루 종일 일해요.\")","id":12},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-class-print","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"print_lyrics()\n#> 나는 나무꾼이고, 괜찮아요.\n#> 나는 밤새도록 자고, 하루 종일 일해요.\nclass(print_lyrics)\n#> function","id":13},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-repeat-func}","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"def repeat_lyrics():\n    print_lyrics()\n    print_lyrics()\n\nrepeat_lyrics()","id":14},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-program","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"def print_lyrics():\n    print(\"나는 나무꾼이고, 괜찮아요.\")\n    print(\"나는 밤새도록 자고, 하루 종일 일해요.\")\n    \ndef repeat_lyrics():\n    print_lyrics()\n    print_lyrics()\n    \nrepeat_lyrics()","id":15},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-argument}","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"def print_twice(bruce):\n    print(bruce)\n    print(bruce)","id":16},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-argument-run","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"print_twice('Spam')\n#> Spam \n#> Spam \nprint_twice(17)\n#> 17\n#> 17\nprint_twice(pi)\n#> 3.141593 \n#> 3.141593 ","id":17},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-argument-run-ex","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"print_twice(\"spam\"*4)\n#> spam spam \n#> spam spam \nprint_twice(math.cos(math.pi))\n#> -1.0\n#> -1.0","id":18},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-argument-variable","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"half_chicken = \"요기, 닭 반마리요\"\nprint_twice(half_chicken)\n#> 요기, 닭 반마리요 \n#> 요기, 닭 반마리요 ","id":19},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-fruitful","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"x <- math.cos(radians)\ngolden <- (math.sqrt(5) + 1) / 2","id":20},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-interactive","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"import math\nmath.sqrt(5)","id":21},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-null","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"result <- print_twice('Bing')\n#> NameError: name 'result' is not defined\n\ndef print_twice(bruce):\n    return bruce + '\\n' + bruce\n\nresult = print_twice('Bing')\nprint(result)\n#> Bing\n#> Bing","id":22},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-return-addtwo","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"def addtwo(a, b):\n    added = a + b\n    return added\n\nx = addtwo(3, 5)\nprint(x)\n#> 8","id":23},{"options":{"comment":"","out-width":"700px","dpi":72,"autorun":"","output":"true","results":"markup","label":"py-func-ex2","warning":"true","fig-height":5,"fig-width":7,"message":"true","classes":"","fig-cap":"","out-height":"","read-only":"false","context":"interactive"},"code":"def fred():\n    print(\"Zap\")\n\ndef jane():\n    print(\"ABC\")\n\njane()\nfred()\njane()","id":24}];
 
 
-</script><script type="module">
+</script>
+<script type="module">
 // Declare startupMessageqpyodide globally
 globalThis.qpyodideStartupMessage = document.createElement("p");
 
@@ -1234,7 +1251,8 @@ function qpyodideDisplayStartupMessage(showStartupMessage) {
 }
 
 qpyodideDisplayStartupMessage(qpyodideShowStartupMessage);
-</script><script type="module">
+</script>
+<script type="module">
 // Create a logging setup
 globalThis.qpyodideMessageArray = []
 
@@ -1306,7 +1324,12 @@ globalThis._qpyodideGetInstance = function() {
     return qpyodideInstance;
 }
 
-</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -1332,11 +1355,15 @@ window.Quarto = {
   typesetMath
 };
 </script>
+
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -1347,9 +1374,13 @@ window.Quarto = {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">챗GPT 코딩</a> 
         <div class="sidebar-tools-main">
@@ -1369,7 +1400,7 @@ window.Quarto = {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">서문</span></a>
@@ -1383,15 +1414,15 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 학습 이유</span></span></a>
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
@@ -1400,8 +1431,8 @@ window.Quarto = {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-var.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
@@ -1419,8 +1450,14 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
   </div>
 </li>
-      </ul>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복</span></span></a>
+  </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -1428,24 +1465,24 @@ window.Quarto = {
   </div>
 </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
    
   <ul>
-<li><a href="#r-func-call" id="toc-r-func-call" class="nav-link active" data-scroll-target="#r-func-call"><span class="header-section-number">4.1</span> 함수 호출</a></li>
+  <li><a href="#r-func-call" id="toc-r-func-call" class="nav-link active" data-scroll-target="#r-func-call"><span class="header-section-number">4.1</span> 함수 호출</a></li>
   <li><a href="#r-func-builtin" id="toc-r-func-builtin" class="nav-link" data-scroll-target="#r-func-builtin"><span class="header-section-number">4.2</span> 내장(Built-in) 함수</a></li>
   <li><a href="#r-func-type" id="toc-r-func-type" class="nav-link" data-scroll-target="#r-func-type"><span class="header-section-number">4.3</span> 자료형 변환 함수</a></li>
   <li><a href="#r-func-random-number" id="toc-r-func-random-number" class="nav-link" data-scroll-target="#r-func-random-number"><span class="header-section-number">4.4</span> 난수</a></li>
   <li><a href="#r-func-math" id="toc-r-func-math" class="nav-link" data-scroll-target="#r-func-math"><span class="header-section-number">4.5</span> 수학 함수</a></li>
-  <li>
-<a href="#r-func-new-function" id="toc-r-func-new-function" class="nav-link" data-scroll-target="#r-func-new-function"><span class="header-section-number">4.6</span> 신규 함수 추가</a>
+  <li><a href="#r-func-new-function" id="toc-r-func-new-function" class="nav-link" data-scroll-target="#r-func-new-function"><span class="header-section-number">4.6</span> 신규 함수 추가</a>
   <ul class="collapse">
-<li><a href="#%ED%8C%8C%EC%9D%B4%EC%8D%AC-13" id="toc-파이썬-13" class="nav-link" data-scroll-target="#%ED%8C%8C%EC%9D%B4%EC%8D%AC-13"><span class="header-section-number">4.6.1</span> 파이썬</a></li>
-  </ul>
-</li>
+  <li><a href="#파이썬-13" id="toc-파이썬-13" class="nav-link" data-scroll-target="#파이썬-13"><span class="header-section-number">4.6.1</span> 파이썬</a></li>
+  </ul></li>
   <li><a href="#r-func-how-to-use" id="toc-r-func-how-to-use" class="nav-link" data-scroll-target="#r-func-how-to-use"><span class="header-section-number">4.7</span> 함수 정의와 사용법</a></li>
   <li><a href="#r-func-control" id="toc-r-func-control" class="nav-link" data-scroll-target="#r-func-control"><span class="header-section-number">4.8</span> 실행 흐름</a></li>
   <li><a href="#r-func-parameter-argument" id="toc-r-func-parameter-argument" class="nav-link" data-scroll-target="#r-func-parameter-argument"><span class="header-section-number">4.9</span> 매개 변수와 인수</a></li>
@@ -1454,10 +1491,13 @@ window.Quarto = {
   <li><a href="#r-func-debug" id="toc-r-func-debug" class="nav-link" data-scroll-target="#r-func-debug"><span class="header-section-number">4.12</span> 디버깅</a></li>
   <li><a href="#r-func-terminology" id="toc-r-func-terminology" class="nav-link" data-scroll-target="#r-func-terminology"><span class="header-section-number">4.13</span> 용어정의</a></li>
   <li><a href="#r-func-ex" id="toc-r-func-ex" class="nav-link" data-scroll-target="#r-func-ex">연습문제</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/04-func.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/04-func.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script><script type="module" id="qwebr-monaco-editor-init">
+<main class="content" id="quarto-document-content">
+<script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+<script type="module" id="qwebr-monaco-editor-init">
 
   // Configure the Monaco Editor's loader
   require.config({
@@ -1465,7 +1505,8 @@ window.Quarto = {
       'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs'
     }
   });
-</script><script type="module">
+</script>
+<script type="module">
 // Global dictionary to store Monaco Editor instances
 globalThis.qwebrEditorInstances = {};
 
@@ -1628,7 +1669,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   };
   
 }
-</script><script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/loader.js"></script><script type="module" id="qpyodide-monaco-editor-init">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/loader.js"></script>
+<script type="module" id="qpyodide-monaco-editor-init">
 
   // Configure the Monaco Editor's loader
   require.config({
@@ -1636,7 +1679,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
       'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'
     }
   });
-</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-var.html">프로그래밍</a></li><li class="breadcrumb-item"><a href="./04-func.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></a></li></ol></nav><div class="quarto-title">
+</script>
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-var.html">프로그래밍</a></li><li class="breadcrumb-item"><a href="./04-func.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></a></li></ol></nav>
+<div class="quarto-title">
 <h1 class="title"><span id="r-func" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></h1>
 </div>
 
@@ -1651,24 +1697,25 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   
 
 
-</header><section id="r-func-call" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="r-func-call">
-<span class="header-section-number">4.1</span> 함수 호출</h2>
+</header>
+
+
+<section id="r-func-call" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="r-func-call"><span class="header-section-number">4.1</span> 함수 호출</h2>
 <p>프로그래밍 문맥에서, <strong>함수(function)</strong>는 명명된 명령어의 집합으로 특정 연산을 수행한다. 함수를 정의할 때는 함수명과 수행할 명령어들을 명기한다. 나중에, 함수를 이름으로 “호출(call)”한다. 이미 <strong>함수 호출(function call)</strong>의 예제를 살펴봤다.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="fl">32</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "double"</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">32</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "double"</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>함수명은 <code><a href="https://rdrr.io/r/base/typeof.html">typeof()</a></code>이다. 괄호안의 표현식을 <strong>함수의 인자(argument)</strong>라고 한다. 인자는 함수 입력으로 함수 내부로 전달되는 값이나 변수다. 앞선 <code><a href="https://rdrr.io/r/base/typeof.html">typeof()</a></code> 함수에 대한 결과는 인자의 자료형(type)이다.</p>
+<p>함수명은 <code>typeof()</code>이다. 괄호안의 표현식을 <strong>함수의 인자(argument)</strong>라고 한다. 인자는 함수 입력으로 함수 내부로 전달되는 값이나 변수다. 앞선 <code>typeof()</code> 함수에 대한 결과는 인자의 자료형(type)이다.</p>
 <p>통상 함수가 인자를 “받아” 결과를 “반환”한다. 결과를 <strong>결과값(return value)</strong>이라 부른다.</p>
-</section><section id="r-func-builtin" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="r-func-builtin">
-<span class="header-section-number">4.2</span> 내장(Built-in) 함수</h2>
+</section>
+<section id="r-func-builtin" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="r-func-builtin"><span class="header-section-number">4.2</span> 내장(Built-in) 함수</h2>
 <p>함수를 정의할 필요없이 사용할 수 있는 내장함수가 R에는 많다. 공통 문제를 해결할 수 있는 함수를 R을 창시자(Ross Ihaka, Robert Gentleman)가 작성해서 누구나 사용할 수 있도록 R에 포함했다.</p>
 <p><code>max</code>와 <code>min</code> 함수는 벡터 최소값과 최대값을 각각 계산해서 출력한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div id="qwebr-insertion-location-1"></div>
@@ -1681,12 +1728,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p><code>max</code> 함수는 벡터의 “가장 큰 값”, 상기 예제에서 “5”, min 함수는 “가장 작은 값”를, 상기 예제에서는 “1”을 출력한다.</p>
-<p>매우 자주 사용되는 또 다른 내장 함수는 얼마나 많은 항목이 있는지 출력하는 <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> 함수가 있다. 만약 <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> 함수의 인수가 벡터이면 벡터에 있는 원소 갯수를 반환한다.</p>
+<p>매우 자주 사용되는 또 다른 내장 함수는 얼마나 많은 항목이 있는지 출력하는 <code>length()</code> 함수가 있다. 만약 <code>length()</code> 함수의 인수가 벡터이면 벡터에 있는 원소 갯수를 반환한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div id="qwebr-insertion-location-2"></div>
@@ -1699,14 +1743,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p>함수가 벡터에만 국한된 것이 아니라, 뒷장에서 보듯이 다양한 자료형에 사용된다. 내장함수 이름은 사전에 점유된 예약어로 취급해야 한다. 예를 들어 “max”를 변수명으로 사용하지 말아야 한다.</p>
-</section><section id="r-func-type" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="r-func-type">
-<span class="header-section-number">4.3</span> 자료형 변환 함수</h2>
-<p>A라는 자료형(type)에서 B라는 자료형(type)으로 값을 변환하는 내장 함수가 R에는 있다. <code><a href="https://rdrr.io/r/base/integer.html">as.integer()</a></code>함수는 임의의 값을 입력받아 변환이 가능하면 정수형으로 변환하고, 그렇지 않으면 오류가 발생한다.</p>
+</section>
+<section id="r-func-type" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="r-func-type"><span class="header-section-number">4.3</span> 자료형 변환 함수</h2>
+<p>A라는 자료형(type)에서 B라는 자료형(type)으로 값을 변환하는 내장 함수가 R에는 있다. <code>as.integer()</code>함수는 임의의 값을 입력받아 변환이 가능하면 정수형으로 변환하고, 그렇지 않으면 오류가 발생한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <div id="qwebr-insertion-location-3"></div>
@@ -1718,12 +1760,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p><code><a href="https://rdrr.io/r/base/integer.html">as.integer()</a></code>는 부동 소수점 값을 정수로 변환할 수 있지만 소수점 이하를 절사한다.</p>
+<p><code>as.integer()</code>는 부동 소수점 값을 정수로 변환할 수 있지만 소수점 이하를 절사한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <div id="qwebr-insertion-location-4"></div>
@@ -1735,12 +1774,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p><code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>는 정수와 문자열을 부동 소수점으로 변환한다.</p>
+<p><code>as.numeric()</code>는 정수와 문자열을 부동 소수점으로 변환한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
 <div id="qwebr-insertion-location-5"></div>
@@ -1754,10 +1790,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p><code>as.characer()</code>은 인자를 문자열로 변환한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
 <div id="qwebr-insertion-location-6"></div>
@@ -1769,12 +1802,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p>파이썬을 비롯한 다른 언어에서 다뤄지지 않는 자료형이 범주형 <strong>요인(factor)</strong> 이다. 범주형 자료구조를 표현하는 일반적인 자료형으로 데이터 분석 및 모형 개발에 빈번하게 사용된다. <code><a href="https://rdrr.io/r/base/factor.html">as.factor()</a></code>은 인자를 요인형으로 변환한다. 파이썬에서 범주형 데이터를 다루기 위해서는 <code>pandas</code> 패키지를 설치하고 <code>Categorical()</code> 클래스를 사용해야 한다.</p>
+<p>파이썬을 비롯한 다른 언어에서 다뤄지지 않는 자료형이 범주형 <strong>요인(factor)</strong> 이다. 범주형 자료구조를 표현하는 일반적인 자료형으로 데이터 분석 및 모형 개발에 빈번하게 사용된다. <code>as.factor()</code>은 인자를 요인형으로 변환한다. 파이썬에서 범주형 데이터를 다루기 위해서는 <code>pandas</code> 패키지를 설치하고 <code>Categorical()</code> 클래스를 사용해야 한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
 <div id="qwebr-insertion-location-7"></div>
@@ -1786,17 +1816,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-</section><section id="r-func-random-number" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="r-func-random-number">
-<span class="header-section-number">4.4</span> 난수</h2>
+</section>
+<section id="r-func-random-number" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="r-func-random-number"><span class="header-section-number">4.4</span> 난수</h2>
 <p>동일한 입력을 받을 때, 대부분의 컴퓨터는 매번 동일한 출력값을 생성하기 때문에 <strong>결정적(deterministic)</strong>이라고 한다. 결정론이 대체로 좋은 것이다. 왜냐하면, 동일한 결과를 얻는데 동일한 계산을 기대하기 때문입니다. 하지만, 어떤 응용프로그램에 대해서 컴퓨터가 예측불가능하길 바란다. 게임이 좋은 예가 되고, 더 많은 예는 얼마든지 많다.</p>
 <p>진실되게 프로그램을 비결정론적으로 만드는 것이 쉽지 않은 것으로 밝혀졌지만, 적어도 비결정론적인 것처럼 보이게 하는 방법은 있다. <strong>의사 난수(pseudorandom numbers)</strong>를 생성하는 알고리즘을 사용하는 것이 방법 중의 하나다. 의사 난수는 이미 결정된 연산에 의해서 생성된다는 점에서 진정한 의미의 난수는 아니지만, 이렇게 생성된 숫자만 봐서는 진정한 난수와 구별하는 것은 불가능에 가깝다.</p>
 <p>R은 데이터분석을 위해 태어난 언어라고 할 만큼 기본 내장함수로 다양한 난수 생성기를 갖추고 있다. 물론 난수 생성기로 생성되는 숫자는 의사난수다. 이하 의사 난수 대신 “랜덤(random)”으로 간략히 부르기로 한다.</p>
-<p><code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> 함수는 0.0 과 1.0 사이 부동 소수점 난수를 반환한다. <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> 함수 내부에 <code>min</code>, <code>max</code> 인자를 지정하여 난수 최소, 최대값을 범위를 설정할 수 있다. 매번 <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> 함수를 호출할 때 마다, 이미 생성된 아주 긴 난수열에서 하나씩 하나씩 뽑아 쓰다. 사례로 다음 반복문을 실행하자.</p>
+<p><code>runif()</code> 함수는 0.0 과 1.0 사이 부동 소수점 난수를 반환한다. <code>runif()</code> 함수 내부에 <code>min</code>, <code>max</code> 인자를 지정하여 난수 최소, 최대값을 범위를 설정할 수 있다. 매번 <code>runif()</code> 함수를 호출할 때 마다, 이미 생성된 아주 긴 난수열에서 하나씩 하나씩 뽑아 쓰다. 사례로 다음 반복문을 실행하자.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
 <div id="qwebr-insertion-location-8"></div>
@@ -1822,14 +1850,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>여러분의 컴퓨터에 프로그램을 실행해서, 어떤 난수가 생성되는지 살펴보세요. 한번 이상 프로그램을 실행하여 보고, 어떤 난수가 생성되는지 다시 살펴보세요.</p>
 </div>
 </div>
-<p><code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> 함수는 난수를 다루는 많은 함수 중의 하나다. <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> 함수는 정수 난수 범위와 난수 갯수를 매개 변수를 입력받아 최저값(low)과 최고값(high) 사이 (최저값과, 최저값 모두 포함) 정수를 반환한다. 정당으로 구성된 모집단에서 정당을 하나 뽑는 방법도 유사하다.</p>
+<p><code>runif()</code> 함수는 난수를 다루는 많은 함수 중의 하나다. <code>sample()</code> 함수는 정수 난수 범위와 난수 갯수를 매개 변수를 입력받아 최저값(low)과 최고값(high) 사이 (최저값과, 최저값 모두 포함) 정수를 반환한다. 정당으로 구성된 모집단에서 정당을 하나 뽑는 방법도 유사하다.</p>
 <p><code>sample(1:10, 5)</code> 실행문은 1 ~ 10 사이 정수 10개 중에서 난수로 5개를 추출한다는 뜻이다.</p>
-<p>무작위로 특정 벡터에서 요소를 하나 뽑아내기 위해, <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code>를 동일하게 사용한다.</p>
+<p>무작위로 특정 벡터에서 요소를 하나 뽑아내기 위해, <code>sample()</code>를 동일하게 사용한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
 <div id="qwebr-insertion-location-9"></div>
@@ -1841,18 +1866,16 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p>또한 <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> 모듈을 활용하여 정규분포, 지수분포, 감마분포 및 기타 연속형 분포에서 난수를 생성하는 함수도 제공된다.</p>
-</section><section id="r-func-math" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="r-func-math">
-<span class="header-section-number">4.5</span> 수학 함수</h2>
+<p>또한 <code>runif()</code> 모듈을 활용하여 정규분포, 지수분포, 감마분포 및 기타 연속형 분포에서 난수를 생성하는 함수도 제공된다.</p>
+</section>
+<section id="r-func-math" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="r-func-math"><span class="header-section-number">4.5</span> 수학 함수</h2>
 <p>R은 가장 친숙한 수학 함수를 제공하는 수학 모듈이 있다. 기본 수학 모듈이 내장함수로 기본 설치되어 있어서 별도 설치와 호출작업은 필요없다. <strong>점 표기법(dot notation)</strong>이라고 불리는 표기법을 사용해서, 여러 함수 중에서 특정 함수에 접근하기 위해서 모듈/객체 이름과 함수 이름을 명시해서 파이썬에서 활용하기도 하지만, R에서는 필요없다.</p>
 <p>R과 파이썬 언어는 서로 다른 설계 철학과 기능을 지니고 있다. 파이썬에서 <code>math.sqrt()</code>는 <code>math</code> 모듈 내 <code>sqrt</code> 함수를 호출하는 방식으로 객체 지향적 특성과 모듈 시스템 특성을 그대로 반영한다.</p>
-<p>반면에, R에서는 함수가 기본적으로 전역 네임스페이스에 위치하거나, 라이브러리를 로드할 때 해당 라이브러리의 모든 함수가 전역 네임스페이스에 적재된다. 예를 들어, <code>ggplot2</code> 패키지 함수들은 패키지를 로드한 후에 바로 함수 이름만으로 호출할 수 있다. 경우에 따라서는 파이썬 점 표기법과 유사하게 <code>패키지명::함수명</code>과 같은 방식으로 특정 패키지 함수만 골라 사용하는 경우도 흔다. 예를 들어, <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> 함수를 명기하기 위해 <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code>와 같이 사용한다.</p>
-<p>신호-대-소음비 로그 밑이 10(<code><a href="https://rdrr.io/r/base/Log.html">log10()</a></code>) 을 계산한 후 라디안 사인값을 찾는 코드를 살펴보자. 변수의 이름이 힌트를 주는데, <code><a href="https://rdrr.io/r/base/Trig.html">sin()</a></code>과 다른 삼각함수(<code><a href="https://rdrr.io/r/base/Trig.html">cos()</a></code>, <code><a href="https://rdrr.io/r/base/Trig.html">tan()</a></code> 등)는 라디안을 인자로 받는다. 도(degree)에서 라디안(radian)으로 변환하기 위해서 360으로 나누고 <span class="math inline">\(2\pi\)</span>를 곱한다.</p>
+<p>반면에, R에서는 함수가 기본적으로 전역 네임스페이스에 위치하거나, 라이브러리를 로드할 때 해당 라이브러리의 모든 함수가 전역 네임스페이스에 적재된다. 예를 들어, <code>ggplot2</code> 패키지 함수들은 패키지를 로드한 후에 바로 함수 이름만으로 호출할 수 있다. 경우에 따라서는 파이썬 점 표기법과 유사하게 <code>패키지명::함수명</code>과 같은 방식으로 특정 패키지 함수만 골라 사용하는 경우도 흔다. 예를 들어, <code>filter()</code> 함수를 명기하기 위해 <code>dplyr::filter()</code>와 같이 사용한다.</p>
+<p>신호-대-소음비 로그 밑이 10(<code>log10()</code>) 을 계산한 후 라디안 사인값을 찾는 코드를 살펴보자. 변수의 이름이 힌트를 주는데, <code>sin()</code>과 다른 삼각함수(<code>cos()</code>, <code>tan()</code> 등)는 라디안을 인자로 받는다. 도(degree)에서 라디안(radian)으로 변환하기 위해서 360으로 나누고 <span class="math inline">\(2\pi\)</span>를 곱한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
 <div id="qwebr-insertion-location-10"></div>
@@ -1867,10 +1890,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p><code>pi</code> 표현식은 수학 모듈에서 <code>pi</code> 변수를 얻는데, <span class="math inline">\(\pi\)</span> 값과 비교하여 15 자리수까지 정확하고 근사적으로 수렴한다.</p>
 <p>삼각함수를 배웠다면, 앞선 연산 결과를 2에 루트를 씌우고 2로 나누어 비교 검증한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
 <div id="qwebr-insertion-location-11"></div>
@@ -1882,14 +1902,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-</section><section id="r-func-new-function" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="r-func-new-function">
-<span class="header-section-number">4.6</span> 신규 함수 추가</h2>
+</section>
+<section id="r-func-new-function" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="r-func-new-function"><span class="header-section-number">4.6</span> 신규 함수 추가</h2>
 <p>지금까지 R 설치 시 함께 설치되는 함수만 사용했지만 새로운 함수를 추가하는 것도 가능하다. <strong>함수 정의(function definition)</strong>는 신규 함수명과 함수가 호출될 때 실행될 일련의 문장을 명세한다. 신규로 함수를 정의하면, 프로그램 실행 중에 반복해서 함수를 재사용할 수 있다. 다음에 예제가 있다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
 <div id="qwebr-insertion-location-12"></div>
@@ -1904,14 +1922,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p><code>function</code>는 “이것이 함수 정의다”를 표시하는 예약어다. 함수 이름은 <code>print_lyrics()</code>이다. 함수 이름을 명명 규칙은 변수명과 동일하다. 문자, 숫자, 그리고 몇몇 문장 부호는 사용할 수 있지만, 첫 문자가 숫자는 될 수 없다. 함수 이름으로 예약어를 사용할 수 없고, 함수 이름과 동일한 변수명은 피해야 한다.</p>
 <p>함수명 뒤 빈 괄호는 이 함수가 어떠한 인자도 갖지 않는다는 것을 나타낸다. 나중에, 입력값으로 인자를 가지는 함수를 작성해 볼 것이다.</p>
 <p>함수 정의 첫번째 줄을 머리 부문(헤더, header), 나머지 부문을 몸통 부문(바디, body)라고 부른다. 머리 부문은 <code>()</code>으로 끝나고, 몸통 부문은 괄호로 감싸야 한다. 몸통 부문에는 제약 없이 문장을 작성할 수 있다.</p>
-<p><code><a href="https://rdrr.io/r/base/print.html">print()</a></code>문의 문자열은 이중 인용부호로 감싼다. 단일 인용부호나, 이중 인용부호나 차이는 없다. 대부분의 경우 이중 인용부호를 사용하고, 이중 인용부호가 문자열에 나타나는 경우, 단일 인용부호를 사용하여 이중 인용부호가 출력되게 감싼다.</p>
+<p><code>print()</code>문의 문자열은 이중 인용부호로 감싼다. 단일 인용부호나, 이중 인용부호나 차이는 없다. 대부분의 경우 이중 인용부호를 사용하고, 이중 인용부호가 문자열에 나타나는 경우, 단일 인용부호를 사용하여 이중 인용부호가 출력되게 감싼다.</p>
 <p>만약 함수 정의를 인터렉티브 모드에서 타이핑을 하면, 함수 정의가 끝나지 않았다는 것을 의미로 더하기 부호(<code>+</code>)가 출력된다.</p>
 <p>함수 정의를 끝내기 위해서 빈 줄을 입력한다. (스크립트에서는 반듯이 필요한 것은 아니다.) 함수를 정의하게 되면 동일한 이름의 변수도 생성된다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-13-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-13-1-tab">
 <div id="qwebr-insertion-location-13"></div>
@@ -1926,25 +1941,24 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p><code>print_lyrics()</code> 값은 ‘function’ 형을 가지는 <strong>함수 객체(function object)</strong>다.</p>
 <p>신규 함수를 호출하는 구문은 내장 함수의 경우와 동일하다.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">print_lyrics</span><span class="op">(</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print_lyrics</span>()</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>함수를 정의하면, 또 다른 함수 내부에서 사용이 가능하다. 예를 들어, 이전 후렴구를 반복하기 위해 <code>repeat_lyrics()</code> 함수를 작성할 수 있다. 그리고 나서, <code>repeat_lyrics()</code> 함수를 호출한다.</p>
 <p>:::{.panel-tabset} ### R</p>
 <div id="qwebr-insertion-location-14"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<section id="파이썬-13" class="level3" data-number="4.6.1"><h3 data-number="4.6.1" class="anchored" data-anchor-id="파이썬-13">
-<span class="header-section-number">4.6.1</span> 파이썬</h3>
+<section id="파이썬-13" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="파이썬-13"><span class="header-section-number">4.6.1</span> 파이썬</h3>
 <div id="qpyodide-insertion-location-14"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>하지만, 그렇다고 실제 노래가 불려지는 것은 아니다.</p>
-</section></section><section id="r-func-how-to-use" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="r-func-how-to-use">
-<span class="header-section-number">4.7</span> 함수 정의와 사용법</h2>
+</section>
+</section>
+<section id="r-func-how-to-use" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="r-func-how-to-use"><span class="header-section-number">4.7</span> 함수 정의와 사용법</h2>
 <p>앞 절의 코드 조각을 모아서 작성한 전체 프로그램은 다음과 같다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-14-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-14-1-tab">
 <div id="qwebr-insertion-location-15"></div>
@@ -1984,8 +1998,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>함수 호출을 맨 마지막으로 옮기고, <code>repeat_lyrics</code> 함수 정의 뒤에 <code>print_lyrics</code> 함수를 옮기세요. 프로그램을 실행하게 되면 무슨 일이 발생하나요?</p>
 </div>
 </div>
-</section><section id="r-func-control" class="level2" data-number="4.8"><h2 data-number="4.8" class="anchored" data-anchor-id="r-func-control">
-<span class="header-section-number">4.8</span> 실행 흐름</h2>
+</section>
+<section id="r-func-control" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="r-func-control"><span class="header-section-number">4.8</span> 실행 흐름</h2>
 <p>처음으로 함수가 사용되기 전에 정의되었는지를 확인하기 위해서, 명령문 실행 순서를 파악해야 하는데 이를 <strong>실행 흐름(flow of execution)</strong>이라고 한다.</p>
 <p>프로그램 실행은 항상 프로그램 첫 문장부터 시작한다. 명령문은 한번에 하나씩 위에서 아래로 실행된다.</p>
 <p>함수 정의(definitions)가 프로그램 실행 순서를 바꾸지는 않는다. 하지만, 함수 내부의 문장은 함수가 호출될 때까지 실행이 되지 않는다는 것을 기억하자.</p>
@@ -1993,15 +2008,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>함수가 또 다른 함수를 호출한다는 것을 기억할 때까지는 매우 간단하게 들린다. 함수 중간에서 프로그램이 또 다른 함수의 문장을 수행할지도 모른다. 하지만, 새로운 함수를 실행하는 중간에 프로그램이 또 다른 함수를 실행할지도 모른다!</p>
 <p>다행스럽게도, 파이썬은 프로그램 실행 위치를 정확히 추적한다. 그래서, 함수가 실행을 완료할 때마다, 프로그램을 함수를 호출해서 떠난 지점으로 정확히 되돌려 놓는다. 프로그램이 마지막에 도달했을 때, 프로그램은 종료한다.</p>
 <p>이렇게 복잡한 이야기의 교훈은 무엇일까요? 프로그램을 읽을 때, 위에서부터 아래로 읽을 필요는 없다. 때때로, 실행 흐름을 따르는 것이 좀더 이치에 맞는다.</p>
-</section><section id="r-func-parameter-argument" class="level2" data-number="4.9"><h2 data-number="4.9" class="anchored" data-anchor-id="r-func-parameter-argument">
-<span class="header-section-number">4.9</span> 매개 변수와 인수</h2>
-<p>지금까지 살펴본 몇몇 내장 함수는 <strong>인자(argument)</strong>를 요구한다. 예를 들어, <code><a href="https://rdrr.io/r/base/Trig.html">sin()</a></code> 함수를 호출할 때, 숫자를 인자로 넘겨야 한다. 어떤 함수는 2개 이상의 인수를 받는다. <code><a href="https://rdrr.io/r/base/Log.html">log()</a></code> 는 숫자와 밑 2개의 인자가 필요하다.</p>
+</section>
+<section id="r-func-parameter-argument" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="r-func-parameter-argument"><span class="header-section-number">4.9</span> 매개 변수와 인수</h2>
+<p>지금까지 살펴본 몇몇 내장 함수는 <strong>인자(argument)</strong>를 요구한다. 예를 들어, <code>sin()</code> 함수를 호출할 때, 숫자를 인자로 넘겨야 한다. 어떤 함수는 2개 이상의 인수를 받는다. <code>log()</code> 는 숫자와 밑 2개의 인자가 필요하다.</p>
 <p>인자는 함수 내부에서 <strong>매개 변수(parameters)</strong>로 불리는 변수로 대입된다. 하나의 인자를 받는 <strong>사용자 정의 함수(user-defined function)</strong>가 예제로 있다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-15-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-15-1-tab">
 <div id="qwebr-insertion-location-16"></div>
@@ -2016,10 +2029,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>사용자 정의 함수는 인자를 받아 매개변수 <code>bruce</code>에 대입한다. 함수가 호출될 때, 매개변수의 값(무엇이든 관계 없이)을 두번 출력합니다.</p>
 <p>사용자 정의 함수는 출력 가능한 임의의 값에 작동한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-16-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-1" role="tab" aria-controls="tabset-16-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-2" role="tab" aria-controls="tabset-16-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-16-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-1" role="tab" aria-controls="tabset-16-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-2" role="tab" aria-controls="tabset-16-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-16-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-16-1-tab">
 <div id="qwebr-insertion-location-17"></div>
@@ -2033,10 +2043,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p>내장함수에 적용되는 동일한 구성 규칙이 사용자 정의 함수에도 적용되어서, <code>print_twice()</code> 함수 인자로 표현식 어떤 종류도 가능하다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-17-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-1" role="tab" aria-controls="tabset-17-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-17-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-2" role="tab" aria-controls="tabset-17-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-17-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-1" role="tab" aria-controls="tabset-17-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-17-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-2" role="tab" aria-controls="tabset-17-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-17-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-17-1-tab">
 <div id="qwebr-insertion-location-18"></div>
@@ -2051,10 +2058,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>함수가 호출되기 전에 인자에 대한 평가는 완료되어, 예제에서 <code>rep("spam",2)</code>과 <code>cos(pi)</code>은 단지 1회만 평가된다.</p>
 <p>변수도 인자로 사용이 가능하다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-18-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-1" role="tab" aria-controls="tabset-18-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-18-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-2" role="tab" aria-controls="tabset-18-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-18-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-1" role="tab" aria-controls="tabset-18-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-18-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-2" role="tab" aria-controls="tabset-18-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-18-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-18-1-tab">
 <div id="qwebr-insertion-location-19"></div>
@@ -2067,15 +2071,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p>전달되는 변수명(<code>half_chicken</code>)은 매개 변수명(<code>bruce</code>)과 아무런 연관이 없다. 어떠한 값이 전달되든 호출하는 쪽과는 별개입니다. 여기 <code>print_twice()</code> 함수에서는 어떤 값이든 <code>bruce</code>로 칭해지면 된다.</p>
-</section><section id="r-func-void" class="level2" data-number="4.10"><h2 data-number="4.10" class="anchored" data-anchor-id="r-func-void">
-<span class="header-section-number">4.10</span> 결과값 반환 (없는) 함수</h2>
+</section>
+<section id="r-func-void" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="r-func-void"><span class="header-section-number">4.10</span> 결과값 반환 (없는) 함수</h2>
 <p>수학 함수와 같은 몇몇 함수는 결과를 만들어 낸다. 좀더 좋은 이름이 없어서, 결과를 만들어 내는 함수를 <strong>결과값을 반환하는 함수(fruitful functions)</strong>라고 명명한다. <code>print_twice()</code>와 같이 액션을 수행하지만, 결과를 만들어 내지 않는 함수를 <strong>반환 값이 없는 함수(void functions)</strong>라고 부른다.</p>
 <p>결과값을 반환하는 함수를 호출할 때는 결과값을 가지고 뭔가를 하려고 한다. 예를 들어, 결과값을 변수에 대입하거나, 표현식의 일부로 사용할 수 있다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-19-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-19-1" role="tab" aria-controls="tabset-19-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-19-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-19-2" role="tab" aria-controls="tabset-19-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-19-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-19-1" role="tab" aria-controls="tabset-19-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-19-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-19-2" role="tab" aria-controls="tabset-19-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-19-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-19-1-tab">
 <div id="qwebr-insertion-location-20"></div>
@@ -2089,10 +2091,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p>인터랙티브 모드에서 함수를 호출할 때, R은 결과를 화면에 출력한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-20-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-20-1" role="tab" aria-controls="tabset-20-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-20-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-20-2" role="tab" aria-controls="tabset-20-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-20-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-20-1" role="tab" aria-controls="tabset-20-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-20-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-20-2" role="tab" aria-controls="tabset-20-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-20-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-20-1-tab">
 <div id="qwebr-insertion-location-21"></div>
@@ -2108,10 +2107,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>이 스크립트는 5의 제곱근을 계산하지만, 변수에 결과값을 저장하거나, 화면에 출력하지 않아서 그다지 유용하지는 않다.</p>
 <p>반환 값이 없는 함수(void functions)는 화면에 출력하거나 무엇인가 다른 효과를 가지지만, 반환값이 없다. 빈 함수를 사용하여 결과에 변수를 대입하면, <code>NULL</code>로 불리는 특별한 값을 얻게 된다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-21-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-21-1" role="tab" aria-controls="tabset-21-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-21-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-21-2" role="tab" aria-controls="tabset-21-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-21-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-21-1" role="tab" aria-controls="tabset-21-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-21-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-21-2" role="tab" aria-controls="tabset-21-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-21-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-21-1-tab">
 <div id="qwebr-insertion-location-22"></div>
@@ -2124,12 +2120,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p><code>NULL</code> 값은 자신만의 특별한 값을 가지며, 문자열 ‘NULL’ 과는 같지 않다.</p>
-<p>함수에서 결과를 반환하기 위해서, 함수 내부에 <code><a href="https://rdrr.io/r/base/function.html">return()</a></code>문을 사용한다. 예를 들어, 두 숫자를 더해서 결과를 반환하는 <code>addtwo()</code>라는 간단한 함수를 작성할 수 있다.</p>
+<p>함수에서 결과를 반환하기 위해서, 함수 내부에 <code>return()</code>문을 사용한다. 예를 들어, 두 숫자를 더해서 결과를 반환하는 <code>addtwo()</code>라는 간단한 함수를 작성할 수 있다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-22-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-22-1" role="tab" aria-controls="tabset-22-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-22-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-22-2" role="tab" aria-controls="tabset-22-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-22-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-22-1" role="tab" aria-controls="tabset-22-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-22-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-22-2" role="tab" aria-controls="tabset-22-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-22-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-22-1-tab">
 <div id="qwebr-insertion-location-23"></div>
@@ -2141,10 +2134,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p>상기 스크립트가 실행될 때 <code><a href="https://rdrr.io/r/base/cat.html">cat()</a></code> 출력문은 “8”을 출력한다. 왜냐하면, 3과 5를 인수로 받는 <code>addtwo()</code> 함수가 호출되기 때문이다. 함수 내부에 매개 변수 a, b는 각각 3, 5이다. <code>addtwo()</code> 함수는 두 숫자 덧셈을 수행하고 <code>added</code>라는 로컬 변수에 저장하고, <code><a href="https://rdrr.io/r/base/function.html">return()</a></code>문을 사용해서 덧셈 결과를 반환하고,x 라는 변수에 대입해서 출력한다.</p>
+<p>상기 스크립트가 실행될 때 <code>cat()</code> 출력문은 “8”을 출력한다. 왜냐하면, 3과 5를 인수로 받는 <code>addtwo()</code> 함수가 호출되기 때문이다. 함수 내부에 매개 변수 a, b는 각각 3, 5이다. <code>addtwo()</code> 함수는 두 숫자 덧셈을 수행하고 <code>added</code>라는 로컬 변수에 저장하고, <code>return()</code>문을 사용해서 덧셈 결과를 반환하고,x 라는 변수에 대입해서 출력한다.</p>
 <p>R에서 명시적으로 <code>return</code>을 통해 밝히지 않더라도 함수에서 최종적으로 담고 있는 객체가 자동 반환되지만, <code>return</code>을 통해 명시적으로 하는 것이 추후 디버깅 등의 목적으로 더 유용하다.</p>
-</section><section id="r-func-why" class="level2" data-number="4.11"><h2 data-number="4.11" class="anchored" data-anchor-id="r-func-why">
-<span class="header-section-number">4.11</span> 함수 사용 이유?</h2>
+</section>
+<section id="r-func-why" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="r-func-why"><span class="header-section-number">4.11</span> 함수 사용 이유?</h2>
 <p>프로그램을 여러 함수로 나누는 데 들이는 노력이 가치 있는지 항상 명확하지는 않다. 그러나 다음과 같은 몇 가지 이유는 존재한다.</p>
 <ul>
 <li>문장을 그룹으로 만들어 새로운 함수로 명명하는 것이 프로그램을 읽고, 이해하고, 디버그하기 좋게 한다.</li>
@@ -2152,56 +2146,42 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li>긴 프로그램을 함수로 나누어 작성하는 것은 작은 부분에서 버그를 수정할 수 있게 하고, 이를 조합해서 전체적으로 동작하는 프로그램을 만들 수 있다.</li>
 <li>잘 설계된 함수는 종종 많은 프로그램에서 유용하게 사용된다. 잘 설계된 프로그램을 작성하고 디버그를 해서 오류가 없이 만들게 되면, 나중에 재사용도 용이하다.</li>
 </ul>
-<p>책의 나머지 부분에서 이 개념을 설명하는 함수 정의를 종종 사용한다. “리스트에서 가장 작은 값을 찾아내는 것”과 같이 아이디어를 적절하게 추상화하여 함수를 작성하는 것이 함수를 만들고 사용하는 기술의 일부가 된다. 나중에, 리스트에서 가장 작은 값을 찾아내는 코드를 보여 줄 것입니다. 리스트를 인수로 받아 가장 작은 값을 반환하는 <code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code> 함수를 작성해서 여러분에게 보여드릴 것이다.</p>
-</section><section id="r-func-debug" class="level2" data-number="4.12"><h2 data-number="4.12" class="anchored" data-anchor-id="r-func-debug">
-<span class="header-section-number">4.12</span> 디버깅</h2>
+<p>책의 나머지 부분에서 이 개념을 설명하는 함수 정의를 종종 사용한다. “리스트에서 가장 작은 값을 찾아내는 것”과 같이 아이디어를 적절하게 추상화하여 함수를 작성하는 것이 함수를 만들고 사용하는 기술의 일부가 된다. 나중에, 리스트에서 가장 작은 값을 찾아내는 코드를 보여 줄 것입니다. 리스트를 인수로 받아 가장 작은 값을 반환하는 <code>min()</code> 함수를 작성해서 여러분에게 보여드릴 것이다.</p>
+</section>
+<section id="r-func-debug" class="level2" data-number="4.12">
+<h2 data-number="4.12" class="anchored" data-anchor-id="r-func-debug"><span class="header-section-number">4.12</span> 디버깅</h2>
 <p>텍스트 편집기로 스크립트를 작성한다면 공백과 탭으로 몇번씩 문제에 봉착했을 것입니다. 이런 문제를 피하는 가장 최선의 방식은 절대 탭을 사용하지 말고 공백(스페이스)를 사용하는 것이다. R을 인식하는 대부분의 텍스트 편집기는 디폴트로 이런 기능을 지원하지만, 몇몇 텍스트 편집기는 이런 기능을 지원하지 않아 탭과 공백 문제를 야기한다.</p>
 <p>탭과 공백은 통상 눈에 보이지 않기 때문에 디버그를 어렵게 한다. 자동으로 들여쓰기를 해주는 편집기를 프로그램 작성 시 사용한다.</p>
 <p>프로그램을 실행하기 전에 저장하는 것을 잊지 마세요. 몇몇 개발 환경은 자동저장 기능을 지원하지만 그렇지 않는 것도 있다. 이런 이유 때문에 텍스트 편집기에서 작성한 개발 프로그램과 실행운영하고 있는 프로그램이 같지 않을 수도 있다.</p>
 <p>동일하고 잘못된 프로그램을 반복적으로 실행한다면, 디버깅은 오래 걸릴 수 있다.</p>
 <p>작성하고 있는 코드와 실행하는 코드가 일치하는지 필히 확인하자. 확신을 하지 못한다면, 프로그램의 첫줄에 <code>print('hello')</code> 을 넣어서 실행해 보자. hello를 보지 못한다면, 작성하고 있는 프로그램과 실행하고 있는 프로그램은 다른 것이다.</p>
-</section><section id="r-func-terminology" class="level2" data-number="4.13"><h2 data-number="4.13" class="anchored" data-anchor-id="r-func-terminology">
-<span class="header-section-number">4.13</span> 용어정의</h2>
+</section>
+<section id="r-func-terminology" class="level2" data-number="4.13">
+<h2 data-number="4.13" class="anchored" data-anchor-id="r-func-terminology"><span class="header-section-number">4.13</span> 용어정의</h2>
 <ul>
-<li>
-<strong>알고리즘(algorithm)</strong>: 특정 범주의 문제를 해결하는 일반적인 프로세스</li>
-<li>
-<strong>인자(argument)</strong>: 함수가 호출될 때 함수에 제공되는 값. 이 값은 함수 내부에 상응하는 매개 변수에 대입된다.</li>
-<li>
-<strong>몸통 부문(body)</strong>: 함수 정의 내부에 일련의 문장</li>
-<li>
-<strong>구성(composition)</strong>: 좀더 큰 표현식의 일부분으로 표현식을 사용하거나, 좀더 큰 문장의 일부로서의 문장</li>
-<li>
-<strong>결정론적(deterministic)</strong>: 동일한 입력값이 주어지고 실행될 때마다 동일한 행동을 하는 프로그램에 관련된 것.</li>
-<li>
-<strong>점 표기법(dot notation)</strong>: 점과 함수명으로 모듈명을 명세함으로써 다른 모듈의 함수를 호출하는 구문.</li>
-<li>
-<strong>실행 흐름(flow of execution)</strong>: 프로그램 실행 동안 명령문이 실행되는 순서.</li>
-<li>
-<strong>결과있는 함수(fruitful function)</strong>: 반환값을 가지는 함수.</li>
-<li>
-<strong>함수(function)</strong>: 유용한 연산을 수행하는 이름을 가진 일련의 명령문. 함수는 인수를 가질 수도 갖지 않을 수도 있고, 결과값을 생성할 수도 생성하지 않을 수도 있다.</li>
-<li>
-<strong>함수 호출(function call)</strong>: 함수를 실행하는 명령문. 함수 이름과 인자 리스트로 구성된다.</li>
-<li>
-<strong>함수 정의(function definition)</strong>: 신규 함수를 정의하는 명령문으로 이름, 매개변수, 실행 명령문을 명세한다.</li>
-<li>
-<strong>함수 객체(function object)</strong>: 함수 정의로 생성되는 값. 함수명은 함수 객체를 참조하는 변수다.</li>
-<li>
-<strong>머리 부문(header)</strong>: 함수 정의의 첫번째 줄</li>
-<li>
-<strong>가져오기 문(import statement)</strong>: 모듈 파일을 읽어 모듈 개체를 생성하는 명령문</li>
-<li>
-<strong>모듈 개체(module object)</strong>: import문에 의해서 생성된 모듈에 정의된 코드와 데이터에 접근할 수 있는 값</li>
-<li>
-<strong>매개 변수(parameter)</strong>: 인자로 전달된 값을 참조하기 위해 함수 내부에 사용되는 이름</li>
-<li>
-<strong>의사 난수(pseudorandom)</strong>: 난수처럼 보이는 일련의 숫자와 관련되어 있지만, 결정론적 프로그램에 의해 생성된다.</li>
-<li>
-<strong>반환 값(return value)</strong>: 함수의 결과. 함수 호출이 표현식으로 사용된다면, 반환값은 표현식의 값이 된다.</li>
-<li>
-<strong>빈 함수(void function)</strong>: 반환값을 갖지 않는 함수</li>
-</ul></section><section id="r-func-ex" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="r-func-ex">연습문제</h2>
+<li><strong>알고리즘(algorithm)</strong>: 특정 범주의 문제를 해결하는 일반적인 프로세스</li>
+<li><strong>인자(argument)</strong>: 함수가 호출될 때 함수에 제공되는 값. 이 값은 함수 내부에 상응하는 매개 변수에 대입된다.</li>
+<li><strong>몸통 부문(body)</strong>: 함수 정의 내부에 일련의 문장</li>
+<li><strong>구성(composition)</strong>: 좀더 큰 표현식의 일부분으로 표현식을 사용하거나, 좀더 큰 문장의 일부로서의 문장</li>
+<li><strong>결정론적(deterministic)</strong>: 동일한 입력값이 주어지고 실행될 때마다 동일한 행동을 하는 프로그램에 관련된 것.</li>
+<li><strong>점 표기법(dot notation)</strong>: 점과 함수명으로 모듈명을 명세함으로써 다른 모듈의 함수를 호출하는 구문.</li>
+<li><strong>실행 흐름(flow of execution)</strong>: 프로그램 실행 동안 명령문이 실행되는 순서.</li>
+<li><strong>결과있는 함수(fruitful function)</strong>: 반환값을 가지는 함수.</li>
+<li><strong>함수(function)</strong>: 유용한 연산을 수행하는 이름을 가진 일련의 명령문. 함수는 인수를 가질 수도 갖지 않을 수도 있고, 결과값을 생성할 수도 생성하지 않을 수도 있다.</li>
+<li><strong>함수 호출(function call)</strong>: 함수를 실행하는 명령문. 함수 이름과 인자 리스트로 구성된다.</li>
+<li><strong>함수 정의(function definition)</strong>: 신규 함수를 정의하는 명령문으로 이름, 매개변수, 실행 명령문을 명세한다.</li>
+<li><strong>함수 객체(function object)</strong>: 함수 정의로 생성되는 값. 함수명은 함수 객체를 참조하는 변수다.</li>
+<li><strong>머리 부문(header)</strong>: 함수 정의의 첫번째 줄</li>
+<li><strong>가져오기 문(import statement)</strong>: 모듈 파일을 읽어 모듈 개체를 생성하는 명령문</li>
+<li><strong>모듈 개체(module object)</strong>: import문에 의해서 생성된 모듈에 정의된 코드와 데이터에 접근할 수 있는 값</li>
+<li><strong>매개 변수(parameter)</strong>: 인자로 전달된 값을 참조하기 위해 함수 내부에 사용되는 이름</li>
+<li><strong>의사 난수(pseudorandom)</strong>: 난수처럼 보이는 일련의 숫자와 관련되어 있지만, 결정론적 프로그램에 의해 생성된다.</li>
+<li><strong>반환 값(return value)</strong>: 함수의 결과. 함수 호출이 표현식으로 사용된다면, 반환값은 표현식의 값이 된다.</li>
+<li><strong>빈 함수(void function)</strong>: 반환값을 갖지 않는 함수</li>
+</ul>
+</section>
+<section id="r-func-ex" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="r-func-ex">연습문제</h2>
 <ol type="1">
 <li>R “function” 키워드의 목적은 무엇입니까?
 <ol type="1">
@@ -2210,15 +2190,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li>다음의 들여쓰기 코드 부문은 나중을 위해 저장되야 된다는 것을 표시한다.</li>
 <li>2와 3 모두 사실</li>
 <li>위 모두 거짓</li>
-</ol>
-</li>
+</ol></li>
 <li>다음 R 프로그램은 무엇을 출력할까요?</li>
 </ol>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-23-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-23-1" role="tab" aria-controls="tabset-23-1" aria-selected="true">R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-23-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-23-2" role="tab" aria-controls="tabset-23-2" aria-selected="false">파이썬</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-23-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-23-1" role="tab" aria-controls="tabset-23-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-23-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-23-2" role="tab" aria-controls="tabset-23-2" aria-selected="false">파이썬</a></li></ul>
 <div class="tab-content">
 <div id="tabset-23-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-23-1-tab">
 <div id="qwebr-insertion-location-24"></div>
@@ -2278,7 +2254,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>반복적으로 프로그램을 실행해서 다양한 다른 입력값을 테스트해 보세요.</p>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -2703,19 +2682,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
       <a href="./03-cont.html" class="pagination-link" aria-label="조건부 실행">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="참고문헌">
-        <span class="nav-page-text">참고문헌</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./05-loop.html" class="pagination-link" aria-label="반복">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
 <p>챗GPT 쿼토 책은 소프트웨어 카펜트리 ***** 번역한 것이 포함되어 있습니다.</p>
 </div>   
@@ -2726,7 +2708,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
 </div>
   </div>
-</footer><script type="module">
+</footer>
+<script type="module">
 // Handle cell initialization initialization
 qwebrCellDetails.map(
   (entry) => {
@@ -2837,7 +2820,8 @@ qwebrInstance.then(
     );  
   }
 );
-</script><script type="module">
+</script>
+<script type="module">
 /**
  * Factory function to create different types of cells based on options.
  * @param {Object} cellData - JSON object containing code, id, and options.
@@ -3363,7 +3347,8 @@ class SetupCell extends BaseCell {
         this.executeCode();
     }
 };
-</script><script type="module">
+</script>
+<script type="module">
 // Handle cell initialization initialization
 qpyodideCellDetails.map(
     (entry) => {
@@ -3372,6 +3357,8 @@ qpyodideCellDetails.map(
     }
   );
 </script>
+
+
 
 
 </body></html>
