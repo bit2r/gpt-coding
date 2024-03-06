@@ -1604,13 +1604,69 @@
     ]
   },
   {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "참고문헌",
+    "objectID": "git-korean.html",
+    "href": "git-korean.html",
+    "title": "23  Git 추가설정",
     "section": "",
-    "text": "Stevens, Stanley Smith. 1946. “On the Theory of Scales of\nMeasurement.” Science 103 (2684): 677–80.\n\n\nWickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.\nR for Data Science. \" O’Reilly Media, Inc.\".\n\n\nWiener, Norbert. 1921. “A New Theory of Measurement: A Study in\nthe Logic of Mathematics.” Proceedings of the London\nMathematical Society 2 (1): 181–205.\n\n\n이경화. 2020. 고등학교 실용통계. 통계청 통계교육원.",
+    "text": "23.1 로컬 PC와 SSH 키(Key) 연결\nGitHub에 저장소(repository)를 만들고 여러 PC에서 작업을 진행할 경우 GitHub에 인증작업을 거쳐 진행하는 것이 여러모로 편리하다. 그중 하나의 방식이 공개키(public key)를 GitHub에 등록시켜 작업을 하는 것이 여기에 포함된다.",
     "crumbs": [
-      "참고문헌"
+      "버전제어와 협업",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>Git 추가설정</span>"
+    ]
+  },
+  {
+    "objectID": "git-korean.html#local-PC-ssh-keys",
+    "href": "git-korean.html#local-PC-ssh-keys",
+    "title": "23  Git 추가설정",
+    "section": "",
+    "text": "먼저 윈도우를 사용할 경우 Git for windows를 다운로드 받아 설치한다.\nssh-keygen 명령어로 공개키/비밀키를 생성한다.\n생성된 공개키를 GitHub 계정에 등록시킨다.",
+    "crumbs": [
+      "버전제어와 협업",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>Git 추가설정</span>"
+    ]
+  },
+  {
+    "objectID": "git-korean.html#local-PC-ssh-keys-generate",
+    "href": "git-korean.html#local-PC-ssh-keys-generate",
+    "title": "23  Git 추가설정",
+    "section": "23.2 SSH 공개키/비밀키 생성 1",
+    "text": "23.2 SSH 공개키/비밀키 생성 1\nSSH 공개키/비밀키를 생성시키고 이를 GitHub 홈페이지에 등록한다. 먼저 ssh-keygen 명령어에 매개변수 인자를 넣고 GitHub 전자우편주소도 함께 지정한다.\n$ ssh-keygen -t rsa -C “your_email@example.com”\nssh-keygen 명령어로 생성된 키를 GitHub에 등록한다.\n\n우측상단 [Settings] → [SSH and GPG keys] → [New SSH key]\n\n[New SSH key]를 클릭하게 되면 Title, Key를 넣는 입력부분이 보인다. Title에 식별가능한 이름을 지정하고 앞서 생성한 id_rsa.pub 내용을 Key에 복사해서 붙여넣는다.\n$ cat ~/.ssh/id_rsa.pub\n\nssh-rsa AAAxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxYxY9 email_address@mail.com",
+    "crumbs": [
+      "버전제어와 협업",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>Git 추가설정</span>"
+    ]
+  },
+  {
+    "objectID": "git-korean.html#local-PC-ssh-keys-commit",
+    "href": "git-korean.html#local-PC-ssh-keys-commit",
+    "title": "23  Git 추가설정",
+    "section": "23.3 첫 커밋(commit)",
+    "text": "23.3 첫 커밋(commit)\n인증작업을 완료한 후에 저장소에서 작업할 파일을 처음 커밋(commit)하는 경우 git add, git commit -m명령어를 이어서 전달시키게 되면 커밋을 때리는 사람이 누구인지를 등록하는 절차가 발생된다. git config를 통해 전자우편과 사용자명을 등록하게 되면 커밋을 정상적으로 진행시킬 수 있게 된다.\n$ git config --global user.email \"you@example.com\"\n$ git config --global user.name \"Your Name\"",
+    "crumbs": [
+      "버전제어와 협업",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>Git 추가설정</span>"
+    ]
+  },
+  {
+    "objectID": "git-korean.html#local-PC-ssh-keys-push",
+    "href": "git-korean.html#local-PC-ssh-keys-push",
+    "title": "23  Git 추가설정",
+    "section": "23.4 비밀번호 입력없이 푸쉬(push) 2",
+    "text": "23.4 비밀번호 입력없이 푸쉬(push) 2\n다음 단계로 비밀번호 없이 커밋된 내용을 GitHub에 전달하는 방법은 자격인증(credential) 캐싱을 통한 간단한 방법이 있다. 물론 처음에는 사용자명과 비번을 입력하는 과정을 필수적으로 거치게 된다.\n$ git config credential.helper store\n$ git push https://github.com/repo.git\n\nUsername for 'https://github.com': &lt;USERNAME&gt;\nPassword for 'https://USERNAME@github.com': &lt;PASSWORD&gt;\n캐쉬에 시간제한을 두어서 7200초 즉 2시간 보안을 강화시킨다.\n$ git config --global credential.helper 'cache --timeout 7200'",
+    "crumbs": [
+      "버전제어와 협업",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>Git 추가설정</span>"
+    ]
+  },
+  {
+    "objectID": "git-korean.html#footnotes",
+    "href": "git-korean.html#footnotes",
+    "title": "23  Git 추가설정",
+    "section": "",
+    "text": "nickjoIT (2017), “GitHub SSH 키 생성 및 등록하여 사용하기”↩︎\nStackoverflow, “How do I avoid the specification of the username and password at every git push?”↩︎",
+    "crumbs": [
+      "버전제어와 협업",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>Git 추가설정</span>"
     ]
   },
   {
@@ -2029,6 +2085,16 @@
     "crumbs": [
       "분야별 도구",
       "<span class='chapter-number'>27</span>  <span class='chapter-title'>작업 자동화</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "참고문헌",
+    "section": "",
+    "text": "Stevens, Stanley Smith. 1946. “On the Theory of Scales of\nMeasurement.” Science 103 (2684): 677–80.\n\n\nWickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.\nR for Data Science. \" O’Reilly Media, Inc.\".\n\n\nWiener, Norbert. 1921. “A New Theory of Measurement: A Study in\nthe Logic of Mathematics.” Proceedings of the London\nMathematical Society 2 (1): 181–205.\n\n\n이경화. 2020. 고등학교 실용통계. 통계청 통계교육원.",
+    "crumbs": [
+      "참고문헌"
     ]
   }
 ]
