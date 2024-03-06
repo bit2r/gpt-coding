@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://r2bit.com/gpt-coding/index.html</loc>
+    <lastmod>2024-02-28T09:58:23.716Z</lastmod>
+  </url>
+  <url>
     <loc>https://r2bit.com/gpt-coding/01-intro.html</loc>
     <lastmod>2024-02-29T04:44:00.558Z</lastmod>
   </url>
@@ -25,14 +29,6 @@
     <lastmod>2024-03-02T01:31:23.312Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/gpt-coding/references.html</loc>
-    <lastmod>2024-02-28T09:58:07.456Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/gpt-coding/index.html</loc>
-    <lastmod>2024-02-28T09:58:23.716Z</lastmod>
-  </url>
-  <url>
     <loc>https://r2bit.com/gpt-coding/07-file.html</loc>
     <lastmod>2024-03-02T13:24:44.047Z</lastmod>
   </url>
@@ -47,5 +43,57 @@
   <url>
     <loc>https://r2bit.com/gpt-coding/A-dataframe.html</loc>
     <lastmod>2024-03-05T00:48:38.253Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/git-basics.html</loc>
+    <lastmod>2024-03-06T04:47:20.787Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/git-setup.html</loc>
+    <lastmod>2024-03-06T03:15:32.677Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/git-create.html</loc>
+    <lastmod>2024-03-06T03:18:04.382Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/git-change.html</loc>
+    <lastmod>2024-03-06T03:25:46.042Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/git-history.html</loc>
+    <lastmod>2024-03-06T03:57:46.295Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/git-ignore.html</loc>
+    <lastmod>2024-03-06T04:00:50.269Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/git-github.html</loc>
+    <lastmod>2024-03-06T04:05:29.503Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/git-collab.html</loc>
+    <lastmod>2024-03-06T04:13:57.675Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/git-conflict.html</loc>
+    <lastmod>2024-03-06T04:15:58.175Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/git-open.html</loc>
+    <lastmod>2024-03-06T04:18:42.185Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/git-licensing.html</loc>
+    <lastmod>2024-03-06T04:35:21.618Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/git-hosting.html</loc>
+    <lastmod>2024-03-06T04:45:20.674Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/references.html</loc>
+    <lastmod>2024-02-28T09:58:07.456Z</lastmod>
   </url>
 </urlset>

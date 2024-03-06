@@ -113,7 +113,7 @@ ga('send', {
   hitType: 'pageview',
   'anonymizeIp': true,
 });
-</script><script defer="" data-domain="r2bit.com/gpt-quarto" src="https://plausible.io/js/script.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</script><script defer="" data-domain="r2bit.com/gpt-coding" src="https://plausible.io/js/script.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <style type="text/css">
 .monaco-editor pre {
@@ -256,7 +256,7 @@ ga('send', {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = ['stringr'];
+globalThis.qwebrInstallRPackagesList = ['stringr', 'readr', 'purrr'];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -278,7 +278,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-cont-true-false"},"code":"5 == 5\n\n5 == 6"},{"id":2,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-cont-logical"},"code":"typeof(TRUE)\n#> [1] \"logical\"\ntypeof(FALSE)\n#> [1] \"logical\""},{"id":3,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-cont-logical-true"},"code":"17 & TRUE\n#> [1] TRUE"},{"id":4,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-cont-if"},"code":"\nif (x > 0) {\n  print('x 는 양수')\n}"},{"id":5,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-cont-if-placeholder"},"code":"if (x > 0) {\n  # 아무것도 작성하지 않고 자리만 잡아둔다. 나중에 코드를 채워넣는다.\n}"},{"id":6,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-cont-console, eval=FALSE}"},"code":"x <- 3\n\nif (x < 10) {\n  print('작다')\n}\n#> [1] \"작다\""},{"id":7,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-cont-alternative"},"code":"if (x %% 2 == 0){\n  print(\"x는 짝수\")\n} else {\n  print(\"x는 홀수\")\n}"},{"id":8,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-cont-chained"},"code":"if (x < y){\n  print(\"x는 y보다 작다\")\n} else if (x > y) {\n  print(\"x는 y보다 크다\")\n} else {\n  print(\"x와 y는 같다\")\n}"},{"id":9,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-cont-choice"},"code":"if (choice == 'a') {\n  print(\"잘못된 추측\")\n} else if(choice == 'b') {\n  print(\"좋은 추측\")\n} else if (choice == 'c') {\n  print('가깝지만 틀렸어요')\n}"},{"id":10,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-cont-nested"},"code":"if (x == y){\n  print(\"x와 y는 같다\")\n} else {\n  if (x > y) {\n    print(\"x는 y보다 크다\")\n  } else {\n    print(\"x는 y보다 작다\")\n  }\n}"},{"id":11,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-cont-code-review"},"code":"if (0 < x) {\n  if (x < 10) {\n    print('x는 한자리 양수.')\n  }\n}"},{"id":12,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-cont-code-simplify"},"code":"if (0 < x & x < 10) {\n  print(\"x는 한자리 양수.\")\n}"},{"id":13,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-var-fahren"},"code":"inp <- readline(prompt = \"화씨 온도 입력해줘: \")\n\ntryCatch({\n  cel <- (as.numeric(inp) - 32.0) * 5.0 / 9.0\n  print(cel)\n}, warning = function(w) {\n  print(\"경고: 숫자를 입력해주세요!\")\n}, error = function(e) {\n  print(\"에러: 숫자를 입력해주세요!\")\n})"},{"id":14,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-var-short-circuit"},"code":"x <- 6\ny <- 2\nx >= 2 & (x/y) > 2\n#> [1] TRUE\n\nx <- 1\ny <- 0\nx >= 2 & (x/y) > 2\n#> [1] FALSE\n\nx <- 6\ny <- 0\nx >= 2 & (x/y) > 2\n#> [1] TRUE"},{"id":15,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-var-gardian-pattern"},"code":"x <- 1\ny <- 0\nx >= 2 & y != 0 & (x/y) > 2\n#> [1] FALSE\n\nx <- 6\ny <- 0\nx >= 2 & y != 0 & (x/y) > 2\n#> [1] FALSE\n\nx >= 2 & (x/y) > 2 & y != 0\n#> [1] FALSE"},{"id":16,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","autorun":"false","warning":"true","fig-cap":"","results":"markup","output":"true","message":"true","read-only":"false","out-width":"700px","label":"r-var-debug"},"code":"signal_power <- 9\nnoise_power <- -10\n\nratio <- signal_power / noise_power\n\ndecibels <- 10 * log10(ratio)\ncat(\"데시벨(db):\", decibels)"}];
+globalThis.qwebrCellDetails = [{"code":"5 == 5\n\n5 == 6","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-cont-true-false"},"id":1},{"code":"typeof(TRUE)\n#> [1] \"logical\"\ntypeof(FALSE)\n#> [1] \"logical\"","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-cont-logical"},"id":2},{"code":"17 & TRUE\n#> [1] TRUE","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-cont-logical-true"},"id":3},{"code":"\nif (x > 0) {\n  print('x 는 양수')\n}","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-cont-if"},"id":4},{"code":"if (x > 0) {\n  # 아무것도 작성하지 않고 자리만 잡아둔다. 나중에 코드를 채워넣는다.\n}","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-cont-if-placeholder"},"id":5},{"code":"x <- 3\n\nif (x < 10) {\n  print('작다')\n}\n#> [1] \"작다\"","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-cont-console, eval=FALSE}"},"id":6},{"code":"if (x %% 2 == 0){\n  print(\"x는 짝수\")\n} else {\n  print(\"x는 홀수\")\n}","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-cont-alternative"},"id":7},{"code":"if (x < y){\n  print(\"x는 y보다 작다\")\n} else if (x > y) {\n  print(\"x는 y보다 크다\")\n} else {\n  print(\"x와 y는 같다\")\n}","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-cont-chained"},"id":8},{"code":"if (choice == 'a') {\n  print(\"잘못된 추측\")\n} else if(choice == 'b') {\n  print(\"좋은 추측\")\n} else if (choice == 'c') {\n  print('가깝지만 틀렸어요')\n}","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-cont-choice"},"id":9},{"code":"if (x == y){\n  print(\"x와 y는 같다\")\n} else {\n  if (x > y) {\n    print(\"x는 y보다 크다\")\n  } else {\n    print(\"x는 y보다 작다\")\n  }\n}","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-cont-nested"},"id":10},{"code":"if (0 < x) {\n  if (x < 10) {\n    print('x는 한자리 양수.')\n  }\n}","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-cont-code-review"},"id":11},{"code":"if (0 < x & x < 10) {\n  print(\"x는 한자리 양수.\")\n}","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-cont-code-simplify"},"id":12},{"code":"inp <- readline(prompt = \"화씨 온도 입력해줘: \")\n\ntryCatch({\n  cel <- (as.numeric(inp) - 32.0) * 5.0 / 9.0\n  print(cel)\n}, warning = function(w) {\n  print(\"경고: 숫자를 입력해주세요!\")\n}, error = function(e) {\n  print(\"에러: 숫자를 입력해주세요!\")\n})","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-var-fahren"},"id":13},{"code":"x <- 6\ny <- 2\nx >= 2 & (x/y) > 2\n#> [1] TRUE\n\nx <- 1\ny <- 0\nx >= 2 & (x/y) > 2\n#> [1] FALSE\n\nx <- 6\ny <- 0\nx >= 2 & (x/y) > 2\n#> [1] TRUE","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-var-short-circuit"},"id":14},{"code":"x <- 1\ny <- 0\nx >= 2 & y != 0 & (x/y) > 2\n#> [1] FALSE\n\nx <- 6\ny <- 0\nx >= 2 & y != 0 & (x/y) > 2\n#> [1] FALSE\n\nx >= 2 & (x/y) > 2 & y != 0\n#> [1] FALSE","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-var-gardian-pattern"},"id":15},{"code":"signal_power <- 9\nnoise_power <- -10\n\nratio <- signal_power / noise_power\n\ndecibels <- 10 * log10(ratio)\ncat(\"데시벨(db):\", decibels)","options":{"classes":"","context":"interactive","autorun":"false","results":"markup","fig-width":7,"fig-height":5,"message":"true","output":"true","warning":"true","out-width":"700px","comment":"","read-only":"false","dpi":72,"fig-cap":"","out-height":"","label":"r-var-debug"},"id":16}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1131,7 +1131,7 @@ globalThis.qwebrExecuteCode = async function (
 // Document level settings ----
 
 // Determine if we need to install python packages
-globalThis.qpyodideInstallPythonPackagesList = [''];
+globalThis.qpyodideInstallPythonPackagesList = ['urllib'];
 
 // Check to see if we have an empty array, if we do set to skip the installation.
 globalThis.qpyodideSetupPythonPackages = !(qpyodideInstallPythonPackagesList.indexOf("") !== -1);
@@ -1150,7 +1150,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"id":1,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-cont-true-false"},"code":"5 == 5\n\n5 == 6"},{"id":2,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-cont-logical"},"code":"type(True)\n#> <class 'bool'>\ntype(False)\n#> <class 'bool'>"},{"id":3,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-cont-logical-true"},"code":"17 and True\n#> [1] True"},{"id":4,"options":{"dpi":72,"fig-height":5,"fig-width":7,"classes":"","fig-cap":"","results":"markup","output":"true","read-only":"false","autorun":"","out-height":"","comment":"","message":"true","eval":"false","warning":"true","out-width":"700px","context":"interactive","label":"py-cont-if"},"code":"\nif x > 0:\n    print('x 는 양수')"},{"id":5,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-cont-if-placeholder"},"code":"if x > 0:\n    pass # 아무것도 작성하지 않고 자리만 잡아둔다. 나중에 코드를 채워넣는다."},{"id":6,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-cont-console, eval=FALSE}"},"code":"x = 3\n\nif x < 10:\n  print('작다')\n#> \"작다\""},{"id":7,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-cont-alternative"},"code":"if x % 2 == 0:\n    print(\"x는 짝수\")\nelse:\n    print(\"x는 홀수\")"},{"id":8,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-cont-chained"},"code":"if x < y:\n    print(\"x는 y보다 작다\")\nelif x > y:\n    print(\"x는 y보다 크다\")\nelse:\n    print(\"x와 y는 같다\")"},{"id":9,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-cont-choice"},"code":"if choice == 'a':\n    print(\"잘못된 추측\")\nelif choice == 'b':\n    print(\"좋은 추측\")\nelif choice == 'c':\n    print('가깝지만 틀렸어요')"},{"id":10,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-cont-nested"},"code":"if x == y:\n    print(\"x와 y는 같다\")\nelse:\n    if x > y:\n        print(\"x는 y보다 크다\")\n    else:\n        print(\"x는 y보다 작다\")"},{"id":11,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-cont-code-review"},"code":"if 0 < x:\n    if x < 10:\n        print('x는 한자리 양수.')"},{"id":12,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-cont-code-simplify"},"code":"if 0 < x and x < 10:\n    print(\"x는 한자리 양수.\")"},{"id":13,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-var-fahren"},"code":"\ninp = input('화씨 온도 입력해줘: ')\ntry:\n    fahr = float(inp)\n    cel = (fahr - 32.0) * 5.0 / 9.0\n    print(cel)\nexcept ValueError:\n    print('숫자를 입력해주세요!')"},{"id":14,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-var-short-circuit"},"code":"x = 6\ny = 2\nx >= 2 and (x/y) > 2\n#> True\n\nx = 1\ny = 0\nx >= 2 and (x/y) > 2\n#> False\n\nx = 6\ny = 0\nx >= 2 and (x/y) > 2\n#> Traceback (most recent call last):\n#>   File \"<pyshell#28>\", line 1, in <module>\n#>     x >= 2 and (x/y) > 2\n#> ZeroDivisionError: division by zero"},{"id":15,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-var-gardian-pattern"},"code":"x = 1\ny = 0\nx >= 2 and y != 0 and (x/y) > 2\n#> False\n\nx = 6\ny = 0\nx >= 2 and y != 0 and (x/y) > 2\n#> False\n\nx >= 2 and (x/y) > 2 and y != 0\n#> Traceback (most recent call last):\n#>   File \"<pyshell#37>\", line 1, in <module>\n#>     x >= 2 and (x/y) > 2 and y != 0\n#> ZeroDivisionError: division by zero"},{"id":16,"options":{"comment":"","dpi":72,"context":"interactive","out-height":"","fig-height":5,"fig-width":7,"classes":"","output":"true","message":"true","fig-cap":"","results":"markup","warning":"true","autorun":"","read-only":"false","out-width":"700px","label":"py-var-debug"},"code":"import math\n\n# 초기 값 설정\nsignal_power = 9\nnoise_power = -10\n\n# signal-to-noise 비율 계산\nratio = signal_power / noise_power\n\n# 데시벨 계산\ndecibels = 10 * math.log10(ratio)\n\nprint(\"데시벨(db):\", decibels)"}];
+globalThis.qpyodideCellDetails = [{"code":"5 == 5\n\n5 == 6","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-cont-true-false"},"id":1},{"code":"type(True)\n#> <class 'bool'>\ntype(False)\n#> <class 'bool'>","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-cont-logical"},"id":2},{"code":"17 and True\n#> [1] True","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-cont-logical-true"},"id":3},{"code":"\nif x > 0:\n    print('x 는 양수')","options":{"read-only":"false","autorun":"","fig-width":7,"fig-height":5,"fig-cap":"","warning":"true","out-height":"","classes":"","context":"interactive","results":"markup","out-width":"700px","output":"true","comment":"","eval":"false","message":"true","dpi":72,"label":"py-cont-if"},"id":4},{"code":"if x > 0:\n    pass # 아무것도 작성하지 않고 자리만 잡아둔다. 나중에 코드를 채워넣는다.","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-cont-if-placeholder"},"id":5},{"code":"x = 3\n\nif x < 10:\n  print('작다')\n#> \"작다\"","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-cont-console, eval=FALSE}"},"id":6},{"code":"if x % 2 == 0:\n    print(\"x는 짝수\")\nelse:\n    print(\"x는 홀수\")","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-cont-alternative"},"id":7},{"code":"if x < y:\n    print(\"x는 y보다 작다\")\nelif x > y:\n    print(\"x는 y보다 크다\")\nelse:\n    print(\"x와 y는 같다\")","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-cont-chained"},"id":8},{"code":"if choice == 'a':\n    print(\"잘못된 추측\")\nelif choice == 'b':\n    print(\"좋은 추측\")\nelif choice == 'c':\n    print('가깝지만 틀렸어요')","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-cont-choice"},"id":9},{"code":"if x == y:\n    print(\"x와 y는 같다\")\nelse:\n    if x > y:\n        print(\"x는 y보다 크다\")\n    else:\n        print(\"x는 y보다 작다\")","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-cont-nested"},"id":10},{"code":"if 0 < x:\n    if x < 10:\n        print('x는 한자리 양수.')","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-cont-code-review"},"id":11},{"code":"if 0 < x and x < 10:\n    print(\"x는 한자리 양수.\")","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-cont-code-simplify"},"id":12},{"code":"\ninp = input('화씨 온도 입력해줘: ')\ntry:\n    fahr = float(inp)\n    cel = (fahr - 32.0) * 5.0 / 9.0\n    print(cel)\nexcept ValueError:\n    print('숫자를 입력해주세요!')","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-var-fahren"},"id":13},{"code":"x = 6\ny = 2\nx >= 2 and (x/y) > 2\n#> True\n\nx = 1\ny = 0\nx >= 2 and (x/y) > 2\n#> False\n\nx = 6\ny = 0\nx >= 2 and (x/y) > 2\n#> Traceback (most recent call last):\n#>   File \"<pyshell#28>\", line 1, in <module>\n#>     x >= 2 and (x/y) > 2\n#> ZeroDivisionError: division by zero","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-var-short-circuit"},"id":14},{"code":"x = 1\ny = 0\nx >= 2 and y != 0 and (x/y) > 2\n#> False\n\nx = 6\ny = 0\nx >= 2 and y != 0 and (x/y) > 2\n#> False\n\nx >= 2 and (x/y) > 2 and y != 0\n#> Traceback (most recent call last):\n#>   File \"<pyshell#37>\", line 1, in <module>\n#>     x >= 2 and (x/y) > 2 and y != 0\n#> ZeroDivisionError: division by zero","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-var-gardian-pattern"},"id":15},{"code":"import math\n\n# 초기 값 설정\nsignal_power = 9\nnoise_power = -10\n\n# signal-to-noise 비율 계산\nratio = signal_power / noise_power\n\n# 데시벨 계산\ndecibels = 10 * math.log10(ratio)\n\nprint(\"데시벨(db):\", decibels)","options":{"classes":"","context":"interactive","autorun":"","results":"markup","fig-width":7,"fig-height":5,"read-only":"false","output":"true","warning":"true","out-width":"700px","comment":"","message":"true","dpi":72,"fig-cap":"","out-height":"","label":"py-var-debug"},"id":16}];
 
 
 </script><script type="module">
@@ -1443,6 +1443,113 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./06-string.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버젼제어</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 구축 및 설정</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">저장소 생성</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-change.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">추적대상에서 제외</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GitHub 원격작업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">협업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-conflict.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">공개 과학</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-licensing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">라이선싱</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-hosting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">호스팅</span></span></a>
   </div>
 </li>
       </ul>
@@ -2578,7 +2685,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 ***** 번역한 것이 포함되어 있습니다.</p>
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
@@ -3232,7 +3339,7 @@ qpyodideCellDetails.map(
       qpyodideCreateCell(entry);
     }
   );
-</script><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});
+</script><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

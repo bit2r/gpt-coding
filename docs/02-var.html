@@ -110,7 +110,7 @@ ga('send', {
   hitType: 'pageview',
   'anonymizeIp': true,
 });
-</script><script defer="" data-domain="r2bit.com/gpt-quarto" src="https://plausible.io/js/script.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</script><script defer="" data-domain="r2bit.com/gpt-coding" src="https://plausible.io/js/script.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <style type="text/css">
 .monaco-editor pre {
@@ -253,7 +253,7 @@ ga('send', {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = ['stringr'];
+globalThis.qwebrInstallRPackagesList = ['stringr', 'readr', 'purrr'];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -275,7 +275,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-print","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"print(7)\n#> [1] 7"},{"id":2,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-type","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"typeof(\"헬로 월드!\")\n#> [1] \"character\"\ntypeof(17)\n#> [1] \"double\""},{"id":3,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-integer-comma","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"1,000,000\n#> Error: unexpected ',' in \"1,\""},{"id":4,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-assign","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"message <- \"매월 세째주 수요일 R Meetup이 열립니다.\"\nn <- 17L\npi <- 3.1415926535897931"},{"id":5,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-assign-again","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"print(message)\nn\npi"},{"id":6,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-assign-typeof","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"typeof(message)\ntypeof(n)\ntypeof(pi)"},{"id":7,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-assign-error","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"76trombones <- 'big parade'\nmore@ <- 1000000\nrepeat <- 'Advanced Theoretical Zymurgy'"},{"id":8,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-evaluate-ex","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"5\nx <- 5\nx + 1"},{"id":9,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-division","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"minute <- 59\nminute / 60"},{"id":10,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-paste","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"first <- 10\nsecond <- 15\nfirst + second\n\nfirst <- '100'\nsecond <- '150'\npaste(first, second, sep=\"\")"},{"id":11,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-comment","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"# 경과한 시간을 퍼센트로 계산\npercentage <- (minute * 100) / 60"},{"id":12,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-comment-inline","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"percentage <- (minute * 100) / 60 # 경과한 시간을 퍼센트로 계산"},{"id":13,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-name-for-loop-season","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"words <- c(\"봄\", \"여름\", \"가을\", \"겨울\")\n\nfor(word in seq_along(words)) {\n  print(words[word])\n}"},{"id":14,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-bad-name","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"bad name <-  5\n#> Error: unexpected symbol in \"bad name\""},{"id":15,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-use-before-def","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"principal <- 327.68\ninterest <- principle * rate\n#> Error: object 'principle' not found"},{"id":16,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-var-pi","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"1.0 / 2.0 * pi"},{"id":17,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"r-celsius-to-fahrenheit","output":"true","autorun":"false","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"\n# input_temp = readline(prompt=\"섭씨 온도를 입력하세요: \")\n\ncelsius <- as.numeric(input_temp)\n\n# 섭씨 온도를 화씨 온도로 변환\nfahrenheit <- celsius * ____ + ____\n\n# 변환된 화씨 온도 출력\ncat(\"화씨 온도는\", fahrenheit, \"도 입니다.\\n\")"}];
+globalThis.qwebrCellDetails = [{"code":"print(7)\n#> [1] 7","id":1,"options":{"label":"r-var-print","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"typeof(\"헬로 월드!\")\n#> [1] \"character\"\ntypeof(17)\n#> [1] \"double\"","id":2,"options":{"label":"r-var-type","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"1,000,000\n#> Error: unexpected ',' in \"1,\"","id":3,"options":{"label":"r-var-integer-comma","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"message <- \"매월 세째주 수요일 R Meetup이 열립니다.\"\nn <- 17L\npi <- 3.1415926535897931","id":4,"options":{"label":"r-var-assign","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"print(message)\nn\npi","id":5,"options":{"label":"r-var-assign-again","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"typeof(message)\ntypeof(n)\ntypeof(pi)","id":6,"options":{"label":"r-var-assign-typeof","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"76trombones <- 'big parade'\nmore@ <- 1000000\nrepeat <- 'Advanced Theoretical Zymurgy'","id":7,"options":{"label":"r-var-assign-error","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"5\nx <- 5\nx + 1","id":8,"options":{"label":"r-var-evaluate-ex","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"minute <- 59\nminute / 60","id":9,"options":{"label":"r-var-division","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"first <- 10\nsecond <- 15\nfirst + second\n\nfirst <- '100'\nsecond <- '150'\npaste(first, second, sep=\"\")","id":10,"options":{"label":"r-var-paste","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"# 경과한 시간을 퍼센트로 계산\npercentage <- (minute * 100) / 60","id":11,"options":{"label":"r-var-comment","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"percentage <- (minute * 100) / 60 # 경과한 시간을 퍼센트로 계산","id":12,"options":{"label":"r-var-comment-inline","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"words <- c(\"봄\", \"여름\", \"가을\", \"겨울\")\n\nfor(word in seq_along(words)) {\n  print(words[word])\n}","id":13,"options":{"label":"r-var-name-for-loop-season","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"bad name <-  5\n#> Error: unexpected symbol in \"bad name\"","id":14,"options":{"label":"r-var-bad-name","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"principal <- 327.68\ninterest <- principle * rate\n#> Error: object 'principle' not found","id":15,"options":{"label":"r-var-use-before-def","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"1.0 / 2.0 * pi","id":16,"options":{"label":"r-var-pi","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"\n# input_temp = readline(prompt=\"섭씨 온도를 입력하세요: \")\n\ncelsius <- as.numeric(input_temp)\n\n# 섭씨 온도를 화씨 온도로 변환\nfahrenheit <- celsius * ____ + ____\n\n# 변환된 화씨 온도 출력\ncat(\"화씨 온도는\", fahrenheit, \"도 입니다.\\n\")","id":17,"options":{"label":"r-celsius-to-fahrenheit","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"false","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1128,7 +1128,7 @@ globalThis.qwebrExecuteCode = async function (
 // Document level settings ----
 
 // Determine if we need to install python packages
-globalThis.qpyodideInstallPythonPackagesList = [''];
+globalThis.qpyodideInstallPythonPackagesList = ['urllib'];
 
 // Check to see if we have an empty array, if we do set to skip the installation.
 globalThis.qpyodideSetupPythonPackages = !(qpyodideInstallPythonPackagesList.indexOf("") !== -1);
@@ -1147,7 +1147,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"id":1,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-print","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"print(7)\n#> 7"},{"id":2,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-type","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"print(type(\"헬로 월드!\"))\n#> <class 'str'>\nprint(type(17))\n#> <class 'int'>"},{"id":3,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-integer-comma","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"1,000,000\n#> (1, 0, 0)"},{"id":4,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-assign","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":""},{"id":5,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-assign-again","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":""},{"id":6,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":""},{"id":7,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-assign-error","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":""},{"id":8,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-evaluate-ex","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"5\nx = 5\nx + 1"},{"id":9,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-division}","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"minute = 59\nminute / 60"},{"id":10,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-paste","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"first = 10\nsecond = 15\nfirst + second\n\nfirst = '100'\nsecond = '150'\nprint(first + second)"},{"id":11,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-comment","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"# 경과한 시간을 퍼센트로 계산\npercentage = (minute * 100) / 60"},{"id":12,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-comment-inline","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"percentage = (minute * 100) / 60 # 경과한 시간을 퍼센트로 계산"},{"id":13,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-name-for-loop-season","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"words = [\"봄\", \"여름\", \"가을\", \"겨울\"]\n\n# Python의 for 루프 사용\nfor word in words:\n    print(word)"},{"id":14,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-bad-name","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"bad name =  5\n#> SyntaxError: invalid syntax"},{"id":15,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-use-before-def","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"principal = 327.68\ninterest = principle * rate\n#> Traceback (most recent call last):\n#>   File \"<pyshell#4>\", line 1, in <module>\n#>     interest = principle * rate\n#> NameError: name 'principle' is not defined. Did you mean: 'principal'?"},{"id":16,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-var-pi","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"import math\n\nresult = 1.0 / 2.0 * math.pi\nprint(result)"},{"id":17,"options":{"warning":"true","classes":"","comment":"","context":"interactive","out-width":"700px","fig-width":7,"read-only":"false","label":"py-celsius-to-fahrenheit","output":"true","autorun":"","fig-cap":"","message":"true","dpi":72,"out-height":"","results":"markup","fig-height":5},"code":"\n# input_temp = input(\"섭씨 온도를 입력하세요: \")\n\ncelsius = float(input_temp)\n\n# 섭씨를 화씨로 변환\nfahrenheit = celsius * ____ + ____\n\n# 화씨 온도를 출력\nprint(f\"화씨 온도는 {fahrenheit}도 입니다.\")"}];
+globalThis.qpyodideCellDetails = [{"code":"print(7)\n#> 7","id":1,"options":{"label":"py-var-print","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"print(type(\"헬로 월드!\"))\n#> <class 'str'>\nprint(type(17))\n#> <class 'int'>","id":2,"options":{"label":"py-var-type","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"1,000,000\n#> (1, 0, 0)","id":3,"options":{"label":"py-var-integer-comma","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"","id":4,"options":{"label":"py-var-assign","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"","id":5,"options":{"label":"py-var-assign-again","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"","id":6,"options":{"label":"","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"","id":7,"options":{"label":"py-var-assign-error","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"5\nx = 5\nx + 1","id":8,"options":{"label":"py-var-evaluate-ex","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"minute = 59\nminute / 60","id":9,"options":{"label":"py-var-division}","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"first = 10\nsecond = 15\nfirst + second\n\nfirst = '100'\nsecond = '150'\nprint(first + second)","id":10,"options":{"label":"py-var-paste","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"# 경과한 시간을 퍼센트로 계산\npercentage = (minute * 100) / 60","id":11,"options":{"label":"py-var-comment","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"percentage = (minute * 100) / 60 # 경과한 시간을 퍼센트로 계산","id":12,"options":{"label":"py-var-comment-inline","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"words = [\"봄\", \"여름\", \"가을\", \"겨울\"]\n\n# Python의 for 루프 사용\nfor word in words:\n    print(word)","id":13,"options":{"label":"py-var-name-for-loop-season","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"bad name =  5\n#> SyntaxError: invalid syntax","id":14,"options":{"label":"py-var-bad-name","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"principal = 327.68\ninterest = principle * rate\n#> Traceback (most recent call last):\n#>   File \"<pyshell#4>\", line 1, in <module>\n#>     interest = principle * rate\n#> NameError: name 'principle' is not defined. Did you mean: 'principal'?","id":15,"options":{"label":"py-var-use-before-def","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"import math\n\nresult = 1.0 / 2.0 * math.pi\nprint(result)","id":16,"options":{"label":"py-var-pi","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}},{"code":"\n# input_temp = input(\"섭씨 온도를 입력하세요: \")\n\ncelsius = float(input_temp)\n\n# 섭씨를 화씨로 변환\nfahrenheit = celsius * ____ + ____\n\n# 화씨 온도를 출력\nprint(f\"화씨 온도는 {fahrenheit}도 입니다.\")","id":17,"options":{"label":"py-celsius-to-fahrenheit","fig-width":7,"results":"markup","read-only":"false","output":"true","autorun":"","warning":"true","dpi":72,"message":"true","context":"interactive","fig-cap":"","out-width":"700px","comment":"","classes":"","fig-height":5,"out-height":""}}];
 
 
 </script><script type="module">
@@ -1440,6 +1440,113 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./06-string.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버젼제어</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 구축 및 설정</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">저장소 생성</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-change.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">추적대상에서 제외</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GitHub 원격작업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">협업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-conflict.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">공개 과학</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-licensing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">라이선싱</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-hosting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">호스팅</span></span></a>
   </div>
 </li>
       </ul>
@@ -2905,7 +3012,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 ***** 번역한 것이 포함되어 있습니다.</p>
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
