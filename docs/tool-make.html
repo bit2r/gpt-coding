@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.9">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="이광춘">
+<title>챗GPT 코딩 – 27&nbsp; 작업 자동화</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./tool-gpt.html" rel="next">
+<link href="./tool-web.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script><script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script><script defer="" data-domain="r2bit.com/gpt-coding" src="https://plausible.io/js/script.js"></script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 도구</a></li><li class="breadcrumb-item"><a href="./tool-make.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">작업 자동화</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">들어가며</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 학습 이유</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버젼제어</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 구축 및 설정</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">저장소 생성</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-change.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">추적대상에서 제외</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GitHub 원격작업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">협업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-conflict.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">공개 과학</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-licensing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">라이선싱</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-hosting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">호스팅</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-korean.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Git 추가설정</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">분야별 도구</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">챗GPT</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
+   
+  <ul>
+<li><a href="#r-paths" id="toc-r-paths" class="nav-link active" data-scroll-target="#r-paths"><span class="header-section-number">27.1</span> 파일 이름과 경로</a></li>
+  <li>
+<a href="#tasks-commandline" id="toc-tasks-commandline" class="nav-link" data-scroll-target="#tasks-commandline"><span class="header-section-number">27.2</span> 명령 줄 인자</a>
+  <ul class="collapse">
+<li><a href="#install-r" id="toc-install-r" class="nav-link" data-scroll-target="#install-r"><span class="header-section-number">27.2.1</span> R 설치</a></li>
+  <li><a href="#install-env" id="toc-install-env" class="nav-link" data-scroll-target="#install-env"><span class="header-section-number">27.2.2</span> R 스크립트 실행환경</a></li>
+  <li><a href="#exec-rscript" id="toc-exec-rscript" class="nav-link" data-scroll-target="#exec-rscript"><span class="header-section-number">27.2.3</span> R 스크립트 파일 실행</a></li>
+  <li><a href="#exec-run-other-ways" id="toc-exec-run-other-ways" class="nav-link" data-scroll-target="#exec-run-other-ways"><span class="header-section-number">27.2.4</span> 다른 R 스크립트 파일 실행법</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#tasks-swcarpentry" id="toc-tasks-swcarpentry" class="nav-link" data-scroll-target="#tasks-swcarpentry"><span class="header-section-number">27.3</span> 실습 사례 </a>
+  <ul class="collapse">
+<li><a href="#make-rscript" id="toc-make-rscript" class="nav-link" data-scroll-target="#make-rscript"><span class="header-section-number">27.3.1</span> R스크립트 작성</a></li>
+  <li><a href="#sessionInfo-save" id="toc-sessionInfo-save" class="nav-link" data-scroll-target="#sessionInfo-save"><span class="header-section-number">27.3.2</span> R스크립트 출력결과 파일저장</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#task-args" id="toc-task-args" class="nav-link" data-scroll-target="#task-args"><span class="header-section-number">27.4</span> 자동화 사례: 국가별 통계</a>
+  <ul class="collapse">
+<li><a href="#task-args-rscript" id="toc-task-args-rscript" class="nav-link" data-scroll-target="#task-args-rscript"><span class="header-section-number">27.4.1</span> 인자를 받는 R 스크립트</a></li>
+  <li><a href="#task-rscript-gdp" id="toc-task-rscript-gdp" class="nav-link" data-scroll-target="#task-rscript-gdp"><span class="header-section-number">27.4.2</span> 데이터 변경 R 스크립트</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#tasks-pipe" id="toc-tasks-pipe" class="nav-link" data-scroll-target="#tasks-pipe"><span class="header-section-number">27.5</span> 파이프(Pipes)</a>
+  <ul class="collapse">
+<li><a href="#tasks-pipe-unix" id="toc-tasks-pipe-unix" class="nav-link" data-scroll-target="#tasks-pipe-unix"><span class="header-section-number">27.5.1</span> 유닉스 철학과 파이프</a></li>
+  </ul>
+</li>
+  <li><a href="#tasks-terminology" id="toc-tasks-terminology" class="nav-link" data-scroll-target="#tasks-terminology"><span class="header-section-number">27.6</span> 용어정의</a></li>
+  <li><a href="#tasks-exercise" id="toc-tasks-exercise" class="nav-link" data-scroll-target="#tasks-exercise">연습문제</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-make.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 도구</a></li><li class="breadcrumb-item"><a href="./tool-make.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">작업 자동화</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="r-automation" class="quarto-section-identifier"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>파일, 네트워크, 서비스, 그리고 데이터베이스에서 데이터를 읽어왔다. R은 또한 여러분의 로컬 컴퓨터 디렉토리와 폴더를 훑어서 파일도 읽어온다.</p>
+<p>이번 장에서, 여러분의 로컬 컴퓨터를 스캔하고 각 파일에 대해서 연산을 수행하는 프로그램을 작성한다. 파일은 디렉토리(또한 “폴더”라고도 부른다.)에 정렬되어 보관된다. 간단한 R 스크립트로 전체 로컬 컴퓨터나 디렉토리 여기저기 뒤져야 찾아지는 수백 수천개 파일에 대한 단순한 작업을 짧게 수행한다.</p>
+<p>트리상의 디렉토리나 파일을 여기저기 돌아다니기 위해서 <code>os.walk</code>과 <code>for</code> 루프를 사용한다. <code>open</code>이 파일 콘텐츠를 읽는 루프를 작성하는 것과 비슷하게, <code>socket</code>은 네트워크 연결된 콘텐츠를 읽는 루프를 작성하고, <code>urllib</code>는 웹문서를 열어 콘텐츠를 루프를 통해서 읽어오게 한다.</p>
+<section id="r-paths" class="level2" data-number="27.1"><h2 data-number="27.1" class="anchored" data-anchor-id="r-paths">
+<span class="header-section-number">27.1</span> 파일 이름과 경로</h2>
+<p>모든 실행 프로그램은 “현재 디렉토리(current directory)”를 가지고 있는데 작업 대부분을 수행하는 디폴트 디렉토리가 된다. 예를 들어, 읽기 위해서 파일을 연다면, R은 현재 디렉토리에서 파일을 찾는다.</p>
+<p><code>libuv</code> C 라이브러리에 기반한 <a href="https://cran.r-project.org/web/packages/fs/index.html"><code>fs</code></a> 패키지는 파일과 디렉토리를 작업하는 함수를 제공한다. <code><a href="https://fs.r-lib.org/reference/path.html">path_wd()</a></code> 함수는 현재 디렉토리 이름을 반환한다.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fs.r-lib.org">fs</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cwd</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html">path_wd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># C:/swc/book_programming</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>cwd</code> 는 <strong>current working directory</strong>의 약자로 현재 작업 디렉토리다. 예제의 결과는 <code>C:/swc/book_programming</code>인데 현재 작성중인 전자책 <code>book_programming</code> 의 홈 디렉토리가 된다.</p>
+<p>파일을 식별하는 <code>cwd</code> 같은 문자열을 경로(path)라고 부른다. <strong>상대경로(relative path)</strong>는 현재 디렉토리에서 시작하고, <strong>절대경로(absolute path)</strong>는 파일 시스템의 가장 최상단의 디렉토리에서 시작한다.</p>
+<p>지금까지 살펴본 경로는 간단한 파일 이름이여서, 현재 디렉토리에서 상대적이다. 파일의 절대 경로를 알아내기 위해서 <code><a href="https://fs.r-lib.org/reference/path_math.html">fs::path_abs()</a></code> 함수를 사용한다.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">path_abs</span>(<span class="st">"index.Rmd"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>C<span class="sc">:</span><span class="er">/</span>swc<span class="sc">/</span>book_programming<span class="sc">/</span>index.Rmd</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>dir_exists</code>는 디렉토리, <code>file_exists</code>는 파일이 존재하는지 검사한다.</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_access.html">dir_exists</a></span><span class="op">(</span><span class="st">"data"</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>data  
+TRUE</code></pre>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_access.html">file_exists</a></span><span class="op">(</span><span class="st">"index.Rmd"</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>index.Rmd 
+TRUE </code></pre>
+<p><code><a href="https://fs.r-lib.org/reference/dir_ls.html">dir_ls()</a></code> 함수는 은 주어진 디렉토리에 파일 리스트(그리고 다른 디렉토리)를 반환한다.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html">dir_ls</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">00-why.Rmd</span>             01-intro.Rmd           02-var.Rmd             03-cont.Rmd            04-func.Rmd            </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">05-loop.Rmd</span>            06-string.Rmd          07-file.Rmd            08-list.Rmd            09-dictionaries.Rmd    </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">10-tuples.Rmd</span>          11-regex.Rmd           12-database.Rmd        13-web.Rmd             14-tasks.Rmd           </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">assets</span>                 book.bib               book_programming.rds   book_programming.Rproj data                   </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">DESCRIPTION</span>            Dockerfile             docs                   index.Rmd              LICENSE                </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">now.json</span>               packages.bib           preamble.tex           README.md              references.Rmd         </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">script</span>                 style.css              toc.css                _bookdown.yml          _bookdown_files        </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">_build.sh</span>              _common.R              _deploy.sh             _output.yml            _publish.R      </span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="tasks-commandline" class="level2" data-number="27.2"><h2 data-number="27.2" class="anchored" data-anchor-id="tasks-commandline">
+<span class="header-section-number">27.2</span> 명령 줄 인자</h2>
+<p><img src="images/parallel-r-script-exec.png" class="img-fluid" style="width:100.0%" alt="R 스크핍트 실행"> 명령라인 인터페이스에서 R 스크립트를 실행하고 다양한 R 스크립트 실행방법을 살펴보자. 먼저, 유닉스/리눅스/윈도우 운영체제가 준비되었다면 R스크립트 실행환경을 준비한다. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<section id="install-r" class="level3" data-number="27.2.1"><h3 data-number="27.2.1" class="anchored" data-anchor-id="install-r">
+<span class="header-section-number">27.2.1</span> R 설치</h3>
+<p>R을 스크립트 형태(<code>.R</code>) 파일로 실행할 경우 가장 먼저 <code>r-base-core</code>를 설치한다. 그래픽 사용자 인터페이스가 없는 형태의 R이 설치되며 R 스크립트 실행에 필요한 연관된 프로그램도 더불어 설치한다.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> sudo apt-get install <span class="at">-y</span> r-base-core</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="install-env" class="level3" data-number="27.2.2"><h3 data-number="27.2.2" class="anchored" data-anchor-id="install-env">
+<span class="header-section-number">27.2.2</span> R 스크립트 실행환경</h3>
+<p>R과 스크립트를 실행할 <code>Rscript</code> 실행프로그램이 위치한 디렉토리를 확인한다. 여기에 사용되는 명령어는 <code>which</code>다. <code>which R</code> 명령어를 통해 R 실행파일이 <code>/usr/bin/</code> 디렉토리에 위치한 것을 확인할 수 있다.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> which R</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/bin/R</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>which Rscript</code> 명령어를 통해 Rcript 실행파일도 <code>/usr/bin/</code> 디렉토리에 위치한 것을 확인할 수 있다.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> which Rscript</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/bin/Rscript</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>echo $PATH</code> 명령어를 통해 <code>/usr/bin</code>, 경우에 따라서는 <code>/usr/local/bin</code> 디렉토리에 R과 Rscript 실행파일이 존재하는 것을 확인한다.</p>
+<pre><code>$ echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games</code></pre>
+</section><section id="exec-rscript" class="level3" data-number="27.2.3"><h3 data-number="27.2.3" class="anchored" data-anchor-id="exec-rscript">
+<span class="header-section-number">27.2.3</span> R 스크립트 파일 실행</h3>
+<p><code>.R</code> 스크립트 파일을 명령라인 인터페이스로 실행하는 방법은 다양한다. 먼저 <code>hello_world.R</code> 스크립트 파일을 생성한다.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#! /usr/bin/env Rscript</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">print</span><span class="er">(</span><span class="st">"Hello World!!!"</span><span class="kw">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>쉬뱅(shebang, #!) 다음에 스크립트를 실행할 프로그램을 지정한다. <code>Rscript</code>로 지정하여 R스크립트를 실행하는데 사용한다.</p>
+<p><code>#! /usr/bin/env Rscript</code></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> chmod +x hello_world.R</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./hello_world.R</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>chmod +x</code> 명령어를 통해서 일반 텍스트 파일을 실행가능한 파일 형식으로 지정한다. <code>hello_world.R</code> 파일이 실행가능한 형태가 되었기 때문에 <code>./hello_world.R</code> 명령어로 R스크립트를 실행시킨다.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> World!!!</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="exec-run-other-ways" class="level3" data-number="27.2.4"><h3 data-number="27.2.4" class="anchored" data-anchor-id="exec-run-other-ways">
+<span class="header-section-number">27.2.4</span> 다른 R 스크립트 파일 실행법</h3>
+<p>R스크립트를 실행하는 방법은 다양하다.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> R <span class="at">--slave</span> <span class="at">-f</span> hello_world.R</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript hello_world.R</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>Rscript</code> 명령어로 실행을 시켜도 동일한 산출 결과가 출력된다.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> R CMD BATCH hello_world.R hello_world_output.txt</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>R CMD BATCH</code> 명령어로 실행시키면 실행결과가 <code>hello_world_output.txt</code> 파일에 저장된다. <code>hello_world_output.txt</code> 파일명을 지정하지 않으면 <code>hello_world.Rout</code> 파일에 저장된다.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> R <span class="at">--no-save</span> <span class="op">&lt;&lt; RSCRIPT</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="st">     print("Hello World")</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="st">  RSCRIPT</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>R --no-save &lt;&lt;</code> 사용법도 가능하다.</p>
+</section></section><section id="tasks-swcarpentry" class="level2" data-number="27.3"><h2 data-number="27.3" class="anchored" data-anchor-id="tasks-swcarpentry">
+<span class="header-section-number">27.3</span> 실습 사례 <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>
+</h2>
+<section id="make-rscript" class="level3" data-number="27.3.1"><h3 data-number="27.3.1" class="anchored" data-anchor-id="make-rscript">
+<span class="header-section-number">27.3.1</span> R스크립트 작성</h3>
+<p><code>Rscript r_session_info.R</code> 명령어를 실행해서 실제로 RStudio나 R 콘솔을 열지 않고도 R 세션정보를 명령라인 인터페이스에서 처리하는 R 스크립트를 작성한다.</p>
+<p>텍스트 편집기를 열고, <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code>를 적고 파일명을 <code>r_session_info.R</code>로 저장한다.</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>배쉬쉘에서 R스크립트를 실행해서 R 세션정보를 받아확인한다.</p>
+<pre class="bas"><code>$ Rscript r_session_info.R</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span> version 3.0.2 <span class="er">(</span><span class="ex">2013-09-25</span><span class="kw">)</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Platform:</span> x86_64-pc-linux-gnu <span class="er">(</span><span class="ex">64-bit</span><span class="kw">)</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">locale:</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">[1]</span> LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">[3]</span> LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">[5]</span> LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">[7]</span> LC_PAPER=en_US.UTF-8       LC_NAME=C</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">[9]</span> LC_ADDRESS=C               LC_TELEPHONE=C</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[11]</span> LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="ex">attached</span> base packages:</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[1]</span> stats     graphics  grDevices utils     datasets  base</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="sessionInfo-save" class="level3" data-number="27.3.2"><h3 data-number="27.3.2" class="anchored" data-anchor-id="sessionInfo-save">
+<span class="header-section-number">27.3.2</span> R스크립트 출력결과 파일저장</h3>
+<p><code>&gt;</code> 파이프 연산자를 사용해서 R 스크립트 출력결과를 텍스트 파일로 저장한다.</p>
+<div class="cell">
+<pre class="shell cell-code"><code>$ Rscript r_session_info.R &gt; r_session_info_pipe_output.txt</code></pre>
+</div>
+<p>또다른 방법은 R 스크립트 내부에서 출력결과를 파일에 저장하고 프로그램을 종료하는 방법도 있다.</p>
+<p><code>caputre.output</code> 함수를 <code>cat</code>과 함께 사용하는데, 한글도 적용이 가능하도록, <code>encoding="UTF-8"</code>도 추가한다.</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/capture.output.html">capture.output</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"R 세션정보"</span>, <span class="va">output</span>, file<span class="op">=</span><span class="st">"./r_session_info_rscript.txt"</span>, sep<span class="op">=</span><span class="st">"\n"</span>, encoding<span class="op">=</span><span class="st">"UTF-8"</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>Rscript r_session_info.R</code> 명령어를 실행시키면 다음과 같이 실행결과가 텍스트 파일 <code>r_session_info_rscript.txt</code>로 떨어진다.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span> 세션정보</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span> version 3.0.2 <span class="er">(</span><span class="ex">2013-09-25</span><span class="kw">)</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Platform:</span> x86_64-pc-linux-gnu <span class="er">(</span><span class="ex">64-bit</span><span class="kw">)</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="ex">locale:</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">[1]</span> LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">[3]</span> LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">[5]</span> LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">[7]</span> LC_PAPER=en_US.UTF-8       LC_NAME=C</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">[9]</span> LC_ADDRESS=C               LC_TELEPHONE=C</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="ex">[11]</span> LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="ex">attached</span> base packages:</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[1]</span> stats     graphics  grDevices utils     datasets  base</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="ex">UTF-8</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section><section id="task-args" class="level2" data-number="27.4"><h2 data-number="27.4" class="anchored" data-anchor-id="task-args">
+<span class="header-section-number">27.4</span> 자동화 사례: 국가별 통계</h2>
+<p><code>.R</code> 스크립트를 유닉스/리눅스상에서 유연하게 동작시킨다. R 스크립트를 수정하지 않고, 인자를 바꿔 작업을 수행하는 방법을 살펴보자. 국가별 통계를 데이터 파일을 달리하여 R스크립트 통계량을 산출하는 방법을 사례로 구현해보자.</p>
+<div id="fig-make-rscript-args" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-make-rscript-args-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/parallel-r-args.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="그림&nbsp;27.1: R 스크립트 실행"><img src="images/parallel-r-args.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-make-rscript-args-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;27.1: R 스크립트 실행
+</figcaption></figure>
+</div>
+<section id="task-args-rscript" class="level3" data-number="27.4.1"><h3 data-number="27.4.1" class="anchored" data-anchor-id="task-args-rscript">
+<span class="header-section-number">27.4.1</span> 인자를 받는 R 스크립트</h3>
+<p>유닉스/GNU리눅스 환경에서 통계모형, 기계학습, 딥러닝 작업을 하게 되면 텍스트 형태 데이터, R스크립트, 출력 산출물을 갖게 되고, 입력 데이터를 출력산출물로 변환시키는데 R이 역할을 하게 된다.</p>
+<p>R 스크립트를 유연하게 만들게 되면 데이터만 바꿔도 산출물을 생성해 내고, 경우에 따라 인자값을 달리하면 원하는 다른 결과를 얻게 된다.</p>
+</section><section id="task-rscript-gdp" class="level3" data-number="27.4.2"><h3 data-number="27.4.2" class="anchored" data-anchor-id="task-rscript-gdp">
+<span class="header-section-number">27.4.2</span> 데이터 변경 R 스크립트</h3>
+<p><a href="http://www2.stat.duke.edu/~mw/ts_data_sets.html">SOME TIME SERIES DATA SETS</a>에서 <a href="http://www2.stat.duke.edu/~mw/data-sets/ts_data/gdp">Per capita annual GDP for several countries during 1950-1983 (first row is 1950, last is 1983)</a> 데이터를 사용한다. 데이터를 <code>austria.csv</code>, <code>canada.csv</code>, <code>france.csv</code>와 같이 구분하여 저장한다.</p>
+<section id="rscript-prototype" class="level4"><h4 class="anchored" data-anchor-id="rscript-prototype">R 스크립트 시제품 제작</h4>
+<p>먼저 <code>austria.csv</code> 파일을 불러와서 평균을 계산하는 R스크립트를 작성한다.</p>
+<div class="cell">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 데이터 불러오기</span></span>
+<span><span class="va">gdp.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"austria.csv"</span>, sep<span class="op">=</span><span class="st">","</span>, head<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co"># 평균계산</span></span>
+<span><span class="va">gdp.mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gdp.df</span><span class="op">$</span><span class="va">V1</span><span class="op">)</span></span>
+<span><span class="co"># 계산결과 화면출력</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"평균: "</span>, <span class="va">gdp.mean</span>, <span class="st">"\n"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>Rscript r-args-ex01.R</code> 실행결과 예상대로 평균 GDP가 계산되었다.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript r-args-ex01.R</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">평균:</span>  0.06553276</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="rscript-change-data-file" class="level4"><h4 class="anchored" data-anchor-id="rscript-change-data-file">입력파일 변경 R스크립트 실행</h4>
+<p>국가가 더 많을 수도 있지만, <code>austria.csv</code>, <code>france.csv</code>, <code>canada.csv</code> 3개 국가가 csv 파일로 데이터가 저장되어 있으니, 입력파일을 달리하여 평균을 계산하도록 R스크립트를 작성한다.</p>
+<p><code>commandArgs</code> 명령어를 통해 명령라인에서 인자를 받아 온다. 인자가 순서대로 들어오기 때문에 첫번째 인자로 들어오는 국가에 대한 GDP 평균을 구하고, 이를 화면에 출력하는 R스크립트다. <code>strsplit</code> 함수를 사용해서 파일명 앞쪽 – <code>.csv</code> 확장자 제거 – 만을 뽑아내어 국가명을 명기했다.</p>
+<div class="cell">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#!/usr/bin/env Rscript</span></span>
+<span></span>
+<span><span class="va">args</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/commandArgs.html">commandArgs</a></span><span class="op">(</span>trailingOnly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">country</span> <span class="op">&lt;-</span> <span class="va">args</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># 데이터 불러오기</span></span>
+<span><span class="va">gdp.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="va">country</span>, sep<span class="op">=</span><span class="st">","</span>, head<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co"># 평균계산</span></span>
+<span><span class="va">gdp.mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gdp.df</span><span class="op">$</span><span class="va">V1</span><span class="op">)</span></span>
+<span><span class="co"># 계산결과 화면출력</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">country</span>, <span class="st">'\\.'</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"평균: "</span>, <span class="va">gdp.mean</span>, <span class="st">"\n"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>상기 R스크립트를 쉘에서 실행한 결과는 다음과 같다.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript r-args-ex02.R  austria.csv</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ex">austria</span> 평균:  0.06553276</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript r-args-ex02.R france.csv</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="ex">france</span> 평균:  20.95751</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript r-args-ex02.R canada.csv</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="ex">canada</span> 평균:  5.817088</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="task-stat-by-countries" class="level4"><h4 class="anchored" data-anchor-id="task-stat-by-countries">국가별 기본통계 계산</h4>
+<p>국가 데이터를 바꾸는 것에 더해서 최소, 평균, 최대 GDP를 계산하는 로직을 추가한다. <code>commandArgs</code> 함수로 인자를 받는데, 최종 인자는 <code>-1</code>로 지정되기 때문에 그런 특성을 이용하여 R스크립트를 작성한다. 따라서, 첫번째 인자에 최소, 평균, 최소를 구할 것인지 정보를 받고, 마지막 인자로 파일명을 받는다.</p>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#!/usr/bin/env Rscript</span></span>
+<span></span>
+<span><span class="va">args</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/commandArgs.html">commandArgs</a></span><span class="op">(</span>trailingOnly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">action</span> <span class="op">=</span> <span class="va">args</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">country</span> <span class="op">&lt;-</span> <span class="va">args</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># 데이터 불러오기</span></span>
+<span><span class="va">gdp.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="va">country</span>, sep<span class="op">=</span><span class="st">","</span>, head<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co"># 기초 통계량 계산</span></span>
+<span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="va">action</span> <span class="op">==</span> <span class="st">"--min"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">gdp.min</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">gdp.df</span><span class="op">$</span><span class="va">V1</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">country</span>, <span class="st">'\\.'</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"최소: "</span>, <span class="va">gdp.min</span>, <span class="st">"\n"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">action</span> <span class="op">==</span> <span class="st">"--mean"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">gdp.mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gdp.df</span><span class="op">$</span><span class="va">V1</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">country</span>, <span class="st">'\\.'</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"평균: "</span>, <span class="va">gdp.mean</span>, <span class="st">"\n"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">action</span><span class="op">==</span><span class="st">"--max"</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">gdp.max</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">gdp.df</span><span class="op">$</span><span class="va">V1</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">country</span>, <span class="st">'\\.'</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"최대: "</span>, <span class="va">gdp.max</span>, <span class="st">"\n"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>Rscript r-args-ex03.R --min canada.csv</code> 명령라인을 살펴보면, <code>r-args-ex03.R</code> R 스크립트를 실행하고, <code>--min</code> 인자로 최소값을 계산하는데, <code>canada.csv</code> 데이터 파일을 이용한다.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript r-args-ex03.R <span class="at">--min</span> canada.csv</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">canada</span> 최소:  3.651109</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript r-args-ex03.R <span class="at">--max</span> canada.csv</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="ex">canada</span> 최대:  8.382785</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript r-args-ex03.R <span class="at">--mean</span> canada.csv</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="ex">canada</span> 평균:  5.817088</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+R 스크립트에 인자를 넘기는 패키지
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/commandArgs.html">commandArgs</a></li>
+<li><a href="https://cran.r-project.org/web/packages/optparse/index.html">optparse - Command Line Option Parser</a></li>
+<li><a href="https://cran.r-project.org/web/packages/argparse/index.html">argparse - Command line optional and positional argument parser</a></li>
+<li><a href="https://cran.r-project.org/web/packages/getopt/">getopt - C-like getopt behavior</a></li>
+</ul>
+</div>
+</div>
+</section></section></section><section id="tasks-pipe" class="level2" data-number="27.5"><h2 data-number="27.5" class="anchored" data-anchor-id="tasks-pipe">
+<span class="header-section-number">27.5</span> 파이프(Pipes)</h2>
+<p>대부분의 운영 시스템은 <strong>쉘(shell)</strong>로 알려진 명령어 기반 인터페이스를 지원한다. 일반적으로 쉘은 파일 시스템을 탐색하거나 응용 프로그램을 실행하는 명령어를 지원한다. 예를 들어, 유닉스에서 <code>cd</code> 명령어로 디렉토리를 변경하고 <code>ls</code> 명령어로 디렉토리의 콘텐츠를 보여주고, <code>firefox</code>를 타이핑해서 웹브라우져를 실행한다.</p>
+<p>쉘에서 실행시킬 수 있는 어떤 프로그램이나 <strong>파이프(pipe)</strong>를 사용하여 파이썬에서도 실행시킬 수 있다. 파이프는 작동중인 프로세스를 표현하는 객체다.</p>
+<p>예를 들어, 유닉스 명령어<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> <code>ls -l</code>는 정상적으로 현재 디렉토리의 콘텐츠(긴 형식으로)를 보여준다. <code><a href="https://rdrr.io/r/base/system2.html">system2()</a></code> 내장함수, 혹은 <a href="https://cran.r-project.org/web/packages/processx/index.html"><code>processx</code></a>, <a href="https://cran.r-project.org/web/packages/sys/index.html"><code>sys</code></a> 패키지를 가지고 <code>ls</code> 를 실행시킬 수 있다.</p>
+<div class="cell">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system2.html">system2</a></span><span class="op">(</span><span class="st">"ls"</span>, <span class="st">"-l"</span>, stdout <span class="op">=</span> <span class="cn">TRUE</span>, stderr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a> <span class="ex">[1]</span> <span class="st">"total 960"</span>                                                                </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">[2]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  16280  5 18 10:26 00-why.Rmd"</span>            </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">[3]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  44481  5 18 10:26 01-intro.Rmd"</span>          </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">[4]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  25092  5 18 10:26 02-var.Rmd"</span>            </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">[5]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  20041  5 18 10:26 03-cont.Rmd"</span>           </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">[6]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  24862  5 18 10:26 04-func.Rmd"</span>           </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">[7]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  19254  5 18 10:26 05-loop.Rmd"</span>           </span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">[8]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  19007  5 18 10:26 06-string.Rmd"</span>         </span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">[9]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  26301  5 18 10:26 07-file.Rmd"</span>           </span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[10]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  27648  5 18 10:26 08-list.Rmd"</span>           </span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="ex">[11]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  22463  5 18 10:26 09-dictionaries.Rmd"</span>   </span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="ex">[12]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  12085  5 18 10:26 10-tuples.Rmd"</span>         </span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[13]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  30744  5 18 12:42 11-regex.Rmd"</span>          </span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[14]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  36390  5 19 11:15 12-database.Rmd"</span>       </span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[15]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  18931  5 19 11:15 13-web.Rmd"</span>            </span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="ex">[16]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff  32936  5 19 12:19 14-tasks.Rmd"</span>          </span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="ex">[17]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff    115  5 18 10:26 DESCRIPTION"</span>           </span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[18]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff    150  5 18 10:26 Dockerfile"</span>            </span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="ex">[19]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff   6556  5 18 10:26 LICENSE"</span>               </span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[20]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff    741  5 18 10:26 README.md"</span>             </span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="ex">[21]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff    671  5 19 11:15 _bookdown.yml"</span>         </span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="ex">[22]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff    235  5 18 10:26 _build.sh"</span>             </span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a><span class="ex">[23]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff    842  5 18 10:26 _common.R"</span>             </span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="ex">[24]</span> <span class="st">"-rwxr-xr-x   1 tidyverse  staff    398  5 18 10:26 _deploy.sh"</span>            </span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a><span class="ex">[25]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff    360  5 18 10:26 _output.yml"</span>           </span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a><span class="ex">[26]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff   1427  5 18 10:26 _publish.R"</span>            </span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a><span class="ex">[27]</span> <span class="st">"drwxr-xr-x   4 tidyverse  staff    128  5 18 14:45 assets"</span>                </span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a><span class="ex">[28]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff   3203  5 18 10:26 book.bib"</span>              </span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a><span class="ex">[29]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff    277  5 18 10:26 book_programming.Rproj"</span></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a><span class="ex">[30]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff    208  5 19 12:10 book_programming.rds"</span>  </span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a><span class="ex">[31]</span> <span class="st">"drwxr-xr-x  10 tidyverse  staff    320  5 18 14:04 data"</span>                  </span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a><span class="ex">[32]</span> <span class="st">"drwxr-xr-x  48 tidyverse  staff   1536  5 19 12:10 docs"</span>                  </span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a><span class="ex">[33]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff   6272  5 18 10:26 index.Rmd"</span>             </span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a><span class="ex">[34]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff     41  5 18 10:26 now.json"</span>              </span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a><span class="ex">[35]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff   2655  5 18 10:26 packages.bib"</span>          </span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a><span class="ex">[36]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff    161  5 18 10:26 preamble.tex"</span>          </span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a><span class="ex">[37]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff     55  5 18 10:26 references.Rmd"</span>        </span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a><span class="ex">[38]</span> <span class="st">"drwxr-xr-x   4 tidyverse  staff    128  5 18 10:26 script"</span>                </span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a><span class="ex">[39]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff    172  5 18 10:26 style.css"</span>             </span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a><span class="ex">[40]</span> <span class="st">"-rw-r--r--   1 tidyverse  staff   2443  5 18 10:26 toc.css"</span>   </span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>인자는 쉘 명령어를 포함하는 문자열이다.</p>
+<section id="tasks-pipe-unix" class="level3" data-number="27.5.1"><h3 data-number="27.5.1" class="anchored" data-anchor-id="tasks-pipe-unix">
+<span class="header-section-number">27.5.1</span> 유닉스 철학과 파이프</h3>
+<div id="fig-make-pipe" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-make-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/parallel-r-pipeline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="그림&nbsp;27.2: R 파이프라인"><img src="images/parallel-r-pipeline.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-make-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;27.2: R 파이프라인
+</figcaption></figure>
+</div>
+<p>통계 예측모형, 기계학습, 딥러닝 시스템을 개발할 경우 유닉스/리눅스 운영체제로 환경을 통일하고 텍스트 파일을 모든 프로그램과 시스템이 의사소통하는 기본 인터페이스로 잡고, 이를 파이프로 연결한다.</p>
+<ol type="1">
+<li>텍스트 데이터로 분석에 사용될 혹은 훈련데이터로 준비한다.</li>
+<li>파이썬 혹은 쉘스크립트, R스크립트를 활용하여 전처리한다.</li>
+<li>R <code>tidymodels</code> 혹은 파이썬 <code>Scikit-learn</code> 예측모형을 적합, 기계학습 훈련, 시각화를 수행한다.</li>
+<li>마크다운(웹), LaTeX(조판) 출력형식에 맞춰 서식을 결정한다.</li>
+<li>최종 결과를 텍스트, 이미지 파일, pdf, html로 출력한다.</li>
+</ol>
+<div class="cell">
+<pre class="shell cell-code"><code>$ cat data.txt | preProcesswithPython.py | runModelwithR.R | formatOutput.sh &gt; mlOutput.txt</code></pre>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<a href="https://en.wikipedia.org/wiki/Unix_philosophy">유닉스 철학</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>[원문] Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface. – Doug McIlroy</p>
+<ul>
+<li>한가지 작업만 매우 잘하는 프로그램을 작성한다(Write programs that do one thing and do it well)</li>
+<li>프로그램이 함께 동작하도록 작성한다(Write programs to work together)</li>
+<li>텍스트를 다루는 프로그램을 작성한다. 이유는 어디서나 사용되는 인터페이스가 되기 때문이다(Write programs to handle text streams, because that is a universal interface)</li>
+</ul>
+</div>
+</div>
+</section></section><section id="tasks-terminology" class="level2" data-number="27.6"><h2 data-number="27.6" class="anchored" data-anchor-id="tasks-terminology">
+<span class="header-section-number">27.6</span> 용어정의</h2>
+<ul>
+<li>
+<strong>절대경로(absolute path)</strong>: 파일이나 디렉토리가 어디에 저장되어 있는지를 저장하는 문자열로 “최상단의 디렉토리”에서 시작해서, 현재 작업 디렉토리에 관계없이 파일이나 디렉토리를 접근하는데 사용할 수 있다.</li>
+<li>
+<strong>체크썸(checksum)</strong>: <strong>해싱(hashing)</strong>을 참조하세요. “체크썸(checksum)”단어는 네트워크로 데이터가 보내지거나 백업 매체에 쓰여지고 다시 읽어올 때, 데이터가 왜곡되었는지를 검증하는 필요에서 생겨났다. 데이터가 쓰여지거나 보내질 때, 송신 시스템은 체크썸을 계산하고 또한 체크썸도 보낸다. 데이터가 읽혀지거나 받았을 때, 수신 시스템을 수신된 데이터의 체크썸을 다시 계산하고 받은 체크썸과 비교한다. 만약 체크썸이 매칭되지 않으면, 전송 시에 데이터가 왜곡된 것으로 판단해야 한다.</li>
+<li>
+<strong>명령 줄 인자(command line argument)</strong>: 파이썬 파일 이름 뒤에 명령 줄에 매개 변수.</li>
+<li>
+<strong>현재 작업 디렉토리(current working directory)</strong>: 여러분이 “작업하고 있는” 현재 디렉토리. 명령-줄 인터페이스에서 대부분의 시스템에 <code>cd</code> 명령어를 사용하여 작업 디렉토리를 변경할 수 있다. 경로 정보 없이 파일만을 사용하여 파이썬에서 파일을 열게 될 때, 파일은 프로그램을 실행하고 있는현재 작업 디렉토리에 있어야 한다.</li>
+<li>
+<strong>해싱(hashing)</strong>: 가능한 큰 데이터를 읽고 그 데이터에 대해서 유일한 체크썸을 생성하는 것. 최고의 해쉬 함수는 거의 “충돌(collision)”을 만들지 않는다. 여기서 충돌은 서로 다른 두 데이터 스트림에 해쉬 함수를 줄 때 동일한 해쉬값을 돌려받는 것이다. MD5, SHA1, SHA256 는 가장 많이 사용되는 해쉬 함수의 사례다.</li>
+<li>
+<strong>파이프(pipe)</strong>: 파이프는 실행하는 프로그램에 연결이다. 파이프를 사용해서, 데이터를 다른 프로그램에 보내거나 그 프로그램에서 데이터를 받는 프로그램을 작성할 수 있다. 파이프는 <strong>소켓(socket)</strong>과 매우 유사하다. 차이점은 파이프는 동일한 컴퓨터에서 실행되는 프로그램을 연결하는데만 사용된다는 것이다. (즉, 네트워크를 통해서는 사용할 수 없다.)</li>
+<li>
+<strong>상대경로(relative path)</strong>: 파일 혹은 디렉토리가 어디에 저장되었는지를 현재 작업 디렉토리에 상대적으로 표현하는 문자열.</li>
+<li>
+<strong>쉘(shell)</strong>: 운영 시스템에 명령줄 인터페이스. 다른 시스템에서는 또한 “터미널 프로그램(terminal program)”이라고 부른다. 이런 인터페이스에서 라인에 명령어와 매개 변수를 타입하고 명령을 실행하기 위해서 “엔터(enter)”를 누른다.</li>
+<li>
+<strong>워크(walk)</strong>: 모든 디렉토리를 방문할 때까지 디렉토리, 하위 디렉토리, 하위의 하위 디렉토리 전체 트리를 방문하는 개념을 나타내기 위해서 사용된 용어. 여기서 이것을 “디렉토리 트리를 워크”한다고 부른다.</li>
+</ul></section><section id="tasks-exercise" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="tasks-exercise">연습문제</h2>
+<p>MP3 파일이 대규모로 수집되어 있은 곳에는 같은 노래의 복사본 하나 이상이 다른 디렉토리 혹은 다른 파일 이름으로 저장되어 있을 수 있다. 이번 연습문제의 목표는 이런 중복 파일을 찾는 것이다.</p>
+<ol type="1">
+<li><p><code>.mp3</code>같은 확장자를 가진 파일을 모든 디렉토리와 하위 디렉토리를 검색해서 동일한 크기를 가진 파일짝을 목록으로 보여주는 프로그램을 작성하세요.</p></li>
+<li>
+<p><strong>체크썸(checksum)</strong> 알고리즘이나 해싱을 사용하여 중복 콘텐츠를 가진 파일을 찾는 이전의 프로그램을 개작하세요. 예를 들어, MD5 (Message-Digest algorithm 5)는 임의적으로 긴 “메시지”를 가지고 128비트 “체크썸”을 반환한다. 다른 콘텐츠를 가진 두 파일이 같은 체크썸을 반환할 확률은 매우 적다.</p>
+<p><a href="wikipedia.org/wiki/Md5">wikipedia.org/wiki/Md5</a>에서 MD5에 대해서 더 배울 수 있다. 다음 코드 조각은 파일을 열고, 읽고, 체크썸을 계산한다.</p>
+<p>체크섬을 계산하고 키로 이미 딕셔너리에 있게 되면, 중복 콘텐츠인 두 파일 있어서 딕셔너리에 파일과 방금전에 읽은 파일을 출력한다. 사진 파일 폴더에서 실행한 샘플 출력물이 다음에 있다.</p>
+</li>
+</ol>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./2004/11/15-11-04_0923001.jpg</span> ./2004/11/15-11-04_1016001.jpg</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./2005/06/28-06-05_1500001.jpg</span> ./2005/06/28-06-05_1502001.jpg</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./2006/08/11-08-06_205948_01.jpg</span> ./2006/08/12-08-06_155318_02.jpg</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>명백하게 때때로 같은 사진을 한번 이상 보내거나 원본을 삭제하지 않고
+종종 사진 사본을 만든다.</code></pre>
+
+
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p><a href="http://www.r-bloggers.com/r-scripts/">R scripts</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="http://statkclee.github.io/parallel-r/r-parallel-rscript-exec.html">.R 스크립트를 인자와 함께 실행</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="http://statkclee.github.io/r-novice-inflammation/05-cmdline-kr.html">R프로그래밍 - 명령-라인 프로그램</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>파이프를 사용하여 <code>ls</code> 같은 운영 시스템 명령어로 대화할 때, 무슨 운영 시스템을 사용하는지 알고 운영 시스템에서 지원되는 명령어로 파이프를 열수 있다는 것이 중요하다.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "복사완료!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "복사완료!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
+          }
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./tool-web.html" class="pagination-link" aria-label="웹서비스 사용하기">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./tool-gpt.html" class="pagination-link" aria-label="챗GPT">
+        <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">챗GPT</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-make.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
+
+</body></html>

@@ -1612,5 +1612,423 @@
     "crumbs": [
       "참고문헌"
     ]
+  },
+  {
+    "objectID": "tool-regex.html",
+    "href": "tool-regex.html",
+    "title": "24  정규 표현식",
+    "section": "",
+    "text": "24.1 정규 표현식 문자 매칭\n좀더 강력한 정규 표현식을 작성할 수 있는 다른 특수문자는 많이 있다. 가장 자주 사용되는 특수 문자는 임의 문자를 매칭하는 마침표다.\n다음 예제에서 정규 표현식 “F..m:”은 “From:”, “Fxxm:”, “F12m:”, “F!@m:’ 같은 임의 문자열을 매칭한다. 왜냐하면 정규 표현식 마침표 문자가 임의의 문자와 매칭되기 때문이다.\nfor( line in seq_along(hand)) {\n  line &lt;- stringr::str_squish(hand[line])\n  if(stringr::str_detect(line, \"^F..m:\")) {\n    print(line)\n  }\n}\n#&gt; [1] \"From: stephen.marquard@uct.ac.za\"\n#&gt; [1] \"From: louis@media.berkeley.edu\"\n#&gt; [1] \"From: zqian@umich.edu\"\n#&gt; [1] \"From: rjlowe@iupui.edu\"\n#&gt; [1] \"From: zqian@umich.edu\"\n#&gt; [1] \"From: rjlowe@iupui.edu\"\n#&gt; [1] \"From: cwen@iupui.edu\"\n#&gt; [1] \"From: cwen@iupui.edu\"\n#&gt; [1] \"From: gsilver@umich.edu\"\n#&gt; [1] \"From: gsilver@umich.edu\"\n#&gt; [1] \"From: zqian@umich.edu\"\n#&gt; [1] \"From: gsilver@umich.edu\"\n#&gt; [1] \"From: wagnermr@iupui.edu\"\n#&gt; [1] \"From: zqian@umich.edu\"\n#&gt; [1] \"From: antranig@caret.cam.ac.uk\"\n#&gt; [1] \"From: gopal.ramasammycook@gmail.com\"\n#&gt; [1] \"From: david.horwitz@uct.ac.za\"\n#&gt; [1] \"From: david.horwitz@uct.ac.za\"\n#&gt; [1] \"From: david.horwitz@uct.ac.za\"\n#&gt; [1] \"From: david.horwitz@uct.ac.za\"\n#&gt; [1] \"From: stephen.marquard@uct.ac.za\"\n#&gt; [1] \"From: louis@media.berkeley.edu\"\n#&gt; [1] \"From: louis@media.berkeley.edu\"\n#&gt; [1] \"From: ray@media.berkeley.edu\"\n#&gt; [1] \"From: cwen@iupui.edu\"\n#&gt; [1] \"From: cwen@iupui.edu\"\n#&gt; [1] \"From: cwen@iupui.edu\"\n정규 표현식에 “*”, “+’ ’ 문자를 사용하여 문자가 원하는만큼 반복을 나타내는 기능과 결합되었을 때는 더욱 강력해진다.”*“,”+’ ’ 특수 문자가 검색 문자열에 문자 하나만을 매칭하는 대신에 별표 기호인 경우 0 혹은 그 이상의 매칭, 더하기 기호인 경우 1 혹은 그 이상의 문자의 매칭을 의미한다.\n다음 예제에서 반복 와일드 카드(wild card) 문자를 사용하여 매칭하는 라인을 좀더 좁힐 수 있다.\nfor( line in seq_along(hand)) {\n  line &lt;- stringr::str_squish(hand[line])\n  if(stringr::str_detect(line, \"^From:.+@\")) {\n    print(line)\n  }\n}\n#&gt; [1] \"From: stephen.marquard@uct.ac.za\"\n#&gt; [1] \"From: louis@media.berkeley.edu\"\n#&gt; [1] \"From: zqian@umich.edu\"\n#&gt; [1] \"From: rjlowe@iupui.edu\"\n#&gt; [1] \"From: zqian@umich.edu\"\n#&gt; [1] \"From: rjlowe@iupui.edu\"\n#&gt; [1] \"From: cwen@iupui.edu\"\n#&gt; [1] \"From: cwen@iupui.edu\"\n#&gt; [1] \"From: gsilver@umich.edu\"\n#&gt; [1] \"From: gsilver@umich.edu\"\n#&gt; [1] \"From: zqian@umich.edu\"\n#&gt; [1] \"From: gsilver@umich.edu\"\n#&gt; [1] \"From: wagnermr@iupui.edu\"\n#&gt; [1] \"From: zqian@umich.edu\"\n#&gt; [1] \"From: antranig@caret.cam.ac.uk\"\n#&gt; [1] \"From: gopal.ramasammycook@gmail.com\"\n#&gt; [1] \"From: david.horwitz@uct.ac.za\"\n#&gt; [1] \"From: david.horwitz@uct.ac.za\"\n#&gt; [1] \"From: david.horwitz@uct.ac.za\"\n#&gt; [1] \"From: david.horwitz@uct.ac.za\"\n#&gt; [1] \"From: stephen.marquard@uct.ac.za\"\n#&gt; [1] \"From: louis@media.berkeley.edu\"\n#&gt; [1] \"From: louis@media.berkeley.edu\"\n#&gt; [1] \"From: ray@media.berkeley.edu\"\n#&gt; [1] \"From: cwen@iupui.edu\"\n#&gt; [1] \"From: cwen@iupui.edu\"\n#&gt; [1] \"From: cwen@iupui.edu\"\n검색 문자열 “^From:.+@” 은 “From:” 으로 시작하고, “.+” 하나 혹은 그 이상의 문자들, 그리고 @ 기호와 매칭되는 라인을 성공적으로 찾아낸다. 그래서 다음 라인은 매칭이 될 것이다.\nFrom: stephen.marquard@uct.ac.za\n콜론(:)과 @ 기호 사이의 모든 문자들을 매칭하도록 확장하는 것으로 “.+” 와이드 카드를 간주할 수 있다.\nFrom:.+ @\n더하기와 별표 기호를 “밀어내기(pushy)” 문자로 생각하는 것이 좋다. 예를 들어, 다음 문자열은 “.+” 특수문자가 다음에 보여주듯이 밖으로 밀어내는 것처럼 문자열 마지막 @ 기호를 매칭한다.\nFrom:stephen.marquard@uct.ac.za, csev@umich.edu, and cwen @iupui.edu\n다른 특수문자를 추가함으로서 별표나 더하기 기호가 너무 “탐욕(greedy)”스럽지 않게 만들 수 있다. 와일드 카드 특수문자의 탐욕스러운 기능을 끄는 것에 대해서는 자세한 정보를 참조바란다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
+    ]
+  },
+  {
+    "objectID": "tool-regex.html#regex-extraction",
+    "href": "tool-regex.html#regex-extraction",
+    "title": "24  정규 표현식",
+    "section": "\n24.2 정규 표현식 데이터 추출",
+    "text": "24.2 정규 표현식 데이터 추출\nR stringr 패키지로 문자열에서 데이터를 추출하려면, str_extract_all() 함수를 사용해서 정규 표현식과 매칭되는 모든 부속 문자열을 추출할 수 있다. 형식에 관계없이 임의 라인에서 전자우편 주소 같은 문자열을 추출하는 예제를 사용하자. 예를 들어, 다음 각 라인에서 전자우편 주소를 뽑아내고자 한다.\nFrom stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008\nReturn-Path: &lt;postmaster@collab.sakaiproject.org&gt;\n          for &lt;source@collab.sakaiproject.org&gt;;\nReceived: (from apache@localhost)\nAuthor: stephen.marquard@uct.ac.za\n각각의 라인에 대해서 다르게 쪼개고, 슬라이싱하면서 라인 각각의 형식에 맞추어 코드를 작성하고는 싶지는 않다. 다음 프로그램은 str_extract_all() 함수를 사용하여 전자우편 주소가 있는 라인을 찾아내고 하나 혹은 그 이상의 주소를 뽑아낸다.\n\nlibrary(stringr)\n\ns &lt;- 'Hello from csev@umich.edu to cwen@iupui.edu about the meeting @2PM'\n\nlst &lt;- str_extract_all(s, '\\\\S+@\\\\S+')\n\n# lst\n\nstr_extract_all() 함수는는 두번째 인자 패턴을 갖는 문자열을 찾아서 전자우편 주소처럼 보이는 모든 문자열을 리스트로 반환한다. 공백이 아닌 문자 (\\\\S)와 매칭되는 가운데 @을 갖는 두 문자열 시퀀스(sequence)를 매칭한다.\n프로그램의 출력은 다음과 같다.\n\nlst\n#&gt; [[1]]\n#&gt; [1] \"csev@umich.edu\" \"cwen@iupui.edu\"\n\n정규 표현식을 해석하면, 적어도 하나의 공백이 아닌 문자, @과 적어도 하나 이상의 공백이 아닌 문자를 가진 부속 문자열을 찾는다. 또한, “\\\\S+” 특수 문자는 가능한 많이 공백이 아닌 문자를 매칭한다. (정규 표현식에서 “탐욕(greedy)” 매칭이라고 부른다.)\n정규 표현식은 두번 매칭(csev@umich.edu, cwen@iupui.edu)하지만, 문자열 “@2PM”은 매칭을 하지 않는다. 왜냐하면, @ 기호 앞에 공백이 아닌 문자가 하나도 없기 때문이다. 프로그램의 정규 표현식을 사용해서 파일에 모든 라인을 읽고 다음과 같이 전자우편 주소처럼 보이는 모든 문자열을 출력한다.\n\nhand &lt;- read_lines(\"data/mbox-short.txt\")\n\nfor( line in seq_along(hand)) {\n  \n  line &lt;- stringr::str_squish(hand[line])\n  x &lt;- stringr::str_extract(line, \"\\\\S+@\\\\S+\")\n  \n  if(! is.na(str_length(x)) ) {\n    print(x)\n  }\n}\n\n각 라인을 읽어 들이고, 정규 표현식과 매칭되는 모든 부속 문자열을 추출한다. str_extract() 함수는 문자 벡터를 반환하기 때문에, 전자우편 처럼 보이는 부속 문자열을 적어도 하나 찾아서 출력하기 위해서 반환 리스트 요소 숫자가 NA 여부를 간단히 확인한다.\nmbox.txt 파일에 프로그램을 실행하면, 다음 출력을 얻는다.\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"&lt;postmaster@collab.sakaiproject.org&gt;\"\n[1] \"&lt;200801051412.m05ECIaH010327@nakamura.uits.iupui.edu&gt;\"\n[1] \"&lt;source@collab.sakaiproject.org&gt;;\"\n[1] \"&lt;source@collab.sakaiproject.org&gt;;\"\n[1] \"&lt;source@collab.sakaiproject.org&gt;;\"\n[1] \"apache@localhost)\"\n[1] \"source@collab.sakaiproject.org;\"\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"louis@media.berkeley.edu\"\n...\n전자우편 주소 몇몇은 “&lt;”, “;” 같은 잘못된 문자가 앞과 뒤에 붙어있다. 문자나 숫자로 시작하고 끝나는 문자열 부분만 관심있다고 하자.\n그러기 위해서, 정규 표현식의 또 다른 기능을 사용한다. 매칭하려는 다중 허용 문자 집합을 표기하기 위해서 꺾쇠 괄호를 사용한다. 그런 의미에서 “\\S”은 공백이 아닌 문자 집합을 매칭하게 한다. 이제 매칭하려는 문자에 관해서 좀더 명확해졌다.\n여기 새로운 정규 표현식이 있다.\n[a-zA-Z0-9]\\\\S*@\\\\S*[a-zA-Z]\n약간 복잡해졌다. 왜 정규 표현식이 자신만의 언어인가에 대해서 이해할 수 있다. 이 정규 표현식을 해석하면, 0 혹은 그 이상의 공백이 아닌 문자(“\\\\S*”)로 하나의 소문자, 대문자 혹은 숫자(“[a-zA-Z0-9]”)를 가지며, @ 다음에 0 혹은 그 이상의 공백이 아닌 문자(“\\\\S*”)로 하나의 소문자, 대문자 혹은 숫자(“[a-zA-Z0-9]”)로 된 부속 문자열을 찾는다. 0 혹은 그 이상의 공백이 아닌 문자를 나타내기 위해서 “+”에서 “”으로 바꿨다. 왜냐하면 ”[a-zA-Z0-9]” 자체가 이미 하나의 공백이 아닌 문자이기 때문이다. ””, “+”는 단일 문자에 별표, 더하기 기호 왼편에 즉시 적용됨을 기억하세요.\n프로그램에 정규 표현식을 사용하면, 데이터가 훨씬 깔끔해진다.\n\nhand &lt;- read_lines(\"data/mbox-short.txt\")\n\nfor( line in seq_along(hand)) {\n  \n  line &lt;- stringr::str_squish(hand[line])\n  x &lt;- stringr::str_extract(line, \"[a-zA-Z0-9]\\\\S*@\\\\S*[a-zA-Z]\")\n  \n  if(! is.na(str_length(x)) ) {\n    print(x)\n  }\n}\n\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"postmaster@collab.sakaiproject.org\"\n[1] \"200801051412.m05ECIaH010327@nakamura.uits.iupui.edu\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"apache@localhost\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"louis@media.berkeley.edu\"\n[1] \"postmaster@collab.sakaiproject.org\"\n[1] \"200801042308.m04N8v6O008125@nakamura.uits.iupui.edu\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"apache@localhost\"\n...\n“source@collab.sakaiproject.org” 라인에서 문자열 끝에 “&gt;” 문자를 정규 표현식으로 제거한 것을 주목한다. 정규 표현식 끝에 “[a-zA-Z]”을 추가하여서 정규 표현식 파서가 찾는 임의 문자열은 문자로만 끝나야 되기 때문이다. 그래서, “sakaiproject.org&gt;;”에서 “&gt;”을 봤을 때, “g”가 마지막 맞는 매칭이 되고, 거기서 마지막 매칭을 마치고 중단한다.\nstr_extract_all() 프로그램의 출력은 리스트의 단일 요소를 가진 문자열로 R 리스트이다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
+    ]
+  },
+  {
+    "objectID": "tool-regex.html#regex-search-extraction",
+    "href": "tool-regex.html#regex-search-extraction",
+    "title": "24  정규 표현식",
+    "section": "\n24.3 검색과 추출 조합",
+    "text": "24.3 검색과 추출 조합\n다음과 같은 “X-” 문자열로 시작하는 라인의 숫자를 찾고자 한다면,\nX-DSPAM-Confidence: 0.8475\nX-DSPAM-Probability: 0.0000  \n임의의 라인에서 임의 부동 소수점 숫자가 아니라 상기 구문을 가진 라인에서만 숫자를 추출하고자 한다.\n라인을 선택하기 위해서 다음과 같이 정규 표현식을 구성한다.\n^X-.*: [0-9.]+\n정규 표현식을 해석하면, ^에서 “X-”으로 시작하고, “.*“에서 0 혹은 그이상의 문자를 가지며, 콜론(”:“)이 나오고 나서 공백을 만족하는 라인을 찾는다. 공백 뒤에”[0-9.]+“에서 숫자 (0-9) 혹은 점을 가진 하나 혹은 그 이상의 문자가 있여야 한다. 꺽쇠 기호 사이에 마침표는 실제 마침표만 매칭함을 주목하기 바란다. (즉, 꺾쇠 기호 사이는 와일드 카드 문자가 아니다.)\n관심을 가지고 있는 특정한 라인과 매우 정확하게 매칭이되는 매우 빠듯한 정규 표현식으로 다음과 같다.\n\nlibrary(stringr)\n\nhand &lt;- read_lines(\"data/mbox-short.txt\")\n\nfor( line in seq_along(hand)) {\n  \n  line &lt;- stringr::str_squish(hand[line])\n  x &lt;- stringr::str_detect(line, \"^X\\\\S*: [0-9.]+\")\n  if(x == TRUE) {\n    print(line[x])\n  }\n}\n\n프로그램을 실행하면, 잘 걸러져서 찾고자 하는 라인만 볼 수 있다.\n[1] \"X-DSPAM-Confidence: 0.8475\"\n[1] \"X-DSPAM-Probability: 0.0000\"\n[1] \"X-DSPAM-Confidence: 0.6178\"\n[1] \"X-DSPAM-Probability: 0.0000\"\n[1] \"X-DSPAM-Confidence: 0.6961\"\n...\n하지만, 이제 str_split() 함수를 사용해서 숫자를 뽑아내는 문제를 해결해야 한다. str_split()을 사용하는 것이 간단해 보이지만, 동시에 라인을 검색하고 파싱하기 위해서 정규 표현식의 또 다른 기능을 사용할 수 있다.\n괄호는 정규 표현식의 또 다른 특수 문자다. 정규 표현식에 괄호를 추가한다면, 문자열이 매칭될 때, 무시된다. 하지만, str_extract()을 사용할 때, 매칭할 전체 정규 표현식을 원할지라도, 정규 표현식을 매칭하는 부속 문자열의 부분만을 뽑아낸다는 것을 괄호가 표시한다.\n그래서, 프로그램을 다음과 같이 수정한다.\n\nlibrary(stringr)\n\nhand &lt;- read_lines(\"data/mbox-short.txt\")\n\nfor( line in seq_along(hand)) {\n  \n  line &lt;- stringr::str_squish(hand[line])\n  x &lt;- stringr::str_extract(line, \"^X\\\\S*: ([0-9.]+)\")\n  prob &lt;- stringr::str_extract(x, \"([0-9.]+)\")\n  \n  if(!is.na(prob)) {\n    print(prob)\n  }\n}\n\nstr_detect()을 호출하는 대신에, 매칭 문자열의 부동 소수점 숫자만 뽑아내는데 str_extract()에 원하는 부동 소수점 숫자를 표현하는 정규 표현식 부분에 괄호를 추가한다.\n프로그램의 출력은 다음과 같다.\n[1] \"0.8475\"\n[1] \"0.0000\"\n[1] \"0.6178\"\n[1] \"0.0000\"\n[1] \"0.6961\"\n[1] \"0.0000\"\n[1] \"0.7565\"\n[1] \"0.0000\"\n[1] \"0.7626\"\n...\n숫자가 여전히 리스트에 있어서 문자열에서 부동 소수점으로 변환할 필요가 있지만, 흥미로운 정보를 찾아 뽑아내기 위해서 정규 표현식의 강력한 힘을 사용했다.\n이 기술을 활용한 또 다른 예제로, 파일을 살펴보면, 폼(form)을 가진 라인이 많다.\nDetails: http://source.sakaiproject.org/viewsvn/?view=rev&rev=39772\n상기 언급한 동일한 기법을 사용하여 모든 변경 번호(라인의 끝에 정수 숫자)를 추출하고자 한다만, 다음과 같이 프로그램을 작성할 수 있다.\n\nlibrary(stringr)\n\nhand &lt;- read_lines(\"data/mbox-short.txt\")\n\nfor( line in seq_along(hand)) {\n  \n  line &lt;- stringr::str_squish(hand[line])\n  x &lt;- stringr::str_extract(line, \"^Details:.*rev=([0-9]+)\")\n  rev_num &lt;- stringr::str_extract(x, \"([0-9]+)\")\n  # rev_num &lt;- stringr::str_extract(x, \"([:digit:]+)\")\n  \n  if(!is.na(rev_num)) {\n    print(rev_num)\n  }\n}\n#&gt; [1] \"39772\"\n#&gt; [1] \"39771\"\n#&gt; [1] \"39770\"\n#&gt; [1] \"39769\"\n#&gt; [1] \"39766\"\n#&gt; [1] \"39765\"\n#&gt; [1] \"39764\"\n#&gt; [1] \"39763\"\n#&gt; [1] \"39762\"\n#&gt; [1] \"39761\"\n#&gt; [1] \"39760\"\n#&gt; [1] \"39759\"\n#&gt; [1] \"39758\"\n#&gt; [1] \"39757\"\n#&gt; [1] \"39756\"\n#&gt; [1] \"39755\"\n#&gt; [1] \"39754\"\n#&gt; [1] \"39753\"\n#&gt; [1] \"39752\"\n#&gt; [1] \"39751\"\n#&gt; [1] \"39750\"\n#&gt; [1] \"39749\"\n#&gt; [1] \"39746\"\n#&gt; [1] \"39745\"\n#&gt; [1] \"39744\"\n#&gt; [1] \"39743\"\n#&gt; [1] \"39742\"\n\n작성한 정규 표현식을 해석하면, “Details:”로 시작하는 “.*“에 임의의 문자들로,”rev=“을 포함하고 나서, 하나 혹은 그 이상의 숫자를 가진 라인을 찾는다. 전체 정규 표현식을 만족하는 라인을 찾고자 하지만, 라인 끝에 정수만을 추출하기 위해서”[0-9]+“을 괄호로 감쌌다.\n프로그램을 실행하면, 다음 출력을 얻는다.\n[1] \"39772\"\n[1] \"39771\"\n[1] \"39770\"\n[1] \"39769\"\n[1] \"39766\"\n[1] \"39765\"\n[1] \"39764\"\n...\n“[0-9]+”은 “탐욕(greedy)”스러워서, 숫자를 추출하기 전에 가능한 큰 문자열 숫자를 만들려고 한다는 것을 기억하라. 이런 “탐욕(greedy)”스러운 행동으로 인해서 왜 각 숫자로 모두 5자리 숫자를 얻은 이유가 된다. 정규 표현식 라이브러리는 양방향으로 파일 처음이나 끝에 숫자가 아닌 것을 마주칠 때까지 뻗어 나간다.\n이제 정규 표현식을 사용해서 각 전자우편 메시지의 요일에 관심이 있었던 책 앞의 연습 프로그램을 다시 작성한다. 다음 형식의 라인을 찾는다.\nFrom stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008\n그리고 나서, 각 라인의 요일의 시간을 추출하고자 한다. 앞에서 str_split를 두번 호출하여 작업을 수행했다. 첫번째는 라인을 단어로 쪼개고, 다섯번째 단어를 뽑아내서, 관심있는 두 문자를 뽑아내기 위해서 콜론 문자에서 다시 쪼갰다.\n작동을 할지 모르지만, 실질적으로 정말 부서지기 쉬운 코드로 라인이 잘 짜여져 있다고 가정하에 가능하다. 잘못된 형식의 라인이 나타날 때도 결코 망가지지 않는 프로그램을 담보하기 위해서 충분한 오류 검사기능을 추가하거나 커다란 try/except 블록을 넣으면, 참 읽기 힘든 10-15 라인 코드로 커질 것이다.\n다음 정규 표현식으로 훨씬 간결하게 작성할 수 있다.\n^From .* [0-9][0-9]:\n상기 정규 표현식을 해석하면, 공백을 포함한 “From”으로 시작해서, “.*“에 임의 갯수의 문자, 그리고 공백, 두 개의 숫자”[0-9][0-9]” 뒤에 콜론(:) 문자를 가진 라인을 찾는다. 일종의 찾고 있는 라인에 대한 정의다.\nstr_extract() 함수를 사용해서 단지 시간만 뽑아내기 위해서, 두 숫자에 괄호를 다음과 같이 추가한다.\n^From .* ([0-9][0-9]):\n작업 결과는 다음과 같이 프로그램에 반영한다.\n\nlibrary(stringr)\n\nhand &lt;- read_lines(\"data/mbox-short.txt\")\n\nfor( line in seq_along(hand)) {\n  \n  line &lt;- stringr::str_squish(hand[line])\n  x &lt;- stringr::str_extract(line, \"^From .* ([0-9][0-9]):\")\n  days &lt;- stringr::str_extract(x, \"([0-9][0-9])\")\n  \n  if(!is.na(days)) {\n    print(days)\n  }\n}\n#&gt; [1] \"09\"\n#&gt; [1] \"18\"\n#&gt; [1] \"16\"\n#&gt; [1] \"15\"\n#&gt; [1] \"15\"\n#&gt; [1] \"14\"\n#&gt; [1] \"11\"\n#&gt; [1] \"11\"\n#&gt; [1] \"11\"\n#&gt; [1] \"11\"\n#&gt; [1] \"11\"\n#&gt; [1] \"11\"\n#&gt; [1] \"10\"\n#&gt; [1] \"10\"\n#&gt; [1] \"10\"\n#&gt; [1] \"09\"\n#&gt; [1] \"07\"\n#&gt; [1] \"06\"\n#&gt; [1] \"04\"\n#&gt; [1] \"04\"\n#&gt; [1] \"04\"\n#&gt; [1] \"19\"\n#&gt; [1] \"17\"\n#&gt; [1] \"17\"\n#&gt; [1] \"16\"\n#&gt; [1] \"16\"\n#&gt; [1] \"16\"\n\n프로그램을 실행하면, 다음 출력 결과가 나온다.\n[1] \"09\"\n[1] \"18\"\n[1] \"16\"\n[1] \"15\"\n[1] \"15\"\n[1] \"14\"\n[1] \"11\"\n[1] \"11\"\n...",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
+    ]
+  },
+  {
+    "objectID": "tool-regex.html#regex-escape",
+    "href": "tool-regex.html#regex-escape",
+    "title": "24  정규 표현식",
+    "section": "\n24.4 이스케이프 문자",
+    "text": "24.4 이스케이프 문자\n라인의 처음과 끝을 매칭하거나, 와일드 카드를 명세하기 위해서 정규 표현식의 특수 문자를 사용했기 때문에, 정규 표현식에 사용된 문자가 “정상(normal)”적인 문자임을 표기할 방법이 필요하고 달러 기호와 탈자 기호(^) 같은 실제 문자를 매칭하고자 한다.\n역슬래쉬(’)́를 가진 문자를 앞에 덮붙여서 문자를 단순히 매칭하고자 한다고 나타낼 수 있다. 예를 들어, 다음 정규표현식으로 금액을 찾을 수 있다.\n\nlibrary(stringr)\n\nx &lt;- 'We just received $10.00 for cookies.'\n\nstr_extract(x, pattern = '\\\\$[0-9.]+')\n#&gt; [1] \"$10.00\"\n\n역슬래쉬 달러 기호를 앞에 덮붙여서(\\\\$), 실제로 “라인 끝(end of line)” 매칭 대신에 입력 문자열의 달러 기호와 매칭한다. 정규 표현식 나머지 부분은 하나 혹은 그 이상의 숫자 혹은 소수점 문자를 매칭한다. 주목: 꺾쇠 괄호 내부에 문자는 “특수 문자”가 아니다. 그래서 “[0-9.]”은 실제 숫자 혹은 점을 의미한다. 꺾쇠 괄호 외부에 점은 “와일드 카드(wild-card)” 문자이고 임의의 문자와 매칭한다. 꺾쇠 괄호 내부에서 점은 점일 뿐이다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
+    ]
+  },
+  {
+    "objectID": "tool-regex.html#regex-summary",
+    "href": "tool-regex.html#regex-summary",
+    "title": "24  정규 표현식",
+    "section": "\n24.5 요약",
+    "text": "24.5 요약\n지금까지 정규 표현식의 표면을 긁은 정도지만, 정규 표현식 언어에 대해서 조금 학습했다. 정규 표현식은 특수 문자로 구성된 검색 문자열로 “매칭(matching)” 정의하고 매칭된 문자열로부터 추출된 결과물을 정규 표현식 시스템과 프로그래머가 의도한 바를 의사소통하는 것이다. 다음에 특수 문자 및 문자 시퀀스의 일부가 있다.\n\n\n^ 라인의 처음을 매칭.\n\n$ 라인의 끝을 매칭.\n\n. 임의의 문자를 매칭(와일드 카드)\n\ns 공백 문자를 매칭.\n\nS 공백이 아닌 문자를 매칭.(s 의 반대).\n\n* 바로 앞선 문자에 적용되고 0 혹은 그 이상의 앞선 문자와 매칭을 표기함.\n\n*? 바로 앞선 문자에 적용되고 0 혹은 그 이상의 앞선 문자와 매칭을 “탐욕적이지 않은(non-greedy) 방식”으로 표기함.\n\n+ 바로 앞선 문자에 적용되고 1 혹은 그 이상의 앞선 문자와 매칭을 표기함.\n\n+? 바로 앞선 문자에 적용되고 1 혹은 그 이상의 앞선 문자와 매칭을 “탐욕적이지 않은(non-greedy) 방식”으로 표기함.\n\n[aeiou] 명세된 집합 문자에 존재하는 단일 문자와 매칭. 다른 문자는 안되고, “a”, “e”, “i”, “o”, “u” 문자만 매칭되는 예제.\n\n[a-z0-9] 음수 기호로 문자 범위를 명세할 수 있다. 소문자이거나 숫자인 단일 문자만 매칭되는 예제.\n\n[^A-Za-z] 집합 표기의 첫문자가 ^인 경우, 로직을 거꾸로 적용한다. 대문자나 혹은 소문자가 아닌 임의 단일 문자만 매칭하는 예제.\n\n( ) 괄호가 정규표현식에 추가될 때, 매칭을 무시한다. 하지만 str_extract()을 사용할 때 전체 문자열보다 매칭된 문자열의 상세한 부속 문자열을 추출할 수 있게 한다.\n\n\\b 빈 문자열을 매칭하지만, 단어의 시작과 끝에만 사용된다.\n\n\\B 빈 문자열을 매칭하지만, 단어의 시작과 끝이 아닌 곳에 사용된다.\n\n\\d 임의 숫자와 매칭하여 [0-9] 집합에 상응함.\n\n\\D 임의 숫자가 아닌 문자와 매칭하여 [^0-9] 집합에 상응함.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
+    ]
+  },
+  {
+    "objectID": "tool-regex.html#unix-users",
+    "href": "tool-regex.html#unix-users",
+    "title": "24  정규 표현식",
+    "section": "\n24.6 유닉스 사용자 보너스",
+    "text": "24.6 유닉스 사용자 보너스\n정규 표현식을 사용하여 파일을 검색 기능은 1960년대 이래로 유닉스 운영 시스템에 내장되어 여러가지 형태로 거의 모든 프로그래밍 언어에서 이용가능하다.\n사실, str_detect() 예제에서와 거의 동일한 기능을 하는 grep (Generalized Regular Expression Parser)으로 불리는 유닉스 내장 명령어 프로그램이 있다. 그래서, 맥킨토시나 리눅스 운영 시스템을 가지고 있다면, 명령어 창에서 다음 명령어를 시도할 수 있다.\n$ grep '^From:' mbox-short.txt\nFrom: stephen.marquard@uct.ac.za\nFrom: louis@media.berkeley.edu\nFrom: zqian@umich.edu\nFrom: rjlowe@iupui.edu\ngrep을 사용하여, mbox-short.txt 파일 내부에 “From:” 문자열로 시작하는 라인을 보여준다. grep 명령어를 가지고 약간 실험을 하고 grep에 대한 문서를 읽는다면, 파이썬에서 지원하는 정규 표현식과 grep에서 지원되는 정규 표현식과 차이를 발견할 것이다. 예를 들어, grep 공백이 아닌 문자 “\\S”을 지원하지 않는다. 그래서 약간 더 복잡한 집합 표기 “[^ ]”을 사용해야 한다. “[^ ]”은 간단히 정리하면, 공복을 제외한 임의의 문자와 매칭한다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
+    ]
+  },
+  {
+    "objectID": "tool-regex.html#regex-debugging",
+    "href": "tool-regex.html#regex-debugging",
+    "title": "24  정규 표현식",
+    "section": "\n24.7 디버깅",
+    "text": "24.7 디버깅\nR에 대해서 도움을 어떻게 받을 수 있을까요?\n만약 특정 함수의 정확한 이름을 기억해 내기 위해서 빠르게 생각나게 하는 것이 필요하다면 도움이 많이 될 수 있는 간단하고 초보적인 내장 문서가 R에 포함되어 있다. 내장 문서 도움말은 인터랙티브 모드의 R 인터프리터에서 볼 수 있다.\n\n24.7.1 도움말 파일 읽어오기\nR과 모든 팩키지는 함수에 대한 도움말 파일을 제공한다. 네임스페이스(인터랙티브 R 세션)에 적재된 팩키지에 있는 특정 함수에 대한 도움말은 다음과 같이 찾는다:\n\n?function_name\nhelp(function_name)\n\nRStudio에 도움말 페이지에 도움말이 표시된다. (혹은 R 자체로 일반 텍스트로 표시된다)\n각 도움말 페이지는 절(section)로 구분된다:\n\n기술(Description): 함수가 어떤 작업을 수행하는가에 대한 충분한 기술\n사용법(Usage): 함수 인자와 기본디폴트 설정값\n인자(Arguments): 각 인자가 예상하는 데이터 설명\n상세 설명(Details): 알고 있어야 되는 중요한 구체적인 설명\n값(Value): 함수가 반환하는 데이터\n함께 보기(See Also): 유용할 수 있는 연관된 함수.\n예제(Examples): 함수 사용법에 대한 예제들.\n\n함수마다 상이한 절을 갖추고 있다. 하지만, 상기 항목이 알고 있어야 하는 핵심 내용이다.\n\n꿀팁: 도움말 파일 불러 읽어오기\nR에 대해 가장 기죽게 되는 한 측면이 엄청난 함수 갯수다. 모든 함수에 대한 올바른 사용법을 기억하지 못하면, 엄두가 나지 않을 것이다. 운좋게도, 도움말 파일로 인해 기억할 필요가 없다!\n\n\n24.7.2 특수 연산자\n특수 연산자에 대한 도움말을 찾으려면, 인용부호를 사용한다:\n\n?\"&lt;-\"\n\n\n24.7.3 팩키지 도움말 얻기\n많은 팩키지에 “소품문(vignettes)”이 따라온다: 활용법과 풍부한 예제를 담은 문서. 어떤 인자도 없이, vignette() 명령어를 입력하면 설치된 모든 팩키지에 대한 모든 소품문 목록이 출력된다; vignette(package=\"package-name\") 명령어는 package-name 팩키지명에 대한 이용가능한 모든 소품문 목록을 출력하고, vignette(\"vignette-name\") 명령어는 특정된 소품문을 연다.\n팩키지에 어떤 소품문도 포함되지 않는다면, 일반적으로 help(\"package-name\") 명령어를 타이핑해서 도움말을 얻는다.\n\n24.7.4 함수가 기억나지 않을 때\n함수가 어느 팩키지에 있는지 확신을 못하거나, 구체적인 철자법을 모르는 경우, 퍼지 검색(fuzzy search)을 실행한다:\n\n??function_name\n\n\n24.7.5 시작조차 난감할 때\n어떤 함수 혹은 팩키지가 필요한지 모르는 경우, CRAN Task Views 사이트가 좋은 시작점이 된다. 유지관리되는 팩키지 목록이 필드로 묶여 잘 정리되어 있다.\n\n24.7.6 코드가 동작하지 않을 때\n동료로부터 도움을 구해 코드가 동작하지 않는 이슈를 해결한다. 함수 사용에 어려움이 있는 경우, 10 에 9 경우에 찾는 정답이 이미 Stack Overflow에 답글이 달려 있다. 검색할 때 [r] 태그를 사용한다:\n원하는 답을 찾지 못한 경우, 동료에게 질문을 만드는데 몇가지 유용한 함수가 있다:\n\n?dput\n\ndput() 함수는 작업하고 있는 데이터를 텍스트 파일 형식으로 덤프해서 저장한다. 그래서 다른 사람 R 세션으로 복사해서 붙여넣기 좋게 돕는다.\n\nsessionInfo()\n#&gt; R version 4.2.2 (2022-10-31 ucrt)\n#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)\n#&gt; Running under: Windows 10 x64 (build 19045)\n#&gt; \n#&gt; Matrix products: default\n#&gt; \n#&gt; locale:\n#&gt; [1] LC_COLLATE=Korean_Korea.utf8  LC_CTYPE=Korean_Korea.utf8   \n#&gt; [3] LC_MONETARY=Korean_Korea.utf8 LC_NUMERIC=C                 \n#&gt; [5] LC_TIME=Korean_Korea.utf8    \n#&gt; \n#&gt; attached base packages:\n#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     \n#&gt; \n#&gt; other attached packages:\n#&gt;  [1] showtext_0.9-6   showtextdb_3.0   sysfonts_0.8.8   JuliaCall_0.17.5\n#&gt;  [5] rvest_1.0.3      lubridate_1.9.2  forcats_1.0.0    stringr_1.5.1   \n#&gt;  [9] dplyr_1.1.4      purrr_1.0.2      readr_2.1.4      tidyr_1.3.1     \n#&gt; [13] tibble_3.2.1     tidyverse_2.0.0  gtExtras_0.4.5   gt_0.10.0       \n#&gt; [17] ggplot2_3.4.2   \n#&gt; \n#&gt; loaded via a namespace (and not attached):\n#&gt;  [1] Rcpp_1.0.12        class_7.3-20       digest_0.6.34     \n#&gt;  [4] conflicted_1.2.0   utf8_1.2.4         R6_2.5.1          \n#&gt;  [7] wesanderson_0.3.6  evaluate_0.23      e1071_1.7-13      \n#&gt; [10] httr_1.4.7         pillar_1.9.0       rlang_1.1.3       \n#&gt; [13] rstudioapi_0.15.0  fontawesome_0.5.2  extrafontdb_1.0   \n#&gt; [16] rmarkdown_2.25     extrafont_0.19     htmlwidgets_1.6.4 \n#&gt; [19] bit_4.0.5          munsell_0.5.0      proxy_0.4-27      \n#&gt; [22] compiler_4.2.2     xfun_0.39          pkgconfig_2.0.3   \n#&gt; [25] htmltools_0.5.7    tidyselect_1.2.0   fansi_1.0.6       \n#&gt; [28] crayon_1.5.2       tzdb_0.4.0         withr_3.0.0       \n#&gt; [31] sf_1.0-14          grid_4.2.2         jsonlite_1.8.8    \n#&gt; [34] Rttf2pt1_1.3.12    gtable_0.3.4       lifecycle_1.0.4   \n#&gt; [37] DBI_1.1.3          magrittr_2.0.3     units_0.8-2       \n#&gt; [40] scales_1.3.0       KernSmooth_2.23-20 vroom_1.6.3       \n#&gt; [43] cli_3.6.1          stringi_1.7.12     cachem_1.0.8      \n#&gt; [46] xml2_1.3.5         paletteer_1.5.0    generics_0.1.3    \n#&gt; [49] vctrs_0.6.5        rematch2_2.1.2     tools_4.2.2       \n#&gt; [52] bit64_4.0.5        archive_1.1.6      glue_1.7.0        \n#&gt; [55] hms_1.1.3          parallel_4.2.2     fastmap_1.1.1     \n#&gt; [58] yaml_2.3.8         timechange_0.2.0   colorspace_2.1-0  \n#&gt; [61] classInt_0.4-9     memoise_2.0.1      knitr_1.45\n\nsessionInfo()는 R 현재 버젼 정보과 함께 적재된 팩키지 정보를 출력한다. 이 정보가 다른 사람이 여러분 문제를 재현하고 디버그하는데 유용할 수 있다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
+    ]
+  },
+  {
+    "objectID": "tool-regex.html#r-regex-terminology",
+    "href": "tool-regex.html#r-regex-terminology",
+    "title": "24  정규 표현식",
+    "section": "\n24.8 용어정의",
+    "text": "24.8 용어정의\n\n\n부서지기 쉬운 코드(brittle code):입력 데이터가 특정한 형식일 경우에만 작동하는 코드. 하지만 올바른 형식에서 약간이도 벗아나게 되면 깨지기 쉽니다. 쉽게 부서지기 때문에 “부서지기 쉬운 코드(brittle code)”라고 부른다.\n\n욕심쟁이 매칭(greedy matching):정규 표현식의 “+”, “*” 문자는 가능한 큰 문자열을 매칭하기 위해서 밖으로 확장하는 개념.\n\ngrep: 정규 표현식에 매칭되는 파일을 탐색하여 라인을 찾는데 대부분의 유닉스 시스템에서 사용가능한 명령어. \"Generalized Regular Expression Parser\"의 약자.\n\n정규 표현식(regular expression): 좀더 복잡한 검색 문자열을 표현하는 언어. 정규 표현식은 특수 문자를 포함해서 검색 라인의 처음 혹은 끝만 매칭하거나 많은 비슷한 것을 매칭한다.\n\n와일드 카드(wild card): 임의 문자를 매칭하는 특수 문자. 정규 표현식에서 와이드 카드 문자는 마침표 문자다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
+    ]
+  },
+  {
+    "objectID": "tool-regex.html#r-regex-ex",
+    "href": "tool-regex.html#r-regex-ex",
+    "title": "24  정규 표현식",
+    "section": "연습문제",
+    "text": "연습문제\n\n유닉스의 grep 명령어를 모사하는 간단한 프로그램을 작성하세요. 사용자가 정규 표현식을 입력하고 정규 표현식에 매칭되는 라인수를 셈하는 프로그램입니다.\n\n$ Rscript grep.R\nEnter a regular expression: ^Author\nmbox.txt had 1798 lines that matched ^Author\n\n$ Rscript grep.R\nEnter a regular expression: ^X-\nmbox.txt had 14368 lines that matched ^X-\n\n$ Rscript grep.R\nEnter a regular expression: java$\nmbox.txt had 4218 lines that matched java$\n\n다음 형식의 라인만을 찾는 프로그램을 작성하세요.\n\nNew Revision: 39772\n그리고, 정규 표현식과 str_extract() 함수를 사용하여 각 라인으로부터 숫자를 추출하세요. 숫자들의 평균을 구하고 출력하세요.\nEnter file:mbox.txt \n38549.7949721\n\nEnter file:mbox-short.txt\n39756.9259259",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
+    ]
+  },
+  {
+    "objectID": "tool-network.html",
+    "href": "tool-network.html",
+    "title": "25  네트워크 프로그램",
+    "section": "",
+    "text": "25.1 하이퍼텍스트 전송 프로토콜\n웹에 동력을 공급하는 네트워크 프로토콜(HyperText Transport Protocol - HTTP)은 실제로 매우 단순하다. 파이썬에는 소켓 (sockets)이라고 불리는 내장 지원 모듈이 있다. 파이썬 프로그램에서 소켓 모듈을 통해서 네트워크 연결을 하고, 데이터 검색을 매우 용이하게 한다.\n소켓(socket)은 단일 소켓으로 두 프로그램 사이에 양방향 연결을 제공한다는 점을 제외하고 파일과 매우 유사하다. 동일한 소켓에 읽거나 쓸 수 있다. 소켓에 무언가를 쓰게 되면, 소켓의 다른 끝에 있는 응용프로그램에 전송된다. 소켓으로부터 읽게 되면, 다른 응용 프로그램이 전송한 데이터를 받게 된다.\n하지만, 소켓의 다른쪽 끝에 프로그램이 어떠한 데이터도 전송하지 않았는데 소켓을 읽으려고 하면, 단지 앉아서 기다리기만 한다. 만약 어떠한 것도 보내지 않고 양쪽 소켓 끝의 프로그램 모두 기다리기만 한다면, 모두 매우 오랜 시간동안 기다리게 될 것이다.\n인터넷으로 통신하는 프로그램의 중요한 부분은 특정 종류의 프로토콜을 공유하는 것이다. 프로토콜(protocol)은 정교한 규칙의 집합으로 누가 메시지를 먼저 보내고, 메세지로 무엇을 하며, 메시지에 대한 응답은 무엇이고, 다음에 누가 메세지를 보내고 등등을 포함한다. 이런 관점에서 소켓 끝의 두 응용프로그램이 함께 춤을 추고 있으니, 다른 사람 발을 밟지 않도록 확인해야 한다.\n네트워크 프로토콜을 기술하는 문서가 많이 있다. 하이퍼텍스트 전송 프로토콜(HyperText Transport Protocol)은 다음 문서에 기술되어 있다.\nhttp://www.w3.org/Protocols/rfc2616/rfc2616.txt\n매우 상세한 176 페이지나 되는 장문의 복잡한 문서다. 흥미롭다면 시간을 가지고 읽어보기 바란다. RFC2616에 36 페이지를 읽어보면, GET 요청(request)에 대한 구문을 발견하게 된다. 꼼꼼히 읽게 되면, 웹서버에 문서를 요청하기 하기 위해서, 80 포트로 www.py4inf.com 서버에 연결을 하고 나서 다음 양식 한 라인을 전송한다.\nGET http://www.py4inf.com/code/romeo.txt HTTP/1.0\n두번째 매개변수는 요청하는 웹페이지가 된다. 그리고 또한 빈 라인도 전송한다. 웹서버는 문서에 대한 헤더 정보와 빈 라인 그리고 문서 본문으로 응답한다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
+    ]
+  },
+  {
+    "objectID": "tool-network.html#network-web-browser",
+    "href": "tool-network.html#network-web-browser",
+    "title": "25  네트워크 프로그램",
+    "section": "\n25.2 가장 간단한 웹 브라우져",
+    "text": "25.2 가장 간단한 웹 브라우져\n아마도 HTTP 프로토콜이 어떻게 작동하는지 알아보는 가장 간단한 방법은 매우 간단한 파이썬 프로그램을 작성하는 것이다. 웹서버에 접속하고 HTTP 프로토콜 규칙에 따라 문서를 요청하고 서버가 다시 보내주는 결과를 보여주는 것이다.\n\nimport socket\n\nmysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nmysock.connect(('data.pr4e.org', 80))\ncmd = 'GET http://data.pr4e.org/romeo.txt HTTP/1.0\\r\\n\\r\\n'.encode()\nmysock.send(cmd)\n\nwhile True:\n    data = mysock.recv(512)\n    if len(data) &lt; 1:\n        break\n    print(data.decode(),end='')\n\nmysock.close()\n\n처음에 프로그램은 www.py4e.com 서버에 80 포트로 연결한다. “웹 브라우져” 역할로 작성된 프로그램이 하기 때문에 HTTP 프로토콜은 GET 명령어를 공백 라인과 함께 보낸다.\n\n\n\n\n\n그림 25.1: 소켓 개념도\n\n\n공백 라인을 보내자 마자, 512 문자 덩어리의 데이터를 소켓에서 받아 더 이상 읽을 데이터가 없을 때까지(즉, recv()이 빈 문자열을 반환한다.) 데이터를 출력하는 루프를 작성한다.\n프로그램 실행결과 다음을 얻을 수 있다.\nHTTP/1.1 200 OK\nDate: Wed, 11 Apr 2018 18:52:55 GMT\nServer: Apache/2.4.7 (Ubuntu)\nLast-Modified: Sat, 13 May 2017 11:22:22 GMT\nETag: \"a7-54f6609245537\"\nAccept-Ranges: bytes\nContent-Length: 167\nCache-Control: max-age=0, no-cache, no-store, must-revalidate\nPragma: no-cache\nExpires: Wed, 11 Jan 1984 05:00:00 GMT\nConnection: close\nContent-Type: text/plain\n\nBut soft what light through yonder window breaks\nIt is the east and Juliet is the sun\nArise fair sun and kill the envious moon\nWho is already sick and pale with grief\n출력결과는 웹서버가 문서를 기술하기 위해서 보내는 헤더(header)로 시작한다. 예를 들어, Content-Type 헤더는 문서가 일반 텍스트 문서(text/plain)임을 표기한다.\n서버가 헤더를 보낸 후에, 빈 라인을 추가해서 헤더 끝임을 표기하고 나서 실제 파일romeo.txt을 보낸다.\n이 예제를 통해서 소켓을 통해서 저수준(low-level) 네트워크 연결을 어떻게 하는지 확인할 수 있다. 소켓을 사용해서 웹서버, 메일 서버 혹은 다른 종류의 서버와 통신할 수 있다. 필요한 것은 프로토콜을 기술하는 문서를 찾고 프로토콜에 따라 데이터를 주고 받는 코드를 작성하는 것이다.\n하지만, 가장 흔히 사용하는 프로토콜은 HTTP (즉, 웹) 프로토콜이기 때문에, 파이썬에는 HTTP 프로토컬을 지원하기 위해 특별히 설계된 라이브러리가 있다. 이것을 통해서 웹상에서 데이터나 문서를 검색을 쉽게 할 수 있다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
+    ]
+  },
+  {
+    "objectID": "tool-network.html#socket-images",
+    "href": "tool-network.html#socket-images",
+    "title": "25  네트워크 프로그램",
+    "section": "\n25.3 HTTP 경유 이미지 가져오기",
+    "text": "25.3 HTTP 경유 이미지 가져오기\n상기 예제에서는 파일에 새줄(newline)이 있는 일반 텍스트 파일을 가져왔다. 그리고 나서, 프로그램을 실행해서 데이터를 단순히 화면에 복사했다. HTTP를 사용하여 이미지를 가져오도록 비슷하게 프로그램을 작성할 수 있다. 프로그램 실행 시에 화면에 데이터를 복사하는 대신에, 데이터를 문자열로 누적하고, 다음과 같이 헤더를 잘라내고 나서 파일에 이미지 데이터를 저장한다.\n\nimport socket\nimport time\n\nHOST = 'data.pr4e.org'\nPORT = 80\nmysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nmysock.connect((HOST, PORT))\nmysock.sendall(b'GET http://data.pr4e.org/cover3.jpg HTTP/1.0\\r\\n\\r\\n')\ncount = 0\npicture = b\"\"\n\nwhile True:\n    data = mysock.recv(5120)\n    if len(data) &lt; 1: break\n    #time.sleep(0.25)\n    count = count + len(data)\n    print(len(data), count)\n    picture = picture + data\n\nmysock.close()\n\n# Look for the end of the header (2 CRLF)\npos = picture.find(b\"\\r\\n\\r\\n\")\nprint('Header length', pos)\nprint(picture[:pos].decode())\n\n# Skip past the header and save the picture data\npicture = picture[pos+4:]\nfhand = open(\"stuff.jpg\", \"wb\")\nfhand.write(picture)\nfhand.close()\n\n# Code: http://www.py4e.com/code3/urljpeg.py\n\n프로그램을 실행하면, 다음과 같은 출력을 생성한다.\n$ python urljpeg.py\n5120 5120\n5120 10240\n4240 14480\n5120 19600\n...\n5120 214000\n3200 217200\n5120 222320\n5120 227440\n3167 230607\nHeader length 393\nHTTP/1.1 200 OK\nDate: Wed, 11 Apr 2018 18:54:09 GMT\nServer: Apache/2.4.7 (Ubuntu)\nLast-Modified: Mon, 15 May 2017 12:27:40 GMT\nETag: \"38342-54f8f2e5b6277\"\nAccept-Ranges: bytes\nContent-Length: 230210\nVary: Accept-Encoding\nCache-Control: max-age=0, no-cache, no-store, must-revalidate\nPragma: no-cache\nExpires: Wed, 11 Jan 1984 05:00:00 GMT\nConnection: close\nContent-Type: image/jpeg\n상기 url에 대해서, Content-Type 헤더가 문서 본문이 이미지(image/jpeg)를 나타내는 것을 볼 수 있다. 프로그램이 완료되면, 이미지 뷰어로 stuff.jpg 파일을 열어서 이미지 데이터를 볼 수 있다.\n프로그램을 실행하면, recv() 메쏘드를 호출할 때 마다 5120 문자는 전달받지 못하는 것을 볼 수 있다. recv() 호출하는 순간마다 웹서버에서 네트워크로 전송되는 가능한 많은 문자를 받을 뿐이다. 매번 5120 문자까지 요청하지만, 1460 혹은 2920 문자만 전송받는다.\n결과값은 네트워크 속도에 따라 달라질 수 있다. recv() 메쏘드 마지막 호출에는 스트림 마지막인 1681 바이트만 받았고, recv() 다음 호출에는 0 길이 문자열을 전송받아서, 서버가 소켓 마지막에 close() 메쏘드를 호출하고 더이상의 데이터가 없다는 신호를 준다.\n주석 처리한 time.sleep()을 풀어줌으로써 recv() 연속 호출을 늦출 수 있다. 이런 방식으로 매번 호출 후에 0.25초 기다리게 한다. 그래서, 사용자가 recv() 메쏘드를 호출하기 전에 서버가 먼저 도착할 수 있어서 더 많은 데이터를 보낼 수가 있다. 정지 시간을 넣어서 프로그램을 다시 실행하면 다음과 같다.\n$ python urljpeg.py\n5120 5120\n5120 10240\n5120 15360\n...\n5120 225280\n5120 230400\n207 230607\nHeader length 393\nHTTP/1.1 200 OK\nDate: Wed, 11 Apr 2018 21:42:08 GMT\nServer: Apache/2.4.7 (Ubuntu)\nLast-Modified: Mon, 15 May 2017 12:27:40 GMT\nETag: \"38342-54f8f2e5b6277\"\nAccept-Ranges: bytes\nContent-Length: 230210\nVary: Accept-Encoding\nCache-Control: max-age=0, no-cache, no-store, must-revalidate\nPragma: no-cache\nExpires: Wed, 11 Jan 1984 05:00:00 GMT\nConnection: close\nContent-Type: image/jpeg\nrecv() 메쏘드 호출의 처음과 마지막을 제외하고, 매번 새로운 데이터를 요청할 때마다 이제 5120 문자가 전송된다.\n서버 send() 요청과 응용프로그램 recv() 요청 사이에 버퍼가 있다. 프로그램에 지연을 넣어 실행하게 될 때, 어느 지점엔가 서버가 소켓 버퍼를 채우고 응용프로그램이 버퍼를 비울 때까지 잠시 멈춰야 된다. 송신하는 응용프로그램 혹은 수신하는 응용프로그램을 멈추게 하는 행위를 “흐름 제어(flow control)”이라고 한다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
+    ]
+  },
+  {
+    "objectID": "tool-network.html#httr",
+    "href": "tool-network.html#httr",
+    "title": "25  네트워크 프로그램",
+    "section": "\n25.4 httr 웹페이지 가져오기",
+    "text": "25.4 httr 웹페이지 가져오기\n수작업으로 소켓 라이브러리를 사용하여 HTTP로 데이터를 주고 받을 수 있지만, httr 패키지를 사용하여 R에서 동일한 작업을 수행하는 좀더 간편한 방식이 있다.\nhttr을 사용하여 파일처럼 웹페이지를 다룰 수가 있다. 단순하게 어느 웹페이지를 가져올 것인지만 지정하면 httr 라이브러리가 모든 HTTP 프로토콜과 헤더 관련 사항을 처리해 준다.\n웹에서 romeo.txt 파일을 읽도록 urllib를 사용하여 작성한 상응 코드는 다음과 같다.\n\nlibrary(httr)\n\nfhand &lt;- httr::GET('http://www.py4inf.com/code/romeo.txt')\n\nhttr::content(fhand, encoding = \"UTF-8\")\n\nGET() 함수를 사용하여 웹페이지를 열게 되면, 파일처럼 다룰 수 있고 content() 함수를 사용해서 데이터를 읽을 수 있다.\n프로그램을 실행하면, 파일 내용 출력결과만을 볼 수 있다. 헤더정보는 여전히 전송되었지만, GET() 함수가 헤더를 받아 내부적으로 처리하고, 사용자에게는 단지 데이터만 반환한다.\n\n#&gt; [1] \"But soft what light through yonder window breaks\\nIt is the east and Juliet is the sun\\nArise fair sun and kill the envious moon\\nWho is already sick and pale with grief\\n\"\n\n예제로, romeo.txt 데이터를 가져와서 파일의 각 단어 빈도를 계산하는 프로그램을 다음과 같이 작성할 수 있다. 웹페이지를 로컬 텍스트로 변환시킨 후에 공백과 \\n 으로 텍스트를 잘게 쪼개고, 단어 빈도수를 table()로 계산한 후 데이터 문법 dplyr을 사용해서 최빈 단어를 상위 3개 뽑는다.\n\n#&gt; # A tibble: 3 × 2\n#&gt;   단어  빈도수\n#&gt;   &lt;chr&gt;  &lt;int&gt;\n#&gt; 1 and        3\n#&gt; 2 is         3\n#&gt; 3 the        3\n\n다시 한번, 웹페이지를 열게 되면, 로컬 파일처럼 웹페이지를 읽을 수 있다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
+    ]
+  },
+  {
+    "objectID": "tool-network.html#html-webscraping",
+    "href": "tool-network.html#html-webscraping",
+    "title": "25  네트워크 프로그램",
+    "section": "\n25.5 HTML 파싱과 웹 스크래핑",
+    "text": "25.5 HTML 파싱과 웹 스크래핑\nR httr 패키지를 활용하는 일반적인 사례는 웹 스크래핑(scraping)이다. 웹 스크래핑은 웹브라우저를 가장한 프로그램을 작성하는 것이다. 웹페이지를 가져와서, 패턴을 찾아 페이지 내부의 데이터를 꼼꼼히 조사한다. 예로, 구글같은 검색엔진은 웹 페이지의 소스를 조사해서 다른 페이지로 가는 링크를 추출하고, 그 해당 페이지를 가져와서 링크 추출하는 작업을 반복한다. 이러한 기법으로 구글은 웹상의 거의 모든 페이지를 거미(spiders)줄처럼 연결한다.\n구글은 또한 발견한 웹페이지에서 특정 페이지로 연결되는 링크 빈도를 사용하여 얼마나 중요한 페이지인지를 측정하고 검색결과에 페이지가 얼마나 높은 순위로 노출되어야 하는지 평가한다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
+    ]
+  },
+  {
+    "objectID": "tool-network.html#webscarping-regex",
+    "href": "tool-network.html#webscarping-regex",
+    "title": "25  네트워크 프로그램",
+    "section": "\n25.6 정규 표현식 HTML 파싱",
+    "text": "25.6 정규 표현식 HTML 파싱\nHTML을 파싱하는 간단한 방식은 정규 표현식을 사용하여 특정한 패턴과 매칭되는 부속 문자열을 반복적으로 찾아 추출하는 것이다.\n여기 간단한 웹페이지가 있다.\n&lt;h1&gt;The First Page&lt;/h1&gt;\n&lt;p&gt;\nIf you like, you can switch to the\n&lt;a href=\"http://www.dr-chuck.com/page2.htm\"&gt;\nSecond Page&lt;/a&gt;.\n&lt;/p&gt;\n모양 좋은 정규표현식을 구성해서 다음과 같이 상기 웹페이지에서 링크를 매칭하고 추출할 수 있다.\nhref=\"http://.+?\"\n작성된 정규 표현식은 “href=http://”로 시작하고, 하나 이상의 문자를 “.+?” 가지고 큰 따옴표를 가진 문자열을 찾는다. “.+?”에 물음표가 갖는 의미는 매칭이 “욕심쟁이(greedy)” 방식보다 “비욕심쟁이(non-greedy)” 방식으로 수행됨을 나타낸다. 비욕심쟁이(non-greedy) 매칭방식은 가능한 가장 적게 매칭되는 문자열을 찾는 방식이고, 욕심 방식은 가능한 가장 크게 매칭되는 문자열을 찾는 방식이다.\n추출하고자 하는 문자열이 매칭된 문자열의 어느 부분인지를 표기하기 위해서 정규 표현식에 괄호를 추가하여 다음과 같이 프로그램을 작성한다.\n\nlibrary(tidyverse)\nlibrary(httr)\n\nurl &lt;- readline(prompt = \"Enter - \")\n\nhtml &lt;- httr::GET(url)  \n    \nurl_link &lt;- str_extract_all(html, pattern = 'href=\"(http://.*?)\"')  \n\nprint(url_link)\n\nstr_extract_all 정규 표현식 함수는 정규 표현식과 매칭되는 모든 문자열 리스트를 추출하여 큰 따옴표 사이에 링크 텍스트만을 반환한다.\n쉘에서 Rscript.exe 프로그램으로 실행하기 위해 다음과 같이 사용자 입력을 받는 부분을 다음과 같이 수정한다.\n\n# urlregex.R 프로그램 코드\n\nlibrary(httr)\n\ntypeline &lt;- function(msg = \"Enter - \") {\n  if (interactive() ) {\n    url &lt;- readline(msg)\n  } else {\n    cat(msg);\n    url &lt;- readLines(\"stdin\",n=1);\n  }\n  return(url)\n}\n\nurl &lt;- typeline()\n\nhtml &lt;- httr::GET(url)\n\nurl_link &lt;- stringr::str_extract_all(html, pattern = 'href=\"(http://.*?)\"')\n\nprint(url_link)\n\n프로그램을 실행하면, 다음 출력을 얻게된다.\n$ Rscript.exe ./script/urlregex.R\nDuring startup - Warning message:\nSetting LC_CTYPE=ko_KR.UTF-8@cjknarrow failed\nEnter - http://www.dr-chuck.com/page1.htm\nNo encoding supplied: defaulting to UTF-8.\nWarning message:\nIn stri_extract_all_regex(string, pattern, simplify = simplify,  :\n  argument is not an atomic vector; coercing\n[[1]]\n[1] \"href=\\\"http://www.dr-chuck.com/page2.htm\\\"\"\n\n$ Rscript.exe ./script/urlregex.R\nDuring startup - Warning message:\nSetting LC_CTYPE=ko_KR.UTF-8@cjknarrow failed\nEnter - http://www.py4inf.com/book.htm\nNo encoding supplied: defaulting to UTF-8.\nWarning message:\nIn stri_extract_all_regex(string, pattern, simplify = simplify,  :\n  argument is not an atomic vector; coercing\n[[1]]\n [1] \"href=\\\"http://amzn.to/1KkULF3\\\"\"\n [2] \"href=\\\"http://www.py4e.com/book\\\"\"\n [3] \"href=\\\"http://amzn.to/1KkULF3\\\"\"\n [4] \"href=\\\"http://amzn.to/1hLcoBy\\\"\"\n [5] \"href=\\\"http://amzn.to/1KkV42z\\\"\"\n [6] \"href=\\\"http://amzn.to/1fNOnbd\\\"\"\n [7] \"href=\\\"http://amzn.to/1N74xLt\\\"\"\n [8] \"href=\\\"http://do1.dr-chuck.net/py4inf/EN-us/book.pdf\\\"\"\n [9] \"href=\\\"http://do1.dr-chuck.net/py4inf/ES-es/book.pdf\\\"\"\n[10] \"href=\\\"http://do1.dr-chuck.net/py4inf/PT-br/book.pdf\\\"\"\n[11] \"href=\\\"http://www.xwmooc.net/python/\\\"\"\n[12] \"href=\\\"http://fanwscu.gitbooks.io/py4inf-zh-cn/\\\"\"\n[13] \"href=\\\"http://itunes.apple.com/us/book/python-for-informatics/id554638579?mt=13\\\"\"\n[14] \"href=\\\"http://www-personal.umich.edu/~csev/books/py4inf/ibooks//python_for_informatics.ibooks\\\"\"\n[15] \"href=\\\"http://www.py4inf.com/code\\\"\"\n[16] \"href=\\\"http://www.greenteapress.com/thinkpython/thinkCSpy/\\\"\"\n[17] \"href=\\\"http://allendowney.com/\\\"\"\n정규 표현식은 HTML이 예측가능하고 잘 구성된 경우에 멋지게 작동한다. 하지만, “망가진” HTML 페이지가 많아서, 정규 표현식만을 사용하는 솔류션은 유효한 링크를 놓치거나 잘못된 데이터만 찾고 끝날 수 있다.\n이 문제는 강건한 HTML 파싱 라이브러리를 사용해서 해결될 수 있다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
+    ]
+  },
+  {
+    "objectID": "tool-network.html#rvest-scraping",
+    "href": "tool-network.html#rvest-scraping",
+    "title": "25  네트워크 프로그램",
+    "section": "\n25.7 rvest HTML 파싱",
+    "text": "25.7 rvest HTML 파싱\nHTML을 파싱하여 페이지에서 데이터를 추출할 수 있는 R 패키지는 많이 있다. 패키지 각각은 강점과 약점이 있어서 사용자 필요에 따라 취사선택한다.\n예로, 간단하게 HTML 입력을 파싱하여 rvest 라이브러리를 사용하여 링크를 추출할 것이다.\nHTML이 XML 처럼 보이고 몇몇 페이지는 XML로 되도록 꼼꼼하게 구축되었지만, 일반적으로 대부분의 HTML이 깨져서 XML 파서가 HTML 전체 페이지를 잘못 구성된 것으로 간주하고 받아들이지 않는다. `rvest`` 패키지는 결점 많은 HTML 페이지에 내성이 있어서 사용자가 필요로하는 데이터를 쉽게 추출할 수 있게 한다.\nhttr 패키지를 사용하여 페이지를 읽어들이고, rvest를 사용해서 앵커 태그 (a)로부터 href 속성을 추출한다.\n\nlibrary(httr)\nlibrary(rvest)\n\nhtml &lt;- httr::GET('http://www.dr-chuck.com/page1.htm')\nwebpage &lt;- rvest::read_html(html)\n\na_href &lt;- webpage %&gt;% \n  html_elements(\"a\") %&gt;% \n  html_attr(\"href\")\n\nprint(a_href)\n\n프로그램이 웹 주소를 입력받고, 웹페이지를 열고, 데이터를 읽어서 BeautifulSoup 파서에 전달하고, 그리고 나서 모든 앵커 태그를 불러와서 각 태그별로 href 속성을 출력한다.\n쉘에서 Rscript.exe 프로그램으로 실행하기 위해 다음과 같이 사용자 입력을 받는 부분을 다음과 같이 수정한다.\n\n## urllinks.R 스크립트\n\nlibrary(httr)\nlibrary(rvest)\n\ntypeline &lt;- function(msg = \"Enter - \") {\n  if (interactive() ) {\n    url &lt;- readline(msg)\n  } else {\n    cat(msg);\n    url &lt;- readLines(\"stdin\",n=1);\n  }\n  return(url)\n}\n\nurl &lt;- typeline()\n\nhtml &lt;- httr::GET(url)\nwebpage &lt;- rvest::read_html(html)\n\na_href &lt;- webpage %&gt;%\n  html_elements(\"a\") %&gt;%\n  html_attr(\"href\")\n\nprint(a_href)\n\n프로그램을 실행하면, 아래와 같다.\n$ Rscript.exe ./script/urllinks.R\nDuring startup - Warning message:\nSetting LC_CTYPE=ko_KR.UTF-8@cjknarrow failed\nEnter - http://www.dr-chuck.com/page1.htm\n[1] \"http://www.dr-chuck.com/page2.htm\"\n\n$ Rscript.exe ./script/urllinks.R\nDuring startup - Warning message:\nSetting LC_CTYPE=ko_KR.UTF-8@cjknarrow failed\nEnter - http://www.py4inf.com/book.htm\n [1] \"http://amzn.to/1KkULF3\"\n [2] \"http://www.py4e.com/book\"\n [3] \"http://amzn.to/1KkULF3\"\n [4] \"http://amzn.to/1hLcoBy\"\n [5] \"http://amzn.to/1KkV42z\"\n [6] \"http://amzn.to/1fNOnbd\"\n [7] \"http://amzn.to/1N74xLt\"\n [8] \"http://do1.dr-chuck.net/py4inf/EN-us/book.pdf\"\n [9] \"http://do1.dr-chuck.net/py4inf/ES-es/book.pdf\"\n[10] \"https://twitter.com/fertardio\"\n[11] \"http://do1.dr-chuck.net/py4inf/PT-br/book.pdf\"\n[12] \"https://twitter.com/victorjabur\"\n[13] \"translations/KO/book_009_ko.pdf\"\n[14] \"http://www.xwmooc.net/python/\"\n[15] \"http://fanwscu.gitbooks.io/py4inf-zh-cn/\"\n[16] \"book_270.epub\"\n[17] \"translations/ES/book_272_es4.epub\"\n[18] \"https://www.gitbook.com/download/epub/book/fanwscu/py4inf-zh-cn\"\n[19] \"html-270/\"\n[20] \"html_270.zip\"\n[21] \"http://itunes.apple.com/us/book/python-for-informatics/id554638579?mt=13\"\n[22] \"http://www-personal.umich.edu/~csev/books/py4inf/ibooks//python_for_informatics.ibooks\"\n[23] \"http://www.py4inf.com/code\"\n[24] \"http://www.greenteapress.com/thinkpython/thinkCSpy/\"\n[25] \"http://allendowney.com/\"\n`rvest``을 사용하여 다음과 같이 각 태그별로 다양한 부분을 뽑아낼 수 있다.\n\nlibrary(httr)\nlibrary(rvest)\n\ntypeline &lt;- function(msg = \"Enter - \") {\n  if (interactive() ) {\n    url &lt;- readline(msg)\n  } else {\n    cat(msg);\n    url &lt;- readLines(\"stdin\",n=1);\n  }\n  return(url)\n}\n\nurl &lt;- typeline()\n\nhtml &lt;- httr::GET(url)\nwebpage &lt;- rvest::read_html(html)\n\na_href &lt;- webpage %&gt;%\n  html_elements(\"a\") %&gt;%\n  html_attr(\"href\")\n\na_text &lt;- webpage %&gt;%\n  html_elements(\"a\") %&gt;% \n  html_text() %&gt;% \n  stringr::str_remove(\"\\n\")\n\ncat(\"URL: \", a_href, \"\\n\")\ncat(\"Content:\", a_text)\n\n상기 프로그램은 다음을 출력합니다.\n$ Rscript.exe ./script/urllinks2.R\nDuring startup - Warning message:\nSetting LC_CTYPE=ko_KR.UTF-8@cjknarrow failed\nEnter - http://www.dr-chuck.com/page1.htm\nURL:  http://www.dr-chuck.com/page2.htm\nContent: Second Page\nHTML을 파싱하는데 rvest가 가진 강력한 기능을 예제로 보여줬다. 좀더 자세한 사항은 https://rvest.tidyverse.org/ 에서 문서와 예제를 살펴보세요.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
+    ]
+  },
+  {
+    "objectID": "tool-network.html#GET-binary",
+    "href": "tool-network.html#GET-binary",
+    "title": "25  네트워크 프로그램",
+    "section": "\n25.8 바이너리 파일 읽기",
+    "text": "25.8 바이너리 파일 읽기\n이미지나 비디오 같은 텍스트가 아닌 (혹은 바이너리) 파일을 가져올 때가 종종 있다. 일반적으로 이런 파일 데이터를 출력하는 것은 유용하지 않다. 하지만, download.file() 함수를 사용하여, 하드 디스크 로컬 파일에 URL 사본을 쉽게 만들 수 있다.\ndownload.file() 함수 내부에 인터넷에 공개된 이미지 url을 적고, destfile 에는 로컬파일에 저장할 파일명을 적어준다. 중요한 것은 텍스트가 아니라 바이너리 이미지라 mode = \"wb\"를 지정한다.\n\ndownload.file(url = \"http://www.py4inf.com/cover.jpg\", \n              destfile = \"images/py4inf_cover.jpeg\", mode=\"wb\")\n\n작성된 프로그램은 네트워크로 모든 데이터를 한번에 읽어서 컴퓨터 cover.jpg 파일을 다운로드 받아 로컬 디스크에 지정한 디렉토리 파일명으로 데이터를 쓴다. 이 방식은 파일 크기가 사용자 컴퓨터의 메모리 크기보다 작다면 정상적으로 작동한다.\n\n\n\n\n\n그림 25.2: 바이너리 파일 다운로드\n\n\nUNIX 혹은 매킨토시 컴퓨터를 가지고 있다면, 다음과 같이 상기 동작을 수행하는 명령어가 운영체제 자체에 내장되어 있다.\ncurl -O http://www.py4inf.com/cover.jpg",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
+    ]
+  },
+  {
+    "objectID": "tool-network.html#network-terminology",
+    "href": "tool-network.html#network-terminology",
+    "title": "25  네트워크 프로그램",
+    "section": "\n25.9 용어정의",
+    "text": "25.9 용어정의\n\n\nBeautifulSoup: 파이썬 라이브러리로 HTML 문서를 파싱하고 브라우저가 일반적으로 생략하는 HTML의 불완전한 부분을 보정하여 HTML 문서에서 데이터를 추출한다. www.crummy.com 사이트에서 BeautifulSoup 코드를 다운로드 받을 수 있다.\n\nrvest: 파이썬 BeautifulSoup에 대응되는 R 크롤링 패키징\n\n\n포트(port): 서버에 소켓 연결을 만들 때, 사용자가 무슨 응용프로그램을 연결하는지 나타내는 숫자. 예로, 웹 트래픽은 통상 80 포트, 전자우편은 25 포트를 사용한다.\n\n스크래핑(scraping): 프로그램이 웹브라우저를 가장하여 웹페이지를 가져와서 웹 페이지의 내용을 검색한다. 종종 프로그램이 한 페이지의 링크를 따라 다른 페이지를 찾게 된다. 그래서, 웹페이지 네트워크 혹은 소셜 네트워크 전체를 훑을 수 있다.\n\n소켓(socket): 두 응용프로그램 사이 네트워크 연결. 두 응용프로그램은 양 방향으로 데이터를 주고 받는다.\n\n스파이더(spider):검색 색인을 구축하기 위해서 한 웹페이지를 검색하고, 그 웹페이지에 링크된 모든 페이지 검색을 반복하여 인터넷에 있는 거의 모든 웹페이지를 가져오기 위해서 사용되는 검색엔진 행동.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
+    ]
+  },
+  {
+    "objectID": "tool-network.html#network-ex",
+    "href": "tool-network.html#network-ex",
+    "title": "25  네트워크 프로그램",
+    "section": "연습문제",
+    "text": "연습문제\n\n소켓 프로그램 socket1.py을 변경하여 임의 웹페이지를 읽을 수 있도록 URL을 사용자가 입력하도록 바꾸세요. split(’/’)을 사용하여 URL을 컴포턴트로 쪼개서 소켓 connect 호출에 대해 호스트 명을 추출할 수 있다. 사용자가 적절하지 못한 형식 혹은 존재하지 않는 URL을 입력하는 경우를 처리할 있도록 try, except를 사용하여 오류 검사기능을 추가하세요.\n소켓 프로그램을 변경하여 전송받은 문자를 계수(count)하고 3000 문자를 출력한 후에 그이상 텍스트 출력을 멈추게 하세요. 프로그램은 전체 문서를 가져와야 하고, 전체 문자를 계수(count)하고, 문서 마지막에 문자 계수(count)결과를 출력해야 합니다.\nhttr 패키지를 사용하여 이전 예제를 반복하세요. (1) 사용자가 입력한 URL에서 문서 가져오기 (2) 3000 문자까지 화면에 보여주기 (3) 문서의 전체 문자 계수(count)하기. 이 연습문제에서 헤더에 대해서는 걱정하지 말고, 단지 문서 본문에서 첫 3000 문자만 화면에 출력하세요.\nurllinks.R 프로그램을 변경하여 가져온 HTML 문서에서 문단 (p) 태그를 추출하고 프로그램의 출력물로 문단을 계수(count)하고 화면에 출력하세요. 문단 텍스트를 화면에 출력하지 말고 단지 숫자만 셉니다. 작성한 프로그램을 작은 웹페이지 뿐만 아니라 조금 큰 웹 페이지에도 테스트해 보세요.\n(고급) 소켓 프로그램을 변경하여 헤더와 빈 라인 다음에 데이터만 보여지게 하세요. recv는 라인이 아니라 문자(새줄(newline)과 모든 문자)를 전송받는다는 것을 기억하세요.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
+    ]
+  },
+  {
+    "objectID": "tool-web.html",
+    "href": "tool-web.html",
+    "title": "26  웹서비스 사용하기",
+    "section": "",
+    "text": "26.1 XML\nXML(eXtensible Markup Language)은 HTML과 매우 유사하지만, XML이 좀더 HTML보다 구조화되었다. 여기 XML 문서 샘플이 있다.\n종종 XML문서를 나무 구조(tree structure)로 생각하는 것이 도움이 된다. 최상단 person 태그가 있고, phone 같은 다른 태그는 부모 노드의 자식(children) 노드로 표현된다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>웹서비스 사용하기</span>"
+    ]
+  },
+  {
+    "objectID": "tool-web.html#ws-xml",
+    "href": "tool-web.html#ws-xml",
+    "title": "26  웹서비스 사용하기",
+    "section": "",
+    "text": "&lt;person&gt;\n  &lt;name&gt;Chuck&lt;/name&gt;\n  &lt;phone type=\"intl\"&gt;\n     +1 734 303 4456\n   &lt;/phone&gt;\n   &lt;email hide=\"yes\"/&gt;\n&lt;/person&gt;\n\n\n\n\n\n\n그림 26.1: XML 나무구조 도식화",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>웹서비스 사용하기</span>"
+    ]
+  },
+  {
+    "objectID": "tool-web.html#ws-xml-parsing",
+    "href": "tool-web.html#ws-xml-parsing",
+    "title": "26  웹서비스 사용하기",
+    "section": "\n26.2 XML 파싱",
+    "text": "26.2 XML 파싱\n다음은 XML을 파싱하고 XML에서 데이터 요소를 추출하는 간단한 응용프로그램이다.\n\nlibrary(xml2)\n\ndata &lt;- '\n&lt;person&gt;\n  &lt;name&gt;Chuck&lt;/name&gt;\n  &lt;phone type=\"intl\"&gt;\n     +1 734 303 4456\n   &lt;/phone&gt;\n   &lt;email hide=\"yes\"/&gt;\n&lt;/person&gt;'\n\ntree &lt;- read_xml(data)\n\nperson_name &lt;- xml_find_all(tree, \".//name\") %&gt;% \n  xml_text()\n\nperson_email &lt;- xml_find_all(tree, \".//email\") %&gt;% \n  xml_attr('hide')\n\ncat(\"Name: \", person_name, \"\\n\",\n    \"Attr: \", person_email, \"\\n\")\n\nxml2 패키지 read_xml() 함수를 사용하여 XML 문자열 표현을 XML 노드 ’나무(tree)’로 변환한다. XML이 나무구조로 되었을 때, XML에서 데이터 일부분을 추출하기 위해서 호출하는 함수가 있다.\nxml_find_all() 함수는 XML 나무를 훑어서 특정한 태그와 매칭되는 노드(node)를 검색한다. 각 노드는 텍스트, 속성(즉, hide 같은), 그리고 “자식(child)” 노드로 구성된다. 각 노드는 노드 나무의 최상단이 될 수 있다.\nName:  Chuck \nAttr:  yes \nxml2같은 XML 패키지를 사용하는 것은 장점이 있다. 상기 예제의 XML은 매우 간단하지만, 적합한 XML에 관해서 규칙이 많이 있고, XML 구문 규칙에 얽매이지 않고 xml2를 사용해서 XML에서 데이터를 추출할 수 있다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>웹서비스 사용하기</span>"
+    ]
+  },
+  {
+    "objectID": "tool-web.html#ws-xml-nodes",
+    "href": "tool-web.html#ws-xml-nodes",
+    "title": "26  웹서비스 사용하기",
+    "section": "\n26.3 노드 반복하기",
+    "text": "26.3 노드 반복하기\n종종 XML이 다중 노드를 가지고 있어서 모든 노드를 처리하는 루프를 작성할 필요가 있다. 다음 프로그램에서 모든 user 노드를 루프로 반복한다.\n\nlibrary(xml2)\n\ninput &lt;- '\n    &lt;stuff&gt;\n        &lt;users&gt;\n            &lt;user x=\"2\"&gt;\n                &lt;id&gt;001&lt;/id&gt;\n                &lt;name&gt;Chuck&lt;/name&gt;\n            &lt;/user&gt;\n            &lt;user x=\"7\"&gt;\n                &lt;id&gt;009&lt;/id&gt;\n                &lt;name&gt;Brent&lt;/name&gt;\n            &lt;/user&gt;\n        &lt;/users&gt;\n    &lt;/stuff&gt;'\n\nstuff &lt;- read_xml(input)\n\nlst &lt;- xml_find_all(stuff, \"//users/user\")\n\ncat(\"User count:\", length(lst), \"\\n\")\n#&gt; User count: 2\n\nfor(i in 1:length(lst)) {\n  \n  lst_name &lt;- xml_find_all(lst[[i]], \".//name\") %&gt;% xml_text()\n  lst_id &lt;- xml_find_all(lst[[i]], \".//id\") %&gt;% xml_text()\n  lst_attr &lt;- xml_attr(lst[[i]], \"x\")\n  \n  cat(\"Name: \", lst_name, \"\\n\")\n  cat(\"Id: \", lst_id, \"\\n\")\n  cat(\"Attribute: \", lst_attr, \"\\n\")\n}\n#&gt; Name:  Chuck \n#&gt; Id:  001 \n#&gt; Attribute:  2 \n#&gt; Name:  Brent \n#&gt; Id:  009 \n#&gt; Attribute:  7\n\nxml_find_all() 함수는는 R 리스트의 하위 나무를 가져온다. 리스트는 XML 나무에서 user 구조를 표현한다. 그리고 나서, for 루프를 작성해서 각 user 노드 값을 확인하고 name, id 텍스트 요소와 user 노드에서 x 속성도 가져와서 출력한다.\nName:  Chuck \nId:  001 \nAttribute:  2 \nName:  Brent \nId:  009 \nAttribute:  7",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>웹서비스 사용하기</span>"
+    ]
+  },
+  {
+    "objectID": "tool-web.html#webservice-json",
+    "href": "tool-web.html#webservice-json",
+    "title": "26  웹서비스 사용하기",
+    "section": "\n26.4 JSON",
+    "text": "26.4 JSON\nJSON(JavaScript Object Notation) 형식은 자바스크립트 언어에서 사용되는 객체와 배열 형식에서 영감을 얻었다. 하지만 파이썬이 자바스크립트 이전에 개발되어서 딕셔너리와 리스트의 파이썬 구문이 JSON 구문에 영향을 주었다. 그래서 JSON 포맷이 거의 파이썬 리스트와 딕셔너리의 조합과 일치한다.\n상기 간단한 XML에 대략 상응하는 JSON으로 작성한 것이 다음에 있다.\n{\n  \"name\" : \"Chuck\",\n  \"phone\" : {\n    \"type\" : \"intl\",\n    \"number\" : \"+1 734 303 4456\"\n   },\n   \"email\" : {\n     \"hide\" : \"yes\"\n   }\n}\n몇가지 차이점에 주목하세요. 첫째로 XML에서는 “phone” 태그에 “intl”같은 속성을 추가할 수 있다. JSON 에서는 단지 키-값 페어(key-value pair)다. 또한 XML “person” 태그는 사라지고 외부 중괄호 세트로 대체되었다.\n일반적으로 JSON 구조가 XML 보다 간단하다. 왜냐하면, JSON 이 XML보다 적은 역량을 보유하기 때문이다. 하지만 JSON 이 딕셔너리와 리스트의 조합에 직접 매핑된다는 장점이 있다. 그리고, 거의 모든 프로그래밍 언어가 파이썬 딕셔너리와 리스트에 상응하는 것을 갖고 있어서, JSON 이 협업하는 두 프로그램 사이에서 데이터를 교환하는 매우 자연스러운 형식이 된다.\nXML에 비해서 상대적으로 단순하기 때문에, JSON이 응용프로그램 간 거의 모든 데이터를 교환하는데 있어 빠르게 선택되고 있다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>웹서비스 사용하기</span>"
+    ]
+  },
+  {
+    "objectID": "tool-web.html#webservice-json-parsing",
+    "href": "tool-web.html#webservice-json-parsing",
+    "title": "26  웹서비스 사용하기",
+    "section": "\n26.5 JSON 파싱하기",
+    "text": "26.5 JSON 파싱하기\n딕셔너리(객체)와 리스트를 중첩함으로써 JSON을 생성한다. 이번 예제에서, user 리스트를 표현하는데, 각 user가 키-값 페어(key-value pair, 즉, 딕셔너리)다. 그래서 리스트 딕셔너리가 있다.\n다음 프로그램에서 내장된 json 라이브러리를 사용하여 JSON을 파싱하여 데이터를 읽어온다. 이것을 상응하는 XML 데이터, 코드와 비교해 보세요. JSON은 조금 덜 정교해서 사전에 미리 리스트를 가져오고, 리스트가 사용자이고, 각 사용자가 키-값 페어 집합임을 알고 있어야 한다. JSON은 좀더 간략(장점)하고 하지만 좀더 덜 서술적(단점)이다.\n\nlibrary(jsonlite)\n\ninput &lt;- '\n  [\n    { \"id\" : \"001\",\n      \"x\" : \"2\",\n      \"name\" : \"Chuck\"\n    } ,\n    { \"id\" : \"009\",\n      \"x\" : \"7\",\n      \"name\" : \"Chuck\"\n    } \n  ]'\n\ninput_df &lt;- jsonlite::fromJSON(input)\n\nJSON과 XML에서 데이터를 추출하는 코드를 비교하면, jsonlite 패키지 fromJSON() 함수는 JSON 파일을 즉시 정형 데이터프레임을 변환시킨다.\n프로그램 출력은 정확하게 상기 XML 버젼과 동일한 정보를 데이터프레임으로 표현하고 있어 후속 작업에 훨씬 유연하게 대응할 수 있다.\n\ninput_df\n#&gt;    id x  name\n#&gt; 1 001 2 Chuck\n#&gt; 2 009 7 Chuck\n\n일반적으로 웹서비스에 대해서 XML에서 JSON으로 옮겨가는 산업 경향이 뚜렷하다. JSON이 프로그래밍 언어에서 이미 갖고 있는 네이티브 자료 구조와 좀더 직접적이며 간단히 매핑되기 때문에, JSON을 사용할 때 파싱하고 데이터 추출하는 코드가 더욱 간단하고 직접적이다. 하지만 XML 이 JSON 보다 좀더 자기 서술적이고 XML 이 강점을 가지는 몇몇 응용프로그램 분야가 있다. 예를 들어, 대부분의 워드 프로세서는 JSON보다는 XML을 사용하여 내부적으로 문서를 저장한다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>웹서비스 사용하기</span>"
+    ]
+  },
+  {
+    "objectID": "tool-web.html#ws-api",
+    "href": "tool-web.html#ws-api",
+    "title": "26  웹서비스 사용하기",
+    "section": "\n26.6 API(응용 프로그램 인터페이스)",
+    "text": "26.6 API(응용 프로그램 인터페이스)\n이제 HTTP를 사용하여 응용프로그램간에 데이터를 교환할 수 있게 되었다. 또한, XML 혹은 JSON을 사용하여 응용프로그램간에도 복잡한 데이터를 주고 받을 수 있는 방법을 습득했다.\n다음 단계는 상기 학습한 기법을 사용하여 응용프로그램 간에 “계약(contract)”을 정의하고 문서화한다. 응용프로그램-대-응용프로그램 계약에 대한 일반적 명칭은 API 응용 프로그램 인터페이스(Application Program Interface) 다. API를 사용할 때, 일반적으로 하나의 프로그램이 다른 응용 프로그램에서 사용할 수 있는 가능한 서비스 집합을 생성한다. 또한, 다른 프로그램이 서비스에 접근하여 사용할 때 지켜야하는 API (즉, “규칙”)도 게시한다.\n다른 프로그램에서 제공되는 서비스에 접근을 포함하여 프로그램 기능을 개발할 때, 이러한 개발법을 SOA, Service-Oriented Architecture(서비스 지향 아키텍처)라고 부른다. SOA 개발 방식은 전반적인 응용 프로그램이 다른 응용 프로그램 서비스를 사용하는 것이다. 반대로, SOA가 아닌 개발방식은 응용 프로그램이 하나의 독립된 응용 프로그램으로 구현에 필요한 모든 코드를 담고 있다.\n웹을 사용할 때 SOA 사례를 많이 찾아 볼 수 있다. 웹사이트 하나를 방문해서 비행기표, 호텔, 자동차를 단일 사이트에서 예약완료한다. 호텔관련 데이터는 물론 항공사 컴퓨터에 저장되어 있지 않다. 대신에 항공사 컴퓨터는 호텔 컴퓨터와 계약을 맺어 호텔 데이터를 가져와서 사용자에게 보여준다. 항공사 사이트를 통해서 사용자가 호텔 예약을 동의할 경우, 항공사 사이트에서 호텔 시스템의 또다른 웹서비스를 통해서 실제 예약을 한다. 전체 거래(transaction)를 완료하고 카드 결재를 진행할 때, 다른 컴퓨터가 프로세스에 관여하여 처리한다.\n\n\n\n\n\n그림 26.2: 서비스 지향 아키텍쳐\n\n\n서비스 지향 아키텍쳐는 많은 장점이 있다. (1) 항상 단 하나의 데이터만 유지관리한다. 이중으로 중복 예약을 원치 않는 호텔 같은 경우에 매우 중요하다. (2) 데이터 소유자가 데이터 사용에 대한 규칙을 정한다. 이러한 장점으로, SOA 시스템은 좋은 성능과 사용자 요구를 모두 만족하기 위해서 신중하게 설계되어야 한다.\n응응프로그램이 웹상에 이용가능한 API로 서비스 집합을 만들 때, 웹서비스(web services)라고 부른다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>웹서비스 사용하기</span>"
+    ]
+  },
+  {
+    "objectID": "tool-web.html#google-geocoding",
+    "href": "tool-web.html#google-geocoding",
+    "title": "26  웹서비스 사용하기",
+    "section": "\n26.7 지오코딩 웹서비스",
+    "text": "26.7 지오코딩 웹서비스\n구글이 자체적으로 구축한 대용량 지리 정보 데이터베이스를 누구나 이용할 수 있게 하는 훌륭한 웹서비스가 있다. “Ann Arbor, MI” 같은 지리 검색 문자열을 지오코딩 API 에 넣으면, 검색 문자열이 의미하는 지도상에 위치와 근처 주요 지형지물 정보를 나름 최선을 다해서 예측 제공한다.\n지오코딩 서비스는 무료지만 사용량이 제한되어 있어서, 상업적 응용프로그램에 API를 무제한 사용할 수는 없다. 하지만, 최종 사용자가 자유형식 입력 박스에 위치정보를 입력하는 설문 데이터가 있다면, 구글 API를 사용하여 데이터를 깔끔하게 정리하는데는 유용하다.\n*구글 지오코딩 API 같은 무료 API를 사용할 때, 자원 사용에 대한 지침을 준수해야 한다. 너무나 많은 사람이 서비스를 남용하게 되면, 구글은 무료 서비스를 중단하거나, 상당부분 줄일 수 있다. (When you are using a free API like Google’s geocoding API, you need to be respectful in your use of these resources. If too many people abuse the service, Google might drop or significantly curtail its free service.)\n서비스에 대해서 자세한 사항을 온라인 문서를 정독할 수 있지만, 무척 간단해서 브라우저에 다음 URL을 입력해서 테스트까지 할 수 있다.\nhttp://maps.googleapis.com/maps/api/geocode/json?sensor=false &address=Ann+Arbor%2C+MI\n웹프라우저에 붙여넣기 전에, URL만 뽑아냈고 URL에서 모든 공백을 제거했는지 확인하세요.\n다음은 간단한 응용 프로그램이다. 사용자가 검색 문자열을 입력하고 구글 지오코딩 API를 호출하여 반환된 JSON에서 정보를 추출한다.\n구글 지리정보 API는 상용으로 전환되었기에 다음카카오 지도 API를 대체하여 동일한 개발작업을 수행한다.\n\nlibrary(tidyverse)\nlibrary(httr)\nlibrary(jsonlite)\n\n# usethis::edit_r_environ()\n\n# 주소를 지정합니다. \nkpmg_addr &lt;- '서울특별시 강남구 역삼동 737' \n\n# HTTP 요청을 실행합니다. \nkpmg_res &lt;- GET(url = 'https://dapi.kakao.com/v2/local/search/address.json',\n                query = list(query = kpmg_addr),\n                add_headers(Authorization = paste0(\"KakaoAK \", DAUM_MAP_API_KEY)))\n\n# KPMG 지리정보 데이터프레임\nkpmg_list &lt;- kpmg_res %&gt;% \n  content(as = 'text') %&gt;% \n  fromJSON()\n\n## 도로명주소\nkpmg_list$documents$road_address %&gt;% \n  select(주소 = address_name, 경도 = x, 위도=y)\n\n\n                      주소             경도             위도\n1 서울 강남구 테헤란로 152 127.036508620542 37.5000242405515\n\n프로그램이 사용자로부터 검색 문자열을 받는다. 적절히 인코딩된 매개 변수로 검색문자열을 변환하여 URL을 만든다. 그리고 나서 httr 패키지를 사용하여 카카오 지오코딩 API에서 텍스트를 가져온다. 고정된 웹페이지와 달리, 반환되는 데이터는 전송한 매개변수와 카카오 서버에 저장된 지리정보 데이터에 따라 달라진다.\nJSON 데이터를 가져오면, jsonlite 패키지로 파싱하고 전송받은 데이터가 올바른지 확인하는 몇가지 절차를 거친 후에 찾고자 하는 정보를 추출한다.\nRscript 프로그램 실행을 위해서 사용자 입력과 API키 외부 유출 방지를 위한 조치를 취한 후에 일반화를 위해 코드를 일부 수정한다.\n\n\nlibrary(tidyverse)\nlibrary(httr)\nlibrary(jsonlite)\n\n# 주소를 지정합니다.\n\ntypeline &lt;- function(msg = \"주소를 입력하세요 - \") {\n  if (interactive() ) {\n    url &lt;- readline(msg)\n  } else {\n    cat(msg);\n    url &lt;- readLines(\"stdin\",n=1);\n  }\n  return(url)\n}\n\naddress &lt;- typeline() # '서울특별시 강남구 역삼동 737'\n\n# HTTP 요청을 실행합니다.\naddress_res &lt;- GET(url = 'https://dapi.kakao.com/v2/local/search/address.json',\n                query = list(query = address),\n                add_headers(Authorization = paste0(\"KakaoAK \", Sys.getenv(\"DAUM_MAP_API_KEY\"))) )\n\n# 지리정보 데이터프레임 변환\naddress_list &lt;- address_res %&gt;%\n  content(as = 'text') %&gt;%\n  fromJSON()\n\n## 도로명주소\naddress_list$documents$road_address %&gt;%\n  select(주소 = address_name, 경도 = x, 위도=y)\n\n프로그램 출력결과는 다음과 같다.\n$ Rscript script/geocoding.R \n\n주소를 입력하세요 - '서울특별시 강남구 역삼동 737'\n                      주소             경도             위도\n1 서울 강남구 테헤란로 152 127.036508620542 37.5000242405515\n다음카카오 지도 API 외 다른 지오코딩 관련 자세한 사항은 공간통계를 위한 데이터 사이언스 - 지리정보 API - 주소와 위도경도 웹사이트를 참조한다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>웹서비스 사용하기</span>"
+    ]
+  },
+  {
+    "objectID": "tool-web.html#ws-security",
+    "href": "tool-web.html#ws-security",
+    "title": "26  웹서비스 사용하기",
+    "section": "\n26.8 보안과 API 사용",
+    "text": "26.8 보안과 API 사용\n상용업체 API를 사용하기 위해서는 일종의 “API키(API key)”가 일반적으로 필요하다. 서비스 제공자 입장에서 누가 서비스를 사용하고 있으며 각 사용자가 얼마나 사용하고 있는를 알고자 한다. 상용 API 제공업체는 서비스에 대한 무료 사용자와 유료 사용자에 대한 구분을 두고 있다. 특정 기간 동안 한 개인 사용자가 사용할 수 있는 요청수에 대해 제한을 두는 정책을 두고 있다.\n때때로 API키를 얻게 되면, API를 호출할 때 POST 데이터의 일부로 포함하거나 URL의 매개변수로 키를 포함시킨다.\n또 다른 경우에는 업체가 서비스 요청에 대한 보증을 강화해서 공유키와 비밀번호를 암호화된 메시지 형식으로 보내도록 요구한다. 인터넷을 통해서 서비스 요청을 암호화하는 일반적인 기술을 OAuth라고 한다. http://www.oauth.net 사이트에서 OAuth 프로토콜에 대해 더 많은 정보를 만날 수 있다.\n트위터 API가 점차적으로 가치있게 됨에 따라 트위터가 공개된 API에서 API를 매번 호출할 때마다 OAuth 인증을 거치도록 API를 바뀌었다. 다행스럽게도 편리한 OAuth 라이브러리가 많이 있다.\n그래서 명세서를 읽고 아무것도 없는 상태에서 OAuth 구현하는 것을 필할 수 있게 되었다. 이용 가능한 라이브러리는 복잡성도 다양한만틈 기능적으로도 다양하다. OAuth 웹사이트에서 다양한 OAuth 라이브러리 정보를 확인할 수 있다.\nOAuth 보안 요구사항을 충족하기 위해 추가된 다양한 매개 변수 의미를 좀더 자세히 알고자 한다면, OAuth 명세서를 읽어보기 바란다.\n이와 같은 보안 API키는 누가 트위터 API를 사용하고 어느 정도 수준으로 트위터를 사용하는지에 대해서 트위트가 확고한 신뢰를 갖게 한다. 사용량에 한계를 두고 서비스를 제공하는 방식은 단순히 개인적인 목적으로 데이터 검색을 할 수는 있지만, 하루에 수백만 API 호출로 데이터를 추출하여 제품을 개발 못하게 제한하는 기능도 동시에 한다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>웹서비스 사용하기</span>"
+    ]
+  },
+  {
+    "objectID": "tool-web.html#ws-term",
+    "href": "tool-web.html#ws-term",
+    "title": "26  웹서비스 사용하기",
+    "section": "\n26.9 용어정의",
+    "text": "26.9 용어정의\n\n\nAPI: 응용 프로그램 인터페이스(Application Program Interface) - 두 응용 프로그램 컴포넌트 간에 상호작용하는 패턴을 정의하는 응용 프로그램 간의 계약.\n\nElementTree: XML데이터를 파싱하는데 사용되는 파이썬 내장 라이브러리.\n\nJSON: JavaScript Object Notation- 자바스크립트 객체(JavaScript Objects) 구문을 기반으로 구조화된 데이터 마크업(markup)을 허용하는 형식.\n\nREST: REpresentational State Transfer - HTTP 프로토콜을 사용하여 응용 프로그램 내부에 자원에 접근을 제공하는 일종의 웹서비스 스타일.\n\nSOA: 서비스 지향 아키텍처(Service Oriented Architecture) - 응용 프로그램이 네트워크에 연결된 컴포넌트로 구성될 때.\n\nXML: 확장 마크업 언어(eXtensible Markup Language) - 구조화된 데이터의 마크업을 허용하는 형식.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>웹서비스 사용하기</span>"
+    ]
+  },
+  {
+    "objectID": "tool-make.html",
+    "href": "tool-make.html",
+    "title": "27  작업 자동화",
+    "section": "",
+    "text": "27.1 파일 이름과 경로\n모든 실행 프로그램은 “현재 디렉토리(current directory)”를 가지고 있는데 작업 대부분을 수행하는 디폴트 디렉토리가 된다. 예를 들어, 읽기 위해서 파일을 연다면, R은 현재 디렉토리에서 파일을 찾는다.\nlibuv C 라이브러리에 기반한 fs 패키지는 파일과 디렉토리를 작업하는 함수를 제공한다. path_wd() 함수는 현재 디렉토리 이름을 반환한다.\nlibrary(fs)\n\ncwd &lt;- fs::path_wd()\n# C:/swc/book_programming\ncwd 는 current working directory의 약자로 현재 작업 디렉토리다. 예제의 결과는 C:/swc/book_programming인데 현재 작성중인 전자책 book_programming 의 홈 디렉토리가 된다.\n파일을 식별하는 cwd 같은 문자열을 경로(path)라고 부른다. 상대경로(relative path)는 현재 디렉토리에서 시작하고, 절대경로(absolute path)는 파일 시스템의 가장 최상단의 디렉토리에서 시작한다.\n지금까지 살펴본 경로는 간단한 파일 이름이여서, 현재 디렉토리에서 상대적이다. 파일의 절대 경로를 알아내기 위해서 fs::path_abs() 함수를 사용한다.\nfs::path_abs(\"index.Rmd\")\nC:/swc/book_programming/index.Rmd\ndir_exists는 디렉토리, file_exists는 파일이 존재하는지 검사한다.\nfs::dir_exists(\"data\")\nfs::file_exists(\"index.Rmd\")\ndir_ls() 함수는 은 주어진 디렉토리에 파일 리스트(그리고 다른 디렉토리)를 반환한다.\nfs::dir_ls()",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>작업 자동화</span>"
+    ]
+  },
+  {
+    "objectID": "tool-make.html#r-paths",
+    "href": "tool-make.html#r-paths",
+    "title": "27  작업 자동화",
+    "section": "",
+    "text": "data  \nTRUE\n\nindex.Rmd \nTRUE \n\n\n00-why.Rmd             01-intro.Rmd           02-var.Rmd             03-cont.Rmd            04-func.Rmd            \n05-loop.Rmd            06-string.Rmd          07-file.Rmd            08-list.Rmd            09-dictionaries.Rmd    \n10-tuples.Rmd          11-regex.Rmd           12-database.Rmd        13-web.Rmd             14-tasks.Rmd           \nassets                 book.bib               book_programming.rds   book_programming.Rproj data                   \nDESCRIPTION            Dockerfile             docs                   index.Rmd              LICENSE                \nnow.json               packages.bib           preamble.tex           README.md              references.Rmd         \nscript                 style.css              toc.css                _bookdown.yml          _bookdown_files        \n_build.sh              _common.R              _deploy.sh             _output.yml            _publish.R",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>작업 자동화</span>"
+    ]
+  },
+  {
+    "objectID": "tool-make.html#tasks-commandline",
+    "href": "tool-make.html#tasks-commandline",
+    "title": "27  작업 자동화",
+    "section": "\n27.2 명령 줄 인자",
+    "text": "27.2 명령 줄 인자\n 명령라인 인터페이스에서 R 스크립트를 실행하고 다양한 R 스크립트 실행방법을 살펴보자. 먼저, 유닉스/리눅스/윈도우 운영체제가 준비되었다면 R스크립트 실행환경을 준비한다. 1 2\n\n27.2.1 R 설치\nR을 스크립트 형태(.R) 파일로 실행할 경우 가장 먼저 r-base-core를 설치한다. 그래픽 사용자 인터페이스가 없는 형태의 R이 설치되며 R 스크립트 실행에 필요한 연관된 프로그램도 더불어 설치한다.\n$ sudo apt-get install -y r-base-core\n\n27.2.2 R 스크립트 실행환경\nR과 스크립트를 실행할 Rscript 실행프로그램이 위치한 디렉토리를 확인한다. 여기에 사용되는 명령어는 which다. which R 명령어를 통해 R 실행파일이 /usr/bin/ 디렉토리에 위치한 것을 확인할 수 있다.\n$ which R\n/usr/bin/R\nwhich Rscript 명령어를 통해 Rcript 실행파일도 /usr/bin/ 디렉토리에 위치한 것을 확인할 수 있다.\n$ which Rscript\n/usr/bin/Rscript\necho $PATH 명령어를 통해 /usr/bin, 경우에 따라서는 /usr/local/bin 디렉토리에 R과 Rscript 실행파일이 존재하는 것을 확인한다.\n$ echo $PATH\n/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games\n\n27.2.3 R 스크립트 파일 실행\n.R 스크립트 파일을 명령라인 인터페이스로 실행하는 방법은 다양한다. 먼저 hello_world.R 스크립트 파일을 생성한다.\n#! /usr/bin/env Rscript\n\nprint(\"Hello World!!!\")\n쉬뱅(shebang, #!) 다음에 스크립트를 실행할 프로그램을 지정한다. Rscript로 지정하여 R스크립트를 실행하는데 사용한다.\n#! /usr/bin/env Rscript\n$ chmod +x hello_world.R\n$ ./hello_world.R\nchmod +x 명령어를 통해서 일반 텍스트 파일을 실행가능한 파일 형식으로 지정한다. hello_world.R 파일이 실행가능한 형태가 되었기 때문에 ./hello_world.R 명령어로 R스크립트를 실행시킨다.\nHello World!!!\n\n27.2.4 다른 R 스크립트 파일 실행법\nR스크립트를 실행하는 방법은 다양하다.\n$ R --slave -f hello_world.R\n$ Rscript hello_world.R\nRscript 명령어로 실행을 시켜도 동일한 산출 결과가 출력된다.\n$ R CMD BATCH hello_world.R hello_world_output.txt\nR CMD BATCH 명령어로 실행시키면 실행결과가 hello_world_output.txt 파일에 저장된다. hello_world_output.txt 파일명을 지정하지 않으면 hello_world.Rout 파일에 저장된다.\n$ R --no-save &lt;&lt; RSCRIPT\n     print(\"Hello World\")\n  RSCRIPT\nR --no-save &lt;&lt; 사용법도 가능하다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>작업 자동화</span>"
+    ]
+  },
+  {
+    "objectID": "tool-make.html#tasks-swcarpentry",
+    "href": "tool-make.html#tasks-swcarpentry",
+    "title": "27  작업 자동화",
+    "section": "\n27.3 실습 사례 3\n",
+    "text": "27.3 실습 사례 3\n\n\n27.3.1 R스크립트 작성\nRscript r_session_info.R 명령어를 실행해서 실제로 RStudio나 R 콘솔을 열지 않고도 R 세션정보를 명령라인 인터페이스에서 처리하는 R 스크립트를 작성한다.\n텍스트 편집기를 열고, sessionInfo()를 적고 파일명을 r_session_info.R로 저장한다.\n\nsessionInfo()\n\n배쉬쉘에서 R스크립트를 실행해서 R 세션정보를 받아확인한다.\n$ Rscript r_session_info.R\nR version 3.0.2 (2013-09-25)\nPlatform: x86_64-pc-linux-gnu (64-bit)\n\nlocale:\n [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C\n [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8\n [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8\n [7] LC_PAPER=en_US.UTF-8       LC_NAME=C\n [9] LC_ADDRESS=C               LC_TELEPHONE=C\n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  base\n\n27.3.2 R스크립트 출력결과 파일저장\n&gt; 파이프 연산자를 사용해서 R 스크립트 출력결과를 텍스트 파일로 저장한다.\n\n$ Rscript r_session_info.R &gt; r_session_info_pipe_output.txt\n\n또다른 방법은 R 스크립트 내부에서 출력결과를 파일에 저장하고 프로그램을 종료하는 방법도 있다.\ncaputre.output 함수를 cat과 함께 사용하는데, 한글도 적용이 가능하도록, encoding=\"UTF-8\"도 추가한다.\n\noutput &lt;- capture.output(sessionInfo())\ncat(\"R 세션정보\", output, file=\"./r_session_info_rscript.txt\", sep=\"\\n\", encoding=\"UTF-8\")\n\nRscript r_session_info.R 명령어를 실행시키면 다음과 같이 실행결과가 텍스트 파일 r_session_info_rscript.txt로 떨어진다.\nR 세션정보\nR version 3.0.2 (2013-09-25)\nPlatform: x86_64-pc-linux-gnu (64-bit)\n\nlocale:\n [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C\n [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8\n [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8\n [7] LC_PAPER=en_US.UTF-8       LC_NAME=C\n [9] LC_ADDRESS=C               LC_TELEPHONE=C\n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  base\nUTF-8",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>작업 자동화</span>"
+    ]
+  },
+  {
+    "objectID": "tool-make.html#task-args",
+    "href": "tool-make.html#task-args",
+    "title": "27  작업 자동화",
+    "section": "\n27.4 자동화 사례: 국가별 통계",
+    "text": "27.4 자동화 사례: 국가별 통계\n.R 스크립트를 유닉스/리눅스상에서 유연하게 동작시킨다. R 스크립트를 수정하지 않고, 인자를 바꿔 작업을 수행하는 방법을 살펴보자. 국가별 통계를 데이터 파일을 달리하여 R스크립트 통계량을 산출하는 방법을 사례로 구현해보자.\n\n\n\n\n\n그림 27.1: R 스크립트 실행\n\n\n\n27.4.1 인자를 받는 R 스크립트\n유닉스/GNU리눅스 환경에서 통계모형, 기계학습, 딥러닝 작업을 하게 되면 텍스트 형태 데이터, R스크립트, 출력 산출물을 갖게 되고, 입력 데이터를 출력산출물로 변환시키는데 R이 역할을 하게 된다.\nR 스크립트를 유연하게 만들게 되면 데이터만 바꿔도 산출물을 생성해 내고, 경우에 따라 인자값을 달리하면 원하는 다른 결과를 얻게 된다.\n\n27.4.2 데이터 변경 R 스크립트\nSOME TIME SERIES DATA SETS에서 Per capita annual GDP for several countries during 1950-1983 (first row is 1950, last is 1983) 데이터를 사용한다. 데이터를 austria.csv, canada.csv, france.csv와 같이 구분하여 저장한다.\nR 스크립트 시제품 제작\n먼저 austria.csv 파일을 불러와서 평균을 계산하는 R스크립트를 작성한다.\n\n# 데이터 불러오기\ngdp.df &lt;- read.csv(\"austria.csv\", sep=\",\", head=FALSE)\n# 평균계산\ngdp.mean &lt;- mean(gdp.df$V1)\n# 계산결과 화면출력\ncat(\"평균: \", gdp.mean, \"\\n\", encoding=\"utf-8\")\n\nRscript r-args-ex01.R 실행결과 예상대로 평균 GDP가 계산되었다.\n$ Rscript r-args-ex01.R\n평균:  0.06553276\n입력파일 변경 R스크립트 실행\n국가가 더 많을 수도 있지만, austria.csv, france.csv, canada.csv 3개 국가가 csv 파일로 데이터가 저장되어 있으니, 입력파일을 달리하여 평균을 계산하도록 R스크립트를 작성한다.\ncommandArgs 명령어를 통해 명령라인에서 인자를 받아 온다. 인자가 순서대로 들어오기 때문에 첫번째 인자로 들어오는 국가에 대한 GDP 평균을 구하고, 이를 화면에 출력하는 R스크립트다. strsplit 함수를 사용해서 파일명 앞쪽 – .csv 확장자 제거 – 만을 뽑아내어 국가명을 명기했다.\n\n#!/usr/bin/env Rscript\n\nargs = commandArgs(trailingOnly=TRUE)\ncountry &lt;- args[1]\n\n# 데이터 불러오기\ngdp.df &lt;- read.csv(country, sep=\",\", head=FALSE)\n# 평균계산\ngdp.mean &lt;- mean(gdp.df$V1)\n# 계산결과 화면출력\ncat(strsplit(country, '\\\\.')[[1]][1], \"평균: \", gdp.mean, \"\\n\", encoding=\"utf-8\")\n\n상기 R스크립트를 쉘에서 실행한 결과는 다음과 같다.\n$ Rscript r-args-ex02.R  austria.csv\naustria 평균:  0.06553276\n$ Rscript r-args-ex02.R france.csv\nfrance 평균:  20.95751\n$ Rscript r-args-ex02.R canada.csv\ncanada 평균:  5.817088\n국가별 기본통계 계산\n국가 데이터를 바꾸는 것에 더해서 최소, 평균, 최대 GDP를 계산하는 로직을 추가한다. commandArgs 함수로 인자를 받는데, 최종 인자는 -1로 지정되기 때문에 그런 특성을 이용하여 R스크립트를 작성한다. 따라서, 첫번째 인자에 최소, 평균, 최소를 구할 것인지 정보를 받고, 마지막 인자로 파일명을 받는다.\n\n#!/usr/bin/env Rscript\n\nargs = commandArgs(trailingOnly=TRUE)\naction = args[1]\ncountry &lt;- args[-1]\n\n# 데이터 불러오기\ngdp.df &lt;- read.csv(country, sep=\",\", head=FALSE)\n# 기초 통계량 계산\n\nif(action == \"--min\") {\n    gdp.min &lt;- min(gdp.df$V1)\n    cat(strsplit(country, '\\\\.')[[1]][1], \"최소: \", gdp.min, \"\\n\", encoding=\"utf-8\")\n}else if(action == \"--mean\") {\n    gdp.mean &lt;- mean(gdp.df$V1)\n    cat(strsplit(country, '\\\\.')[[1]][1], \"평균: \", gdp.mean, \"\\n\", encoding=\"utf-8\")\n}else if (action==\"--max\"){\n    gdp.max &lt;- max(gdp.df$V1)\n    cat(strsplit(country, '\\\\.')[[1]][1], \"최대: \", gdp.max, \"\\n\", encoding=\"utf-8\")\n}\n\nRscript r-args-ex03.R --min canada.csv 명령라인을 살펴보면, r-args-ex03.R R 스크립트를 실행하고, --min 인자로 최소값을 계산하는데, canada.csv 데이터 파일을 이용한다.\n$ Rscript r-args-ex03.R --min canada.csv\ncanada 최소:  3.651109\n$ Rscript r-args-ex03.R --max canada.csv\ncanada 최대:  8.382785\n$ Rscript r-args-ex03.R --mean canada.csv\ncanada 평균:  5.817088\n\n\n\n\n\n\nR 스크립트에 인자를 넘기는 패키지\n\n\n\n\ncommandArgs\noptparse - Command Line Option Parser\nargparse - Command line optional and positional argument parser\ngetopt - C-like getopt behavior",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>작업 자동화</span>"
+    ]
+  },
+  {
+    "objectID": "tool-make.html#tasks-pipe",
+    "href": "tool-make.html#tasks-pipe",
+    "title": "27  작업 자동화",
+    "section": "\n27.5 파이프(Pipes)",
+    "text": "27.5 파이프(Pipes)\n대부분의 운영 시스템은 쉘(shell)로 알려진 명령어 기반 인터페이스를 지원한다. 일반적으로 쉘은 파일 시스템을 탐색하거나 응용 프로그램을 실행하는 명령어를 지원한다. 예를 들어, 유닉스에서 cd 명령어로 디렉토리를 변경하고 ls 명령어로 디렉토리의 콘텐츠를 보여주고, firefox를 타이핑해서 웹브라우져를 실행한다.\n쉘에서 실행시킬 수 있는 어떤 프로그램이나 파이프(pipe)를 사용하여 파이썬에서도 실행시킬 수 있다. 파이프는 작동중인 프로세스를 표현하는 객체다.\n예를 들어, 유닉스 명령어4 ls -l는 정상적으로 현재 디렉토리의 콘텐츠(긴 형식으로)를 보여준다. system2() 내장함수, 혹은 processx, sys 패키지를 가지고 ls 를 실행시킬 수 있다.\n\nsystem2(\"ls\", \"-l\", stdout = TRUE, stderr = TRUE)\n\n [1] \"total 960\"                                                                \n [2] \"-rw-r--r--   1 tidyverse  staff  16280  5 18 10:26 00-why.Rmd\"            \n [3] \"-rw-r--r--   1 tidyverse  staff  44481  5 18 10:26 01-intro.Rmd\"          \n [4] \"-rw-r--r--   1 tidyverse  staff  25092  5 18 10:26 02-var.Rmd\"            \n [5] \"-rw-r--r--   1 tidyverse  staff  20041  5 18 10:26 03-cont.Rmd\"           \n [6] \"-rw-r--r--   1 tidyverse  staff  24862  5 18 10:26 04-func.Rmd\"           \n [7] \"-rw-r--r--   1 tidyverse  staff  19254  5 18 10:26 05-loop.Rmd\"           \n [8] \"-rw-r--r--   1 tidyverse  staff  19007  5 18 10:26 06-string.Rmd\"         \n [9] \"-rw-r--r--   1 tidyverse  staff  26301  5 18 10:26 07-file.Rmd\"           \n[10] \"-rw-r--r--   1 tidyverse  staff  27648  5 18 10:26 08-list.Rmd\"           \n[11] \"-rw-r--r--   1 tidyverse  staff  22463  5 18 10:26 09-dictionaries.Rmd\"   \n[12] \"-rw-r--r--   1 tidyverse  staff  12085  5 18 10:26 10-tuples.Rmd\"         \n[13] \"-rw-r--r--   1 tidyverse  staff  30744  5 18 12:42 11-regex.Rmd\"          \n[14] \"-rw-r--r--   1 tidyverse  staff  36390  5 19 11:15 12-database.Rmd\"       \n[15] \"-rw-r--r--   1 tidyverse  staff  18931  5 19 11:15 13-web.Rmd\"            \n[16] \"-rw-r--r--   1 tidyverse  staff  32936  5 19 12:19 14-tasks.Rmd\"          \n[17] \"-rw-r--r--   1 tidyverse  staff    115  5 18 10:26 DESCRIPTION\"           \n[18] \"-rw-r--r--   1 tidyverse  staff    150  5 18 10:26 Dockerfile\"            \n[19] \"-rw-r--r--   1 tidyverse  staff   6556  5 18 10:26 LICENSE\"               \n[20] \"-rw-r--r--   1 tidyverse  staff    741  5 18 10:26 README.md\"             \n[21] \"-rw-r--r--   1 tidyverse  staff    671  5 19 11:15 _bookdown.yml\"         \n[22] \"-rw-r--r--   1 tidyverse  staff    235  5 18 10:26 _build.sh\"             \n[23] \"-rw-r--r--   1 tidyverse  staff    842  5 18 10:26 _common.R\"             \n[24] \"-rwxr-xr-x   1 tidyverse  staff    398  5 18 10:26 _deploy.sh\"            \n[25] \"-rw-r--r--   1 tidyverse  staff    360  5 18 10:26 _output.yml\"           \n[26] \"-rw-r--r--   1 tidyverse  staff   1427  5 18 10:26 _publish.R\"            \n[27] \"drwxr-xr-x   4 tidyverse  staff    128  5 18 14:45 assets\"                \n[28] \"-rw-r--r--   1 tidyverse  staff   3203  5 18 10:26 book.bib\"              \n[29] \"-rw-r--r--   1 tidyverse  staff    277  5 18 10:26 book_programming.Rproj\"\n[30] \"-rw-r--r--   1 tidyverse  staff    208  5 19 12:10 book_programming.rds\"  \n[31] \"drwxr-xr-x  10 tidyverse  staff    320  5 18 14:04 data\"                  \n[32] \"drwxr-xr-x  48 tidyverse  staff   1536  5 19 12:10 docs\"                  \n[33] \"-rw-r--r--   1 tidyverse  staff   6272  5 18 10:26 index.Rmd\"             \n[34] \"-rw-r--r--   1 tidyverse  staff     41  5 18 10:26 now.json\"              \n[35] \"-rw-r--r--   1 tidyverse  staff   2655  5 18 10:26 packages.bib\"          \n[36] \"-rw-r--r--   1 tidyverse  staff    161  5 18 10:26 preamble.tex\"          \n[37] \"-rw-r--r--   1 tidyverse  staff     55  5 18 10:26 references.Rmd\"        \n[38] \"drwxr-xr-x   4 tidyverse  staff    128  5 18 10:26 script\"                \n[39] \"-rw-r--r--   1 tidyverse  staff    172  5 18 10:26 style.css\"             \n[40] \"-rw-r--r--   1 tidyverse  staff   2443  5 18 10:26 toc.css\"   \n인자는 쉘 명령어를 포함하는 문자열이다.\n\n27.5.1 유닉스 철학과 파이프\n\n\n\n\n\n그림 27.2: R 파이프라인\n\n\n통계 예측모형, 기계학습, 딥러닝 시스템을 개발할 경우 유닉스/리눅스 운영체제로 환경을 통일하고 텍스트 파일을 모든 프로그램과 시스템이 의사소통하는 기본 인터페이스로 잡고, 이를 파이프로 연결한다.\n\n텍스트 데이터로 분석에 사용될 혹은 훈련데이터로 준비한다.\n파이썬 혹은 쉘스크립트, R스크립트를 활용하여 전처리한다.\nR tidymodels 혹은 파이썬 Scikit-learn 예측모형을 적합, 기계학습 훈련, 시각화를 수행한다.\n마크다운(웹), LaTeX(조판) 출력형식에 맞춰 서식을 결정한다.\n최종 결과를 텍스트, 이미지 파일, pdf, html로 출력한다.\n\n\n$ cat data.txt | preProcesswithPython.py | runModelwithR.R | formatOutput.sh &gt; mlOutput.txt\n\n\n\n\n\n\n\n유닉스 철학\n\n\n\n[원문] Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface. – Doug McIlroy\n\n한가지 작업만 매우 잘하는 프로그램을 작성한다(Write programs that do one thing and do it well)\n프로그램이 함께 동작하도록 작성한다(Write programs to work together)\n텍스트를 다루는 프로그램을 작성한다. 이유는 어디서나 사용되는 인터페이스가 되기 때문이다(Write programs to handle text streams, because that is a universal interface)",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>작업 자동화</span>"
+    ]
+  },
+  {
+    "objectID": "tool-make.html#tasks-terminology",
+    "href": "tool-make.html#tasks-terminology",
+    "title": "27  작업 자동화",
+    "section": "\n27.6 용어정의",
+    "text": "27.6 용어정의\n\n\n절대경로(absolute path): 파일이나 디렉토리가 어디에 저장되어 있는지를 저장하는 문자열로 “최상단의 디렉토리”에서 시작해서, 현재 작업 디렉토리에 관계없이 파일이나 디렉토리를 접근하는데 사용할 수 있다.\n\n체크썸(checksum): 해싱(hashing)을 참조하세요. “체크썸(checksum)”단어는 네트워크로 데이터가 보내지거나 백업 매체에 쓰여지고 다시 읽어올 때, 데이터가 왜곡되었는지를 검증하는 필요에서 생겨났다. 데이터가 쓰여지거나 보내질 때, 송신 시스템은 체크썸을 계산하고 또한 체크썸도 보낸다. 데이터가 읽혀지거나 받았을 때, 수신 시스템을 수신된 데이터의 체크썸을 다시 계산하고 받은 체크썸과 비교한다. 만약 체크썸이 매칭되지 않으면, 전송 시에 데이터가 왜곡된 것으로 판단해야 한다.\n\n명령 줄 인자(command line argument): 파이썬 파일 이름 뒤에 명령 줄에 매개 변수.\n\n현재 작업 디렉토리(current working directory): 여러분이 “작업하고 있는” 현재 디렉토리. 명령-줄 인터페이스에서 대부분의 시스템에 cd 명령어를 사용하여 작업 디렉토리를 변경할 수 있다. 경로 정보 없이 파일만을 사용하여 파이썬에서 파일을 열게 될 때, 파일은 프로그램을 실행하고 있는현재 작업 디렉토리에 있어야 한다.\n\n해싱(hashing): 가능한 큰 데이터를 읽고 그 데이터에 대해서 유일한 체크썸을 생성하는 것. 최고의 해쉬 함수는 거의 “충돌(collision)”을 만들지 않는다. 여기서 충돌은 서로 다른 두 데이터 스트림에 해쉬 함수를 줄 때 동일한 해쉬값을 돌려받는 것이다. MD5, SHA1, SHA256 는 가장 많이 사용되는 해쉬 함수의 사례다.\n\n파이프(pipe): 파이프는 실행하는 프로그램에 연결이다. 파이프를 사용해서, 데이터를 다른 프로그램에 보내거나 그 프로그램에서 데이터를 받는 프로그램을 작성할 수 있다. 파이프는 소켓(socket)과 매우 유사하다. 차이점은 파이프는 동일한 컴퓨터에서 실행되는 프로그램을 연결하는데만 사용된다는 것이다. (즉, 네트워크를 통해서는 사용할 수 없다.)\n\n상대경로(relative path): 파일 혹은 디렉토리가 어디에 저장되었는지를 현재 작업 디렉토리에 상대적으로 표현하는 문자열.\n\n쉘(shell): 운영 시스템에 명령줄 인터페이스. 다른 시스템에서는 또한 “터미널 프로그램(terminal program)”이라고 부른다. 이런 인터페이스에서 라인에 명령어와 매개 변수를 타입하고 명령을 실행하기 위해서 “엔터(enter)”를 누른다.\n\n워크(walk): 모든 디렉토리를 방문할 때까지 디렉토리, 하위 디렉토리, 하위의 하위 디렉토리 전체 트리를 방문하는 개념을 나타내기 위해서 사용된 용어. 여기서 이것을 “디렉토리 트리를 워크”한다고 부른다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>작업 자동화</span>"
+    ]
+  },
+  {
+    "objectID": "tool-make.html#tasks-exercise",
+    "href": "tool-make.html#tasks-exercise",
+    "title": "27  작업 자동화",
+    "section": "연습문제",
+    "text": "연습문제\nMP3 파일이 대규모로 수집되어 있은 곳에는 같은 노래의 복사본 하나 이상이 다른 디렉토리 혹은 다른 파일 이름으로 저장되어 있을 수 있다. 이번 연습문제의 목표는 이런 중복 파일을 찾는 것이다.\n\n.mp3같은 확장자를 가진 파일을 모든 디렉토리와 하위 디렉토리를 검색해서 동일한 크기를 가진 파일짝을 목록으로 보여주는 프로그램을 작성하세요.\n\n체크썸(checksum) 알고리즘이나 해싱을 사용하여 중복 콘텐츠를 가진 파일을 찾는 이전의 프로그램을 개작하세요. 예를 들어, MD5 (Message-Digest algorithm 5)는 임의적으로 긴 “메시지”를 가지고 128비트 “체크썸”을 반환한다. 다른 콘텐츠를 가진 두 파일이 같은 체크썸을 반환할 확률은 매우 적다.\nwikipedia.org/wiki/Md5에서 MD5에 대해서 더 배울 수 있다. 다음 코드 조각은 파일을 열고, 읽고, 체크썸을 계산한다.\n체크섬을 계산하고 키로 이미 딕셔너리에 있게 되면, 중복 콘텐츠인 두 파일 있어서 딕셔너리에 파일과 방금전에 읽은 파일을 출력한다. 사진 파일 폴더에서 실행한 샘플 출력물이 다음에 있다.\n\n\n./2004/11/15-11-04_0923001.jpg ./2004/11/15-11-04_1016001.jpg\n./2005/06/28-06-05_1500001.jpg ./2005/06/28-06-05_1502001.jpg\n./2006/08/11-08-06_205948_01.jpg ./2006/08/12-08-06_155318_02.jpg\n명백하게 때때로 같은 사진을 한번 이상 보내거나 원본을 삭제하지 않고\n종종 사진 사본을 만든다.",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>작업 자동화</span>"
+    ]
+  },
+  {
+    "objectID": "tool-make.html#footnotes",
+    "href": "tool-make.html#footnotes",
+    "title": "27  작업 자동화",
+    "section": "",
+    "text": "R scripts↩︎\n.R 스크립트를 인자와 함께 실행↩︎\nR프로그래밍 - 명령-라인 프로그램↩︎\n파이프를 사용하여 ls 같은 운영 시스템 명령어로 대화할 때, 무슨 운영 시스템을 사용하는지 알고 운영 시스템에서 지원되는 명령어로 파이프를 열수 있다는 것이 중요하다.↩︎",
+    "crumbs": [
+      "분야별 도구",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>작업 자동화</span>"
+    ]
   }
 ]
