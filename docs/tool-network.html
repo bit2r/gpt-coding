@@ -113,7 +113,1203 @@ ga('send', {
   hitType: 'pageview',
   'anonymizeIp': true,
 });
-</script><script defer="" data-domain="r2bit.com/gpt-coding" src="https://plausible.io/js/script.js"></script>
+</script><script defer="" data-domain="r2bit.com/gpt-coding" src="https://plausible.io/js/script.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<style type="text/css">
+.monaco-editor pre {
+  background-color: unset !important;
+}
+
+.qwebr-editor-toolbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.qwebr-editor-toolbar-left-buttons, .qwebr-editor-toolbar-right-buttons {
+  display: flex;
+}
+
+.qwebr-non-interactive-loading-container.qwebr-cell-needs-evaluation, .qwebr-non-interactive-loading-container.qwebr-cell-evaluated {
+  justify-content: center;
+  display: flex;
+  background-color: rgba(250, 250, 250, 0.65);
+  border: 1px solid rgba(233, 236, 239, 0.65);
+  border-radius: 0.5rem;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.qwebr-r-project-logo {
+  color: #2767B0; /* R Project's blue color */
+}
+
+.qwebr-icon-status-spinner {
+  color: #7894c4;
+}
+
+.qwebr-icon-run-code {
+  color: #0d9c29
+}
+
+.qwebr-output-code-stdout {
+  color: #111;
+}
+
+.qwebr-output-code-stderr {
+  color: #db4133;
+}
+
+.qwebr-editor {
+  border: 1px solid #EEEEEE;
+}
+
+.qwebr-editor-toolbar {
+  background-color: #EEEEEE;
+  padding: 0.2rem 0.5rem;
+}
+
+.qwebr-button {
+  background-color: #EEEEEE;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+  text-align: center;
+  color: #000;
+  border-color: #dee2e6;
+  border: 1px solid rgba(0,0,0,0);
+  padding: 0.375rem 0.75rem;
+  font-size: .9rem;
+  border-radius: 0.25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.qwebr-button:hover {
+  color: #000;
+  background-color: #d9dce0;
+  border-color: #c8ccd0;
+}
+
+.qwebr-button:disabled,.qwebr-button.disabled,fieldset:disabled .qwebr-button {
+  pointer-events: none;
+  opacity: .65
+}
+
+.qwebr-button-reset {
+  color: #696969; /*#4682b4;*/
+}
+
+.qwebr-button-copy {
+  color: #696969;
+}
+
+
+/* Custom styling for RevealJS Presentations*/
+
+/* Reset the style of the interactive area */
+.reveal div.qwebr-interactive-area {
+  display: block;
+  box-shadow: none;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+} 
+
+/* Provide space to entries */
+.reveal div.qwebr-output-code-area pre div {
+  margin: 1px 2px 1px 10px;
+}
+
+/* Collapse the inside code tags to avoid extra space between line outputs */
+.reveal pre div code.qwebr-output-code-stdout, .reveal pre div code.qwebr-output-code-stderr {
+  padding: 0;
+  display: contents;
+}
+
+.reveal pre div code.qwebr-output-code-stdout {
+  color: #111;
+}
+
+.reveal pre div code.qwebr-output-code-stderr {
+  color: #db4133;
+}
+
+
+/* Create a border around console and output (does not effect graphs) */
+.reveal div.qwebr-console-area {
+  border: 1px solid #EEEEEE;
+  box-shadow: 2px 2px 10px #EEEEEE;
+}
+
+/* Cap output height and allow text to scroll */
+/* TODO: Is there a better way to fit contents/max it parallel to the monaco editor size? */
+.reveal div.qwebr-output-code-area pre {
+  max-height: 400px;
+  overflow: scroll;
+}
+
+</style>
+<script type="module">
+// Document level settings ----
+
+// Determine if we need to install R packages
+globalThis.qwebrInstallRPackagesList = ['stringr', 'readr', 'purrr', 'httr', 'curl', 'rvest'];
+
+// Specify possible locations to search for the repository
+globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
+
+// Check to see if we have an empty array, if we do set to skip the installation.
+globalThis.qwebrSetupRPackages = !(qwebrInstallRPackagesList.indexOf("") !== -1);
+globalThis.qwebrAutoloadRPackages = true;
+
+// Display a startup message?
+globalThis.qwebrShowStartupMessage = true;
+globalThis.qwebrShowHeaderMessage = false;
+
+// Describe the webR settings that should be used
+globalThis.qwebrCustomizedWebROptions = {
+  "baseURL": "https://webr.r-wasm.org/v0.2.2/",
+  "serviceWorkerUrl": "",
+  "homedir": "/home/web_user", 
+  "channelType": "ChannelType.Automatic"
+};
+
+// Store cell data
+globalThis.qwebrCellDetails = [{"code":"con <- socketConnection(host = \"data.pr4e.org\", port = 80, blocking = TRUE, open = \"r+b\", timeout = 60)\n\ncmd <- \"GET http://data.pr4e.org/romeo.txt HTTP/1.0\\r\\n\\r\\n\"\n\nwriteLines(cmd, con)\n\nflush(con)\n\nwhile(length(line <- readLines(con, warn = FALSE, n = 1)) > 0) {\n  cat(line, sep = \"\\n\")\n}\n\nclose(con)","id":1,"options":{"label":"r-socket-example","autorun":"false","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"download.file(\"http://data.pr4e.org/cover3.jpg\", \n              destfile = \"data/cover3.jpg\",\n              mode = \"wb\")","id":2,"options":{"label":"r-socket-images","autorun":"false","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"library(httr)\n\nurl <- 'http://www.py4inf.com/code/romeo.txt'\n\nresponse <- GET(url)\ncontent <- content(response, \"text\", encoding = \"UTF-8\")\nlines <- strsplit(content, split = \"\\n\")[[1]]\nlines","id":3,"options":{"label":"r-httr-package","autorun":"false","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"library(httr)\n\nurl <- \"http://www.py4inf.com/code/romeo.txt\"\n\nresponse <- GET(url)\ncontent <- content(response, \"text\", , encoding = \"UTF-8\")\n\ncounts <- strsplit(content, \"\\\\s+\") |> \n  unlist() |> \n  table()\n\nprint(counts)","id":4,"options":{"label":"r-httr-package-output","autorun":"false","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"library(stringr)\n\ncat(\"웹사이트 입력 - \")\nurl <- readLines(file(\"stdin\"), 1)\n\nhtml <- readLines(url, warn = FALSE)\nhtml <- paste(html, collapse = \"\\n\")\n\nlinks <- str_extract_all(html, 'href=\"http://[^\"]*\"')[[1]]\nlinks <- str_replace_all(links, 'href=\"', '')\n\nprint(links)","id":5,"options":{"label":"r-httr-extract-urls","autorun":"false","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"library(httr)\nlibrary(xml2)\nlibrary(rvest)\n\n\ncat(\"웹사이트 입력 - \")\nurl <- readLines(file(\"stdin\"), 1)\n\nhtml_content <- read_html(GET(url))\n\nhrefs <- html_nodes(html_content, \"a\") |> \n  html_attr(\"href\")\n\nprint(hrefs)","id":6,"options":{"label":"r-httr-rvest-combo","autorun":"false","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"library(httr)\nlibrary(rvest)\n\ncat(\"웹사이트 입력 - \")\nurl <- readLines(file(\"stdin\"), 1)\n\nresponse <- GET(url)\nhtml_content <- content(response, \"text\", encoding = \"UTF-8\")\n\nhtml <- read_html(html_content)\ntags <- html_nodes(html, \"a\")\n\nfor (tag in tags) {\n  # Tag\n  cat(\"TAG:\", toString(xml2::xml_find_first(tag, xpath = \".\")), \"\\n\")\n  \n  # URL\n  url <- html_attr(tag, \"href\")\n  cat(\"URL:\", url, \"\\n\")\n  \n  # Content\n  content <- html_text(tag)\n  cat(\"Content:\", content, \"\\n\")\n  \n  # Attributes\n  attrs <- html_attrs(tag)\n  cat(\"Attrs:\", paste(names(attrs), attrs, sep=\": \", collapse=\", \"), \"\\n\\n\")\n}","id":7,"options":{"label":"r-rvest-extract-tags","autorun":"false","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"url <- \"https://www.dr-chuck.com/py4inf/cover.jpg\"\ndestination_file <- \"cover.jpg\"\n\ndownload.file(url, destfile = destination_file, mode = \"wb\")","id":8,"options":{"label":"r-download-files","autorun":"false","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"library(httr)\n\nurl <- 'https://www.fhfa.gov/DataTools/Downloads/Documents/Enterprise-PUDB/National-File-A/2022_SFNationalFileA2022.zip'\nresp <- GET(url, write_disk(\"2022_SFNationalFileA2022.zip\", overwrite = TRUE))\n\n# Check if the request was successful and report the size\nif (status_code(resp) == 200) {\n  file_info <- file.info(\"2022_SFNationalFileA2022.zip\")\n  size <- file_info$size\n  message(size, \"문자 복사완료!\")\n} else {\n  message(\"파일 다운로드 실패!\")\n}\n#> 20232194문자 복사완료!","id":9,"options":{"label":"r-download-big-file","autorun":"false","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}}];
+
+</script><script type="module">
+// Declare startupMessageQWebR globally
+globalThis.qwebrStartupMessage = document.createElement("p");
+
+
+// Function to set the button text
+globalThis.qwebrSetInteractiveButtonState = function(buttonText, enableCodeButton = true) {
+  document.querySelectorAll(".qwebr-button-run").forEach((btn) => {
+    btn.innerHTML = buttonText;
+    btn.disabled = !enableCodeButton;
+  });
+}
+
+// Function to update the status message in non-interactive cells
+globalThis.qwebrUpdateStatusMessage = function(message) {
+  document.querySelectorAll(".qwebr-status-text.qwebr-cell-needs-evaluation").forEach((elem) => {
+    elem.innerText = message;
+  });
+}
+
+// Function to update the status message
+globalThis.qwebrUpdateStatusHeader = function(message) {
+  qwebrStartupMessage.innerHTML = `
+    <i class="fa-solid fa-spinner fa-spin qwebr-icon-status-spinner"></i>
+    <span>${message}</span>`;
+}
+
+// Function that attaches the document status message and diagnostics
+function displayStartupMessage(showStartupMessage, showHeaderMessage) {
+  if (!showStartupMessage) {
+    return;
+  }
+
+  // Get references to header elements
+  const headerHTML = document.getElementById("title-block-header");
+  const headerRevealJS = document.getElementById("title-slide");
+
+  // Create the outermost div element for metadata
+  const quartoTitleMeta = document.createElement("div");
+  quartoTitleMeta.classList.add("quarto-title-meta");
+
+  // Create the first inner div element
+  const firstInnerDiv = document.createElement("div");
+  firstInnerDiv.setAttribute("id", "qwebr-status-message-area");
+
+  // Create the second inner div element for "WebR Status" heading and contents
+  const secondInnerDiv = document.createElement("div");
+  secondInnerDiv.setAttribute("id", "qwebr-status-message-title");
+  secondInnerDiv.classList.add("quarto-title-meta-heading");
+  secondInnerDiv.innerText = "WebR Status";
+
+  // Create another inner div for contents
+  const secondInnerDivContents = document.createElement("div");
+  secondInnerDivContents.setAttribute("id", "qwebr-status-message-body");
+  secondInnerDivContents.classList.add("quarto-title-meta-contents");
+
+  // Describe the WebR state
+  qwebrStartupMessage.innerText = "🟡 Loading...";
+  qwebrStartupMessage.setAttribute("id", "qwebr-status-message-text");
+  // Add `aria-live` to auto-announce the startup status to screen readers
+  qwebrStartupMessage.setAttribute("aria-live", "assertive");
+
+  // Append the startup message to the contents
+  secondInnerDivContents.appendChild(qwebrStartupMessage);
+
+  // Add a status indicator for COOP and COEP Headers if needed
+  if (showHeaderMessage) {
+    const crossOriginMessage = document.createElement("p");
+    crossOriginMessage.innerText = `${crossOriginIsolated ? '🟢' : '🟡'} COOP & COEP Headers`;
+    crossOriginMessage.setAttribute("id", "qwebr-coop-coep-header");
+    secondInnerDivContents.appendChild(crossOriginMessage);
+  }
+
+  // Combine the inner divs and contents
+  firstInnerDiv.appendChild(secondInnerDiv);
+  firstInnerDiv.appendChild(secondInnerDivContents);
+  quartoTitleMeta.appendChild(firstInnerDiv);
+
+  // Determine where to insert the quartoTitleMeta element
+  if (headerHTML || headerRevealJS) {
+    // Append to the existing "title-block-header" element or "title-slide" div
+    (headerHTML || headerRevealJS).appendChild(quartoTitleMeta);
+  } else {
+    // If neither headerHTML nor headerRevealJS is found, insert after "webr-monaco-editor-init" script
+    const monacoScript = document.getElementById("qwebr-monaco-editor-init");
+    const header = document.createElement("header");
+    header.setAttribute("id", "title-block-header");
+    header.appendChild(quartoTitleMeta);
+    monacoScript.after(header);
+  }
+}
+
+displayStartupMessage(qwebrShowStartupMessage, qwebrShowHeaderMessage);
+</script><script type="module">
+// Supported Evaluation Types for Context
+globalThis.EvalTypes = Object.freeze({
+  Interactive: 'interactive',
+  Setup: 'setup',
+  Output: 'output',
+});
+
+// Function that dispatches the creation request
+globalThis.qwebrCreateHTMLElement = function (
+  cellData
+) {
+
+  // Extract key components
+  const evalType = cellData.options.context;
+  const qwebrCounter = cellData.id;
+
+  // We make an assumption that insertion points are defined by the Lua filter as:
+  // qwebr-insertion-location-{qwebrCounter} 
+  const elementLocator = document.getElementById(`qwebr-insertion-location-${qwebrCounter}`);
+
+  // Figure out the routine to use to insert the element.
+  let qwebrElement;
+  switch ( evalType ) {
+    case EvalTypes.Interactive:
+      qwebrElement = qwebrCreateInteractiveElement(qwebrCounter, cellData.options);
+      break;
+    case EvalTypes.Output: 
+      qwebrElement = qwebrCreateNonInteractiveOutputElement(qwebrCounter, cellData.options);
+      break;
+    case EvalTypes.Setup: 
+      qwebrElement = qwebrCreateNonInteractiveSetupElement(qwebrCounter, cellData.options);
+      break;
+    default: 
+      qwebrElement = document.createElement('div');
+      qwebrElement.textContent = 'Error creating `quarto-webr` element';
+  }
+
+  // Insert the dynamically generated object at the document location.
+  elementLocator.appendChild(qwebrElement);
+};
+
+// Function that setups the interactive element creation
+globalThis.qwebrCreateInteractiveElement = function (qwebrCounter, qwebrOptions) {
+
+  // Create main div element
+  var mainDiv = document.createElement('div');
+  mainDiv.id = 'qwebr-interactive-area-' + qwebrCounter;
+  mainDiv.className = `qwebr-interactive-area`;
+  if (qwebrOptions.classes) {
+    mainDiv.className += " " + qwebrOptions.classes
+  }
+
+  // Add a unique cell identifier that users can customize
+  if (qwebrOptions.label) {
+    mainDiv.setAttribute('data-id', qwebrOptions.label);
+  }
+
+  // Create toolbar div
+  var toolbarDiv = document.createElement('div');
+  toolbarDiv.className = 'qwebr-editor-toolbar';
+  toolbarDiv.id = 'qwebr-editor-toolbar-' + qwebrCounter;
+
+  // Create a div to hold the left buttons
+  var leftButtonsDiv = document.createElement('div');
+  leftButtonsDiv.className = 'qwebr-editor-toolbar-left-buttons';
+
+  // Create a div to hold the right buttons
+  var rightButtonsDiv = document.createElement('div');
+  rightButtonsDiv.className = 'qwebr-editor-toolbar-right-buttons';
+
+  // Create Run Code button
+  var runCodeButton = document.createElement('button');
+  runCodeButton.className = 'btn btn-default qwebr-button qwebr-button-run';
+  runCodeButton.disabled = true;
+  runCodeButton.type = 'button';
+  runCodeButton.id = 'qwebr-button-run-' + qwebrCounter;
+  runCodeButton.textContent = '🟡 Loading webR...';
+  runCodeButton.title = `Run code (Shift + Enter)`;
+
+  // Append buttons to the leftButtonsDiv
+  leftButtonsDiv.appendChild(runCodeButton);
+
+  // Create Reset button
+  var resetButton = document.createElement('button');
+  resetButton.className = 'btn btn-light btn-xs qwebr-button qwebr-button-reset';
+  resetButton.type = 'button';
+  resetButton.id = 'qwebr-button-reset-' + qwebrCounter;
+  resetButton.title = 'Start over';
+  resetButton.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i>';
+
+  // Create Copy button
+  var copyButton = document.createElement('button');
+  copyButton.className = 'btn btn-light btn-xs qwebr-button qwebr-button-copy';
+  copyButton.type = 'button';
+  copyButton.id = 'qwebr-button-copy-' + qwebrCounter;
+  copyButton.title = 'Copy code';
+  copyButton.innerHTML = '<i class="fa-regular fa-copy"></i>';
+
+  // Append buttons to the rightButtonsDiv
+  rightButtonsDiv.appendChild(resetButton);
+  rightButtonsDiv.appendChild(copyButton);
+
+  // Create console area div
+  var consoleAreaDiv = document.createElement('div');
+  consoleAreaDiv.id = 'qwebr-console-area-' + qwebrCounter;
+  consoleAreaDiv.className = 'qwebr-console-area';
+
+  // Create editor div
+  var editorDiv = document.createElement('div');
+  editorDiv.id = 'qwebr-editor-' + qwebrCounter;
+  editorDiv.className = 'qwebr-editor';
+
+  // Create output code area div
+  var outputCodeAreaDiv = document.createElement('div');
+  outputCodeAreaDiv.id = 'qwebr-output-code-area-' + qwebrCounter;
+  outputCodeAreaDiv.className = 'qwebr-output-code-area';
+  outputCodeAreaDiv.setAttribute('aria-live', 'assertive');
+
+  // Create pre element inside output code area
+  var preElement = document.createElement('pre');
+  preElement.style.visibility = 'hidden';
+  outputCodeAreaDiv.appendChild(preElement);
+
+  // Create output graph area div
+  var outputGraphAreaDiv = document.createElement('div');
+  outputGraphAreaDiv.id = 'qwebr-output-graph-area-' + qwebrCounter;
+  outputGraphAreaDiv.className = 'qwebr-output-graph-area';
+
+  // Append buttons to the toolbar
+  toolbarDiv.appendChild(leftButtonsDiv);
+  toolbarDiv.appendChild(rightButtonsDiv);
+
+  // Append all elements to the main div
+  mainDiv.appendChild(toolbarDiv);
+  consoleAreaDiv.appendChild(editorDiv);
+  consoleAreaDiv.appendChild(outputCodeAreaDiv);
+  mainDiv.appendChild(consoleAreaDiv);
+  mainDiv.appendChild(outputGraphAreaDiv);
+
+  return mainDiv;
+}
+
+// Function that adds output structure for non-interactive output
+globalThis.qwebrCreateNonInteractiveOutputElement = function(qwebrCounter, qwebrOptions) {
+  // Create main div element
+  var mainDiv = document.createElement('div');
+  mainDiv.id = 'qwebr-noninteractive-area-' + qwebrCounter;
+  mainDiv.className = `qwebr-noninteractive-area`;
+  if (qwebrOptions.classes) {
+    mainDiv.className += " " + qwebrOptions.classes
+  }
+  
+  // Add a unique cell identifier that users can customize
+  if (qwebrOptions.label) {
+    mainDiv.setAttribute('data-id', qwebrOptions.label);
+  }
+  
+  // Create a status container div
+  var statusContainer = createLoadingContainer(qwebrCounter);
+
+  // Create output code area div
+  var outputCodeAreaDiv = document.createElement('div');
+  outputCodeAreaDiv.id = 'qwebr-output-code-area-' + qwebrCounter;
+  outputCodeAreaDiv.className = 'qwebr-output-code-area';
+  outputCodeAreaDiv.setAttribute('aria-live', 'assertive');
+
+  // Create pre element inside output code area
+  var preElement = document.createElement('pre');
+  preElement.style.visibility = 'hidden';
+  outputCodeAreaDiv.appendChild(preElement);
+
+  // Create output graph area div
+  var outputGraphAreaDiv = document.createElement('div');
+  outputGraphAreaDiv.id = 'qwebr-output-graph-area-' + qwebrCounter;
+  outputGraphAreaDiv.className = 'qwebr-output-graph-area';
+
+  // Append all elements to the main div
+  mainDiv.appendChild(statusContainer);
+  mainDiv.appendChild(outputCodeAreaDiv);
+  mainDiv.appendChild(outputGraphAreaDiv);
+
+  return mainDiv;
+};
+
+// Function that adds a stub in the page to indicate a setup cell was used.
+globalThis.qwebrCreateNonInteractiveSetupElement = function(qwebrCounter, qwebrOptions) {
+  // Create main div element
+  var mainDiv = document.createElement('div');
+  mainDiv.id = `qwebr-noninteractive-setup-area-${qwebrCounter}`;
+  mainDiv.className = `qwebr-noninteractive-setup-area`;
+  if (qwebrOptions.classes) {
+    mainDiv.className += " " + qwebrOptions.classes
+  }
+
+
+  // Add a unique cell identifier that users can customize
+  if (qwebrOptions.label) {
+    mainDiv.setAttribute('data-id', qwebrOptions.label);
+  }
+
+  // Create a status container div
+  var statusContainer = createLoadingContainer(qwebrCounter);
+
+  // Append status onto the main div
+  mainDiv.appendChild(statusContainer);
+
+  return mainDiv;
+}
+
+
+// Function to create loading container with specified ID
+globalThis.createLoadingContainer = function(qwebrCounter) {
+
+  // Create a status container
+  const container = document.createElement('div');
+  container.id = `qwebr-non-interactive-loading-container-${qwebrCounter}`;
+  container.className = 'qwebr-non-interactive-loading-container qwebr-cell-needs-evaluation';
+
+  // Create an R project logo to indicate its a code space
+  const rProjectIcon = document.createElement('i');
+  rProjectIcon.className = 'fa-brands fa-r-project fa-3x qwebr-r-project-logo';
+
+  // Setup a loading icon from font awesome
+  const spinnerIcon = document.createElement('i');
+  spinnerIcon.className = 'fa-solid fa-spinner fa-spin fa-1x qwebr-icon-status-spinner';
+
+  // Add a section for status text
+  const statusText = document.createElement('p');
+  statusText.id = `qwebr-status-text-${qwebrCounter}`;
+  statusText.className = `qwebr-status-text qwebr-cell-needs-evaluation`;
+  statusText.innerText = 'Loading webR...';
+
+  // Incorporate an inner container
+  const innerContainer = document.createElement('div');
+
+  // Append elements to the inner container
+  innerContainer.appendChild(spinnerIcon);
+  innerContainer.appendChild(statusText);
+
+  // Append elements to the main container
+  container.appendChild(rProjectIcon);
+  container.appendChild(innerContainer);
+
+  return container;
+}
+</script><script type="module">
+// Function to install a single package
+async function qwebrInstallRPackage(packageName) {
+  await mainWebR.evalRVoid(`webr::install('${packageName}');`);
+}
+
+// Function to load a single package
+async function qwebrLoadRPackage(packageName) {
+  await mainWebR.evalRVoid(`require('${packageName}', quietly = TRUE)`);
+}
+
+// Generic function to process R packages
+async function qwebrProcessRPackagesWithStatus(packages, processType, displayStatusMessageUpdate = true) {
+  // Switch between contexts
+  const messagePrefix = processType === 'install' ? 'Installing' : 'Loading';
+
+  // Modify button state
+  qwebrSetInteractiveButtonState(`🟡 ${messagePrefix} package ...`, false);
+
+  // Iterate over packages
+  for (let i = 0; i < packages.length; i++) {
+    const activePackage = packages[i];
+    const formattedMessage = `${messagePrefix} package ${i + 1} out of ${packages.length}: ${activePackage}`;
+
+    // Display the update in header
+    if (displayStatusMessageUpdate) {
+      qwebrUpdateStatusHeader(formattedMessage);
+    }
+
+    // Display the update in non-active areas
+    qwebrUpdateStatusMessage(formattedMessage);
+
+    // Run package installation
+    if (processType === 'install') {
+      await qwebrInstallRPackage(activePackage);
+    } else {
+      await qwebrLoadRPackage(activePackage);
+    }
+  }
+
+  // Clean slate
+  if (processType === 'load') {
+    await mainWebR.flush();
+  }
+}
+
+// Start a timer
+const initializeWebRTimerStart = performance.now();
+
+// Encase with a dynamic import statement
+globalThis.qwebrInstance = import(qwebrCustomizedWebROptions.baseURL + "webr.mjs").then(
+  async ({ WebR, ChannelType }) => {
+    // Populate WebR options with defaults or new values based on `webr` meta
+    globalThis.mainWebR = new WebR(qwebrCustomizedWebROptions);
+
+    // Initialization WebR
+    await mainWebR.init();
+
+    // Setup a shelter
+    globalThis.mainWebRCodeShelter = await new mainWebR.Shelter();
+
+    // Setup a pager to allow processing help documentation 
+    await mainWebR.evalRVoid('webr::pager_install()'); 
+
+    // Override the existing install.packages() to use webr::install()
+    await mainWebR.evalRVoid('webr::shim_install()'); 
+
+    // Specify the repositories to pull from
+    // Note: webR does not use the `repos` option, but instead uses `webr_pkg_repos`
+    // inside of `install()`. However, other R functions still pull from `repos`.
+    await mainWebR.evalRVoid(`
+      options(
+        webr_pkg_repos = c(${qwebrPackageRepoURLS.map(repoURL => `'${repoURL}'`).join(',')}),
+        repos = c(${qwebrPackageRepoURLS.map(repoURL => `'${repoURL}'`).join(',')})
+      )
+    `);
+
+    // Check to see if any packages need to be installed
+    if (qwebrSetupRPackages) {
+      // Obtain only a unique list of packages
+      const uniqueRPackageList = Array.from(new Set(qwebrInstallRPackagesList));
+
+      // Install R packages one at a time (either silently or with a status update)
+      await qwebrProcessRPackagesWithStatus(uniqueRPackageList, 'install', qwebrShowStartupMessage);
+
+      if (qwebrAutoloadRPackages) {
+        // Load R packages one at a time (either silently or with a status update)
+        await qwebrProcessRPackagesWithStatus(uniqueRPackageList, 'load', qwebrShowStartupMessage);
+      }
+    }
+  }
+);
+
+// Stop timer
+const initializeWebRTimerEnd = performance.now();
+
+</script><script type="module">
+// Function to verify a given JavaScript Object is empty
+globalThis.qwebrIsObjectEmpty = function (arr) {
+    return Object.keys(arr).length === 0;
+}
+
+// Global version of the Escape HTML function that converts HTML 
+// characters to their HTML entities.
+globalThis.qwebrEscapeHTMLCharacters = function(unsafe) {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  };
+
+// Passthrough results
+globalThis.qwebrIdentity = function(x) {
+    return x;
+};
+
+// Append a comment
+globalThis.qwebrPrefixComment = function(x, comment) {
+    return `${comment}${x}`;
+};
+
+// Function to parse the pager results
+globalThis.qwebrParseTypePager = async function (msg) { 
+
+    // Split out the event data
+    const { path, title, deleteFile } = msg.data; 
+
+    // Process the pager data by reading the information from disk
+    const paged_data = await mainWebR.FS.readFile(path).then((data) => {
+        // Obtain the file content
+        let content = new TextDecoder().decode(data);
+
+        // Remove excessive backspace characters until none remain
+        while(content.match(/.[\b]/)){
+        content = content.replace(/.[\b]/g, '');
+        }
+
+        // Returned cleaned data
+        return content;
+    });
+
+    // Unlink file if needed
+    if (deleteFile) { 
+        await mainWebR.FS.unlink(path); 
+    } 
+
+    // Return extracted data with spaces
+    return paged_data;
+} 
+
+// Function to run the code using webR and parse the output
+globalThis.qwebrComputeEngine = async function(
+    codeToRun, 
+    elements, 
+    options) {
+
+    // Call into the R compute engine that persists within the document scope.
+    // To be prepared for all scenarios, the following happens: 
+    // 1. We setup a canvas device to write to by making a namespace call into the {webr} package
+    // 2. We use values inside of the options array to set the figure size.
+    // 3. We capture the output stream information (STDOUT and STERR)
+    // 4. While parsing the results, we disable image creation.
+
+    // Create a canvas variable for graphics
+    let canvas = undefined;
+
+    // Create a pager variable for help/file contents
+    let pager = [];
+
+    // Handle how output is processed
+    let showMarkup = options.results === "markup" && options.output !== "asis";
+    let processOutput;
+
+    if (showMarkup) {
+        processOutput = qwebrEscapeHTMLCharacters;
+    } else {
+        processOutput = qwebrIdentity;
+    }
+
+    // ---- 
+    // Convert from Inches to Pixels by using DPI (dots per inch)
+    // for bitmap devices (dpi * inches = pixels)
+    let fig_width = options["fig-width"] * options["dpi"]
+    let fig_height = options["fig-height"] * options["dpi"]
+
+    // Initialize webR
+    await mainWebR.init();
+
+    // Setup a webR canvas by making a namespace call into the {webr} package
+    await mainWebR.evalRVoid(`webr::canvas(width=${fig_width}, height=${fig_height})`);
+
+    const result = await mainWebRCodeShelter.captureR(codeToRun, {
+        withAutoprint: true,
+        captureStreams: true,
+        captureConditions: false//,
+        // env: webR.objs.emptyEnv, // maintain a global environment for webR v0.2.0
+    });
+
+    // -----
+
+    // Start attempting to parse the result data
+    processResultOutput:try {
+
+        // Stop creating images
+        await mainWebR.evalRVoid("dev.off()");
+        
+        // Avoid running through output processing
+        if (options.results === "hide" || options.output === "false") { 
+            break processResultOutput; 
+        }
+
+        // Merge output streams of STDOUT and STDErr (messages and errors are combined.)
+        // Require both `warning` and `message` to be true to display `STDErr`. 
+        const out = result.output
+        .filter(
+            evt => evt.type === "stdout" || 
+            ( evt.type === "stderr" && (options.warning === "true" && options.message === "true")) 
+        )
+        .map((evt, index) => {
+            const className = `qwebr-output-code-${evt.type}`;
+            const outputResult = qwebrPrefixComment(processOutput(evt.data), options.comment);
+            return `<code id="${className}-editor-${elements.id}-result-${index + 1}" class="${className}">${outputResult}</code>`;
+        })
+        .join("\n");
+
+
+        // Clean the state
+        // We're now able to process both graphics and pager events.
+        // As a result, we cannot maintain a true 1-to-1 output order 
+        // without individually feeding each line
+        const msgs = await mainWebR.flush();
+
+        // Output each image event stored
+        msgs.forEach((msg) => {
+        // Determine if old canvas can be used or a new canvas is required.
+        if (msg.type === 'canvas'){
+            // Add image to the current canvas
+            if (msg.data.event === 'canvasImage') {
+                canvas.getContext('2d').drawImage(msg.data.image, 0, 0);
+            } else if (msg.data.event === 'canvasNewPage') {
+
+                // Generate a new canvas element
+                canvas = document.createElement("canvas");
+                canvas.setAttribute("width", 2 * fig_width);
+                canvas.setAttribute("height", 2 * fig_height);
+                canvas.style.width = options["out-width"] ? options["out-width"] : `${fig_width}px`;
+                if (options["out-height"]) {
+                    canvas.style.height = options["out-height"];
+                }
+                canvas.style.display = "block";
+                canvas.style.margin = "auto";
+            }
+        } 
+        });
+
+        // Use `map` to process the filtered "pager" events asynchronously
+        const pager = await Promise.all(
+            msgs.filter(msg => msg.type === 'pager').map(
+                async (msg) => {
+                    return await qwebrParseTypePager(msg);
+                }
+            )
+        );
+
+        // Nullify the output area of content
+        elements.outputCodeDiv.innerHTML = "";
+        elements.outputGraphDiv.innerHTML = "";
+
+        // Design an output object for messages
+        const pre = document.createElement("pre");
+        if (/\S/.test(out)) {
+            // Display results as HTML elements to retain output styling
+            const div = document.createElement("div");
+            div.innerHTML = out;
+            pre.appendChild(div);
+        } else {
+            // If nothing is present, hide the element.
+            pre.style.visibility = "hidden";
+        }
+
+        elements.outputCodeDiv.appendChild(pre);
+
+        // Place the graphics on the canvas
+        if (canvas) {
+            // Create figure element
+            const figureElement = document.createElement('figure');
+
+            // Append canvas to figure
+            figureElement.appendChild(canvas);
+
+            if (options['fig-cap']) {
+                // Create figcaption element
+                const figcaptionElement = document.createElement('figcaption');
+                figcaptionElement.innerText = options['fig-cap'];
+                // Append figcaption to figure
+                figureElement.appendChild(figcaptionElement);    
+            }
+
+            elements.outputGraphDiv.appendChild(figureElement);
+        }
+
+        // Display the pager data
+        if (pager) {
+        // Use the `pre` element to preserve whitespace.
+        pager.forEach((paged_data, index) => {
+            let pre_pager = document.createElement("pre");
+            pre_pager.innerText = paged_data;
+            pre_pager.classList.add("qwebr-output-code-pager");
+            pre_pager.setAttribute("id", `qwebr-output-code-pager-editor-${elements.id}-result-${index + 1}`);
+            elements.outputCodeDiv.appendChild(pre_pager);
+        });
+        }
+    } finally {
+        // Clean up the remaining code
+        mainWebRCodeShelter.purge();
+    }
+}
+
+// Function to execute the code (accepts code as an argument)
+globalThis.qwebrExecuteCode = async function (
+    codeToRun,
+    id,
+    options = {}) {
+
+    // If options are not passed, we fall back on the bare minimum to handle the computation
+    if (qwebrIsObjectEmpty(options)) {
+        options = { 
+            "context": "interactive", 
+            "fig-width": 7, "fig-height": 5, 
+            "out-width": "700px", "out-height": "", 
+            "dpi": 72,
+            "results": "markup", 
+            "warning": "true", "message": "true",
+        };
+    }
+
+    // Next, we access the compute areas values
+    const elements = {
+        runButton: document.getElementById(`qwebr-button-run-${id}`),
+        outputCodeDiv: document.getElementById(`qwebr-output-code-area-${id}`),
+        outputGraphDiv: document.getElementById(`qwebr-output-graph-area-${id}`),
+        id: id,
+    }
+
+    // Disallowing execution of other code cells
+    document.querySelectorAll(".qwebr-button-run").forEach((btn) => {
+        btn.disabled = true;
+    });
+
+    if (options.context == EvalTypes.Interactive) {
+        // Emphasize the active code cell
+        elements.runButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin qwebr-icon-status-spinner"></i> <span>Run Code</span>';
+    }
+
+    // Evaluate the code and parse the output into the document
+    await qwebrComputeEngine(codeToRun, elements, options);
+
+    // Switch to allowing execution of code
+    document.querySelectorAll(".qwebr-button-run").forEach((btn) => {
+        btn.disabled = false;
+    });
+
+    if (options.context == EvalTypes.Interactive) {
+        // Revert to the initial code cell state
+        elements.runButton.innerHTML = '<i class="fa-solid fa-play qwebr-icon-run-code"></i> <span>Run Code</span>';
+    }
+}
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/editor/editor.main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<style type="text/css">
+.monaco-editor pre {
+  background-color: unset !important;
+}
+
+.qpyodide-editor-toolbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.qpyodide-editor-toolbar-left-buttons, .qpyodide-editor-toolbar-right-buttons {
+  display: flex;
+}
+
+.qpyodide-non-interactive-loading-container.qpyodide-cell-needs-evaluation, .qpyodide-non-interactive-loading-container.qpyodide-cell-evaluated {
+  justify-content: center;
+  display: flex;
+  background-color: rgba(250, 250, 250, 0.65);
+  border: 1px solid rgba(233, 236, 239, 0.65);
+  border-radius: 0.5rem;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.qpyodide-r-project-logo {
+  color: #2767B0; /* R Project's blue color */
+}
+
+.qpyodide-icon-status-spinner {
+  color: #7894c4;
+}
+
+.qpyodide-icon-run-code {
+  color: #0d9c29
+}
+
+.qpyodide-output-code-stdout {
+  color: #111;
+}
+
+.qpyodide-output-code-stderr {
+  color: #db4133;
+}
+
+.qpyodide-editor {
+  border: 1px solid #EEEEEE;
+}
+
+.qpyodide-editor-toolbar {
+  background-color: #EEEEEE;
+  padding: 0.2rem 0.5rem;
+}
+
+.qpyodide-button {
+  background-color: #EEEEEE;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+  text-align: center;
+  color: #000;
+  border-color: #dee2e6;
+  border: 1px solid rgba(0,0,0,0);
+  padding: 0.375rem 0.75rem;
+  font-size: .9rem;
+  border-radius: 0.25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.qpyodide-button:hover {
+  color: #000;
+  background-color: #d9dce0;
+  border-color: #c8ccd0;
+}
+
+.qpyodide-button:disabled,.qpyodide-button.disabled,fieldset:disabled .qpyodide-button {
+  pointer-events: none;
+  opacity: .65
+}
+
+.qpyodide-button-reset {
+  color: #696969; /*#4682b4;*/
+}
+
+.qpyodide-button-copy {
+  color: #696969;
+}
+
+
+/* Custom styling for RevealJS Presentations*/
+
+/* Reset the style of the interactive area */
+.reveal div.qpyodide-interactive-area {
+  display: block;
+  box-shadow: none;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+} 
+
+/* Provide space to entries */
+.reveal div.qpyodide-output-code-area pre div {
+  margin: 1px 2px 1px 10px;
+}
+
+/* Collapse the inside code tags to avoid extra space between line outputs */
+.reveal pre div code.qpyodide-output-code-stdout, .reveal pre div code.qpyodide-output-code-stderr {
+  padding: 0;
+  display: contents;
+}
+
+.reveal pre div code.qpyodide-output-code-stdout {
+  color: #111;
+}
+
+.reveal pre div code.qpyodide-output-code-stderr {
+  color: #db4133;
+}
+
+
+/* Create a border around console and output (does not effect graphs) */
+.reveal div.qpyodide-console-area {
+  border: 1px solid #EEEEEE;
+  box-shadow: 2px 2px 10px #EEEEEE;
+}
+
+/* Cap output height and allow text to scroll */
+/* TODO: Is there a better way to fit contents/max it parallel to the monaco editor size? */
+.reveal div.qpyodide-output-code-area pre {
+  max-height: 400px;
+  overflow: scroll;
+}
+</style>
+<script type="module">
+// Document level settings ----
+
+// Determine if we need to install python packages
+globalThis.qpyodideInstallPythonPackagesList = ['urllib'];
+
+// Check to see if we have an empty array, if we do set to skip the installation.
+globalThis.qpyodideSetupPythonPackages = !(qpyodideInstallPythonPackagesList.indexOf("") !== -1);
+
+// Display a startup message?
+globalThis.qpyodideShowStartupMessage = true;
+
+// Describe the webR settings that should be used
+globalThis.qpyodideCustomizedPyodideOptions = {
+  "indexURL": "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/",
+  "env": {
+    "HOME": "/home/pyodide",
+  }, 
+  stdout: (text) => {qpyodideAddToOutputArray(text, "out");},
+  stderr: (text) => {qpyodideAddToOutputArray(text, "error");}
+}
+
+// Store cell data
+globalThis.qpyodideCellDetails = [{"code":"import socket\n\nmysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nmysock.connect(('data.pr4e.org', 80))\ncmd = 'GET http://data.pr4e.org/romeo.txt HTTP/1.0\\r\\n\\r\\n'.encode()\nmysock.send(cmd)\n\nwhile True:\n    data = mysock.recv(512)\n    if len(data) < 1:\n        break\n    print(data.decode(),end='')\n\nmysock.close()","id":1,"options":{"label":"py-socket-example","autorun":"","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"import socket\nimport time\n\nHOST = 'data.pr4e.org'\nPORT = 80\nmysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nmysock.connect((HOST, PORT))\nmysock.sendall(b'GET http://data.pr4e.org/cover3.jpg HTTP/1.0\\r\\n\\r\\n')\ncount = 0\npicture = b\"\"\n\nwhile True:\n    data = mysock.recv(5120)\n    if len(data) < 1: break\n    #time.sleep(0.25)\n    count = count + len(data)\n    print(len(data), count)\n    picture = picture + data\n\nmysock.close()\n\n# 헤더 종료지점 탐색 (2 CRLF)\npos = picture.find(b\"\\r\\n\\r\\n\")\nprint('Header length', pos)\nprint(picture[:pos].decode())\n\n# 헤더를 건너뛰고 사진 데이터 저장\npicture = picture[pos+4:]\nfhand = open(\"images/stuff.jpg\", \"wb\")\nfhand.write(picture)\nfhand.close()","id":2,"options":{"label":"py-socket-images","autorun":"","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"import urllib.request\n\nfhand = urllib.request.urlopen('http://www.py4inf.com/code/romeo.txt')\nfor line in fhand:\n    print(line.decode().strip())","id":3,"options":{"label":"py-httr-package","autorun":"","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"import urllib.request\n\ncounts = dict()\nfhand = urllib.request.urlopen('http://www.py4inf.com/code/romeo.txt')\n\nfor line in fhand:\n    words = line.decode().strip().split()\n    for word in words:\n        counts[word] = counts.get(word, 0) + 1\n\nprint(counts)","id":4,"options":{"label":"py-httr-package-output","autorun":"","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"import urllib.request\nimport re\n\nurl = input('웹사이트 입력 - ')\nhtml = urllib.request.urlopen(url).read().decode()\nlinks = re.findall('href=\"(http://.*?)\"', html)\nfor link in links:\n    print(link)","id":5,"options":{"label":"py-httr-extract-urls","autorun":"","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"import urllib.request\nfrom bs4 import BeautifulSoup\n\nurl = input('웹사이트 입력 - ')\nhtml = urllib.request.urlopen(url).read()\nsoup = BeautifulSoup(html, 'html.parser')\n\ntags = soup('a')\nfor tag in tags:\n    print(tag.get('href', None))","id":6,"options":{"label":"py-httr-rvest-combo","autorun":"","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"import urllib.request\nfrom bs4 import BeautifulSoup\n\nurl = input('Enter - ')\nhtml = urllib.request.urlopen(url).read()\nsoup = BeautifulSoup(html, 'html.parser')\n\ntags = soup('a')\nfor tag in tags:\n  \n    print('TAG:', tag)\n    print('URL:', tag.get('href', None))\n    content = tag.contents[0] if tag.contents else \"None\"\n    print('Content:', content)\n    print('Attrs:', tag.attrs)","id":7,"options":{"label":"py-rvest-extract-tags","autorun":"","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"import urllib.request\n\nurl = 'http://www.py4inf.com/cover.jpg'\n\nimg = urllib.request.urlopen(url).read()\nwith open('cover.jpg', 'wb') as fhand:\n    fhand.write(img)","id":8,"options":{"label":"py-download-files","autorun":"","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}},{"code":"import urllib.request\n\nurl = 'https://www.fhfa.gov/DataTools/Downloads/Documents/Enterprise-PUDB/National-File-A/2022_SFNationalFileA2022.zip'\nzip_file = urllib.request.urlopen(url)\nfhand = open('2022_SFNationalFileA2022.zip', 'wb')  # Open in binary write mode\nsize = 0\n\nwhile True:\n    info = zip_file.read(100000)\n    if len(info) < 1:\n        break\n    size += len(info)\n    fhand.write(info)\n\nfhand.close()\nprint(size, '문자 복사완료!')\n#> 20232194문자 복사완료!","id":9,"options":{"label":"py-download-big-file","autorun":"","warning":"true","context":"interactive","output":"true","fig-height":5,"classes":"","out-width":"700px","message":"true","fig-width":7,"read-only":"false","dpi":72,"results":"markup","fig-cap":"","out-height":"","comment":""}}];
+
+
+</script><script type="module">
+// Declare startupMessageqpyodide globally
+globalThis.qpyodideStartupMessage = document.createElement("p");
+
+// Function to set the button text
+globalThis.qpyodideSetInteractiveButtonState = function(buttonText, enableCodeButton = true) {
+  document.querySelectorAll(".qpyodide-button-run").forEach((btn) => {
+    btn.innerHTML = buttonText;
+    btn.disabled = !enableCodeButton;
+  });
+}
+
+// Function to update the status message in non-interactive cells
+globalThis.qpyodideUpdateStatusMessage = function(message) {
+  document.querySelectorAll(".qpyodide-status-text.qpyodide-cell-needs-evaluation").forEach((elem) => {
+    elem.innerText = message;
+  });
+}
+
+// Function to update the status message
+globalThis.qpyodideUpdateStatusHeader = function(message) {
+  qpyodideStartupMessage.innerHTML = `
+    <i class="fa-solid fa-spinner fa-spin qpyodide-icon-status-spinner"></i>
+    <span>${message}</span>`;
+}
+
+// Function that attaches the document status message
+function qpyodideDisplayStartupMessage(showStartupMessage) {
+  if (!showStartupMessage) {
+    return;
+  }
+
+  // Get references to header elements
+  const headerHTML = document.getElementById("title-block-header");
+  const headerRevealJS = document.getElementById("title-slide");
+
+  // Create the outermost div element for metadata
+  const quartoTitleMeta = document.createElement("div");
+  quartoTitleMeta.classList.add("quarto-title-meta");
+
+  // Create the first inner div element
+  const firstInnerDiv = document.createElement("div");
+  firstInnerDiv.setAttribute("id", "qpyodide-status-message-area");
+
+  // Create the second inner div element for "Pyodide Status" heading and contents
+  const secondInnerDiv = document.createElement("div");
+  secondInnerDiv.setAttribute("id", "qpyodide-status-message-title");
+  secondInnerDiv.classList.add("quarto-title-meta-heading");
+  secondInnerDiv.innerText = "Pyodide Status";
+
+  // Create another inner div for contents
+  const secondInnerDivContents = document.createElement("div");
+  secondInnerDivContents.setAttribute("id", "qpyodide-status-message-body");
+  secondInnerDivContents.classList.add("quarto-title-meta-contents");
+
+  // Describe the Pyodide state
+  qpyodideStartupMessage.innerText = "🟡 Loading...";
+  qpyodideStartupMessage.setAttribute("id", "qpyodide-status-message-text");
+  // Add `aria-live` to auto-announce the startup status to screen readers
+  qpyodideStartupMessage.setAttribute("aria-live", "assertive");
+
+  // Append the startup message to the contents
+  secondInnerDivContents.appendChild(qpyodideStartupMessage);
+
+  // Combine the inner divs and contents
+  firstInnerDiv.appendChild(secondInnerDiv);
+  firstInnerDiv.appendChild(secondInnerDivContents);
+  quartoTitleMeta.appendChild(firstInnerDiv);
+
+  // Determine where to insert the quartoTitleMeta element
+  if (headerHTML || headerRevealJS) {
+    // Append to the existing "title-block-header" element or "title-slide" div
+    (headerHTML || headerRevealJS).appendChild(quartoTitleMeta);
+  } else {
+    // If neither headerHTML nor headerRevealJS is found, insert after "Pyodide-monaco-editor-init" script
+    const monacoScript = document.getElementById("qpyodide-monaco-editor-init");
+    const header = document.createElement("header");
+    header.setAttribute("id", "title-block-header");
+    header.appendChild(quartoTitleMeta);
+    monacoScript.after(header);
+  }
+}
+
+qpyodideDisplayStartupMessage(qpyodideShowStartupMessage);
+</script><script type="module">
+// Create a logging setup
+globalThis.qpyodideMessageArray = []
+
+// Add messages to array
+globalThis.qpyodideAddToOutputArray = function(message, type) {
+  qpyodideMessageArray.push({ message, type });
+}
+
+// Function to reset the output array
+globalThis.qpyodideResetOutputArray = function() {
+  qpyodideMessageArray = [];
+}
+
+globalThis.qpyodideRetrieveOutput = function() {
+  return qpyodideMessageArray.map(entry => entry.message).join('\n');
+}
+
+// Start a timer
+const initializePyodideTimerStart = performance.now();
+
+// Encase with a dynamic import statement
+globalThis.qpyodideInstance = await import(
+  qpyodideCustomizedPyodideOptions.indexURL + "pyodide.mjs").then(
+   async({ loadPyodide }) => {
+
+    console.log("Start loading Pyodide");
+    
+    // Populate Pyodide options with defaults or new values based on `pyodide`` meta
+    let mainPyodide = await loadPyodide(
+      qpyodideCustomizedPyodideOptions
+    );
+    
+    // Setup a namespace for global scoping
+    // await loadedPyodide.runPythonAsync("globalScope = {}"); 
+
+    // Add matplotlib
+    await mainPyodide.loadPackage("matplotlib");
+
+    // Set the backend for matplotlib to be interactive.
+    await mainPyodide.runPythonAsync(`
+    import matplotlib
+    matplotlib.use("module://matplotlib_pyodide.html5_canvas_backend")
+    from matplotlib import pyplot as plt
+    `);
+
+    // Unlock interactive buttons
+    qpyodideSetInteractiveButtonState(
+      `<i class="fa-solid fa-play qpyodide-icon-run-code"></i> <span>Run Code</span>`, 
+      true
+    ); 
+
+    if (qpyodideShowStartupMessage) {
+      qpyodideStartupMessage.innerText = "🟢 Ready!"
+    }
+
+    // Assign Pyodide into the global environment
+    globalThis.mainPyodide = mainPyodide;
+
+    console.log("Completed loading Pyodide");
+    return mainPyodide;
+  }
+);
+
+// Stop timer
+const initializePyodideTimerEnd = performance.now();
+
+// Create a function to retrieve the promise object.
+globalThis._qpyodideGetInstance = function() {
+    return qpyodideInstance;
+}
+
+</script>
 </head>
 <body class="nav-sidebar floating">
 
@@ -407,7 +1603,186 @@ ga('send', {
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-network.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 도구</a></li><li class="breadcrumb-item"><a href="./tool-network.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script><script type="module" id="qwebr-monaco-editor-init">
+
+  // Configure the Monaco Editor's loader
+  require.config({
+    paths: {
+      'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs'
+    }
+  });
+</script><script type="module">
+// Global dictionary to store Monaco Editor instances
+globalThis.qwebrEditorInstances = {};
+
+// Function that builds and registers a Monaco Editor instance    
+globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
+
+  const initialCode = cellData.code;
+  const qwebrCounter = cellData.id;
+  const qwebrOptions = cellData.options;
+
+  // Retrieve the previously created document elements
+  let runButton = document.getElementById(`qwebr-button-run-${qwebrCounter}`);
+  let resetButton = document.getElementById(`qwebr-button-reset-${qwebrCounter}`);
+  let copyButton = document.getElementById(`qwebr-button-copy-${qwebrCounter}`);
+  let editorDiv = document.getElementById(`qwebr-editor-${qwebrCounter}`);
+  
+  // Load the Monaco Editor and create an instance
+  let editor;
+  require(['vs/editor/editor.main'], function () {
+    editor = monaco.editor.create(editorDiv, {
+      value: initialCode,
+      language: 'r',
+      theme: 'vs-light',
+      automaticLayout: true,           // Works wonderfully with RevealJS
+      scrollBeyondLastLine: false,
+      minimap: {
+        enabled: false
+      },
+      fontSize: '17.5pt',              // Bootstrap is 1 rem
+      renderLineHighlight: "none",     // Disable current line highlighting
+      hideCursorInOverviewRuler: true,  // Remove cursor indictor in right hand side scroll bar
+      readOnly: qwebrOptions['read-only'] ?? false
+    });
+
+    // Store the official counter ID to be used in keyboard shortcuts
+    editor.__qwebrCounter = qwebrCounter;
+
+    // Store the official div container ID
+    editor.__qwebrEditorId = `qwebr-editor-${qwebrCounter}`;
+
+    // Store the initial code value and options
+    editor.__qwebrinitialCode = initialCode;
+    editor.__qwebrOptions = qwebrOptions;
+
+    // Set at the model level the preferred end of line (EOL) character to LF.
+    // This prevent `\r\n` from being given to the webR engine if the user is on Windows.
+    // See details in: https://github.com/coatless/quarto-webr/issues/94
+    // Associated error text: 
+    // Error: <text>:1:7 unexpected input
+
+    // Retrieve the underlying model
+    const model = editor.getModel();
+    // Set EOL for the model
+    model.setEOL(monaco.editor.EndOfLineSequence.LF);
+
+    // Dynamically modify the height of the editor window if new lines are added.
+    let ignoreEvent = false;
+    const updateHeight = () => {
+      const contentHeight = editor.getContentHeight();
+      // We're avoiding a width change
+      //editorDiv.style.width = `${width}px`;
+      editorDiv.style.height = `${contentHeight}px`;
+      try {
+        ignoreEvent = true;
+
+        // The key to resizing is this call
+        editor.layout();
+      } finally {
+        ignoreEvent = false;
+      }
+    };
+
+    // Helper function to check if selected text is empty
+    function isEmptyCodeText(selectedCodeText) {
+      return (selectedCodeText === null || selectedCodeText === undefined || selectedCodeText === "");
+    }
+
+    // Registry of keyboard shortcuts that should be re-added to each editor window
+    // when focus changes.
+    const addWebRKeyboardShortCutCommands = () => {
+      // Add a keydown event listener for Shift+Enter to run all code in cell
+      editor.addCommand(monaco.KeyMod.Shift | monaco.KeyCode.Enter, () => {
+
+        // Retrieve all text inside the editor
+        qwebrExecuteCode(editor.getValue(), editor.__qwebrCounter, editor.__qwebrOptions);
+      });
+
+      // Add a keydown event listener for CMD/Ctrl+Enter to run selected code
+      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
+
+        // Get the selected text from the editor
+        const selectedText = editor.getModel().getValueInRange(editor.getSelection());
+        // Check if no code is selected
+        if (isEmptyCodeText(selectedText)) {
+          // Obtain the current cursor position
+          let currentPosition = editor.getPosition();
+          // Retrieve the current line content
+          let currentLine = editor.getModel().getLineContent(currentPosition.lineNumber);
+
+          // Propose a new position to move the cursor to
+          let newPosition = new monaco.Position(currentPosition.lineNumber + 1, 1);
+
+          // Check if the new position is beyond the last line of the editor
+          if (newPosition.lineNumber > editor.getModel().getLineCount()) {
+            // Add a new line at the end of the editor
+            editor.executeEdits("addNewLine", [{
+            range: new monaco.Range(newPosition.lineNumber, 1, newPosition.lineNumber, 1),
+            text: "\n", 
+            forceMoveMarkers: true,
+            }]);
+          }
+          
+          // Run the entire line of code.
+          qwebrExecuteCode(currentLine, editor.__qwebrCounter, editor.__qwebrOptions);
+
+          // Move cursor to new position
+          editor.setPosition(newPosition);
+        } else {
+          // Code to run when Ctrl+Enter is pressed with selected code
+          qwebrExecuteCode(selectedText, editor.__qwebrCounter, editor.__qwebrOptions);
+        }
+      });
+    }
+
+    // Register an on focus event handler for when a code cell is selected to update
+    // what keyboard shortcut commands should work.
+    // This is a workaround to fix a regression that happened with multiple
+    // editor windows since Monaco 0.32.0 
+    // https://github.com/microsoft/monaco-editor/issues/2947
+    editor.onDidFocusEditorText(addWebRKeyboardShortCutCommands);
+
+    // Register an on change event for when new code is added to the editor window
+    editor.onDidContentSizeChange(updateHeight);
+
+    // Manually re-update height to account for the content we inserted into the call
+    updateHeight();
+
+    // Store the editor instance in the global dictionary
+    qwebrEditorInstances[editor.__qwebrCounter] = editor;
+
+  });
+
+  // Add a click event listener to the run button
+  runButton.onclick = function () {
+    qwebrExecuteCode(editor.getValue(), editor.__qwebrCounter, editor.__qwebrOptions);
+  };
+
+  // Add a click event listener to the reset button
+  copyButton.onclick = function () {
+    // Retrieve current code data
+    const data = editor.getValue();
+    
+    // Write code data onto the clipboard.
+    navigator.clipboard.writeText(data || "");
+  };
+  
+  // Add a click event listener to the copy button
+  resetButton.onclick = function () {
+    editor.setValue(editor.__qwebrinitialCode);
+  };
+  
+}
+</script><script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/loader.js"></script><script type="module" id="qpyodide-monaco-editor-init">
+
+  // Configure the Monaco Editor's loader
+  require.config({
+    paths: {
+      'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'
+    }
+  });
+</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 도구</a></li><li class="breadcrumb-item"><a href="./tool-network.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title"><span id="network" class="quarto-section-identifier"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></h1>
 </div>
 
@@ -422,8 +1797,7 @@ ga('send', {
   
 
 
-</header><p>지금까지 책의 많은 예제는 파일을 읽고 파일의 정보를 찾는데 집중했지만, 다양한 많은 정보의 원천이 인터넷에 있다.</p>
-<p>이번 장에서는 웹브라우져로 가장하고 HTTP 프로토콜(HyperText Transport Protocol,HTTP)을 사용하여 웹페이지를 검색할 것이다. 웹페이지 데이터를 읽고 파싱할 것이다.</p>
+</header><p>지금까지 책의 많은 예제는 파일을 읽고 파일 속 정보를 찾는데 집중했지만, 다양한 많은 정보의 원천이 인터넷에 있다. 이번 장에서는 웹브라우져로 가장하고 HTTP 프로토콜(HyperText Transport Protocol,HTTP)을 사용하여 웹페이지를 검색할 것이다. 웹페이지 데이터를 읽고 파싱할 것이다.</p>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -445,24 +1819,37 @@ ga('send', {
 <p>매우 상세한 176 페이지나 되는 장문의 복잡한 문서다. 흥미롭다면 시간을 가지고 읽어보기 바란다. RFC2616에 36 페이지를 읽어보면, GET 요청(request)에 대한 구문을 발견하게 된다. 꼼꼼히 읽게 되면, 웹서버에 문서를 요청하기 하기 위해서, 80 포트로 <code>www.py4inf.com</code> 서버에 연결을 하고 나서 다음 양식 한 라인을 전송한다.</p>
 <p><code>GET http://www.py4inf.com/code/romeo.txt HTTP/1.0</code></p>
 <p>두번째 매개변수는 요청하는 웹페이지가 된다. 그리고 또한 빈 라인도 전송한다. 웹서버는 문서에 대한 헤더 정보와 빈 라인 그리고 문서 본문으로 응답한다.</p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+웹브라우저 실행금지 사유
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>webr</code> <code>pyodide</code>는 웹 브라우저 샌드박스 환경에서 R, 파이썬을 실행하며, 브라우저 보안 제한으로 인해 일반 R, 파이썬 환경에서와 같은 네트워크 소켓에 대한 직접적인 접근이 불가능하다. 접근을 허용하는 것이 중대한 보안 위험을 초래할 수 있기 때문에 웨브라우저에서 실행이 되지 않게 되어 있어 오류가 나는 것이 정상이다.</p>
+</div>
+</div>
 </section><section id="network-web-browser" class="level2" data-number="25.2"><h2 data-number="25.2" class="anchored" data-anchor-id="network-web-browser">
 <span class="header-section-number">25.2</span> 가장 간단한 웹 브라우져</h2>
 <p>아마도 HTTP 프로토콜이 어떻게 작동하는지 알아보는 가장 간단한 방법은 매우 간단한 파이썬 프로그램을 작성하는 것이다. 웹서버에 접속하고 HTTP 프로토콜 규칙에 따라 문서를 요청하고 서버가 다시 보내주는 결과를 보여주는 것이다.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> socket</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mysock <span class="op">=</span> socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mysock.<span class="ex">connect</span>((<span class="st">'data.pr4e.org'</span>, <span class="dv">80</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>cmd <span class="op">=</span> <span class="st">'GET http://data.pr4e.org/romeo.txt HTTP/1.0</span><span class="ch">\r\n\r\n</span><span class="st">'</span>.encode()</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mysock.send(cmd)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mysock.recv(<span class="dv">512</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(data) <span class="op">&lt;</span> <span class="dv">1</span>:</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(data.decode(),end<span class="op">=</span><span class="st">''</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>mysock.close()</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="qwebr-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="qpyodide-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
 </div>
 <p>처음에 프로그램은 <a href="www.py4e.com">www.py4e.com</a> 서버에 80 포트로 연결한다. “웹 브라우져” 역할로 작성된 프로그램이 하기 때문에 HTTP 프로토콜은 GET 명령어를 공백 라인과 함께 보낸다.</p>
 <div id="fig-network-concept" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -475,23 +1862,23 @@ ga('send', {
 </div>
 <p>공백 라인을 보내자 마자, 512 문자 덩어리의 데이터를 소켓에서 받아 더 이상 읽을 데이터가 없을 때까지(즉, recv()이 빈 문자열을 반환한다.) 데이터를 출력하는 루프를 작성한다.</p>
 <p>프로그램 실행결과 다음을 얻을 수 있다.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">HTTP/1.1</span> 200 OK</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span> Wed, 11 Apr 2018 18:52:55 GMT</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Server:</span> Apache/2.4.7 <span class="er">(</span><span class="ex">Ubuntu</span><span class="kw">)</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Last-Modified:</span> Sat, 13 May 2017 11:22:22 GMT</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ETag:</span> <span class="st">"a7-54f6609245537"</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Accept-Ranges:</span> bytes</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Length:</span> 167</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Cache-Control:</span> max-age=0, no-cache, no-store, must-revalidate</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Pragma:</span> no-cache</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Expires:</span> Wed, 11 Jan 1984 05:00:00 GMT</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Connection:</span> close</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Type:</span> text/plain</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ex">But</span> soft what light through yonder window breaks</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ex">It</span> is the east and Juliet is the sun</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Arise</span> fair sun and kill the envious moon</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Who</span> is already sick and pale with grief</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">HTTP/1.1</span> 200 OK</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span> Wed, 11 Apr 2018 18:52:55 GMT</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Server:</span> Apache/2.4.7 <span class="er">(</span><span class="ex">Ubuntu</span><span class="kw">)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Last-Modified:</span> Sat, 13 May 2017 11:22:22 GMT</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ETag:</span> <span class="st">"a7-54f6609245537"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Accept-Ranges:</span> bytes</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Length:</span> 167</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Cache-Control:</span> max-age=0, no-cache, no-store, must-revalidate</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Pragma:</span> no-cache</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Expires:</span> Wed, 11 Jan 1984 05:00:00 GMT</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Connection:</span> close</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Type:</span> text/plain</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">But</span> soft what light through yonder window breaks</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">It</span> is the east and Juliet is the sun</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Arise</span> fair sun and kill the envious moon</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Who</span> is already sick and pale with grief</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>출력결과는 웹서버가 문서를 기술하기 위해서 보내는 헤더(header)로 시작한다. 예를 들어, <code>Content-Type</code> 헤더는 문서가 일반 텍스트 문서(<code>text/plain</code>)임을 표기한다.</p>
 <p>서버가 헤더를 보낸 후에, 빈 라인을 추가해서 헤더 끝임을 표기하고 나서 실제 파일<code>romeo.txt</code>을 보낸다.</p>
 <p>이 예제를 통해서 소켓을 통해서 저수준(low-level) 네트워크 연결을 어떻게 하는지 확인할 수 있다. 소켓을 사용해서 웹서버, 메일 서버 혹은 다른 종류의 서버와 통신할 수 있다. 필요한 것은 프로토콜을 기술하는 문서를 찾고 프로토콜에 따라 데이터를 주고 받는 코드를 작성하는 것이다.</p>
@@ -499,120 +1886,112 @@ ga('send', {
 </section><section id="socket-images" class="level2" data-number="25.3"><h2 data-number="25.3" class="anchored" data-anchor-id="socket-images">
 <span class="header-section-number">25.3</span> HTTP 경유 이미지 가져오기</h2>
 <p>상기 예제에서는 파일에 새줄(newline)이 있는 일반 텍스트 파일을 가져왔다. 그리고 나서, 프로그램을 실행해서 데이터를 단순히 화면에 복사했다. HTTP를 사용하여 이미지를 가져오도록 비슷하게 프로그램을 작성할 수 있다. 프로그램 실행 시에 화면에 데이터를 복사하는 대신에, 데이터를 문자열로 누적하고, 다음과 같이 헤더를 잘라내고 나서 파일에 이미지 데이터를 저장한다.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> socket</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>HOST <span class="op">=</span> <span class="st">'data.pr4e.org'</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>PORT <span class="op">=</span> <span class="dv">80</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>mysock <span class="op">=</span> socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mysock.<span class="ex">connect</span>((HOST, PORT))</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>mysock.sendall(<span class="st">b'GET http://data.pr4e.org/cover3.jpg HTTP/1.0</span><span class="ch">\r\n\r\n</span><span class="st">'</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>picture <span class="op">=</span> <span class="st">b""</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mysock.recv(<span class="dv">5120</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(data) <span class="op">&lt;</span> <span class="dv">1</span>: <span class="cf">break</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">#time.sleep(0.25)</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> count <span class="op">+</span> <span class="bu">len</span>(data)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">len</span>(data), count)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    picture <span class="op">=</span> picture <span class="op">+</span> data</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>mysock.close()</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Look for the end of the header (2 CRLF)</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> picture.find(<span class="st">b"</span><span class="ch">\r\n\r\n</span><span class="st">"</span>)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Header length'</span>, pos)</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(picture[:pos].decode())</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Skip past the header and save the picture data</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>picture <span class="op">=</span> picture[pos<span class="op">+</span><span class="dv">4</span>:]</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>fhand <span class="op">=</span> <span class="bu">open</span>(<span class="st">"stuff.jpg"</span>, <span class="st">"wb"</span>)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>fhand.write(picture)</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>fhand.close()</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Code: http://www.py4e.com/code3/urljpeg.py</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="qpyodide-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
 </div>
 <p>프로그램을 실행하면, 다음과 같은 출력을 생성한다.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python urljpeg.py</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 5120</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 10240</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">4240</span> 14480</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 19600</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 214000</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">3200</span> 217200</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 222320</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 227440</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ex">3167</span> 230607</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Header</span> length 393</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="ex">HTTP/1.1</span> 200 OK</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span> Wed, 11 Apr 2018 18:54:09 GMT</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Server:</span> Apache/2.4.7 <span class="er">(</span><span class="ex">Ubuntu</span><span class="kw">)</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Last-Modified:</span> Mon, 15 May 2017 12:27:40 GMT</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="ex">ETag:</span> <span class="st">"38342-54f8f2e5b6277"</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Accept-Ranges:</span> bytes</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Length:</span> 230210</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Vary:</span> Accept-Encoding</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Cache-Control:</span> max-age=0, no-cache, no-store, must-revalidate</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Pragma:</span> no-cache</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="ex">Expires:</span> Wed, 11 Jan 1984 05:00:00 GMT</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="ex">Connection:</span> close</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Type:</span> image/jpeg</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python urljpeg.py</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 5120</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 10240</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">4240</span> 14480</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 19600</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 214000</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">3200</span> 217200</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 222320</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 227440</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">3167</span> 230607</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Header</span> length 393</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ex">HTTP/1.1</span> 200 OK</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span> Wed, 11 Apr 2018 18:54:09 GMT</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Server:</span> Apache/2.4.7 <span class="er">(</span><span class="ex">Ubuntu</span><span class="kw">)</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Last-Modified:</span> Mon, 15 May 2017 12:27:40 GMT</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ex">ETag:</span> <span class="st">"38342-54f8f2e5b6277"</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Accept-Ranges:</span> bytes</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Length:</span> 230210</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Vary:</span> Accept-Encoding</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Cache-Control:</span> max-age=0, no-cache, no-store, must-revalidate</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Pragma:</span> no-cache</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="ex">Expires:</span> Wed, 11 Jan 1984 05:00:00 GMT</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="ex">Connection:</span> close</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Type:</span> image/jpeg</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>상기 url에 대해서, <code>Content-Type</code> 헤더가 문서 본문이 이미지(<code>image/jpeg</code>)를 나타내는 것을 볼 수 있다. 프로그램이 완료되면, 이미지 뷰어로 <code>stuff.jpg</code> 파일을 열어서 이미지 데이터를 볼 수 있다.</p>
 <p>프로그램을 실행하면, <code>recv()</code> 메쏘드를 호출할 때 마다 5120 문자는 전달받지 못하는 것을 볼 수 있다. <code>recv()</code> 호출하는 순간마다 웹서버에서 네트워크로 전송되는 가능한 많은 문자를 받을 뿐이다. 매번 5120 문자까지 요청하지만, 1460 혹은 2920 문자만 전송받는다.</p>
 <p>결과값은 네트워크 속도에 따라 달라질 수 있다. <code>recv()</code> 메쏘드 마지막 호출에는 스트림 마지막인 1681 바이트만 받았고, <code>recv()</code> 다음 호출에는 0 길이 문자열을 전송받아서, 서버가 소켓 마지막에 <code><a href="https://rdrr.io/r/base/connections.html">close()</a></code> 메쏘드를 호출하고 더이상의 데이터가 없다는 신호를 준다.</p>
 <p>주석 처리한 <code>time.sleep()</code>을 풀어줌으로써 <code>recv()</code> 연속 호출을 늦출 수 있다. 이런 방식으로 매번 호출 후에 0.25초 기다리게 한다. 그래서, 사용자가 <code>recv()</code> 메쏘드를 호출하기 전에 서버가 먼저 도착할 수 있어서 더 많은 데이터를 보낼 수가 있다. 정지 시간을 넣어서 프로그램을 다시 실행하면 다음과 같다.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python urljpeg.py</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 5120</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 10240</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 15360</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 225280</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 230400</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">207</span> 230607</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Header</span> length 393</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ex">HTTP/1.1</span> 200 OK</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span> Wed, 11 Apr 2018 21:42:08 GMT</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Server:</span> Apache/2.4.7 <span class="er">(</span><span class="ex">Ubuntu</span><span class="kw">)</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Last-Modified:</span> Mon, 15 May 2017 12:27:40 GMT</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">ETag:</span> <span class="st">"38342-54f8f2e5b6277"</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Accept-Ranges:</span> bytes</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Length:</span> 230210</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Vary:</span> Accept-Encoding</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Cache-Control:</span> max-age=0, no-cache, no-store, must-revalidate</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Pragma:</span> no-cache</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Expires:</span> Wed, 11 Jan 1984 05:00:00 GMT</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Connection:</span> close</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Type:</span> image/jpeg</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python urljpeg.py</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 5120</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 10240</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 15360</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 225280</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 230400</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">207</span> 230607</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Header</span> length 393</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">HTTP/1.1</span> 200 OK</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span> Wed, 11 Apr 2018 21:42:08 GMT</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Server:</span> Apache/2.4.7 <span class="er">(</span><span class="ex">Ubuntu</span><span class="kw">)</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Last-Modified:</span> Mon, 15 May 2017 12:27:40 GMT</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ex">ETag:</span> <span class="st">"38342-54f8f2e5b6277"</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Accept-Ranges:</span> bytes</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Length:</span> 230210</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Vary:</span> Accept-Encoding</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Cache-Control:</span> max-age=0, no-cache, no-store, must-revalidate</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Pragma:</span> no-cache</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Expires:</span> Wed, 11 Jan 1984 05:00:00 GMT</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Connection:</span> close</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Type:</span> image/jpeg</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>recv()</code> 메쏘드 호출의 처음과 마지막을 제외하고, 매번 새로운 데이터를 요청할 때마다 이제 5120 문자가 전송된다.</p>
 <p>서버 <code>send()</code> 요청과 응용프로그램 <code>recv()</code> 요청 사이에 버퍼가 있다. 프로그램에 지연을 넣어 실행하게 될 때, 어느 지점엔가 서버가 소켓 버퍼를 채우고 응용프로그램이 버퍼를 비울 때까지 잠시 멈춰야 된다. 송신하는 응용프로그램 혹은 수신하는 응용프로그램을 멈추게 하는 행위를 “흐름 제어(flow control)”이라고 한다.</p>
 </section><section id="httr" class="level2" data-number="25.4"><h2 data-number="25.4" class="anchored" data-anchor-id="httr">
 <span class="header-section-number">25.4</span> <code>httr</code> 웹페이지 가져오기</h2>
-<p>수작업으로 소켓 라이브러리를 사용하여 HTTP로 데이터를 주고 받을 수 있지만, <code>httr</code> 패키지를 사용하여 R에서 동일한 작업을 수행하는 좀더 간편한 방식이 있다.</p>
-<p><code>httr</code>을 사용하여 파일처럼 웹페이지를 다룰 수가 있다. 단순하게 어느 웹페이지를 가져올 것인지만 지정하면 <code>httr</code> 라이브러리가 모든 HTTP 프로토콜과 헤더 관련 사항을 처리해 준다.</p>
-<p>웹에서 <code>romeo.txt</code> 파일을 읽도록 <code>urllib</code>를 사용하여 작성한 상응 코드는 다음과 같다.</p>
-<div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">fhand</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="st">'http://www.py4inf.com/code/romeo.txt'</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">fhand</span>, encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>수작업으로 소켓 라이브러리를 사용하여 HTTP로 데이터를 주고 받을 수 있지만, <code>httr</code> 패키지를 사용하여 R에서 동일한 작업을 수행하는 좀더 간편한 방식이 있다. <code>httr</code>을 사용하여 파일처럼 웹페이지를 다룰 수가 있다. 단순하게 어느 웹페이지를 가져올 것인지만 지정하면 <code>httr</code> 라이브러리가 모든 HTTP 프로토콜과 헤더 관련 사항을 처리해 준다.</p>
+<p><code>GET()</code> 함수를 사용하여 웹페이지를 열게 되면, 파일처럼 다룰 수 있고 <code>content()</code> 함수를 사용해서 데이터를 읽을 수 있다. 프로그램을 실행하면, 파일 내용 출력결과만을 볼 수 있다. 헤더정보는 여전히 전송되었지만, <code>GET()</code> 함수가 헤더를 받아 내부적으로 처리하고, 사용자에게는 단지 데이터만 반환한다. 파이썬으로 웹에서 <code>romeo.txt</code> 파일을 읽도록 <code>urllib</code>를 사용하여 동일한 기능을 구현할 수 있다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div id="qwebr-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
-<p><code><a href="https://httr.r-lib.org/reference/GET.html">GET()</a></code> 함수를 사용하여 웹페이지를 열게 되면, 파일처럼 다룰 수 있고 <code><a href="https://httr.r-lib.org/reference/content.html">content()</a></code> 함수를 사용해서 데이터를 읽을 수 있다.</p>
-<p>프로그램을 실행하면, 파일 내용 출력결과만을 볼 수 있다. 헤더정보는 여전히 전송되었지만, <code><a href="https://httr.r-lib.org/reference/GET.html">GET()</a></code> 함수가 헤더를 받아 내부적으로 처리하고, 사용자에게는 단지 데이터만 반환한다.</p>
-<div class="cell">
-<pre><code>#&gt; [1] "But soft what light through yonder window breaks\nIt is the east and Juliet is the sun\nArise fair sun and kill the envious moon\nWho is already sick and pale with grief\n"</code></pre>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div id="qpyodide-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
-<p>예제로, <code>romeo.txt</code> 데이터를 가져와서 파일의 각 단어 빈도를 계산하는 프로그램을 다음과 같이 작성할 수 있다. 웹페이지를 로컬 텍스트로 변환시킨 후에 공백과 <code>\n</code> 으로 텍스트를 잘게 쪼개고, 단어 빈도수를 <code><a href="https://rdrr.io/r/base/table.html">table()</a></code>로 계산한 후 데이터 문법 <code>dplyr</code>을 사용해서 최빈 단어를 상위 3개 뽑는다.</p>
-<div class="cell">
-<pre><code>#&gt; # A tibble: 3 × 2
-#&gt;   단어  빈도수
-#&gt;   &lt;chr&gt;  &lt;int&gt;
-#&gt; 1 and        3
-#&gt; 2 is         3
-#&gt; 3 the        3</code></pre>
+</div>
+</div>
+<p>예제로, <code>romeo.txt</code> 데이터를 가져와서 파일의 각 단어 빈도를 계산하는 프로그램을 다음과 같이 작성할 수 있다. 웹페이지를 로컬 텍스트로 변환시킨 후에 공백과 <code>\n</code> 으로 텍스트를 잘게 쪼개고, 단어 빈도수를 <code><a href="https://rdrr.io/r/base/table.html">table()</a></code>로 계산한 후 단어 빈도수를 확인한다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="qpyodide-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
 </div>
 <p>다시 한번, 웹페이지를 열게 되면, 로컬 파일처럼 웹페이지를 읽을 수 있다.</p>
 </section><section id="html-webscraping" class="level2" data-number="25.5"><h2 data-number="25.5" class="anchored" data-anchor-id="html-webscraping">
@@ -623,91 +2002,56 @@ ga('send', {
 <span class="header-section-number">25.6</span> 정규 표현식 HTML 파싱</h2>
 <p>HTML을 파싱하는 간단한 방식은 정규 표현식을 사용하여 특정한 패턴과 매칭되는 부속 문자열을 반복적으로 찾아 추출하는 것이다.</p>
 <p>여기 간단한 웹페이지가 있다.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>The First Page<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>If you like, you can switch to the</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"http://www.dr-chuck.com/page2.htm"</span><span class="dt">&gt;</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>Second Page<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>.</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>The First Page<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>If you like, you can switch to the</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"http://www.dr-chuck.com/page2.htm"</span><span class="dt">&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Second Page<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>.</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>모양 좋은 정규표현식을 구성해서 다음과 같이 상기 웹페이지에서 링크를 매칭하고 추출할 수 있다.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="va">href</span><span class="op">=</span><span class="st">"http://.+?"</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">href</span><span class="op">=</span><span class="st">"http://.+?"</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>작성된 정규 표현식은 “href=http://”로 시작하고, 하나 이상의 문자를 “.+?” 가지고 큰 따옴표를 가진 문자열을 찾는다. “.+?”에 물음표가 갖는 의미는 매칭이 “욕심쟁이(greedy)” 방식보다 “비욕심쟁이(non-greedy)” 방식으로 수행됨을 나타낸다. 비욕심쟁이(non-greedy) 매칭방식은 가능한 <em>가장 적게</em> 매칭되는 문자열을 찾는 방식이고, 욕심 방식은 가능한 <em>가장 크게</em> 매칭되는 문자열을 찾는 방식이다.</p>
 <p>추출하고자 하는 문자열이 매칭된 문자열의 어느 부분인지를 표기하기 위해서 정규 표현식에 괄호를 추가하여 다음과 같이 프로그램을 작성한다.</p>
-<div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readline.html">readline</a></span><span class="op">(</span>prompt <span class="op">=</span> <span class="st">"Enter - "</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>  </span>
-<span>    </span>
-<span><span class="va">url_link</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract_all</a></span><span class="op">(</span><span class="va">html</span>, pattern <span class="op">=</span> <span class="st">'href="(http://.*?)"'</span><span class="op">)</span>  </span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">url_link</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div id="qwebr-insertion-location-5"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
-<p><code>str_extract_all</code> 정규 표현식 함수는 정규 표현식과 매칭되는 모든 문자열 리스트를 추출하여 큰 따옴표 사이에 링크 텍스트만을 반환한다.</p>
-<p>쉘에서 <code>Rscript.exe</code> 프로그램으로 실행하기 위해 다음과 같이 사용자 입력을 받는 부분을 다음과 같이 수정한다.</p>
-<div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># urlregex.R 프로그램 코드</span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">typeline</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">msg</span> <span class="op">=</span> <span class="st">"Enter - "</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readline.html">readline</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
-<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span>;</span>
-<span>    <span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"stdin"</span>,n<span class="op">=</span><span class="fl">1</span><span class="op">)</span>;</span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu">typeline</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">url_link</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract_all</a></span><span class="op">(</span><span class="va">html</span>, pattern <span class="op">=</span> <span class="st">'href="(http://.*?)"'</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">url_link</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div id="qpyodide-insertion-location-5"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
-<p>프로그램을 실행하면, 다음 출력을 얻게된다.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./script/urlregex.R</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">During</span> startup <span class="at">-</span> Warning message:</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Setting</span> LC_CTYPE=ko_KR.UTF-8@cjknarrow failed</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Enter</span> <span class="at">-</span> http://www.dr-chuck.com/page1.htm</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">No</span> encoding supplied: defaulting to UTF-8.</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Warning</span> message:</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="ex">In</span> stri_extract_all_regex<span class="er">(</span><span class="ex">string,</span> pattern, simplify = simplify,  :</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">argument</span> is not an atomic vector<span class="kw">;</span> <span class="ex">coercing</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[[1]]</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[1]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.dr-chuck.com/page2.htm</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./script/urlregex.R</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="ex">During</span> startup <span class="at">-</span> Warning message:</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Setting</span> LC_CTYPE=ko_KR.UTF-8@cjknarrow failed</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Enter</span> <span class="at">-</span> http://www.py4inf.com/book.htm</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="ex">No</span> encoding supplied: defaulting to UTF-8.</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Warning</span> message:</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="ex">In</span> stri_extract_all_regex<span class="er">(</span><span class="ex">string,</span> pattern, simplify = simplify,  :</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="ex">argument</span> is not an atomic vector<span class="kw">;</span> <span class="ex">coercing</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[[1]]</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a> <span class="ex">[1]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1KkULF3</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a> <span class="ex">[2]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.py4e.com/book</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a> <span class="ex">[3]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1KkULF3</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a> <span class="ex">[4]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1hLcoBy</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a> <span class="ex">[5]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1KkV42z</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a> <span class="ex">[6]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1fNOnbd</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a> <span class="ex">[7]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1N74xLt</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a> <span class="ex">[8]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://do1.dr-chuck.net/py4inf/EN-us/book.pdf</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a> <span class="ex">[9]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://do1.dr-chuck.net/py4inf/ES-es/book.pdf</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="ex">[10]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://do1.dr-chuck.net/py4inf/PT-br/book.pdf</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="ex">[11]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.xwmooc.net/python/</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="ex">[12]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://fanwscu.gitbooks.io/py4inf-zh-cn/</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="ex">[13]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://itunes.apple.com/us/book/python-for-informatics/id554638579?mt=13</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="ex">[14]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www-personal.umich.edu/~csev/books/py4inf/ibooks//python_for_informatics.ibooks</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="ex">[15]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.py4inf.com/code</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="ex">[16]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.greenteapress.com/thinkpython/thinkCSpy/</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="ex">[17]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://allendowney.com/</span><span class="dt">\"</span><span class="st">"</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p><code>str_extract_all</code> 정규 표현식 함수는 정규 표현식과 매칭되는 모든 문자열 리스트를 추출하여 큰 따옴표 사이에 링크 텍스트만을 반환한다. 프로그램을 실행하면, 다음 출력을 얻게된다.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./code/extract_link.R</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">웹사이트</span> 입력 <span class="at">-</span> http://www.dr-chuck.com/page1.htm</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[1]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.dr-chuck.com/page2.htm</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./code/extract_link.R</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">웹사이트</span> 입력 <span class="at">-</span> http://www.py4inf.com/book.htm</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">[1]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1KkULF3</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">[2]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.py4e.com/book</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">[3]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1KkULF3</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">[4]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1hLcoBy</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">[5]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1KkV42z</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">[6]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1fNOnbd</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a> <span class="ex">[7]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1N74xLt</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">[8]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://do1.dr-chuck.net/py4inf/EN-us/book.pdf</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">[9]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://do1.dr-chuck.net/py4inf/ES-es/book.pdf</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="ex">[10]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://do1.dr-chuck.net/py4inf/PT-br/book.pdf</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="ex">[11]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.xwmooc.net/python/</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[12]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://fanwscu.gitbooks.io/py4inf-zh-cn/</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="ex">[13]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://itunes.apple.com/us/book/python-for-informatics/id554638579?mt=13</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[14]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www-personal.umich.edu/~csev/books/py4inf/ibooks//python_for_informatics.ibooks</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="ex">[15]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.py4inf.com/code</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="ex">[16]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.greenteapress.com/thinkpython/thinkCSpy/</span><span class="dt">\"</span><span class="st">"</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="ex">[17]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://allendowney.com/</span><span class="dt">\"</span><span class="st">"</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>정규 표현식은 HTML이 예측가능하고 잘 구성된 경우에 멋지게 작동한다. 하지만, “망가진” HTML 페이지가 많아서, 정규 표현식만을 사용하는 솔류션은 유효한 링크를 놓치거나 잘못된 데이터만 찾고 끝날 수 있다.</p>
 <p>이 문제는 강건한 HTML 파싱 라이브러리를 사용해서 해결될 수 있다.</p>
 </section><section id="rvest-scraping" class="level2" data-number="25.7"><h2 data-number="25.7" class="anchored" data-anchor-id="rvest-scraping">
@@ -716,131 +2060,103 @@ ga('send', {
 <p>예로, 간단하게 HTML 입력을 파싱하여 <strong>rvest</strong> 라이브러리를 사용하여 링크를 추출할 것이다.</p>
 <p>HTML이 XML 처럼 보이고 몇몇 페이지는 XML로 되도록 꼼꼼하게 구축되었지만, 일반적으로 대부분의 HTML이 깨져서 XML 파서가 HTML 전체 페이지를 잘못 구성된 것으로 간주하고 받아들이지 않는다. `rvest`` 패키지는 결점 많은 HTML 페이지에 내성이 있어서 사용자가 필요로하는 데이터를 쉽게 추출할 수 있게 한다.</p>
 <p><code>httr</code> 패키지를 사용하여 페이지를 읽어들이고, <code>rvest</code>를 사용해서 앵커 태그 (<code>a</code>)로부터 <code>href</code> 속성을 추출한다.</p>
-<div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvest.tidyverse.org/">rvest</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="st">'http://www.dr-chuck.com/page1.htm'</span><span class="op">)</span></span>
-<span><span class="va">webpage</span> <span class="op">&lt;-</span> <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="va">html</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">a_href</span> <span class="op">&lt;-</span> <span class="va">webpage</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_elements</a></span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_attr.html">html_attr</a></span><span class="op">(</span><span class="st">"href"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">a_href</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div id="qwebr-insertion-location-6"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
-<p>프로그램이 웹 주소를 입력받고, 웹페이지를 열고, 데이터를 읽어서 BeautifulSoup 파서에 전달하고, 그리고 나서 모든 앵커 태그를 불러와서 각 태그별로 <code>href</code> 속성을 출력한다.</p>
-<p>쉘에서 <code>Rscript.exe</code> 프로그램으로 실행하기 위해 다음과 같이 사용자 입력을 받는 부분을 다음과 같이 수정한다.</p>
-<div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## urllinks.R 스크립트</span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvest.tidyverse.org/">rvest</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">typeline</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">msg</span> <span class="op">=</span> <span class="st">"Enter - "</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readline.html">readline</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
-<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span>;</span>
-<span>    <span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"stdin"</span>,n<span class="op">=</span><span class="fl">1</span><span class="op">)</span>;</span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu">typeline</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
-<span><span class="va">webpage</span> <span class="op">&lt;-</span> <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="va">html</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">a_href</span> <span class="op">&lt;-</span> <span class="va">webpage</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_elements</a></span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_attr.html">html_attr</a></span><span class="op">(</span><span class="st">"href"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">a_href</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div id="qpyodide-insertion-location-6"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
-<p>프로그램을 실행하면, 아래와 같다.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./script/urllinks.R</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">During</span> startup <span class="at">-</span> Warning message:</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Setting</span> LC_CTYPE=ko_KR.UTF-8@cjknarrow failed</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Enter</span> <span class="at">-</span> http://www.dr-chuck.com/page1.htm</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[1]</span> <span class="st">"http://www.dr-chuck.com/page2.htm"</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./script/urllinks.R</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="ex">During</span> startup <span class="at">-</span> Warning message:</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Setting</span> LC_CTYPE=ko_KR.UTF-8@cjknarrow failed</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Enter</span> <span class="at">-</span> http://www.py4inf.com/book.htm</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">[1]</span> <span class="st">"http://amzn.to/1KkULF3"</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">[2]</span> <span class="st">"http://www.py4e.com/book"</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a> <span class="ex">[3]</span> <span class="st">"http://amzn.to/1KkULF3"</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">[4]</span> <span class="st">"http://amzn.to/1hLcoBy"</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">[5]</span> <span class="st">"http://amzn.to/1KkV42z"</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a> <span class="ex">[6]</span> <span class="st">"http://amzn.to/1fNOnbd"</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a> <span class="ex">[7]</span> <span class="st">"http://amzn.to/1N74xLt"</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a> <span class="ex">[8]</span> <span class="st">"http://do1.dr-chuck.net/py4inf/EN-us/book.pdf"</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a> <span class="ex">[9]</span> <span class="st">"http://do1.dr-chuck.net/py4inf/ES-es/book.pdf"</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[10]</span> <span class="st">"https://twitter.com/fertardio"</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="ex">[11]</span> <span class="st">"http://do1.dr-chuck.net/py4inf/PT-br/book.pdf"</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="ex">[12]</span> <span class="st">"https://twitter.com/victorjabur"</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="ex">[13]</span> <span class="st">"translations/KO/book_009_ko.pdf"</span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="ex">[14]</span> <span class="st">"http://www.xwmooc.net/python/"</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="ex">[15]</span> <span class="st">"http://fanwscu.gitbooks.io/py4inf-zh-cn/"</span></span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="ex">[16]</span> <span class="st">"book_270.epub"</span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="ex">[17]</span> <span class="st">"translations/ES/book_272_es4.epub"</span></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="ex">[18]</span> <span class="st">"https://www.gitbook.com/download/epub/book/fanwscu/py4inf-zh-cn"</span></span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="ex">[19]</span> <span class="st">"html-270/"</span></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="ex">[20]</span> <span class="st">"html_270.zip"</span></span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="ex">[21]</span> <span class="st">"http://itunes.apple.com/us/book/python-for-informatics/id554638579?mt=13"</span></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="ex">[22]</span> <span class="st">"http://www-personal.umich.edu/~csev/books/py4inf/ibooks//python_for_informatics.ibooks"</span></span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="ex">[23]</span> <span class="st">"http://www.py4inf.com/code"</span></span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="ex">[24]</span> <span class="st">"http://www.greenteapress.com/thinkpython/thinkCSpy/"</span></span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="ex">[25]</span> <span class="st">"http://allendowney.com/"</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>`rvest``을 사용하여 다음과 같이 각 태그별로 다양한 부분을 뽑아낼 수 있다.</p>
-<div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvest.tidyverse.org/">rvest</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">typeline</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">msg</span> <span class="op">=</span> <span class="st">"Enter - "</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span> <span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readline.html">readline</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
-<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span>;</span>
-<span>    <span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"stdin"</span>,n<span class="op">=</span><span class="fl">1</span><span class="op">)</span>;</span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu">typeline</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
-<span><span class="va">webpage</span> <span class="op">&lt;-</span> <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="va">html</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">a_href</span> <span class="op">&lt;-</span> <span class="va">webpage</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_elements</a></span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_attr.html">html_attr</a></span><span class="op">(</span><span class="st">"href"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">a_text</span> <span class="op">&lt;-</span> <span class="va">webpage</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_elements</a></span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html">str_remove</a></span><span class="op">(</span><span class="st">"\n"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"URL: "</span>, <span class="va">a_href</span>, <span class="st">"\n"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Content:"</span>, <span class="va">a_text</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>프로그램이 웹 주소를 입력받고, 웹페이지를 열고, 데이터를 읽어서 BeautifulSoup 파서에 전달하고, 그리고 나서 모든 앵커 태그를 불러와서 각 태그별로 <code>href</code> 속성을 출력한다. 프로그램을 실행하면, 아래와 같다.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./code/extract_link_rvest.R</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">웹사이트</span> 입력 <span class="at">-</span> http://www.dr-chuck.com/page1.htm</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[1]</span> <span class="st">"http://www.dr-chuck.com/page2.htm"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./code/extract_link_rvest.R</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">웹사이트</span> 입력 <span class="at">-</span> http://www.py4inf.com/book.htm</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">[1]</span> <span class="st">"http://amzn.to/1KkULF3"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">[2]</span> <span class="st">"http://www.py4e.com/book"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">[3]</span> <span class="st">"http://amzn.to/1KkULF3"</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">[4]</span> <span class="st">"http://amzn.to/1hLcoBy"</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">[5]</span> <span class="st">"http://amzn.to/1KkV42z"</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">[6]</span> <span class="st">"http://amzn.to/1fNOnbd"</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a> <span class="ex">[7]</span> <span class="st">"http://amzn.to/1N74xLt"</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">[8]</span> <span class="st">"http://do1.dr-chuck.net/py4inf/EN-us/book.pdf"</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">[9]</span> <span class="st">"http://do1.dr-chuck.net/py4inf/ES-es/book.pdf"</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="ex">[10]</span> <span class="st">"https://twitter.com/fertardio"</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="ex">[11]</span> <span class="st">"http://do1.dr-chuck.net/py4inf/PT-br/book.pdf"</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[12]</span> <span class="st">"https://twitter.com/victorjabur"</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="ex">[13]</span> <span class="st">"translations/KO/book_009_ko.pdf"</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[14]</span> <span class="st">"http://www.xwmooc.net/python/"</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="ex">[15]</span> <span class="st">"http://fanwscu.gitbooks.io/py4inf-zh-cn/"</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="ex">[16]</span> <span class="st">"book_270.epub"</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="ex">[17]</span> <span class="st">"translations/ES/book_272_es4.epub"</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="ex">[18]</span> <span class="st">"https://www.gitbook.com/download/epub/book/fanwscu/py4inf-zh-cn"</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="ex">[19]</span> <span class="st">"html-270/"</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="ex">[20]</span> <span class="st">"html_270.zip"</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="ex">[21]</span> <span class="st">"http://itunes.apple.com/us/book/python-for-informatics/id554638579?mt=13"</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="ex">[22]</span> <span class="st">"http://www-personal.umich.edu/~csev/books/py4inf/ibooks//python_for_informatics.ibooks"</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="ex">[23]</span> <span class="st">"http://www.py4inf.com/code"</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="ex">[24]</span> <span class="st">"http://www.greenteapress.com/thinkpython/thinkCSpy/"</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="ex">[25]</span> <span class="st">"http://allendowney.com/"</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>rvest</code>을 사용하여 다음과 같이 각 태그별로 다양한 부분을 뽑아낼 수 있다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div id="qwebr-insertion-location-7"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div id="qpyodide-insertion-location-7"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
 </div>
 <p>상기 프로그램은 다음을 출력합니다.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./script/urllinks2.R</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">During</span> startup <span class="at">-</span> Warning message:</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Setting</span> LC_CTYPE=ko_KR.UTF-8@cjknarrow failed</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Enter</span> <span class="at">-</span> http://www.dr-chuck.com/page1.htm</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="ex">URL:</span>  http://www.dr-chuck.com/page2.htm</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Content:</span> Second Page</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./code/extract_link_tag.R</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">웹사이트</span> 입력 <span class="at">-</span> http://www.dr-chuck.com/page1.htm</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">경고메시지</span><span class="er">(</span><span class="ex">들</span><span class="kw">)</span><span class="bu">:</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="kw">(</span><span class="ex">name</span> in names<span class="er">(</span><span class="ex">public_methods</span><span class="kw">))</span> <span class="ex">lockBinding</span><span class="er">(</span><span class="ex">name,</span> public_bind_env<span class="kw">)</span><span class="ex">에서:</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">사용되지</span> 않는 커넥션 3 <span class="er">(</span><span class="ex">stdin</span><span class="kw">)</span><span class="ex">를</span> 닫습니다</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">TAG:</span> <span class="op">&lt;</span>a href=<span class="st">"http://www.dr-chuck.com/page2.htm"</span><span class="op">&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Second</span> Page<span class="op">&lt;</span>/a<span class="op">&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">URL:</span> http://www.dr-chuck.com/page2.htm</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Content:</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Second</span> Page</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Attrs:</span> href: http://www.dr-chuck.com/page2.htm</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>HTML을 파싱하는데 <code>rvest</code>가 가진 강력한 기능을 예제로 보여줬다. 좀더 자세한 사항은 <a href="https://rvest.tidyverse.org/" class="uri">https://rvest.tidyverse.org/</a> 에서 문서와 예제를 살펴보세요.</p>
 </section><section id="GET-binary" class="level2" data-number="25.8"><h2 data-number="25.8" class="anchored" data-anchor-id="GET-binary">
 <span class="header-section-number">25.8</span> 바이너리 파일 읽기</h2>
 <p>이미지나 비디오 같은 텍스트가 아닌 (혹은 바이너리) 파일을 가져올 때가 종종 있다. 일반적으로 이런 파일 데이터를 출력하는 것은 유용하지 않다. 하지만, <code><a href="https://rdrr.io/r/utils/download.file.html">download.file()</a></code> 함수를 사용하여, 하드 디스크 로컬 파일에 URL 사본을 쉽게 만들 수 있다.</p>
 <p><code><a href="https://rdrr.io/r/utils/download.file.html">download.file()</a></code> 함수 내부에 인터넷에 공개된 이미지 <code>url</code>을 적고, <code>destfile</code> 에는 로컬파일에 저장할 파일명을 적어준다. 중요한 것은 텍스트가 아니라 바이너리 이미지라 <code>mode = "wb"</code>를 지정한다.</p>
-<div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"http://www.py4inf.com/cover.jpg"</span>, </span>
-<span>              destfile <span class="op">=</span> <span class="st">"images/py4inf_cover.jpeg"</span>, mode<span class="op">=</span><span class="st">"wb"</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div id="qwebr-insertion-location-8"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div id="qpyodide-insertion-location-8"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
 </div>
 <p>작성된 프로그램은 네트워크로 모든 데이터를 한번에 읽어서 컴퓨터 <code>cover.jpg</code> 파일을 다운로드 받아 로컬 디스크에 지정한 디렉토리 파일명으로 데이터를 쓴다. 이 방식은 파일 크기가 사용자 컴퓨터의 메모리 크기보다 작다면 정상적으로 작동한다.</p>
 <div id="fig-network-binary" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
@@ -851,8 +2167,26 @@ ga('send', {
 그림&nbsp;25.2: 바이너리 파일 다운로드
 </figcaption></figure>
 </div>
+<p>하지만, 오디오 혹은 비디오 파일 대용량이면, 상기 프로그램은 멈추거나 사용 자 컴퓨터 메모리가 부족할 때 극단적으로 느려질 수 있다. 메모리 부족을 회피 하기 위해서, 데이터를 블럭 혹은 버퍼로 가져와서, 다음 블럭을 가져오기 전에 디스크에 각각의 블럭을 쓴다. 이런 방식으로 사용자가 가진 모든 메모리를 사 용하지 않고 어떠한 크기 파일도 읽어올 수 있다.</p>
+<p><a href="https://www.fhfa.gov/">Fannie Mae and Freddie Mac</a>는 주택금융공사에 상응하는 기관으로 주택 구매자에게 저리의 장기 고정금리 주택담보대출을 제공하고 주택 모기지를 재융자하는 역할을 통해 주택 금융 시장의 안정을 도모하고 국민의 주거 안정에 기여한다. <a href="https://www.fhfa.gov/DataTools/Downloads">웹사이트</a>에 공공데이터로 인터넷에 공개된 주택담보대출 나름 크기가 큰 데이터를 가져온다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
+<div id="qwebr-insertion-location-9"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<div id="qpyodide-insertion-location-9"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
 <p>UNIX 혹은 매킨토시 컴퓨터를 가지고 있다면, 다음과 같이 상기 동작을 수행하는 명령어가 운영체제 자체에 내장되어 있다.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> http://www.py4inf.com/cover.jpg</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://www.dr-chuck.com/py4inf/cover.jpg</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="network-terminology" class="level2" data-number="25.9"><h2 data-number="25.9" class="anchored" data-anchor-id="network-terminology">
 <span class="header-section-number">25.9</span> 용어정의</h2>
 <ul>
@@ -1327,7 +2661,652 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
 </div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom"});
+</footer><script type="module">
+// Handle cell initialization initialization
+qwebrCellDetails.map(
+  (entry) => {
+    // Handle the creation of the element
+    qwebrCreateHTMLElement(entry);
+    // In the event of interactive, initialize the monaco editor
+    if (entry.options.context == EvalTypes.Interactive) {
+      qwebrCreateMonacoEditorInstance(entry);
+    }
+  }
+);
+
+// Identify non-interactive cells (in order)
+const filteredEntries = qwebrCellDetails.filter(entry => {
+  const contextOption = entry.options && entry.options.context;
+  return ['output', 'setup'].includes(contextOption) || (contextOption == "interactive" && entry.options && entry.options.autorun === 'true');
+});
+
+// Condition non-interactive cells to only be run after webR finishes its initialization.
+qwebrInstance.then(
+  async () => {
+    const nHiddenCells = filteredEntries.length;
+    var currentHiddenCell = 0;
+
+
+    // Modify button state
+    qwebrSetInteractiveButtonState(`🟡 Running hidden code cells ...`, false);
+
+    // Begin processing non-interactive sections
+    // Due to the iteration policy, we must use a for() loop.
+    // Otherwise, we would need to switch to using reduce with an empty
+    // starting promise
+    for (const entry of filteredEntries) {
+
+      // Determine cell being examined
+      currentHiddenCell = currentHiddenCell + 1;
+      const formattedMessage = `Evaluating hidden cell ${currentHiddenCell} out of ${nHiddenCells}`;
+
+      // Update the document status header
+      if (qwebrShowStartupMessage) {
+        qwebrUpdateStatusHeader(formattedMessage);
+      }
+
+      // Display the update in non-active areas
+      qwebrUpdateStatusMessage(formattedMessage);
+
+      // Extract details on the active cell
+      const evalType = entry.options.context;
+      const cellCode = entry.code;
+      const qwebrCounter = entry.id;
+
+      if (['output', 'setup'].includes(evalType)) {
+        // Disable further global status updates
+        const activeContainer = document.getElementById(`qwebr-non-interactive-loading-container-${qwebrCounter}`);
+        activeContainer.classList.remove('qwebr-cell-needs-evaluation');
+        activeContainer.classList.add('qwebr-cell-evaluated');
+
+        // Update status on the code cell
+        const activeStatus = document.getElementById(`qwebr-status-text-${qwebrCounter}`);
+        activeStatus.innerText = " Evaluating hidden code cell...";
+        activeStatus.classList.remove('qwebr-cell-needs-evaluation');
+        activeStatus.classList.add('qwebr-cell-evaluated');
+      }
+
+      switch (evalType) {
+        case 'interactive':
+          // TODO: Make this more standardized.
+          // At the moment, we're overriding the interactive status update by pretending its
+          // output-like. 
+          const tempOptions = entry.options;
+          tempOptions["context"] = "output"
+          // Run the code in a non-interactive state that is geared to displaying output
+          await qwebrExecuteCode(`${cellCode}`, qwebrCounter, tempOptions);
+          break;
+        case 'output':
+          // Run the code in a non-interactive state that is geared to displaying output
+          await qwebrExecuteCode(`${cellCode}`, qwebrCounter, entry.options);
+          break;
+        case 'setup':
+          const activeDiv = document.getElementById(`qwebr-noninteractive-setup-area-${qwebrCounter}`);
+          // Run the code in a non-interactive state with all output thrown away
+          await mainWebR.evalRVoid(`${cellCode}`);
+          break;
+        default: 
+          break; 
+      }
+
+      if (['output', 'setup'].includes(evalType)) {
+        // Disable further global status updates
+        const activeContainer = document.getElementById(`qwebr-non-interactive-loading-container-${qwebrCounter}`);
+        // Disable visibility
+        activeContainer.style.visibility = 'hidden';
+        activeContainer.style.display = 'none';
+      }
+    }
+  }
+).then(
+  () => {
+    // Release document status as ready
+
+    if (qwebrShowStartupMessage) {
+      qwebrStartupMessage.innerText = "🟢 Ready!"
+    }
+  
+    qwebrSetInteractiveButtonState(
+      `<i class="fa-solid fa-play qwebr-icon-run-code"></i> <span>Run Code</span>`, 
+      true
+    );  
+  }
+);
+</script><script type="module">
+/**
+ * Factory function to create different types of cells based on options.
+ * @param {Object} cellData - JSON object containing code, id, and options.
+ * @returns {BaseCell} Instance of the appropriate cell class.
+ */
+globalThis.qpyodideCreateCell = function(cellData) {
+    switch (cellData.options.context) {
+        case 'interactive':
+            return new InteractiveCell(cellData);
+        case 'output':
+            return new OutputCell(cellData);
+        case 'setup':
+            return new SetupCell(cellData);
+        default:
+            return new InteractiveCell(cellData);
+            // throw new Error('Invalid cell type specified in options.');
+    }
+}  
+
+/**
+ * CellContainer class for managing a collection of cells.
+ * @class
+ */
+class CellContainer {
+    /**
+     * Constructor for CellContainer.
+     * Initializes an empty array to store cells.
+     * @constructor
+     */
+    constructor() {
+        this.cells = [];
+    }
+
+    /**
+     * Add a cell to the container.
+     * @param {BaseCell} cell - Instance of a cell (BaseCell or its subclasses).
+     */
+    addCell(cell) {
+        this.cells.push(cell);
+    }
+
+    /**
+     * Execute all cells in the container.
+     */
+    async executeAllCells() {
+        for (const cell of this.cells) {
+            await cell.executeCode();
+        }
+    }
+
+    /**
+     * Execute all cells in the container.
+     */
+    async autoRunExecuteAllCells() {
+        for (const cell of this.cells) {
+            await cell.autoRunExecuteCode();
+        }
+    }
+}
+  
+
+/**
+ * BaseCell class for handling code execution using Pyodide.
+ * @class
+ */
+class BaseCell {
+    /**
+     * Constructor for BaseCell.
+     * @constructor
+     * @param {Object} cellData - JSON object containing code, id, and options.
+     */
+    constructor(cellData) {
+        this.code = cellData.code;
+        this.id = cellData.id;
+        this.options = cellData.options;
+        this.insertionLocation = document.getElementById(`qpyodide-insertion-location-${this.id}`);
+        this.executionLock = false;
+    }
+
+    cellOptions() {
+        // Subclass this? 
+        console.log(this.options);
+        return this.options;
+    }
+
+    /**
+     * Execute the Python code using Pyodide.
+     * @returns {*} Result of the code execution.
+     */
+    async executeCode() {
+        // Execute code using Pyodide
+        const result = getPyodide().runPython(this.code);
+        return result;
+    }
+};
+
+/**
+ * InteractiveCell class for creating editable code editor with Monaco Editor.
+ * @class
+ * @extends BaseCell
+ */
+class InteractiveCell extends BaseCell {
+
+    /**
+     * Constructor for InteractiveCell.
+     * @constructor
+     * @param {Object} cellData - JSON object containing code, id, and options.
+     */
+    constructor(cellData) {
+        super(cellData);
+        this.editor = null;
+        this.setupElement();
+        this.setupMonacoEditor();
+    }
+
+    /**
+     * Set up the interactive cell elements
+     */
+    setupElement() {
+
+        // Create main div element
+        var mainDiv = document.createElement('div');
+        mainDiv.id = `qpyodide-interactive-area-${this.id}`;
+        mainDiv.className = `qpyodide-interactive-area`;
+        if (this.options.classes) {
+            mainDiv.className += " " + this.options.classes
+        }
+
+        // Add a unique cell identifier that users can customize
+        if (this.options.label) {
+            mainDiv.setAttribute('data-id', this.options.label);
+        }
+
+        // Create toolbar div
+        var toolbarDiv = document.createElement('div');
+        toolbarDiv.className = 'qpyodide-editor-toolbar';
+        toolbarDiv.id = `qpyodide-editor-toolbar-${this.id}`;
+
+        // Create a div to hold the left buttons
+        var leftButtonsDiv = document.createElement('div');
+        leftButtonsDiv.className = 'qpyodide-editor-toolbar-left-buttons';
+
+        // Create a div to hold the right buttons
+        var rightButtonsDiv = document.createElement('div');
+        rightButtonsDiv.className = 'qpyodide-editor-toolbar-right-buttons';
+
+        // Create Run Code button
+        var runCodeButton = document.createElement('button');
+        runCodeButton.className = 'btn btn-default qpyodide-button qpyodide-button-run';
+        runCodeButton.disabled = true;
+        runCodeButton.type = 'button';
+        runCodeButton.id = `qpyodide-button-run-${this.id}`;
+        runCodeButton.textContent = '🟡 Loading Pyodide...';
+        runCodeButton.title = `Run code (Shift + Enter)`;
+
+        // Append buttons to the leftButtonsDiv
+        leftButtonsDiv.appendChild(runCodeButton);
+
+        // Create Reset button
+        var resetButton = document.createElement('button');
+        resetButton.className = 'btn btn-light btn-xs qpyodide-button qpyodide-button-reset';
+        resetButton.type = 'button';
+        resetButton.id = `qpyodide-button-reset-${this.id}`;
+        resetButton.title = 'Start over';
+        resetButton.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i>';
+
+        // Create Copy button
+        var copyButton = document.createElement('button');
+        copyButton.className = 'btn btn-light btn-xs qpyodide-button qpyodide-button-copy';
+        copyButton.type = 'button';
+        copyButton.id = `qpyodide-button-copy-${this.id}`;
+        copyButton.title = 'Copy code';
+        copyButton.innerHTML = '<i class="fa-regular fa-copy"></i>';
+
+        // Append buttons to the rightButtonsDiv
+        rightButtonsDiv.appendChild(resetButton);
+        rightButtonsDiv.appendChild(copyButton);
+
+        // Create console area div
+        var consoleAreaDiv = document.createElement('div');
+        consoleAreaDiv.id = `qpyodide-console-area-${this.id}`;
+        consoleAreaDiv.className = 'qpyodide-console-area';
+
+        // Create editor div
+        var editorDiv = document.createElement('div');
+        editorDiv.id = `qpyodide-editor-${this.id}`;
+        editorDiv.className = 'qpyodide-editor';
+
+        // Create output code area div
+        var outputCodeAreaDiv = document.createElement('div');
+        outputCodeAreaDiv.id = `qpyodide-output-code-area-${this.id}`;
+        outputCodeAreaDiv.className = 'qpyodide-output-code-area';
+        outputCodeAreaDiv.setAttribute('aria-live', 'assertive');
+
+        // Create pre element inside output code area
+        var preElement = document.createElement('pre');
+        preElement.style.visibility = 'hidden';
+        outputCodeAreaDiv.appendChild(preElement);
+
+        // Create output graph area div
+        var outputGraphAreaDiv = document.createElement('div');
+        outputGraphAreaDiv.id = `qpyodide-output-graph-area-${this.id}`;
+        outputGraphAreaDiv.className = 'qpyodide-output-graph-area';
+
+        // Append buttons to the toolbar
+        toolbarDiv.appendChild(leftButtonsDiv);
+        toolbarDiv.appendChild(rightButtonsDiv);
+
+        // Append all elements to the main div
+        mainDiv.appendChild(toolbarDiv);
+        consoleAreaDiv.appendChild(editorDiv);
+        consoleAreaDiv.appendChild(outputCodeAreaDiv);
+        mainDiv.appendChild(consoleAreaDiv);
+        mainDiv.appendChild(outputGraphAreaDiv);
+
+        // Insert the dynamically generated object at the document location.
+        this.insertionLocation.appendChild(mainDiv);
+    }
+
+    /**
+     * Set up Monaco Editor for code editing.
+     */
+    setupMonacoEditor() {
+
+        // Retrieve the previously created document elements
+        this.runButton = document.getElementById(`qpyodide-button-run-${this.id}`);
+        this.resetButton = document.getElementById(`qpyodide-button-reset-${this.id}`);
+        this.copyButton = document.getElementById(`qpyodide-button-copy-${this.id}`);
+        this.editorDiv = document.getElementById(`qpyodide-editor-${this.id}`);
+        this.outputCodeDiv = document.getElementById(`qpyodide-output-code-area-${this.id}`);
+        this.outputGraphDiv = document.getElementById(`qpyodide-output-graph-area-${this.id}`);
+        
+        // Store reference to the object
+        var thiz = this;
+
+        // Load the Monaco Editor and create an instance
+        require(['vs/editor/editor.main'], function () {
+            thiz.editor = monaco.editor.create(
+                thiz.editorDiv, {
+                    value: thiz.code,
+                    language: 'python',
+                    theme: 'vs-light',
+                    automaticLayout: true,           // Works wonderfully with RevealJS
+                    scrollBeyondLastLine: false,
+                    minimap: {
+                        enabled: false
+                    },
+                    fontSize: '17.5pt',              // Bootstrap is 1 rem
+                    renderLineHighlight: "none",     // Disable current line highlighting
+                    hideCursorInOverviewRuler: true,  // Remove cursor indictor in right hand side scroll bar
+                    readOnly: thiz.options['read-only'] ?? false
+                }
+            );
+        
+            // Store the official counter ID to be used in keyboard shortcuts
+            thiz.editor.__qpyodideCounter = thiz.id;
+        
+            // Store the official div container ID
+            thiz.editor.__qpyodideEditorId = `qpyodide-editor-${thiz.id}`;
+        
+            // Store the initial code value and options
+            thiz.editor.__qpyodideinitialCode = thiz.code;
+            thiz.editor.__qpyodideOptions = thiz.options;
+        
+            // Set at the model level the preferred end of line (EOL) character to LF.
+            // This prevent `\r\n` from being given to the Pyodide engine if the user is on Windows.
+            // See details in: https://github.com/coatless/quarto-Pyodide/issues/94
+            // Associated error text: 
+            // Error: <text>:1:7 unexpected input
+        
+            // Retrieve the underlying model
+            const model = thiz.editor.getModel();
+            // Set EOL for the model
+            model.setEOL(monaco.editor.EndOfLineSequence.LF);
+        
+            // Dynamically modify the height of the editor window if new lines are added.
+            let ignoreEvent = false;
+            const updateHeight = () => {
+            const contentHeight = thiz.editor.getContentHeight();
+            // We're avoiding a width change
+            //editorDiv.style.width = `${width}px`;
+            thiz.editorDiv.style.height = `${contentHeight}px`;
+                try {
+                    ignoreEvent = true;
+            
+                    // The key to resizing is this call
+                    thiz.editor.layout();
+                } finally {
+                    ignoreEvent = false;
+                }
+            };
+        
+            // Helper function to check if selected text is empty
+            function isEmptyCodeText(selectedCodeText) {
+                return (selectedCodeText === null || selectedCodeText === undefined || selectedCodeText === "");
+            }
+        
+            // Registry of keyboard shortcuts that should be re-added to each editor window
+            // when focus changes.
+            const addPyodideKeyboardShortCutCommands = () => {
+            // Add a keydown event listener for Shift+Enter to run all code in cell
+            thiz.editor.addCommand(monaco.KeyMod.Shift | monaco.KeyCode.Enter, () => {
+                // Retrieve all text inside the editor
+                thiz.runCode(thiz.editor.getValue());
+            });
+        
+            // Add a keydown event listener for CMD/Ctrl+Enter to run selected code
+            thiz.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
+                    // Get the selected text from the editor
+                    const selectedText = thiz.editor.getModel().getValueInRange(thiz.editor.getSelection());
+                    // Check if no code is selected
+                    if (isEmptyCodeText(selectedText)) {
+                        // Obtain the current cursor position
+                        let currentPosition = thiz.editor.getPosition();
+                        // Retrieve the current line content
+                        let currentLine = thiz.editor.getModel().getLineContent(currentPosition.lineNumber);
+                
+                        // Propose a new position to move the cursor to
+                        let newPosition = new monaco.Position(currentPosition.lineNumber + 1, 1);
+                
+                        // Check if the new position is beyond the last line of the editor
+                        if (newPosition.lineNumber > thiz.editor.getModel().getLineCount()) {
+                            // Add a new line at the end of the editor
+                            thiz.editor.executeEdits("addNewLine", [{
+                            range: new monaco.Range(newPosition.lineNumber, 1, newPosition.lineNumber, 1),
+                            text: "\n", 
+                            forceMoveMarkers: true,
+                            }]);
+                        }
+                        
+                        // Run the entire line of code.
+                        thiz.runCode(currentLine);
+                
+                        // Move cursor to new position
+                        thiz.editor.setPosition(newPosition);
+                    } else {
+                        // Code to run when Ctrl+Enter is pressed with selected code
+                        thiz.runCode(selectedText);
+                    }
+                });
+            }
+        
+            // Register an on focus event handler for when a code cell is selected to update
+            // what keyboard shortcut commands should work.
+            // This is a workaround to fix a regression that happened with multiple
+            // editor windows since Monaco 0.32.0 
+            // https://github.com/microsoft/monaco-editor/issues/2947
+            thiz.editor.onDidFocusEditorText(addPyodideKeyboardShortCutCommands);
+        
+            // Register an on change event for when new code is added to the editor window
+            thiz.editor.onDidContentSizeChange(updateHeight);
+        
+            // Manually re-update height to account for the content we inserted into the call
+            updateHeight();
+                
+        });
+
+        
+        // Add a click event listener to the run button
+        thiz.runButton.onclick = function () {
+            thiz.runCode(
+                thiz.editor.getValue()
+            );
+        };
+        
+        // Add a click event listener to the reset button
+        thiz.copyButton.onclick = function () {
+            // Retrieve current code data
+            const data = thiz.editor.getValue();
+            
+            // Write code data onto the clipboard.
+            navigator.clipboard.writeText(data || "");
+        };
+        
+        // Add a click event listener to the copy button
+        thiz.resetButton.onclick = function () {
+            thiz.editor.setValue(thiz.editor.__qpyodideinitialCode);
+        };
+    }
+
+    disableInteractiveCells() {
+        // Enable locking of execution for the cell
+        this.executionLock = true;
+
+        // Disallowing execution of other code cells
+        document.querySelectorAll(".qpyodide-button-run").forEach((btn) => {
+            btn.disabled = true;
+        });
+    }
+
+    enableInteractiveCells() {
+        // Remove locking of execution for the cell
+        this.executionLock = false;
+
+        // All execution of other code cells
+        document.querySelectorAll(".qpyodide-button-run").forEach((btn) => {
+            btn.disabled = false;
+        });
+    }
+
+    /**
+     * Execute the Python code inside the editor.
+     */
+    async runCode(code) {
+        
+        // Check if we have an execution lock
+        if (this.executeLock) return; 
+        
+        this.disableInteractiveCells();
+
+        // Force wait procedure
+        await mainPyodide;
+
+        // Clear the output stock
+        qpyodideResetOutputArray();
+
+        // Generate a new canvas element, avoid attaching until the end
+        let graphFigure = document.createElement("figure");
+        document.pyodideMplTarget = graphFigure;
+
+        console.log("Running code!");
+        // Obtain results from the base class
+        try {
+            // Always check to see if the user adds new packages
+            await mainPyodide.loadPackagesFromImports(code);
+
+            // Process result
+            const output = await mainPyodide.runPythonAsync(code);
+
+            // Add output
+            qpyodideAddToOutputArray(output, "stdout");
+        } catch (err) {
+            // Add error message
+            qpyodideAddToOutputArray(err, "stderr");
+            // TODO: There has to be a way to remove the Pyodide portion of the errors... 
+        }
+
+        const result = qpyodideRetrieveOutput();
+
+        // Nullify the output area of content
+        this.outputCodeDiv.innerHTML = "";
+        this.outputGraphDiv.innerHTML = "";        
+
+        // Design an output object for messages
+        const pre = document.createElement("pre");
+        if (/\S/.test(result)) {
+            // Display results as HTML elements to retain output styling
+            const div = document.createElement("div");
+            div.innerHTML = result;
+            pre.appendChild(div);
+        } else {
+            // If nothing is present, hide the element.
+            pre.style.visibility = "hidden";
+        }
+
+        // Add output under interactive div
+        this.outputCodeDiv.appendChild(pre);
+
+        // Place the graphics onto the page
+        if (graphFigure) {
+
+            if (this.options['fig-cap']) {
+                // Create figcaption element
+                const figcaptionElement = document.createElement('figcaption');
+                figcaptionElement.innerText = this.options['fig-cap'];
+                // Append figcaption to figure
+                graphFigure.appendChild(figcaptionElement);    
+            }
+
+            this.outputGraphDiv.appendChild(graphFigure);
+        }
+
+        // Re-enable execution
+        this.enableInteractiveCells();
+    }
+};
+
+/**
+ * OutputCell class for customizing and displaying output.
+ * @class
+ * @extends BaseCell
+ */
+class OutputCell extends BaseCell {
+    /**
+     * Constructor for OutputCell.
+     * @constructor
+     * @param {Object} cellData - JSON object containing code, id, and options.
+     */
+    constructor(cellData) {
+      super(cellData);
+    }
+  
+    /**
+     * Display customized output on the page.
+     * @param {*} output - Result to be displayed.
+     */
+    displayOutput(output) {
+        const results = this.executeCode();
+        return results;
+    }
+  }
+
+/**
+ * SetupCell class for suppressed output.
+ * @class
+ * @extends BaseCell
+ */
+class SetupCell extends BaseCell {
+    /**
+     * Constructor for SetupCell.
+     * @constructor
+     * @param {Object} cellData - JSON object containing code, id, and options.
+     */
+    constructor(cellData) {
+        super(cellData);
+    }
+
+    /**
+     * Execute the Python code without displaying the results.
+     */
+    runSetupCode() {
+        // Execute code without displaying output
+        this.executeCode();
+    }
+};
+</script><script type="module">
+// Handle cell initialization initialization
+qpyodideCellDetails.map(
+    (entry) => {
+      // Handle the creation of the element
+      qpyodideCreateCell(entry);
+    }
+  );
+</script><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
