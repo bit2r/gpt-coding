@@ -1676,7 +1676,18 @@
     "section": "",
     "text": "24.1 문자 매칭\n좀더 강력한 정규 표현식을 작성할 수 있는 다른 특수문자는 많이 있다. 가장 자주 사용되는 특수 문자는 임의 문자를 매칭하는 마침표다.\n다음 예제에서 정규 표현식 “F..m:”은 “From:”, “Fxxm:”, “F12m:”, “F!@m:’ 같은 임의 문자열을 매칭한다. 왜냐하면 정규 표현식 마침표 문자가 임의의 문자와 매칭되기 때문이다.\n정규 표현식에 “*”, “+’ ’ 문자를 사용하여 문자가 원하는만큼 반복을 나타내는 기능과 결합되었을 때는 더욱 강력해진다.”*“,”+’ ’ 특수 문자가 검색 문자열에 문자 하나만을 매칭하는 대신에 별표 기호인 경우 0 혹은 그 이상의 매칭, 더하기 기호인 경우 1 혹은 그 이상의 문자의 매칭을 의미한다.\n다음 예제에서 반복 와일드 카드(wild card) 문자를 사용하여 매칭하는 라인을 좀더 좁힐 수 있다.\n검색 문자열 “^From:.+@” 은 “From:” 으로 시작하고, “.+” 하나 혹은 그 이상의 문자들, 그리고 @ 기호와 매칭되는 라인을 성공적으로 찾아낸다. 그래서 다음 라인은 매칭이 될 것이다.\nFrom: stephen.marquard@uct.ac.za\n콜론(:)과 @ 기호 사이의 모든 문자들을 매칭하도록 확장하는 것으로 “.+” 와이드 카드를 간주할 수 있다.\nFrom:.+ @\n더하기와 별표 기호를 “밀어내기(pushy)” 문자로 생각하는 것이 좋다. 예를 들어, 다음 문자열은 “.+” 특수문자가 다음에 보여주듯이 밖으로 밀어내는 것처럼 문자열 마지막 @ 기호를 매칭한다.\nFrom:stephen.marquard@uct.ac.za, csev@umich.edu, and cwen @iupui.edu\n다른 특수문자를 추가함으로서 별표나 더하기 기호가 너무 “탐욕(greedy)”스럽지 않게 만들 수 있다. 와일드 카드 특수문자의 탐욕스러운 기능을 끄는 것에 대해서는 자세한 정보를 참조바란다.",
     "crumbs": [
-      "분야별 도구",
+      "분야별 코딩",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
+    ]
+  },
+  {
+    "objectID": "tool-regex.html#regex-char-matching",
+    "href": "tool-regex.html#regex-char-matching",
+    "title": "24  정규 표현식",
+    "section": "",
+    "text": "R\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "crumbs": [
+      "분야별 코딩",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
     ]
   },
@@ -1687,7 +1698,7 @@
     "section": "\n24.2 데이터 추출",
     "text": "24.2 데이터 추출\nR stringr 패키지로 문자열에서 데이터를 추출하려면, str_extract_all() 함수를 사용해서 정규 표현식과 매칭되는 모든 부속 문자열을 추출할 수 있다. 형식에 관계없이 임의 라인에서 전자우편 주소 같은 문자열을 추출하는 예제를 사용하자. 예를 들어, 다음 각 라인에서 전자우편 주소를 뽑아내고자 한다.\nFrom stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008\nReturn-Path: &lt;postmaster@collab.sakaiproject.org&gt;\n          for &lt;source@collab.sakaiproject.org&gt;;\nReceived: (from apache@localhost)\nAuthor: stephen.marquard@uct.ac.za\n각각의 라인에 대해서 다르게 쪼개고, 슬라이싱하면서 라인 각각의 형식에 맞추어 코드를 작성하고는 싶지는 않다. 다음 프로그램은 str_extract_all() 함수를 사용하여 전자우편 주소가 있는 라인을 찾아내고 하나 혹은 그 이상의 주소를 뽑아낸다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nstr_extract_all() 함수는는 두번째 인자 패턴을 갖는 문자열을 찾아서 전자우편 주소처럼 보이는 모든 문자열을 리스트로 반환한다. 공백이 아닌 문자 (\\\\S)와 매칭되는 가운데 @을 갖는 두 문자열 시퀀스(sequence)를 매칭한다.\n프로그램의 출력은 다음과 같다.\n\n[[1]]\n[1] \"csev@umich.edu\" \"cwen@iupui.edu\"\n\n정규 표현식을 해석하면, 적어도 하나의 공백이 아닌 문자, @과 적어도 하나 이상의 공백이 아닌 문자를 가진 부속 문자열을 찾는다. 또한, “\\\\S+” 특수 문자는 가능한 많이 공백이 아닌 문자를 매칭한다. (정규 표현식에서 “탐욕(greedy)” 매칭이라고 부른다.)\n정규 표현식은 두번 매칭(csev@umich.edu, cwen@iupui.edu)하지만, 문자열 “@2PM”은 매칭을 하지 않는다. 왜냐하면, @ 기호 앞에 공백이 아닌 문자가 하나도 없기 때문이다. 프로그램의 정규 표현식을 사용해서 파일에 모든 라인을 읽고 다음과 같이 전자우편 주소처럼 보이는 모든 문자열을 출력한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n각 라인을 읽어 들이고, 정규 표현식과 매칭되는 모든 부속 문자열을 추출한다. str_extract() 함수는 문자 벡터를 반환하기 때문에, 전자우편 처럼 보이는 부속 문자열을 적어도 하나 찾아서 출력하기 위해서 반환 리스트 요소 숫자가 NA 여부를 간단히 확인한다.\n원데이터 mbox.txt 파일에 프로그램을 실행하면, 다음 출력을 얻는다.\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"&lt;postmaster@collab.sakaiproject.org&gt;\"\n[1] \"&lt;200801051412.m05ECIaH010327@nakamura.uits.iupui.edu&gt;\"\n[1] \"&lt;source@collab.sakaiproject.org&gt;;\"\n[1] \"&lt;source@collab.sakaiproject.org&gt;;\"\n[1] \"&lt;source@collab.sakaiproject.org&gt;;\"\n[1] \"apache@localhost)\"\n[1] \"source@collab.sakaiproject.org;\"\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"louis@media.berkeley.edu\"\n...\n전자우편 주소 몇몇은 “&lt;”, “;” 같은 잘못된 문자가 앞과 뒤에 붙어있다. 문자나 숫자로 시작하고 끝나는 문자열 부분만 관심있다고 하자.\n그러기 위해서, 정규 표현식의 또 다른 기능을 사용한다. 매칭하려는 다중 허용 문자 집합을 표기하기 위해서 꺾쇠 괄호를 사용한다. 그런 의미에서 “\\S”은 공백이 아닌 문자 집합을 매칭하게 한다. 이제 매칭하려는 문자에 관해서 좀더 명확해졌다.\n여기 새로운 정규 표현식이 있다.\n[a-zA-Z0-9]\\\\S*@\\\\S*[a-zA-Z]\n약간 복잡해졌다. 왜 정규 표현식이 자신만의 언어인가에 대해서 이해할 수 있다. 이 정규 표현식을 해석하면, 0 혹은 그 이상의 공백이 아닌 문자(“\\\\S*”)로 하나의 소문자, 대문자 혹은 숫자(“[a-zA-Z0-9]”)를 가지며, @ 다음에 0 혹은 그 이상의 공백이 아닌 문자(“\\\\S*”)로 하나의 소문자, 대문자 혹은 숫자(“[a-zA-Z0-9]”)로 된 부속 문자열을 찾는다. 0 혹은 그 이상의 공백이 아닌 문자를 나타내기 위해서 “+”에서 “”으로 바꿨다. 왜냐하면 ”[a-zA-Z0-9]” 자체가 이미 하나의 공백이 아닌 문자이기 때문이다. ””, “+”는 단일 문자에 별표, 더하기 기호 왼편에 즉시 적용됨을 기억하세요.\n프로그램에 정규 표현식을 사용하면, 데이터가 훨씬 깔끔해진다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"postmaster@collab.sakaiproject.org\"\n[1] \"200801051412.m05ECIaH010327@nakamura.uits.iupui.edu\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"apache@localhost\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"stephen.marquard@uct.ac.za\"\n[1] \"louis@media.berkeley.edu\"\n[1] \"postmaster@collab.sakaiproject.org\"\n[1] \"200801042308.m04N8v6O008125@nakamura.uits.iupui.edu\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"source@collab.sakaiproject.org\"\n[1] \"apache@localhost\"\n...\n“source@collab.sakaiproject.org” 라인에서 문자열 끝에 “&gt;” 문자를 정규 표현식으로 제거한 것을 주목한다. 정규 표현식 끝에 “[a-zA-Z]”을 추가하여서 정규 표현식 파서가 찾는 임의 문자열은 문자로만 끝나야 되기 때문이다. 그래서, “sakaiproject.org&gt;;”에서 “&gt;”을 봤을 때, “g”가 마지막 맞는 매칭이 되고, 거기서 마지막 매칭을 마치고 중단한다.\nstr_extract_all() 프로그램의 출력은 리스트의 단일 요소를 가진 문자열로 R 리스트이다.",
     "crumbs": [
-      "분야별 도구",
+      "분야별 코딩",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
     ]
   },
@@ -1698,7 +1709,7 @@
     "section": "\n24.3 검색과 추출 조합",
     "text": "24.3 검색과 추출 조합\n다음과 같은 “X-” 문자열로 시작하는 라인의 숫자를 찾고자 한다면,\nX-DSPAM-Confidence: 0.8475\nX-DSPAM-Probability: 0.0000  \n임의의 라인에서 임의 부동 소수점 숫자가 아니라 상기 구문을 가진 라인에서만 숫자를 추출하고자 한다.\n라인을 선택하기 위해서 다음과 같이 정규 표현식을 구성한다.\n^X-.*: [0-9.]+\n정규 표현식을 해석하면, ^에서 “X-”으로 시작하고, “.*“에서 0 혹은 그이상의 문자를 가지며, 콜론(”:“)이 나오고 나서 공백을 만족하는 라인을 찾는다. 공백 뒤에”[0-9.]+“에서 숫자 (0-9) 혹은 점을 가진 하나 혹은 그 이상의 문자가 있여야 한다. 꺽쇠 기호 사이에 마침표는 실제 마침표만 매칭함을 주목하기 바란다. (즉, 꺾쇠 기호 사이는 와일드 카드 문자가 아니다.)\n관심을 가지고 있는 특정한 라인과 매우 정확하게 매칭이되는 매우 빠듯한 정규 표현식으로 다음과 같다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n프로그램을 실행하면, 잘 걸러져서 찾고자 하는 라인만 볼 수 있다.\n[1] \"X-DSPAM-Confidence: 0.8475\"\n[1] \"X-DSPAM-Probability: 0.0000\"\n[1] \"X-DSPAM-Confidence: 0.6178\"\n[1] \"X-DSPAM-Probability: 0.0000\"\n[1] \"X-DSPAM-Confidence: 0.6961\"\n...\n하지만, 이제 str_split() 함수를 사용해서 숫자를 뽑아내는 문제를 해결해야 한다. str_split()을 사용하는 것이 간단해 보이지만, 동시에 라인을 검색하고 파싱하기 위해서 정규 표현식의 또 다른 기능을 사용할 수 있다.\n괄호는 정규 표현식의 또 다른 특수 문자다. 정규 표현식에 괄호를 추가한다면, 문자열이 매칭될 때, 무시된다. 하지만, str_match()을 사용할 때, 매칭할 전체 정규 표현식을 원할지라도, 정규 표현식을 매칭하는 부속 문자열의 부분만을 뽑아낸다는 것을 괄호가 표시한다.\n그래서, 프로그램을 다음과 같이 수정한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nstr_detect()을 호출하는 대신에, 매칭 문자열의 부동 소수점 숫자만 뽑아내는데 str_match()에 원하는 부동 소수점 숫자를 표현하는 정규 표현식 부분에 괄호를 추가한다.\n프로그램의 출력은 다음과 같다.\n[1] \"0.8475\"\n[1] \"0.0000\"\n[1] \"0.6178\"\n[1] \"0.0000\"\n[1] \"0.6961\"\n[1] \"0.0000\"\n[1] \"0.7565\"\n[1] \"0.0000\"\n[1] \"0.7626\"\n...\n숫자가 여전히 리스트에 있어서 문자열에서 부동 소수점으로 변환할 필요가 있지만, 흥미로운 정보를 찾아 뽑아내기 위해서 정규 표현식의 강력한 힘을 사용했다.\n이 기술을 활용한 또 다른 예제로, 파일을 살펴보면, 폼(form)을 가진 라인이 많다.\nDetails: http://source.sakaiproject.org/viewsvn/?view=rev&rev=39772\n상기 언급한 동일한 기법을 사용하여 모든 변경 번호(라인의 끝에 정수 숫자)를 추출하고자 한다면 다음과 같이 프로그램을 작성할 수 있다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n작성한 정규 표현식을 해석하면, “Details:”로 시작하는 “.*“에 임의의 문자들로,”rev=“을 포함하고 나서, 하나 혹은 그 이상의 숫자를 가진 라인을 찾는다. 전체 정규 표현식을 만족하는 라인을 찾고자 하지만, 라인 끝에 정수만을 추출하기 위해서”[0-9]+“을 괄호로 감쌌다.\n프로그램을 실행하면, 다음 출력을 얻는다.\n[1] \"39772\"\n[1] \"39771\"\n[1] \"39770\"\n[1] \"39769\"\n[1] \"39766\"\n[1] \"39765\"\n[1] \"39764\"\n...\n“[0-9]+”은 “탐욕(greedy)”스러워서, 숫자를 추출하기 전에 가능한 큰 문자열 숫자를 만들려고 한다는 것을 기억하라. 이런 “탐욕(greedy)”스러운 행동으로 인해서 왜 각 숫자로 모두 5자리 숫자를 얻은 이유가 된다. 정규 표현식 라이브러리는 양방향으로 파일 처음이나 끝에 숫자가 아닌 것을 마주칠 때까지 뻗어 나간다.\n이제 정규 표현식을 사용해서 각 전자우편 메시지의 요일에 관심이 있었던 책 앞의 연습 프로그램을 다시 작성한다. 다음 형식의 라인을 찾는다.\nFrom stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008\n그리고 나서, 각 라인의 요일의 시간을 추출하고자 한다. 앞에서 str_split를 두번 호출하여 작업을 수행했다. 첫번째는 라인을 단어로 쪼개고, 다섯번째 단어를 뽑아내서, 관심있는 두 문자를 뽑아내기 위해서 콜론 문자에서 다시 쪼갰다.\n작동을 할지 모르지만, 실질적으로 정말 부서지기 쉬운 코드로 라인이 잘 짜여져 있다고 가정하에 가능하다. 잘못된 형식의 라인이 나타날 때도 결코 망가지지 않는 프로그램을 담보하기 위해서 충분한 오류 검사기능을 추가하거나 커다란 try/except 블록을 넣으면, 참 읽기 힘든 10-15 라인 코드로 커질 것이다.\n다음 정규 표현식으로 훨씬 간결하게 작성할 수 있다.\n^From .* [0-9][0-9]:\n상기 정규 표현식을 해석하면, 공백을 포함한 “From”으로 시작해서, “.*“에 임의 갯수의 문자, 그리고 공백, 두 개의 숫자”[0-9][0-9]” 뒤에 콜론(:) 문자를 가진 라인을 찾는다. 일종의 찾고 있는 라인에 대한 정의다.\nstr_extract() 함수를 사용해서 단지 시간만 뽑아내기 위해서, 두 숫자에 괄호를 다음과 같이 추가한다.\n^From .* ([0-9][0-9]):\n작업 결과는 다음과 같이 프로그램에 반영한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n프로그램을 실행하면, 다음 출력 결과가 나온다.\n[1] \"09\"\n[1] \"18\"\n[1] \"16\"\n[1] \"15\"\n[1] \"15\"\n[1] \"14\"\n[1] \"11\"\n[1] \"11\"\n...",
     "crumbs": [
-      "분야별 도구",
+      "분야별 코딩",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
     ]
   },
@@ -1709,7 +1720,7 @@
     "section": "\n24.4 이스케이프 문자",
     "text": "24.4 이스케이프 문자\n라인의 처음과 끝을 매칭하거나, 와일드 카드를 명세하기 위해서 정규 표현식의 특수 문자를 사용했기 때문에, 정규 표현식에 사용된 문자가 “정상(normal)”적인 문자임을 표기할 방법이 필요하고 달러 기호와 탈자 기호(^) 같은 실제 문자를 매칭하고자 한다.\n역슬래쉬(’)́를 가진 문자를 앞에 덮붙여서 문자를 단순히 매칭하고자 한다고 나타낼 수 있다. 예를 들어, 다음 정규표현식으로 금액을 찾을 수 있다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n역슬래쉬 달러 기호를 앞에 덮붙여서(\\\\$), 실제로 “라인 끝(end of line)” 매칭 대신에 입력 문자열의 달러 기호와 매칭한다. 정규 표현식 나머지 부분은 하나 혹은 그 이상의 숫자 혹은 소수점 문자를 매칭한다. 주목: 꺾쇠 괄호 내부에 문자는 “특수 문자”가 아니다. 그래서 “[0-9.]”은 실제 숫자 혹은 점을 의미한다. 꺾쇠 괄호 외부에 점은 “와일드 카드(wild-card)” 문자이고 임의의 문자와 매칭한다. 꺾쇠 괄호 내부에서 점은 점일 뿐이다.",
     "crumbs": [
-      "분야별 도구",
+      "분야별 코딩",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
     ]
   },
@@ -1720,7 +1731,7 @@
     "section": "\n24.5 요약",
     "text": "24.5 요약\n지금까지 정규 표현식의 표면을 긁은 정도지만, 정규 표현식 언어에 대해서 조금 학습했다. 정규 표현식은 특수 문자로 구성된 검색 문자열로 “매칭(matching)” 정의하고 매칭된 문자열로부터 추출된 결과물을 정규 표현식 시스템과 프로그래머가 의도한 바를 의사소통하는 것이다. 다음에 특수 문자 및 문자 시퀀스의 일부가 있다.\n\n\n^ 라인의 처음을 매칭.\n\n$ 라인의 끝을 매칭.\n\n. 임의의 문자를 매칭(와일드 카드)\n\ns 공백 문자를 매칭.\n\nS 공백이 아닌 문자를 매칭.(s 의 반대).\n\n* 바로 앞선 문자에 적용되고 0 혹은 그 이상의 앞선 문자와 매칭을 표기함.\n\n*? 바로 앞선 문자에 적용되고 0 혹은 그 이상의 앞선 문자와 매칭을 “탐욕적이지 않은(non-greedy) 방식”으로 표기함.\n\n+ 바로 앞선 문자에 적용되고 1 혹은 그 이상의 앞선 문자와 매칭을 표기함.\n\n+? 바로 앞선 문자에 적용되고 1 혹은 그 이상의 앞선 문자와 매칭을 “탐욕적이지 않은(non-greedy) 방식”으로 표기함.\n\n[aeiou] 명세된 집합 문자에 존재하는 단일 문자와 매칭. 다른 문자는 안되고, “a”, “e”, “i”, “o”, “u” 문자만 매칭되는 예제.\n\n[a-z0-9] 음수 기호로 문자 범위를 명세할 수 있다. 소문자이거나 숫자인 단일 문자만 매칭되는 예제.\n\n[^A-Za-z] 집합 표기의 첫문자가 ^인 경우, 로직을 거꾸로 적용한다. 대문자나 혹은 소문자가 아닌 임의 단일 문자만 매칭하는 예제.\n\n( ) 괄호가 정규표현식에 추가될 때, 매칭을 무시한다. 하지만 str_extract()을 사용할 때 전체 문자열보다 매칭된 문자열의 상세한 부속 문자열을 추출할 수 있게 한다.\n\n\\b 빈 문자열을 매칭하지만, 단어의 시작과 끝에만 사용된다.\n\n\\B 빈 문자열을 매칭하지만, 단어의 시작과 끝이 아닌 곳에 사용된다.\n\n\\d 임의 숫자와 매칭하여 [0-9] 집합에 상응함.\n\n\\D 임의 숫자가 아닌 문자와 매칭하여 [^0-9] 집합에 상응함.",
     "crumbs": [
-      "분야별 도구",
+      "분야별 코딩",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
     ]
   },
@@ -1731,7 +1742,7 @@
     "section": "\n24.6 유닉스 사용자 보너스",
     "text": "24.6 유닉스 사용자 보너스\n정규 표현식을 사용하여 파일을 검색 기능은 1960년대 이래로 유닉스 운영 시스템에 내장되어 여러가지 형태로 거의 모든 프로그래밍 언어에서 이용가능하다.\n사실, str_detect() 예제에서와 거의 동일한 기능을 하는 grep (Generalized Regular Expression Parser)으로 불리는 유닉스 내장 명령어 프로그램이 있다. 그래서, 맥킨토시나 리눅스 운영 시스템을 가지고 있다면, 명령어 창에서 다음 명령어를 시도할 수 있다.\n$ grep '^From:' mbox-short.txt\nFrom: stephen.marquard@uct.ac.za\nFrom: louis@media.berkeley.edu\nFrom: zqian@umich.edu\nFrom: rjlowe@iupui.edu\ngrep을 사용하여, mbox-short.txt 파일 내부에 “From:” 문자열로 시작하는 라인을 보여준다. grep 명령어를 가지고 약간 실험을 하고 grep에 대한 문서를 읽는다면, 파이썬에서 지원하는 정규 표현식과 grep에서 지원되는 정규 표현식과 차이를 발견할 것이다. 예를 들어, grep 공백이 아닌 문자 “\\S”을 지원하지 않는다. 그래서 약간 더 복잡한 집합 표기 “[^ ]”을 사용해야 한다. “[^ ]”은 간단히 정리하면, 공복을 제외한 임의의 문자와 매칭한다.",
     "crumbs": [
-      "분야별 도구",
+      "분야별 코딩",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
     ]
   },
@@ -1742,7 +1753,7 @@
     "section": "\n24.7 디버깅",
     "text": "24.7 디버깅\nR에 대해서 도움을 어떻게 받을 수 있을까요?\n만약 특정 함수의 정확한 이름을 기억해 내기 위해서 빠르게 생각나게 하는 것이 필요하다면 도움이 많이 될 수 있는 간단하고 초보적인 내장 문서가 R에 포함되어 있다. 내장 문서 도움말은 인터랙티브 모드의 R 인터프리터에서 볼 수 있다.\n\n24.7.1 도움말 파일 읽어오기\n특정한 패키지를 사용하고자 한다면, ls(pos = \"package:패키지명) 명령어를 사용하여 다음과 같이 패키지에 포함된 함수를 찾을 수 있다. stringr 패키지는 파이썬 내장 re 패키지와 유사한 패턴 매칭 함수를 제공한다.\n\nls(pos = \"package:stringr\")\n#&gt;  [1] \"%&gt;%\"               \"boundary\"          \"coll\"             \n#&gt;  [4] \"fixed\"             \"fruit\"             \"invert_match\"     \n#&gt;  [7] \"regex\"             \"sentences\"         \"str_c\"            \n#&gt; [10] \"str_conv\"          \"str_count\"         \"str_detect\"       \n#&gt; [13] \"str_dup\"           \"str_ends\"          \"str_equal\"        \n#&gt; [16] \"str_escape\"        \"str_extract\"       \"str_extract_all\"  \n#&gt; [19] \"str_flatten\"       \"str_flatten_comma\" \"str_glue\"         \n#&gt; [22] \"str_glue_data\"     \"str_interp\"        \"str_length\"       \n#&gt; [25] \"str_like\"          \"str_locate\"        \"str_locate_all\"   \n#&gt; [28] \"str_match\"         \"str_match_all\"     \"str_order\"        \n#&gt; [31] \"str_pad\"           \"str_rank\"          \"str_remove\"       \n#&gt; [34] \"str_remove_all\"    \"str_replace\"       \"str_replace_all\"  \n#&gt; [37] \"str_replace_na\"    \"str_sort\"          \"str_split\"        \n#&gt; [40] \"str_split_1\"       \"str_split_fixed\"   \"str_split_i\"      \n#&gt; [43] \"str_squish\"        \"str_starts\"        \"str_sub\"          \n#&gt; [46] \"str_sub_all\"       \"str_sub&lt;-\"         \"str_subset\"       \n#&gt; [49] \"str_to_lower\"      \"str_to_sentence\"   \"str_to_title\"     \n#&gt; [52] \"str_to_upper\"      \"str_trim\"          \"str_trunc\"        \n#&gt; [55] \"str_unique\"        \"str_view\"          \"str_view_all\"     \n#&gt; [58] \"str_which\"         \"str_width\"         \"str_wrap\"         \n#&gt; [61] \"word\"              \"words\"\n\nR과 모든 팩키지는 함수에 대한 도움말 파일을 제공한다. 네임스페이스(인터랙티브 R 세션)에 적재된 팩키지에 있는 특정 함수에 대한 도움말은 다음과 같이 찾는다.\n\n?function_name\nhelp(function_name)\n\nRStudio에 도움말 페이지에 도움말이 표시된다. (혹은 R 자체로 일반 텍스트로 표시된다) 각 도움말 페이지는 절(section)로 구분된다:\n\n기술(Description): 함수가 어떤 작업을 수행하는가에 대한 충분한 기술\n사용법(Usage): 함수 인자와 기본디폴트 설정값\n인자(Arguments): 각 인자가 예상하는 데이터 설명\n상세 설명(Details): 알고 있어야 되는 중요한 구체적인 설명\n값(Value): 함수가 반환하는 데이터\n함께 보기(See Also): 유용할 수 있는 연관된 함수.\n예제(Examples): 함수 사용법에 대한 예제들.\n\n함수마다 상이한 절을 갖추고 있다. 하지만, 상기 항목이 알고 있어야 하는 핵심 내용이다.\n\n\n\n\n\n\n도움말 파일 불러 읽어오기\n\n\n\nR에 대해 가장 기죽게 되는 한 측면이 엄청난 함수 갯수다. 모든 함수에 대한 올바른 사용법을 기억하지 못하면, 엄두가 나지 않을 것이다. 운좋게도, 도움말 파일로 인해 기억할 필요가 없다!\n\n\n\n24.7.2 특수 연산자\n특수 연산자에 대한 도움말을 찾으려면, 인용부호를 사용한다:\n\n?\"&lt;-\"\n\n\n24.7.3 팩키지 도움말 얻기\n많은 팩키지에 “소품문(vignettes)”이 따라온다: 활용법과 풍부한 예제를 담은 문서. 어떤 인자도 없이, vignette() 명령어를 입력하면 설치된 모든 팩키지에 대한 모든 소품문 목록이 출력된다; vignette(package=\"package-name\") 명령어는 package-name 팩키지명에 대한 이용가능한 모든 소품문 목록을 출력하고, vignette(\"vignette-name\") 명령어는 특정된 소품문을 연다.\n팩키지에 어떤 소품문도 포함되지 않는다면, 일반적으로 help(\"package-name\") 명령어를 타이핑해서 도움말을 얻는다.\n\n24.7.4 함수가 기억나지 않을 때\n함수가 어느 팩키지에 있는지 확신을 못하거나, 구체적인 철자법을 모르는 경우, 퍼지 검색(fuzzy search)을 실행한다:\n\n??function_name\n\n\n24.7.5 시작조차 난감할 때\n어떤 함수 혹은 팩키지가 필요한지 모르는 경우, CRAN Task Views 사이트가 좋은 시작점이 된다. 유지관리되는 팩키지 목록이 필드로 묶여 잘 정리되어 있다.\n\n24.7.6 코드가 동작하지 않을 때\n동료로부터 도움을 구해 코드가 동작하지 않는 이슈를 해결한다. 함수 사용에 어려움이 있는 경우, 10 에 9 경우에 찾는 정답이 이미 Stack Overflow에 답글이 달려 있다. 검색할 때 [r] 태그를 사용한다:\n원하는 답을 찾지 못한 경우, 동료에게 질문을 만드는데 몇가지 유용한 함수가 있다:\n\n?dput\n\ndput() 함수는 작업하고 있는 데이터를 텍스트 파일 형식으로 덤프해서 저장한다. 그래서 다른 사람 R 세션으로 복사해서 붙여넣기 좋게 돕는다.\n\nsessionInfo()\n#&gt; R version 4.2.2 (2022-10-31 ucrt)\n#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)\n#&gt; Running under: Windows 10 x64 (build 19045)\n#&gt; \n#&gt; Matrix products: default\n#&gt; \n#&gt; locale:\n#&gt; [1] LC_COLLATE=Korean_Korea.utf8  LC_CTYPE=Korean_Korea.utf8   \n#&gt; [3] LC_MONETARY=Korean_Korea.utf8 LC_NUMERIC=C                 \n#&gt; [5] LC_TIME=Korean_Korea.utf8    \n#&gt; \n#&gt; attached base packages:\n#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     \n#&gt; \n#&gt; other attached packages:\n#&gt;  [1] showtext_0.9-6   showtextdb_3.0   sysfonts_0.8.8   JuliaCall_0.17.5\n#&gt;  [5] rvest_1.0.3      lubridate_1.9.2  forcats_1.0.0    stringr_1.5.1   \n#&gt;  [9] dplyr_1.1.4      purrr_1.0.2      readr_2.1.4      tidyr_1.3.1     \n#&gt; [13] tibble_3.2.1     tidyverse_2.0.0  gtExtras_0.4.5   gt_0.10.0       \n#&gt; [17] ggplot2_3.4.2   \n#&gt; \n#&gt; loaded via a namespace (and not attached):\n#&gt;  [1] Rcpp_1.0.12        class_7.3-20       digest_0.6.34     \n#&gt;  [4] conflicted_1.2.0   utf8_1.2.4         R6_2.5.1          \n#&gt;  [7] wesanderson_0.3.6  evaluate_0.23      e1071_1.7-13      \n#&gt; [10] httr_1.4.7         pillar_1.9.0       rlang_1.1.3       \n#&gt; [13] rstudioapi_0.15.0  fontawesome_0.5.2  extrafontdb_1.0   \n#&gt; [16] rmarkdown_2.25     extrafont_0.19     htmlwidgets_1.6.4 \n#&gt; [19] munsell_0.5.0      proxy_0.4-27       compiler_4.2.2    \n#&gt; [22] xfun_0.39          pkgconfig_2.0.3    htmltools_0.5.7   \n#&gt; [25] tidyselect_1.2.0   fansi_1.0.6        tzdb_0.4.0        \n#&gt; [28] withr_3.0.0        sf_1.0-14          grid_4.2.2        \n#&gt; [31] jsonlite_1.8.8     Rttf2pt1_1.3.12    gtable_0.3.4      \n#&gt; [34] lifecycle_1.0.4    DBI_1.1.3          magrittr_2.0.3    \n#&gt; [37] units_0.8-2        scales_1.3.0       KernSmooth_2.23-20\n#&gt; [40] cli_3.6.1          stringi_1.7.12     cachem_1.0.8      \n#&gt; [43] xml2_1.3.5         paletteer_1.5.0    generics_0.1.3    \n#&gt; [46] vctrs_0.6.5        rematch2_2.1.2     tools_4.2.2       \n#&gt; [49] glue_1.7.0         hms_1.1.3          fastmap_1.1.1     \n#&gt; [52] yaml_2.3.8         timechange_0.2.0   colorspace_2.1-0  \n#&gt; [55] classInt_0.4-9     memoise_2.0.1      knitr_1.45\n\nsessionInfo()는 R 현재 버젼 정보과 함께 적재된 팩키지 정보를 출력한다. 이 정보가 다른 사람이 여러분 문제를 재현하고 디버그하는데 유용할 수 있다.",
     "crumbs": [
-      "분야별 도구",
+      "분야별 코딩",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
     ]
   },
@@ -1753,7 +1764,7 @@
     "section": "\n24.8 용어정의",
     "text": "24.8 용어정의\n\n\n부서지기 쉬운 코드(brittle code):입력 데이터가 특정한 형식일 경우에만 작동하는 코드. 하지만 올바른 형식에서 약간이도 벗아나게 되면 깨지기 쉽니다. 쉽게 부서지기 때문에 “부서지기 쉬운 코드(brittle code)”라고 부른다.\n\n욕심쟁이 매칭(greedy matching):정규 표현식의 “+”, “*” 문자는 가능한 큰 문자열을 매칭하기 위해서 밖으로 확장하는 개념.\n\ngrep: 정규 표현식에 매칭되는 파일을 탐색하여 라인을 찾는데 대부분의 유닉스 시스템에서 사용가능한 명령어. \"Generalized Regular Expression Parser\"의 약자.\n\n정규 표현식(regular expression): 좀더 복잡한 검색 문자열을 표현하는 언어. 정규 표현식은 특수 문자를 포함해서 검색 라인의 처음 혹은 끝만 매칭하거나 많은 비슷한 것을 매칭한다.\n\n와일드 카드(wild card): 임의 문자를 매칭하는 특수 문자. 정규 표현식에서 와이드 카드 문자는 마침표 문자다.",
     "crumbs": [
-      "분야별 도구",
+      "분야별 코딩",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
     ]
   },
@@ -1764,7 +1775,7 @@
     "section": "연습문제",
     "text": "연습문제\n\n유닉스의 grep 명령어를 모사하는 간단한 프로그램을 작성하세요. 사용자가 정규 표현식을 입력하고 정규 표현식에 매칭되는 라인수를 셈하는 프로그램입니다.\n\n$ Rscript grep.R\nEnter a regular expression: ^Author\nmbox.txt had 1798 lines that matched ^Author\n\n$ Rscript grep.R\nEnter a regular expression: ^X-\nmbox.txt had 14368 lines that matched ^X-\n\n$ Rscript grep.R\nEnter a regular expression: java$\nmbox.txt had 4218 lines that matched java$\n\n다음 형식의 라인만을 찾는 프로그램을 작성하세요.\n\nNew Revision: 39772\n그리고, 정규 표현식과 str_extract() 함수를 사용하여 각 라인으로부터 숫자를 추출하세요. 숫자들의 평균을 구하고 출력하세요.\nEnter file:mbox.txt \n38549.7949721\n\nEnter file:mbox-short.txt\n39756.9259259",
     "crumbs": [
-      "분야별 도구",
+      "분야별 코딩",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
     ]
   },
@@ -1774,6 +1785,17 @@
     "title": "25  네트워크 프로그램",
     "section": "",
     "text": "25.1 하이퍼텍스트 전송 프로토콜\n웹에 동력을 공급하는 네트워크 프로토콜(HyperText Transport Protocol - HTTP)은 실제로 매우 단순하다. 파이썬에는 소켓 (sockets)이라고 불리는 내장 지원 모듈이 있다. 파이썬 프로그램에서 소켓 모듈을 통해서 네트워크 연결을 하고, 데이터 검색을 매우 용이하게 한다.\n소켓(socket)은 단일 소켓으로 두 프로그램 사이에 양방향 연결을 제공한다는 점을 제외하고 파일과 매우 유사하다. 동일한 소켓에 읽거나 쓸 수 있다. 소켓에 무언가를 쓰게 되면, 소켓의 다른 끝에 있는 응용프로그램에 전송된다. 소켓으로부터 읽게 되면, 다른 응용 프로그램이 전송한 데이터를 받게 된다.\n하지만, 소켓의 다른쪽 끝에 프로그램이 어떠한 데이터도 전송하지 않았는데 소켓을 읽으려고 하면, 단지 앉아서 기다리기만 한다. 만약 어떠한 것도 보내지 않고 양쪽 소켓 끝의 프로그램 모두 기다리기만 한다면, 모두 매우 오랜 시간동안 기다리게 될 것이다.\n인터넷으로 통신하는 프로그램의 중요한 부분은 특정 종류의 프로토콜을 공유하는 것이다. 프로토콜(protocol)은 정교한 규칙의 집합으로 누가 메시지를 먼저 보내고, 메세지로 무엇을 하며, 메시지에 대한 응답은 무엇이고, 다음에 누가 메세지를 보내고 등등을 포함한다. 이런 관점에서 소켓 끝의 두 응용프로그램이 함께 춤을 추고 있으니, 다른 사람 발을 밟지 않도록 확인해야 한다.\n네트워크 프로토콜을 기술하는 문서가 많이 있다. 하이퍼텍스트 전송 프로토콜(HyperText Transport Protocol)은 다음 문서에 기술되어 있다.\nhttp://www.w3.org/Protocols/rfc2616/rfc2616.txt\n매우 상세한 176 페이지나 되는 장문의 복잡한 문서다. 흥미롭다면 시간을 가지고 읽어보기 바란다. RFC2616에 36 페이지를 읽어보면, GET 요청(request)에 대한 구문을 발견하게 된다. 꼼꼼히 읽게 되면, 웹서버에 문서를 요청하기 하기 위해서, 80 포트로 www.py4inf.com 서버에 연결을 하고 나서 다음 양식 한 라인을 전송한다.\nGET http://www.py4inf.com/code/romeo.txt HTTP/1.0\n두번째 매개변수는 요청하는 웹페이지가 된다. 그리고 또한 빈 라인도 전송한다. 웹서버는 문서에 대한 헤더 정보와 빈 라인 그리고 문서 본문으로 응답한다.",
+    "crumbs": [
+      "분야별 코딩",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
+    ]
+  },
+  {
+    "objectID": "tool-network.html#network-http",
+    "href": "tool-network.html#network-http",
+    "title": "25  네트워크 프로그램",
+    "section": "",
+    "text": "웹브라우저 실행금지 사유\n\n\n\nwebr pyodide는 웹 브라우저 샌드박스 환경에서 R, 파이썬을 실행하며, 브라우저 보안 제한으로 인해 일반 R, 파이썬 환경에서와 같은 네트워크 소켓에 대한 직접적인 접근이 불가능하다. 접근을 허용하는 것이 중대한 보안 위험을 초래할 수 있기 때문에 웨브라우저에서 실행이 되지 않게 되어 있어 오류가 나는 것이 정상이다.",
     "crumbs": [
       "분야별 코딩",
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
@@ -1989,6 +2011,28 @@
     ]
   },
   {
+    "objectID": "tool-database.html",
+    "href": "tool-database.html",
+    "title": "27  데이터베이스와 SQL",
+    "section": "",
+    "text": "27.1 용어정의",
+    "crumbs": [
+      "분야별 코딩",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>데이터베이스와 SQL</span>"
+    ]
+  },
+  {
+    "objectID": "tool-database.html#db-terminology",
+    "href": "tool-database.html#db-terminology",
+    "title": "27  데이터베이스와 SQL",
+    "section": "",
+    "text": "속성(attribute): 튜플 내부에 값의 하나. 좀더 일반적으로 “열”, “칼럼”, “필드”로 불린다.\n\n제약(constraint): 데이터베이스가 테이블의 필드나 행에 규칙을 강제하는 것. 일반적인 제약은 특정 필드에 중복된 값이 없도록 하는 것(즉, 모든 값이 유일해야 한다.)\n\n커서(cursor): 커서를 사용해서 데이터베이스에서 SQL 명령어를 수행하고 데이터베이스에서 데이터를 가져온다. 커서는 네트워크 연결을 위한 소켓이나 파일의 파일 핸들러와 유사하다.\n\n데이터베이스 브라우져(database browser): 프로그램을 작성하지 않고 직접적으로 데이터베이스에 연결하거나 데이터베이스를 조작할 수 있는 소프트웨어.\n\n외부 키(foreign key): 다른 테이블에 있는 행의 주키를 가리키는 숫자 키. 외부 키는 다른 테이블에 저장된 행사이에 관계를 설정한다.\n\n인텍스(index): 테이블에 행이 추가될 때 정보 검색하는 것을 빠르게 하기 위해서 데이터베이스 소프트웨어가 유지관리하는 추가 데이터.\n\n논리 키(logical key): “외부 세계”가 특정 행의 정보를 찾기 위해서 사용하는 키. 사용자 계정 테이블의 예로, 사람의 전자우편 주소는 사용자 데이터에 대한 논리 키의 좋은 후보자가 될 수 있다.\n\n정규화(normalization): 어떠한 데이터도 중복이 없도록 데이터 모델을 설계하는 것. 데이터베이스 한 장소에 데이터 각 항목 정보를 저장하고 외부키를 이용하여 다른 곳에서 참조한다.\n\n주키(primary key): 다른 테이블에서 테이블의 한 행을 참조하기 위해서 각 행에 대입되는 숫자 키. 종종 데이터베이스는 행이 삽입될 때 주키를 자동 삽입하도록 설정되었다.\n\n관계(relation): 튜플과 속성을 담고 있는 데이터베이스 내부 영역. 좀더 일반적으로 “테이블(table)”이라고 한다.\n\n튜플(tuple):데이터베이스 테이블에 단일 항목으로 속성 집합이다. 좀더 일반적으로 “행(row)”이라고 한다.",
+    "crumbs": [
+      "분야별 코딩",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>데이터베이스와 SQL</span>"
+    ]
+  },
+  {
     "objectID": "tool-make.html",
     "href": "tool-make.html",
     "title": "28  작업 자동화",
@@ -2005,6 +2049,28 @@
     "title": "28  작업 자동화",
     "section": "",
     "text": "R\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\n\n\n\nweb-r, pyodide\n\n\n\nweb-r, pyodide 모두 자바스크립트 emscripten 환경에서 실행되기 때문에, 시스템 명령어를 실행할 수 없다.\n\nsystem2(\"ls\", \"-l\", stdout = TRUE, stderr = TRUE)\n#&gt; Error: The `system()` function is unsupported under Emscripten.\n\n\nimport os\ncmd = 'ls -l'\nfp = os.popen(cmd)\n#&gt; OSError: [Errno 138] emscripten does not support processes.",
+    "crumbs": [
+      "분야별 코딩",
+      "<span class='chapter-number'>28</span>  <span class='chapter-title'>작업 자동화</span>"
+    ]
+  },
+  {
+    "objectID": "tool-make.html#bbc-뉴스-사례",
+    "href": "tool-make.html#bbc-뉴스-사례",
+    "title": "28  작업 자동화",
+    "section": "\n28.2 BBC 뉴스 사례",
+    "text": "28.2 BBC 뉴스 사례\n작업 자동화를 별도의 주제로 분리하여 다루는 이유는, BBC 뉴스 데이터셋(Greene 와/과 Cunningham 2006)과 같은 파일들이 디렉토리에 저장될 경우, 이를 효과적으로 처리할 수 있기 때문이다. 인공지능의 기반 기술인 기계학습과 딥러닝은, 전 세계 다양한 언어로 수집된 상상을 초월하는 양의 텍스트 데이터를 가공하여 AI 모델 개발의 기초 데이터로 활용한다.\nBBC 뉴스 데이터셋은 5개 뉴스 범주에 맞춰 각 뉴스는 001.txt, 002.txt, 003.txt 등과 같은 파일명으로 저장되어 있다. 먼저 궁금한 점은 BBC 뉴스 데이터가 각 범주별로 몇개의 기사 있는지 빈도수를 확인하는 것이다.\n\nlibrary(fs)\nfs::dir_tree(\"data/bbc\", type = \"directory\")\n\n#&gt; data/bbc\n#&gt; ├── business\n#&gt; ├── entertainment\n#&gt; ├── politics\n#&gt; ├── sport\n#&gt; └── tech\n\n이 작업을 위해서 디렉토리 파일 정보를 파일시스템에서 fs 패키지 dir_ls() 함수로 읽어온 후에 dplyr 패키지 enframe() 함수로 데이터프레임으로 변환하여 디렉토리인지 파일인지 구분하는 작업을 if_else 문으로 수행하고 빈도수를 count() 함수로 계산한다.\n\n\nR\n파이썬\n\n\n\n\nbbc_files &lt;- fs::dir_ls(\"data/bbc/\", recurse = TRUE)\n\nbbc_files |&gt; \n  enframe() |&gt; \n  mutate(구분 = if_else(str_detect(value, \"txt$\"), \"파일\", \"디렉토리\")) |&gt; \n  count(구분, name = \"건수\")\n#&gt; # A tibble: 2 × 2\n#&gt;   구분      건수\n#&gt;   &lt;chr&gt;    &lt;int&gt;\n#&gt; 1 디렉토리     6\n#&gt; 2 파일      2225\n\n\n\n\nimport os\nimport pandas as pd\n\nbbc_files = []\nfor root, dirs, files in os.walk(\"data/bbc/\"):\n    for name in files:\n        bbc_files.append(os.path.join(root, name))\n    for name in dirs:\n        bbc_files.append(os.path.join(root, name))\n\ndf = pd.DataFrame({'value': bbc_files})\n\ndf['구분'] = df['value'].apply(lambda x: '파일' if x.endswith('.txt') else '디렉토리')\n\nresult = df['구분'].value_counts().reset_index()\nresult.columns = ['구분', '건수']\n\nprint(result)\n\n     구분    건수\n0    파일  2225\n1  디렉토리     6\n\n\n\n이제 BBC 뉴스 데이터셋의 각 범주별로 몇개의 기사가 있는지 빈도수를 계산한다. bbc_files에 있는 파일 목록을 데이터 프레임으로 변환하고, 파일 경로를 구분자 “/”를 기준으로 나누어 여러 열로 분리한다. 파일 이름이 “.txt”로 끝나는지 여부에 따라 파일과 디렉토리를 구분하고, 디렉토리가 아닌 파일들만을 남겨둔 후, 각 범주별로 뉴스 기사의 수를 세어 빈도수를 계산한다.\n\n\nR\n파이썬\n\n\n\n\nbbc_files |&gt; \n  enframe() |&gt; \n  separate(name, into = c(\"data\", \"bbc\", \"범주\"), sep = \"/\") |&gt;\n  mutate(구분 = if_else(str_detect(value, \"txt$\"), \"파일\", \"디렉토리\")) |&gt; \n  filter(구분 != \"디렉토리\") |&gt; \n  count(범주, name = \"뉴스기사수\")\n#&gt; # A tibble: 5 × 2\n#&gt;   범주          뉴스기사수\n#&gt;   &lt;chr&gt;              &lt;int&gt;\n#&gt; 1 business             510\n#&gt; 2 entertainment        386\n#&gt; 3 politics             417\n#&gt; 4 sport                511\n#&gt; 5 tech                 401\n\n\n\n\nimport os\nimport pandas as pd\n\n# data/bbc/ 디렉토리의 파일 목록을 가져오는 함수\ndef get_file_list(directory):\n    file_list = []\n    for root, dirs, files in os.walk(directory):\n        for file in files:\n            file_list.append(os.path.join(root, file))\n    return file_list\n\n# 파일 목록 가져오기\nbbc_files = get_file_list(\"data/bbc/\")\n\n# 데이터 프레임 생성\ndf = pd.DataFrame({'value': bbc_files})\n\n# 경로를 '/'를 기준으로 분리\ndf[['범주', '파일']] = df['value'].str.split('\\\\', expand=True)\ndf = df.dropna()\n\n# 범주별로 뉴스기사 수 세기\nresult = df['범주'].value_counts().reset_index()\nresult.columns = ['범주', '뉴스기사수']\n\nprint(result)\n\n                       범주  뉴스기사수\n0          data/bbc/sport    511\n1       data/bbc/business    510\n2       data/bbc/politics    417\n3           data/bbc/tech    401\n4  data/bbc/entertainment    386",
+    "crumbs": [
+      "분야별 코딩",
+      "<span class='chapter-number'>28</span>  <span class='chapter-title'>작업 자동화</span>"
+    ]
+  },
+  {
+    "objectID": "tool-make.html#tasks-pipe",
+    "href": "tool-make.html#tasks-pipe",
+    "title": "28  작업 자동화",
+    "section": "\n28.3 파이프(Pipes)",
+    "text": "28.3 파이프(Pipes)\n대부분의 운영 시스템은 쉘(shell)로 알려진 명령어 기반 인터페이스를 지원한다. 일반적으로 쉘은 파일 시스템을 탐색하거나 응용 프로그램을 실행하는 명령어를 지원한다. 예를 들어, 유닉스에서 cd 명령어로 디렉토리를 변경하고 ls 명령어로 디렉토리의 콘텐츠를 보여주고, firefox를 타이핑해서 웹브라우저를 실행시킬 수 있다.\n쉘에서 실행시킬 수 있는 어떤 프로그램이나 파이프(pipe)를 사용하여 파이썬에서도 실행시킬 수 있다. 파이프는 작동중인 프로세스를 표현하는 객체다. 파이프를 사용하면 프로세스의 입출력을 읽거나 쓸 수 있다.\n예를 들어, 유닉스 명령어1 ls -l는 정상적으로 현재 디렉토리의 콘텐츠(긴 형식으로)를 보여준다. system2() 내장함수, 혹은 processx, sys 패키지를 가지고 ls 를 실행시킬 수 있다. 인자는 쉘 명령어를 포함하는 문자열이다.\n\n\nR\n파이썬\n\n\n\n\nsystem2(\"ls\", \"-l data\", stdout = TRUE, stderr = TRUE)\n#&gt; [1] \"total 6759\"                                                     \n#&gt; [2] \"drwxr-xr-x 1 statkclee 없음       0 Mar  8 10:09 bbc\"           \n#&gt; [3] \"-rw-r--r-- 1 statkclee 없음     107 Feb 28 19:16 ch01-text.txt\" \n#&gt; [4] \"-rw-r--r-- 1 statkclee 없음   96536 Mar  2 10:36 mbox-short.txt\"\n#&gt; [5] \"-rw-r--r-- 1 statkclee 없음 6819047 Mar  2 10:35 mbox.txt\"      \n#&gt; [6] \"-rw-r--r-- 1 statkclee 없음     212 Mar  4 09:42 mbox_debug.py\" \n#&gt; [7] \"-rw-r--r-- 1 statkclee 없음     171 Mar  4 19:03 romeo.txt\"   \n\n\n\n\nimport subprocess\n\nresult = subprocess.run([\"dir\", \"data\"], shell=True, capture_output=True, text=True)\n\nprint(\"stdout:\", result.stdout)\n#&gt; stdout:  D 드라이브의 볼륨: 데이터\n#&gt;  볼륨 일련 번호: 66D3-65EC\n#&gt; \n#&gt;  d:\\tcs\\gpt-coding\\data 디렉터리\n#&gt; \n#&gt; 2024-03-08  오전 10:09    &lt;DIR&gt;          .\n#&gt; 2024-03-08  오전 10:09    &lt;DIR&gt;          ..\n#&gt; 2024-03-08  오전 10:09    &lt;DIR&gt;          bbc\n#&gt; 2024-02-28  오후 07:16               107 ch01-text.txt\n#&gt; 2024-03-02  오전 10:36            96,536 mbox-short.txt\n#&gt; 2024-03-02  오전 10:35         6,819,047 mbox.txt\n#&gt; 2024-03-04  오전 09:42               212 mbox_debug.py\n#&gt; 2024-03-04  오후 07:03               171 romeo.txt\n#&gt;                5개 파일           6,916,073 바이트\n#&gt;                3개 디렉터리  1,223,577,202,688 바이트 남음\n\n\n\n\n\n28.3.1 유닉스 철학과 파이프\n통계 예측모형, 기계학습, 딥러닝 시스템을 개발할 경우 유닉스/리눅스 운영체제로 환경을 통일하고 텍스트 파일을 모든 프로그램과 시스템이 의사소통하는 기본 인터페이스로 잡고, 이를 파이프로 연결한다.\n\n텍스트 데이터로 분석에 사용될 혹은 훈련데이터로 준비한다.\n파이썬 혹은 쉘스크립트, R스크립트를 활용하여 전처리한다.\nR tidymodels 혹은 파이썬 Scikit-learn 예측모형을 적합, 기계학습 훈련, 시각화를 수행한다.\n마크다운(웹), \\(\\LaTeX\\) (조판) 출력형식에 맞춰 서식을 결정한다.\n최종 결과를 텍스트, 이미지 파일, pdf, html로 출력한다.\n\n\n$ cat data.txt | preProcesswithPython.py | runModelwithR.R | formatOutput.sh &gt; mlOutput.txt\n\n\n\n\n\n\n그림 28.1: R 파이프라인\n\n\n\n\n\n\n\n\n유닉스 철학\n\n\n\n\n[원문] Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface. – Doug McIlroy\n\n\n한가지 작업만 매우 잘하는 프로그램을 작성한다.\n프로그램이 함께 동작하도록 작성한다.\n텍스트를 다루는 프로그램을 작성한다. 이유는 어디서나 사용되는 인터페이스가 되기 때문이다.",
     "crumbs": [
       "분야별 코딩",
       "<span class='chapter-number'>28</span>  <span class='chapter-title'>작업 자동화</span>"
@@ -2037,18 +2103,7 @@
     "href": "tool-make.html#task-args",
     "title": "28  작업 자동화",
     "section": "\n28.6 국가별 GDP 사례",
-    "text": "28.6 국가별 GDP 사례\n.R 스크립트를 유닉스/리눅스상에서 유연하게 동작시킨다. R 스크립트를 수정하지 않고, 인자를 바꿔 작업을 수행하는 방법을 살펴보자. 국가별 통계를 데이터 파일을 달리하여 R스크립트 통계량을 산출하는 방법을 사례로 구현해보자.\n\n\n\n\n\n그림 28.3: R 스크립트 실행\n\n\n\n28.6.1 인자 받는 R 스크립트\n유닉스/GNU리눅스 환경에서 통계모형, 기계학습, 딥러닝 작업을 하게 되면 텍스트 형태 데이터, R스크립트, 출력 산출물을 갖게 되고, 입력 데이터를 출력산출물로 변환시키는데 R이 역할을 하게 된다.\nR 스크립트를 유연하게 만들게 되면 데이터만 바꿔도 산출물을 생성해 내고, 경우에 따라 인자값을 달리하면 원하는 다른 결과를 얻게 된다.\n\n28.6.2 데이터 변경 R 스크립트\n(Pole, West, 와/과 Harrison 2018) 가 집필한 책에 포함된 시계열 데이터 웹사이트 SOME TIME SERIES DATA SETS에서 Per capita annual GDP for several countries during 1950-1983 (first row is 1950, last is 1983) 데이터를 사용한다. 데이터를 austria.csv, canada.csv, france.csv와 같이 구분하여 저장한다.\nR 스크립트 시제품 제작\n먼저 austria.csv 파일을 불러와서 평균을 계산하는 R스크립트를 작성한다. code 디렉토리 r-args-ex01.R 파일명으로 저장한다.\n#!/usr/bin/env Rscript\n\ngdp.df &lt;- read.csv(\"data/austria.csv\", sep=\",\", head=TRUE)\n# 평균계산\ngdp.mean &lt;- mean(gdp.df$gdp, na.rm = TRUE)\n# 계산결과 화면출력\ncat(\"평균: \", gdp.mean, \"\\n\")\nRscript code/r-args-ex01.R 실행결과 예상대로 평균 GDP가 계산되었다.\n$ Rscript code/r-args-ex01.R\n평균:  0.06553276\n입력파일명 변경\n국가가 더 많을 수도 있지만, austria.csv, france.csv, canada.csv 3개 국가가 csv 파일로 데이터가 저장되어 있으니, 입력파일을 달리하여 평균을 계산하도록 R스크립트를 작성한다.\ncommandArgs 명령어를 통해 명령라인에서 인자를 받아 온다. 인자가 순서대로 들어오기 때문에 첫번째 인자로 들어오는 국가에 대한 GDP 평균을 구하고, 이를 화면에 출력하는 R스크립트다. R 내장함수 sub 함수와 정규표현식을 사용해서 파일명 앞쪽 – .csv 확장자 제거 – 만을 뽑아내어 국가명을 명기했다. code 디렉토리 r-args-ex02.R 파일명으로 저장한다.\n#!/usr/bin/env Rscript\n\nargs = commandArgs(trailingOnly=TRUE)\ncountry &lt;- args[1]\n\n# country &lt;- \"data/austria.csv\"\n\n# 데이터 불러오기\ngdp_df &lt;- read.csv(country, sep=\",\", head=TRUE)\n# 평균계산\ngdp_mean &lt;- mean(gdp_df$gdp)\n# 국가명 출력\ncountry_name &lt;- sub(\"data/(.*)\\\\.csv\", \"\\\\1\", country)\n# 계산결과 화면출력\ncat(\"국가명:\", country_name, \" 평균: \", gdp_mean, \"\\n\")\n상기 R스크립트를 쉘에서 실행한 결과는 다음과 같다. code 디렉토리에 r-args-ex02.R 스크립트 파일이 저장되어 있다.\n$ Rscript code/r-args-ex02.R  data/austria.csv\n국가명: austria  평균:  0.06553276\n$ Rscript code/r-args-ex02.R data/france.csv\n국가명: france  평균:  20.95751\n$ Rscript code/r-args-ex02.R data/canada.csv\n국가명: canada  평균:  5.817088\n국가별 기본통계\n국가 데이터를 바꾸는 것에 더해서 최소, 평균, 최대 GDP를 계산하는 로직을 추가한다. commandArgs 함수로 인자를 받는데, 최종 인자는 -1로 지정되기 때문에 그런 특성을 이용하여 R스크립트를 작성한다. 따라서, 첫번째 인자에 최소, 평균, 최소를 구할 것인지 정보를 받고, 마지막 인자로 파일명을 받는다.\n#!/usr/bin/env Rscript\n\nargs = commandArgs(trailingOnly=TRUE)\naction = args[1]\ncountry &lt;- args[-1]\n\n# 데이터 불러오기\ngdp_df &lt;- read.csv(country, sep=\",\", head=TRUE)\n\n# 국가명 추출\ncountry_name &lt;- sub(\"data/(.*)\\\\.csv\", \"\\\\1\", country)\n\n# 기초 통계량 계산\nif(action == \"--min\") {\n  gdp_min &lt;- min(gdp_df$gdp)\n  cat(\"국가명:\", country_name, \" 최소: \", gdp_min, \"\\n\")  \n}else if(action == \"--mean\") {\n  gdp_mean &lt;- mean(gdp_df$gdp)\n  cat(\"국가명:\", country_name, \" 최소: \", gdp_mean, \"\\n\")  \n}else if (action==\"--max\"){\n  gdp_max &lt;- max(gdp_df$gdp)\n  cat(\"국가명:\", country_name, \" 최소: \", gdp_max, \"\\n\")  \n}\nRscript code/r-args-ex03.R --min data/canada.csv 명령라인을 살펴보면, r-args-ex03.R R 스크립트를 실행하고, --min 인자로 최소값을 계산하는데, canada.csv 데이터 파일을 이용한다.\n$ Rscript code/r-args-ex03.R --min data/canada.csv\n국가명: canada  최소:  3.651109\n$ Rscript code/r-args-ex03.R --max data/canada.csv\n국가명: canada  최대:  8.382785\n$ Rscript code/r-args-ex03.R --mean data/canada.csv\n국가명: canada  평균:  5.817088\n\n\n\n\n\n\nR 스크립트에 인자를 넘기는 패키지\n\n\n\n\ncommandArgs\noptparse - Command Line Option Parser\nargparse - Command line optional and positional argument parser\ngetopt - C-like getopt behavior",
-    "crumbs": [
-      "분야별 코딩",
-      "<span class='chapter-number'>28</span>  <span class='chapter-title'>작업 자동화</span>"
-    ]
-  },
-  {
-    "objectID": "tool-make.html#tasks-pipe",
-    "href": "tool-make.html#tasks-pipe",
-    "title": "28  작업 자동화",
-    "section": "\n28.3 파이프(Pipes)",
-    "text": "28.3 파이프(Pipes)\n대부분의 운영 시스템은 쉘(shell)로 알려진 명령어 기반 인터페이스를 지원한다. 일반적으로 쉘은 파일 시스템을 탐색하거나 응용 프로그램을 실행하는 명령어를 지원한다. 예를 들어, 유닉스에서 cd 명령어로 디렉토리를 변경하고 ls 명령어로 디렉토리의 콘텐츠를 보여주고, firefox를 타이핑해서 웹브라우저를 실행시킬 수 있다.\n쉘에서 실행시킬 수 있는 어떤 프로그램이나 파이프(pipe)를 사용하여 파이썬에서도 실행시킬 수 있다. 파이프는 작동중인 프로세스를 표현하는 객체다. 파이프를 사용하면 프로세스의 입출력을 읽거나 쓸 수 있다.\n예를 들어, 유닉스 명령어1 ls -l는 정상적으로 현재 디렉토리의 콘텐츠(긴 형식으로)를 보여준다. system2() 내장함수, 혹은 processx, sys 패키지를 가지고 ls 를 실행시킬 수 있다. 인자는 쉘 명령어를 포함하는 문자열이다.\n\n\nR\n파이썬\n\n\n\n\nsystem2(\"ls\", \"-l data\", stdout = TRUE, stderr = TRUE)\n#&gt; [1] \"total 6759\"                                                     \n#&gt; [2] \"drwxr-xr-x 1 statkclee 없음       0 Mar  8 10:09 bbc\"           \n#&gt; [3] \"-rw-r--r-- 1 statkclee 없음     107 Feb 28 19:16 ch01-text.txt\" \n#&gt; [4] \"-rw-r--r-- 1 statkclee 없음   96536 Mar  2 10:36 mbox-short.txt\"\n#&gt; [5] \"-rw-r--r-- 1 statkclee 없음 6819047 Mar  2 10:35 mbox.txt\"      \n#&gt; [6] \"-rw-r--r-- 1 statkclee 없음     212 Mar  4 09:42 mbox_debug.py\" \n#&gt; [7] \"-rw-r--r-- 1 statkclee 없음     171 Mar  4 19:03 romeo.txt\"   \n\n\n\n\nimport subprocess\n\nresult = subprocess.run([\"dir\", \"data\"], shell=True, capture_output=True, text=True)\n\nprint(\"stdout:\", result.stdout)\n#&gt; stdout:  D 드라이브의 볼륨: 데이터\n#&gt;  볼륨 일련 번호: 66D3-65EC\n#&gt; \n#&gt;  d:\\tcs\\gpt-coding\\data 디렉터리\n#&gt; \n#&gt; 2024-03-08  오전 10:09    &lt;DIR&gt;          .\n#&gt; 2024-03-08  오전 10:09    &lt;DIR&gt;          ..\n#&gt; 2024-03-08  오전 10:09    &lt;DIR&gt;          bbc\n#&gt; 2024-02-28  오후 07:16               107 ch01-text.txt\n#&gt; 2024-03-02  오전 10:36            96,536 mbox-short.txt\n#&gt; 2024-03-02  오전 10:35         6,819,047 mbox.txt\n#&gt; 2024-03-04  오전 09:42               212 mbox_debug.py\n#&gt; 2024-03-04  오후 07:03               171 romeo.txt\n#&gt;                5개 파일           6,916,073 바이트\n#&gt;                3개 디렉터리  1,223,577,202,688 바이트 남음\n\n\n\n\n\n28.3.1 유닉스 철학과 파이프\n통계 예측모형, 기계학습, 딥러닝 시스템을 개발할 경우 유닉스/리눅스 운영체제로 환경을 통일하고 텍스트 파일을 모든 프로그램과 시스템이 의사소통하는 기본 인터페이스로 잡고, 이를 파이프로 연결한다.\n\n텍스트 데이터로 분석에 사용될 혹은 훈련데이터로 준비한다.\n파이썬 혹은 쉘스크립트, R스크립트를 활용하여 전처리한다.\nR tidymodels 혹은 파이썬 Scikit-learn 예측모형을 적합, 기계학습 훈련, 시각화를 수행한다.\n마크다운(웹), \\(\\LaTeX\\) (조판) 출력형식에 맞춰 서식을 결정한다.\n최종 결과를 텍스트, 이미지 파일, pdf, html로 출력한다.\n\n\n$ cat data.txt | preProcesswithPython.py | runModelwithR.R | formatOutput.sh &gt; mlOutput.txt\n\n\n\n\n\n\n그림 28.1: R 파이프라인\n\n\n\n\n\n\n\n\n유닉스 철학\n\n\n\n\n[원문] Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface. – Doug McIlroy\n\n\n한가지 작업만 매우 잘하는 프로그램을 작성한다.\n프로그램이 함께 동작하도록 작성한다.\n텍스트를 다루는 프로그램을 작성한다. 이유는 어디서나 사용되는 인터페이스가 되기 때문이다.",
+    "text": "28.6 국가별 GDP 사례\n.R 스크립트를 유닉스/리눅스상에서 유연하게 동작시킨다. R 스크립트를 수정하지 않고, 인자를 바꿔 작업을 수행하는 방법을 살펴보자. 국가별 통계를 데이터 파일을 달리하여 R스크립트 통계량을 산출하는 방법을 사례로 구현해보자.\n\n\n\n\n\n그림 28.3: R 스크립트 실행\n\n\n\n28.6.1 인자 받는 R 스크립트\n유닉스/GNU리눅스 환경에서 통계모형, 기계학습, 딥러닝 작업을 하게 되면 텍스트 형태 데이터, R스크립트, 출력 산출물을 갖게 되고, 입력 데이터를 출력산출물로 변환시키는데 R이 역할을 하게 된다.\nR 스크립트를 유연하게 만들게 되면 데이터만 바꿔도 산출물을 생성해 내고, 경우에 따라 인자값을 달리하면 원하는 다른 결과를 얻게 된다.\n\n28.6.2 데이터 변경 R 스크립트\n(Pole, West, 와/과 Harrison 2018) 가 집필한 책에 포함된 시계열 데이터 웹사이트 SOME TIME SERIES DATA SETS에서 Per capita annual GDP for several countries during 1950-1983 (first row is 1950, last is 1983) 데이터를 사용한다. 데이터를 austria.csv, canada.csv, france.csv와 같이 구분하여 저장한다.\nR 스크립트 시제품 제작\n먼저 austria.csv 파일을 불러와서 평균을 계산하는 R스크립트를 작성한다. code 디렉토리 r-args-ex01.R 파일명으로 저장한다.\n#!/usr/bin/env Rscript\n\ngdp.df &lt;- read.csv(\"data/austria.csv\", sep=\",\", head=TRUE)\n# 평균계산\ngdp.mean &lt;- mean(gdp.df$gdp, na.rm = TRUE)\n# 계산결과 화면출력\ncat(\"평균: \", gdp.mean, \"\\n\")\nRscript code/r-args-ex01.R 실행결과 예상대로 평균 GDP가 계산되었다.\n$ Rscript code/r-args-ex01.R\n평균:  0.06553276\n입력파일명 변경\n국가가 더 많을 수도 있지만, austria.csv, france.csv, canada.csv 3개 국가가 csv 파일로 데이터가 저장되어 있으니, 입력파일을 달리하여 평균을 계산하도록 R스크립트를 작성한다.\ncommandArgs 명령어를 통해 명령라인에서 인자를 받아 온다. 인자가 순서대로 들어오기 때문에 첫번째 인자로 들어오는 국가에 대한 GDP 평균을 구하고, 이를 화면에 출력하는 R스크립트다. R 내장함수 sub 함수와 정규표현식을 사용해서 파일명 앞쪽 – .csv 확장자 제거 – 만을 뽑아내어 국가명을 명기했다. code 디렉토리 r-args-ex02.R 파일명으로 저장한다.\n#!/usr/bin/env Rscript\n\nargs = commandArgs(trailingOnly=TRUE)\ncountry &lt;- args[1]\n\n# country &lt;- \"data/austria.csv\"\n\n# 데이터 불러오기\ngdp_df &lt;- read.csv(country, sep=\",\", head=TRUE)\n# 평균계산\ngdp_mean &lt;- mean(gdp_df$gdp)\n# 국가명 출력\ncountry_name &lt;- sub(\"data/(.*)\\\\.csv\", \"\\\\1\", country)\n# 계산결과 화면출력\ncat(\"국가명:\", country_name, \" 평균: \", gdp_mean, \"\\n\")\n상기 R스크립트를 쉘에서 실행한 결과는 다음과 같다. code 디렉토리에 r-args-ex02.R 스크립트 파일이 저장되어 있다.\n$ Rscript code/r-args-ex02.R  data/austria.csv\n국가명: austria  평균:  0.06553276\n$ Rscript code/r-args-ex02.R data/france.csv\n국가명: france  평균:  20.95751\n$ Rscript code/r-args-ex02.R data/canada.csv\n국가명: canada  평균:  5.817088\n국가별 기본통계\n국가 데이터를 바꾸는 것에 더해서 최소, 평균, 최대 GDP를 계산하는 로직을 추가한다. commandArgs 함수로 인자를 받는데, 최종 인자는 -1로 지정되기 때문에 그런 특성을 이용하여 R스크립트를 작성한다. 따라서, 첫번째 인자에 최소, 평균, 최소를 구할 것인지 정보를 받고, 마지막 인자로 파일명을 받는다.\n#!/usr/bin/env Rscript\n\nargs = commandArgs(trailingOnly=TRUE)\naction = args[1]\ncountry &lt;- args[-1]\n\n# 데이터 불러오기\ngdp_df &lt;- read.csv(country, sep=\",\", head=TRUE)\n\n# 국가명 추출\ncountry_name &lt;- sub(\"data/(.*)\\\\.csv\", \"\\\\1\", country)\n\n# 기초 통계량 계산\nif(action == \"--min\") {\n  gdp_min &lt;- min(gdp_df$gdp)\n  cat(\"국가명:\", country_name, \" 최소: \", gdp_min, \"\\n\")  \n}else if(action == \"--mean\") {\n  gdp_mean &lt;- mean(gdp_df$gdp)\n  cat(\"국가명:\", country_name, \" 평균: \", gdp_mean, \"\\n\")  \n}else if (action==\"--max\"){\n  gdp_max &lt;- max(gdp_df$gdp)\n  cat(\"국가명:\", country_name, \" 최대: \", gdp_max, \"\\n\")  \n}\nRscript code/r-args-ex03.R --min data/canada.csv 명령라인을 살펴보면, r-args-ex03.R R 스크립트를 실행하고, --min 인자로 최소값을 계산하는데, canada.csv 데이터 파일을 이용한다.\n$ Rscript code/r-args-ex03.R --min data/canada.csv\n국가명: canada  최소:  3.651109\n$ Rscript code/r-args-ex03.R --max data/canada.csv\n국가명: canada  최대:  8.382785\n$ Rscript code/r-args-ex03.R --mean data/canada.csv\n국가명: canada  평균:  5.817088\n\n\n\n\n\n\nR 스크립트에 인자를 넘기는 패키지\n\n\n\n\ncommandArgs\noptparse - Command Line Option Parser\nargparse - Command line optional and positional argument parser\ngetopt - C-like getopt behavior",
     "crumbs": [
       "분야별 코딩",
       "<span class='chapter-number'>28</span>  <span class='chapter-title'>작업 자동화</span>"
@@ -2085,82 +2140,6 @@
     "crumbs": [
       "분야별 코딩",
       "<span class='chapter-number'>28</span>  <span class='chapter-title'>작업 자동화</span>"
-    ]
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "참고문헌",
-    "section": "",
-    "text": "Stevens, Stanley Smith. 1946. “On the Theory of Scales of\nMeasurement.” Science 103 (2684): 677–80.\n\n\nWickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.\nR for Data Science. \" O’Reilly Media, Inc.\".\n\n\nWiener, Norbert. 1921. “A New Theory of Measurement: A Study in\nthe Logic of Mathematics.” Proceedings of the London\nMathematical Society 2 (1): 181–205.\n\n\n이경화. 2020. 고등학교 실용통계. 통계청 통계교육원.",
-    "crumbs": [
-      "참고문헌"
-    ]
-  },
-  {
-    "objectID": "tool-regex.html#regex-char-matching",
-    "href": "tool-regex.html#regex-char-matching",
-    "title": "24  정규 표현식",
-    "section": "",
-    "text": "R\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
-    "crumbs": [
-      "분야별 도구",
-      "<span class='chapter-number'>24</span>  <span class='chapter-title'>정규 표현식</span>"
-    ]
-  },
-  {
-    "objectID": "tool-network.html#network-http",
-    "href": "tool-network.html#network-http",
-    "title": "25  네트워크 프로그램",
-    "section": "",
-    "text": "웹브라우저 실행금지 사유\n\n\n\nwebr pyodide는 웹 브라우저 샌드박스 환경에서 R, 파이썬을 실행하며, 브라우저 보안 제한으로 인해 일반 R, 파이썬 환경에서와 같은 네트워크 소켓에 대한 직접적인 접근이 불가능하다. 접근을 허용하는 것이 중대한 보안 위험을 초래할 수 있기 때문에 웨브라우저에서 실행이 되지 않게 되어 있어 오류가 나는 것이 정상이다.",
-    "crumbs": [
-      "분야별 코딩",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>네트워크 프로그램</span>"
-    ]
-  },
-  {
-    "objectID": "tool-database.html",
-    "href": "tool-database.html",
-    "title": "27  데이터베이스와 SQL",
-    "section": "",
-    "text": "27.1 용어정의",
-    "crumbs": [
-      "분야별 코딩",
-      "<span class='chapter-number'>27</span>  <span class='chapter-title'>데이터베이스와 SQL</span>"
-    ]
-  },
-  {
-    "objectID": "tool-database.html#db-terminology",
-    "href": "tool-database.html#db-terminology",
-    "title": "27  데이터베이스와 SQL",
-    "section": "",
-    "text": "속성(attribute): 튜플 내부에 값의 하나. 좀더 일반적으로 “열”, “칼럼”, “필드”로 불린다.\n\n제약(constraint): 데이터베이스가 테이블의 필드나 행에 규칙을 강제하는 것. 일반적인 제약은 특정 필드에 중복된 값이 없도록 하는 것(즉, 모든 값이 유일해야 한다.)\n\n커서(cursor): 커서를 사용해서 데이터베이스에서 SQL 명령어를 수행하고 데이터베이스에서 데이터를 가져온다. 커서는 네트워크 연결을 위한 소켓이나 파일의 파일 핸들러와 유사하다.\n\n데이터베이스 브라우져(database browser): 프로그램을 작성하지 않고 직접적으로 데이터베이스에 연결하거나 데이터베이스를 조작할 수 있는 소프트웨어.\n\n외부 키(foreign key): 다른 테이블에 있는 행의 주키를 가리키는 숫자 키. 외부 키는 다른 테이블에 저장된 행사이에 관계를 설정한다.\n\n인텍스(index): 테이블에 행이 추가될 때 정보 검색하는 것을 빠르게 하기 위해서 데이터베이스 소프트웨어가 유지관리하는 추가 데이터.\n\n논리 키(logical key): “외부 세계”가 특정 행의 정보를 찾기 위해서 사용하는 키. 사용자 계정 테이블의 예로, 사람의 전자우편 주소는 사용자 데이터에 대한 논리 키의 좋은 후보자가 될 수 있다.\n\n정규화(normalization): 어떠한 데이터도 중복이 없도록 데이터 모델을 설계하는 것. 데이터베이스 한 장소에 데이터 각 항목 정보를 저장하고 외부키를 이용하여 다른 곳에서 참조한다.\n\n주키(primary key): 다른 테이블에서 테이블의 한 행을 참조하기 위해서 각 행에 대입되는 숫자 키. 종종 데이터베이스는 행이 삽입될 때 주키를 자동 삽입하도록 설정되었다.\n\n관계(relation): 튜플과 속성을 담고 있는 데이터베이스 내부 영역. 좀더 일반적으로 “테이블(table)”이라고 한다.\n\n튜플(tuple):데이터베이스 테이블에 단일 항목으로 속성 집합이다. 좀더 일반적으로 “행(row)”이라고 한다.",
-    "crumbs": [
-      "분야별 코딩",
-      "<span class='chapter-number'>27</span>  <span class='chapter-title'>데이터베이스와 SQL</span>"
-    ]
-  },
-  {
-    "objectID": "tool-make.html#bbc-뉴스-사례",
-    "href": "tool-make.html#bbc-뉴스-사례",
-    "title": "28  작업 자동화",
-    "section": "\n28.2 BBC 뉴스 사례",
-    "text": "28.2 BBC 뉴스 사례\n작업 자동화를 별도의 주제로 분리하여 다루는 이유는, BBC 뉴스 데이터셋(Greene 와/과 Cunningham 2006)과 같은 파일들이 디렉토리에 저장될 경우, 이를 효과적으로 처리할 수 있기 때문이다. 인공지능의 기반 기술인 기계학습과 딥러닝은, 전 세계 다양한 언어로 수집된 상상을 초월하는 양의 텍스트 데이터를 가공하여 AI 모델 개발의 기초 데이터로 활용한다.\nBBC 뉴스 데이터셋은 5개 뉴스 범주에 맞춰 각 뉴스는 001.txt, 002.txt, 003.txt 등과 같은 파일명으로 저장되어 있다. 먼저 궁금한 점은 BBC 뉴스 데이터가 각 범주별로 몇개의 기사 있는지 빈도수를 확인하는 것이다.\n\nlibrary(fs)\nfs::dir_tree(\"data/bbc\", type = \"directory\")\n\n#&gt; data/bbc\n#&gt; ├── business\n#&gt; ├── entertainment\n#&gt; ├── politics\n#&gt; ├── sport\n#&gt; └── tech\n\n이 작업을 위해서 디렉토리 파일 정보를 파일시스템에서 fs 패키지 dir_ls() 함수로 읽어온 후에 dplyr 패키지 enframe() 함수로 데이터프레임으로 변환하여 디렉토리인지 파일인지 구분하는 작업을 if_else 문으로 수행하고 빈도수를 count() 함수로 계산한다.\n\n\nR\n파이썬\n\n\n\n\nbbc_files &lt;- fs::dir_ls(\"data/bbc/\", recurse = TRUE)\n\nbbc_files |&gt; \n  enframe() |&gt; \n  mutate(구분 = if_else(str_detect(value, \"txt$\"), \"파일\", \"디렉토리\")) |&gt; \n  count(구분, name = \"건수\")\n#&gt; # A tibble: 2 × 2\n#&gt;   구분      건수\n#&gt;   &lt;chr&gt;    &lt;int&gt;\n#&gt; 1 디렉토리     6\n#&gt; 2 파일      2225\n\n\n\n\nimport os\nimport pandas as pd\n\nbbc_files = []\nfor root, dirs, files in os.walk(\"data/bbc/\"):\n    for name in files:\n        bbc_files.append(os.path.join(root, name))\n    for name in dirs:\n        bbc_files.append(os.path.join(root, name))\n\ndf = pd.DataFrame({'value': bbc_files})\n\ndf['구분'] = df['value'].apply(lambda x: '파일' if x.endswith('.txt') else '디렉토리')\n\nresult = df['구분'].value_counts().reset_index()\nresult.columns = ['구분', '건수']\n\nprint(result)\n\n     구분    건수\n0    파일  2225\n1  디렉토리     6\n\n\n\n이제 BBC 뉴스 데이터셋의 각 범주별로 몇개의 기사가 있는지 빈도수를 계산한다. bbc_files에 있는 파일 목록을 데이터 프레임으로 변환하고, 파일 경로를 구분자 “/”를 기준으로 나누어 여러 열로 분리한다. 파일 이름이 “.txt”로 끝나는지 여부에 따라 파일과 디렉토리를 구분하고, 디렉토리가 아닌 파일들만을 남겨둔 후, 각 범주별로 뉴스 기사의 수를 세어 빈도수를 계산한다.\n\n\nR\n파이썬\n\n\n\n\nbbc_files |&gt; \n  enframe() |&gt; \n  separate(name, into = c(\"data\", \"bbc\", \"범주\"), sep = \"/\") |&gt;\n  mutate(구분 = if_else(str_detect(value, \"txt$\"), \"파일\", \"디렉토리\")) |&gt; \n  filter(구분 != \"디렉토리\") |&gt; \n  count(범주, name = \"뉴스기사수\")\n#&gt; # A tibble: 5 × 2\n#&gt;   범주          뉴스기사수\n#&gt;   &lt;chr&gt;              &lt;int&gt;\n#&gt; 1 business             510\n#&gt; 2 entertainment        386\n#&gt; 3 politics             417\n#&gt; 4 sport                511\n#&gt; 5 tech                 401\n\n\n\n\nimport os\nimport pandas as pd\n\n# data/bbc/ 디렉토리의 파일 목록을 가져오는 함수\ndef get_file_list(directory):\n    file_list = []\n    for root, dirs, files in os.walk(directory):\n        for file in files:\n            file_list.append(os.path.join(root, file))\n    return file_list\n\n# 파일 목록 가져오기\nbbc_files = get_file_list(\"data/bbc/\")\n\n# 데이터 프레임 생성\ndf = pd.DataFrame({'value': bbc_files})\n\n# 경로를 '/'를 기준으로 분리\ndf[['범주', '파일']] = df['value'].str.split('\\\\', expand=True)\ndf = df.dropna()\n\n# 범주별로 뉴스기사 수 세기\nresult = df['범주'].value_counts().reset_index()\nresult.columns = ['범주', '뉴스기사수']\n\nprint(result)\n\n                       범주  뉴스기사수\n0          data/bbc/sport    511\n1       data/bbc/business    510\n2       data/bbc/politics    417\n3           data/bbc/tech    401\n4  data/bbc/entertainment    386",
-    "crumbs": [
-      "분야별 코딩",
-      "<span class='chapter-number'>28</span>  <span class='chapter-title'>작업 자동화</span>"
-    ]
-  },
-  {
-    "objectID": "tool-gpt.html",
-    "href": "tool-gpt.html",
-    "title": "\n30  챗GPT 코딩\n",
-    "section": "",
-    "text": "30.1 코딩 패러다임\n코딩 세계는 끊임없이 진화한다. 전통적인 코딩 방식에서 시작하여 기계학습 코딩, 최근 챗GPT와 같은 대규모 언어모델(LLM)을 활용한 프롬프트 기반 코딩에 이르기까지, 새로운 패러다임이 계속해서 등장하고 있다.\n전통적인 코딩은 프로그래머가 직접 모든 코드를 작성하고 논리를 구축하는 방식으로 개발자 전문성과 경험에 크게 의존하며, 코드 품질과 효율성은 프로그래머의 역량에 달렸다. 하지만 이러한 접근법은 시간이 많이 소요되고 반복적인 작업이 많아 생산성이 낮아 통합개발환경(IDE), 소프트웨어 공학, 소프트웨어 아키텍처, 디자인 패턴 등의 방법론과 도구가 발전하며 개선되어 왔고 현재 주류를 형성하고 있다.\n기계학습 코딩은 데이터와 알고리즘을 활용하여 컴퓨터 스스로 코드를 생성하고 최적화할 수 있게 하는 방식으로 전통적인 코딩 방식으로 풀 수 없는 복잡한 문제를 해결할 수 있다. 기계학습 코딩 방식은 대규모 데이터셋과 복잡한 알고리즘을 필요로 하지만, 일단 학습이 완료되면 개발자가 작성한 코드보다 월등한 성능을 보인다. 다만 기계학습 모형의 성능은 데이터의 질과 양, 알고리즘의 복잡성, 컴퓨팅 자원에 따라 크게 좌우된다.\n최근 챗GPT와 같은 대규모 언어모델을 활용한 프롬프트 기반 코딩이 주목받고 있다. 자연어 프롬프트를 입력하면 언어모델이 이해하고 관련 코드를 생성한다는 점에서 일종의 생성형 모형으로 볼 수 있다. 프롬프트 기반 코딩은 전통적인 코딩 방식과 기계학습 코딩의 장점을 결합했다. 프로그래머는 자연어로 의도를 표현할 수 있고, LLM은 의도를 파악하여 코드로 변환해주어 생산성과 효율성을 높일 수 있어 매우 유용하다.",
-    "crumbs": [
-      "분야별 코딩",
-      "<span class='chapter-number'>30</span>  <span class='chapter-title'>챗GPT 코딩</span>"
     ]
   },
   {
@@ -2230,6 +2209,17 @@
     ]
   },
   {
+    "objectID": "tool-gpt.html",
+    "href": "tool-gpt.html",
+    "title": "\n30  챗GPT 코딩\n",
+    "section": "",
+    "text": "30.1 코딩 패러다임\n코딩 세계는 끊임없이 진화한다. 전통적인 코딩 방식에서 시작하여 기계학습 코딩, 최근 챗GPT와 같은 대규모 언어모델(LLM)을 활용한 프롬프트 기반 코딩에 이르기까지, 새로운 패러다임이 계속해서 등장하고 있다.\n전통적인 코딩은 프로그래머가 직접 모든 코드를 작성하고 논리를 구축하는 방식으로 개발자 전문성과 경험에 크게 의존하며, 코드 품질과 효율성은 프로그래머의 역량에 달렸다. 하지만 이러한 접근법은 시간이 많이 소요되고 반복적인 작업이 많아 생산성이 낮아 통합개발환경(IDE), 소프트웨어 공학, 소프트웨어 아키텍처, 디자인 패턴 등의 방법론과 도구가 발전하며 개선되어 왔고 현재 주류를 형성하고 있다.\n기계학습 코딩은 데이터와 알고리즘을 활용하여 컴퓨터 스스로 코드를 생성하고 최적화할 수 있게 하는 방식으로 전통적인 코딩 방식으로 풀 수 없는 복잡한 문제를 해결할 수 있다. 기계학습 코딩 방식은 대규모 데이터셋과 복잡한 알고리즘을 필요로 하지만, 일단 학습이 완료되면 개발자가 작성한 코드보다 월등한 성능을 보인다. 다만 기계학습 모형의 성능은 데이터의 질과 양, 알고리즘의 복잡성, 컴퓨팅 자원에 따라 크게 좌우된다.\n최근 챗GPT와 같은 대규모 언어모델을 활용한 프롬프트 기반 코딩이 주목받고 있다. 자연어 프롬프트를 입력하면 언어모델이 이해하고 관련 코드를 생성한다는 점에서 일종의 생성형 모형으로 볼 수 있다. 프롬프트 기반 코딩은 전통적인 코딩 방식과 기계학습 코딩의 장점을 결합했다. 프로그래머는 자연어로 의도를 표현할 수 있고, LLM은 의도를 파악하여 코드로 변환해주어 생산성과 효율성을 높일 수 있어 매우 유용하다.",
+    "crumbs": [
+      "분야별 코딩",
+      "<span class='chapter-number'>30</span>  <span class='chapter-title'>챗GPT 코딩</span>"
+    ]
+  },
+  {
     "objectID": "tool-gpt.html#코딩-패러다임",
     "href": "tool-gpt.html#코딩-패러다임",
     "title": "\n30  챗GPT 코딩\n",
@@ -2249,17 +2239,6 @@
     "crumbs": [
       "분야별 코딩",
       "<span class='chapter-number'>30</span>  <span class='chapter-title'>챗GPT 코딩</span>"
-    ]
-  },
-  {
-    "objectID": "tool-gpt.html#챗gpt-코딩",
-    "href": "tool-gpt.html#챗gpt-코딩",
-    "title": "30  챗GPT",
-    "section": "\n31.3 챗GPT 코딩",
-    "text": "31.3 챗GPT 코딩\n챗GPT 코딩 구성요소",
-    "crumbs": [
-      "분야별 코딩",
-      "<span class='chapter-number'>30</span>  <span class='chapter-title'>챗GPT</span>"
     ]
   },
   {
@@ -2304,6 +2283,16 @@
     "crumbs": [
       "분야별 코딩",
       "<span class='chapter-number'>30</span>  <span class='chapter-title'>챗GPT 코딩</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "참고문헌",
+    "section": "",
+    "text": "Chiang, Ted. 2023. “ChatGPT Is a Blurry JPEG of the Web.”\nThe New Yorker 9: 2023.\n\n\nGozalo-Brizuela, Roberto, and Eduardo C Garrido-Merchan. 2023.\n“ChatGPT Is Not All You Need. A State of the Art Review of Large\nGenerative AI Models.” arXiv Preprint arXiv:2301.04655.\n\n\nGreene, Derek, and Pádraig Cunningham. 2006. “Practical Solutions\nto the Problem of Diagonal Dominance in Kernel Document\nClustering.” In Proc. 23rd International Conference on\nMachine Learning (ICML’06), 377–84. ACM Press.\n\n\nPole, Andy, Mike West, and Jeff Harrison. 2018. Applied Bayesian\nForecasting and Time Series Analysis. Chapman; Hall/CRC.\n\n\nStevens, Stanley Smith. 1946. “On the Theory of Scales of\nMeasurement.” Science 103 (2684): 677–80.\n\n\nVaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion\nJones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017.\n“Attention Is All You Need.” Advances in Neural\nInformation Processing Systems 30.\n\n\nWickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy\nD’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.\n“Welcome to the Tidyverse.” Journal of Open Source\nSoftware 4 (43): 1686.\n\n\nWickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.\nR for Data Science. \" O’Reilly Media, Inc.\".\n\n\nWiener, Norbert. 1921. “A New Theory of Measurement: A Study in\nthe Logic of Mathematics.” Proceedings of the London\nMathematical Society 2 (1): 181–205.\n\n\nWu, Tianyu, Shizhu He, Jingping Liu, Siqi Sun, Kang Liu, Qing-Long Han,\nand Yang Tang. 2023. “A Brief Overview of ChatGPT: The History,\nStatus Quo and Potential Future Development.” IEEE/CAA\nJournal of Automatica Sinica 10 (5): 1122–36.\n\n\n이경화. 2020. 고등학교 실용통계. 통계청 통계교육원.",
+    "crumbs": [
+      "참고문헌"
     ]
   }
 ]

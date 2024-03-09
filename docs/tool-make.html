@@ -81,7 +81,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./tool-gpt.html" rel="next">
+<link href="./tool-viz.html" rel="next">
 <link href="./tool-database.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -276,7 +276,7 @@ ga('send', {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = ['stringr', 'readr', 'purrr', 'httr', 'curl', 'rvest', 'fs'];
+globalThis.qwebrInstallRPackagesList = ['stringr', 'readr', 'purrr', 'httr', 'curl', 'rvest', 'fs', 'ggplot2'];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -298,7 +298,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"library(fs)\n\ncwd <- fs::path_wd()\ncwd\n#> C:/swc/gpt-coding","options":{"message":"true","read-only":"false","label":"r-task-fs","results":"markup","autorun":"false","fig-cap":"","dpi":72,"comment":"","out-height":"","warning":"true","classes":"","fig-width":7,"output":"true","fig-height":5,"out-width":"700px","context":"interactive"},"id":1},{"code":"file.create(\"index.qmd\")\n#> [1] TRUE\nfs::path_abs(\"index.qmd\")\n#> D:/swc/gpt-coding/index.qmd","options":{"message":"true","read-only":"false","label":"r-show-abs-path","results":"markup","autorun":"false","fig-cap":"","dpi":72,"comment":"","out-height":"","warning":"true","classes":"","fig-width":7,"output":"true","fig-height":5,"out-width":"700px","context":"interactive"},"id":2},{"code":"# 'music' 디렉토리 생성\ndir_create(\"music\", showWarnings = FALSE)\n\n# 'memo.txt' 파일 생성\nfile_create(\"memo.txt\")\n\n# 파일 및 디렉토리 존재 여부 확인\nfile_exists(\"memo.txt\") \n#> TRUE\ndir_exists(\"memo.txt\")\n#> FALSE\ndir_exists(\"music\")\n#> TRUE","options":{"message":"true","read-only":"false","label":"r-file-dir-exist","results":"markup","autorun":"false","fig-cap":"","dpi":72,"comment":"","out-height":"","warning":"true","classes":"","fig-width":7,"output":"true","fig-height":5,"out-width":"700px","context":"interactive"},"id":3},{"code":"dir_ls(cwd)\n#> /home/web_user/memo.txt /home/web_user/music","options":{"message":"true","read-only":"false","label":"r-tasks-dir-ls","results":"markup","autorun":"false","fig-cap":"","dpi":72,"comment":"","out-height":"","warning":"true","classes":"","fig-width":7,"output":"true","fig-height":5,"out-width":"700px","context":"interactive"},"id":4}];
+globalThis.qwebrCellDetails = [{"code":"library(fs)\n\ncwd <- fs::path_wd()\ncwd\n#> C:/swc/gpt-coding","id":1,"options":{"warning":"true","dpi":72,"output":"true","comment":"","autorun":"false","label":"r-task-fs","context":"interactive","out-width":"700px","out-height":"","fig-height":5,"message":"true","classes":"","results":"markup","fig-cap":"","fig-width":7,"read-only":"false"}},{"code":"file.create(\"index.qmd\")\n#> [1] TRUE\nfs::path_abs(\"index.qmd\")\n#> D:/swc/gpt-coding/index.qmd","id":2,"options":{"warning":"true","dpi":72,"output":"true","comment":"","autorun":"false","label":"r-show-abs-path","context":"interactive","out-width":"700px","out-height":"","fig-height":5,"message":"true","classes":"","results":"markup","fig-cap":"","fig-width":7,"read-only":"false"}},{"code":"# 'music' 디렉토리 생성\ndir_create(\"music\", showWarnings = FALSE)\n\n# 'memo.txt' 파일 생성\nfile_create(\"memo.txt\")\n\n# 파일 및 디렉토리 존재 여부 확인\nfile_exists(\"memo.txt\") \n#> TRUE\ndir_exists(\"memo.txt\")\n#> FALSE\ndir_exists(\"music\")\n#> TRUE","id":3,"options":{"warning":"true","dpi":72,"output":"true","comment":"","autorun":"false","label":"r-file-dir-exist","context":"interactive","out-width":"700px","out-height":"","fig-height":5,"message":"true","classes":"","results":"markup","fig-cap":"","fig-width":7,"read-only":"false"}},{"code":"dir_ls(cwd)\n#> /home/web_user/memo.txt /home/web_user/music","id":4,"options":{"warning":"true","dpi":72,"output":"true","comment":"","autorun":"false","label":"r-tasks-dir-ls","context":"interactive","out-width":"700px","out-height":"","fig-height":5,"message":"true","classes":"","results":"markup","fig-cap":"","fig-width":7,"read-only":"false"}}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1170,7 +1170,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"code":"import os\n\ncwd = os.getcwd()\nprint(cwd)","options":{"message":"true","read-only":"false","label":"py-task-fs","results":"markup","autorun":"","fig-cap":"","dpi":72,"comment":"","out-height":"","warning":"true","classes":"","fig-width":7,"output":"true","fig-height":5,"out-width":"700px","context":"interactive"},"id":1},{"code":"import os\n\nfile_name = \"index.qmd\"\nwith open(file_name, 'w') as file:\n    pass\n\nabs_path = os.path.abspath(file_name)\nprint(abs_path)","options":{"message":"true","read-only":"false","label":"py-show-abs-path","results":"markup","autorun":"","fig-cap":"","dpi":72,"comment":"","out-height":"","warning":"true","classes":"","fig-width":7,"output":"true","fig-height":5,"out-width":"700px","context":"interactive"},"id":2},{"code":"# music 디렉토리 생성, memo.txt 파일 생성\nos.makedirs('music', exist_ok=True)\n\nfile_name = \"memo.txt\"\nwith open(file_name, 'w') as file:\n    pass\n\nos.path.exists('memo.txt')\n#> True\nos.path.isdir('memo.txt')\n#> False\nos.path.isdir('music')\n#> True","options":{"message":"true","read-only":"false","label":"py-file-dir-exist","results":"markup","autorun":"","fig-cap":"","dpi":72,"comment":"","out-height":"","warning":"true","classes":"","fig-width":7,"output":"true","fig-height":5,"out-width":"700px","context":"interactive"},"id":3},{"code":"os.listdir(cwd)\n#> ['.matplotlib', 'music', 'memo.txt']","options":{"message":"true","read-only":"false","label":"py-tasks-dir-ls","results":"markup","autorun":"","fig-cap":"","dpi":72,"comment":"","out-height":"","warning":"true","classes":"","fig-width":7,"output":"true","fig-height":5,"out-width":"700px","context":"interactive"},"id":4}];
+globalThis.qpyodideCellDetails = [{"code":"import os\n\ncwd = os.getcwd()\nprint(cwd)","id":1,"options":{"warning":"true","dpi":72,"output":"true","comment":"","autorun":"","label":"py-task-fs","context":"interactive","out-width":"700px","out-height":"","fig-height":5,"message":"true","classes":"","results":"markup","fig-cap":"","fig-width":7,"read-only":"false"}},{"code":"import os\n\nfile_name = \"index.qmd\"\nwith open(file_name, 'w') as file:\n    pass\n\nabs_path = os.path.abspath(file_name)\nprint(abs_path)","id":2,"options":{"warning":"true","dpi":72,"output":"true","comment":"","autorun":"","label":"py-show-abs-path","context":"interactive","out-width":"700px","out-height":"","fig-height":5,"message":"true","classes":"","results":"markup","fig-cap":"","fig-width":7,"read-only":"false"}},{"code":"# music 디렉토리 생성, memo.txt 파일 생성\nos.makedirs('music', exist_ok=True)\n\nfile_name = \"memo.txt\"\nwith open(file_name, 'w') as file:\n    pass\n\nos.path.exists('memo.txt')\n#> True\nos.path.isdir('memo.txt')\n#> False\nos.path.isdir('music')\n#> True","id":3,"options":{"warning":"true","dpi":72,"output":"true","comment":"","autorun":"","label":"py-file-dir-exist","context":"interactive","out-width":"700px","out-height":"","fig-height":5,"message":"true","classes":"","results":"markup","fig-cap":"","fig-width":7,"read-only":"false"}},{"code":"os.listdir(cwd)\n#> ['.matplotlib', 'music', 'memo.txt']","id":4,"options":{"warning":"true","dpi":72,"output":"true","comment":"","autorun":"","label":"py-tasks-dir-ls","context":"interactive","out-width":"700px","out-height":"","fig-height":5,"message":"true","classes":"","results":"markup","fig-cap":"","fig-width":7,"read-only":"false"}}];
 
 
 </script><script type="module">
@@ -1621,8 +1621,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">챗GPT</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
   </div>
 </li>
       </ul>
@@ -2370,10 +2376,10 @@ R 스크립트 파일을 실행하는 다른 방법
 <span id="cb30-16"><a href="#cb30-16"></a>  <span class="fu">cat</span>(<span class="st">"국가명:"</span>, country_name, <span class="st">" 최소: "</span>, gdp_min, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)  </span>
 <span id="cb30-17"><a href="#cb30-17"></a>}<span class="cf">else</span> <span class="cf">if</span>(action <span class="sc">==</span> <span class="st">"--mean"</span>) {</span>
 <span id="cb30-18"><a href="#cb30-18"></a>  gdp_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(gdp_df<span class="sc">$</span>gdp)</span>
-<span id="cb30-19"><a href="#cb30-19"></a>  <span class="fu">cat</span>(<span class="st">"국가명:"</span>, country_name, <span class="st">" 최소: "</span>, gdp_mean, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)  </span>
+<span id="cb30-19"><a href="#cb30-19"></a>  <span class="fu">cat</span>(<span class="st">"국가명:"</span>, country_name, <span class="st">" 평균: "</span>, gdp_mean, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)  </span>
 <span id="cb30-20"><a href="#cb30-20"></a>}<span class="cf">else</span> <span class="cf">if</span> (action<span class="sc">==</span><span class="st">"--max"</span>){</span>
 <span id="cb30-21"><a href="#cb30-21"></a>  gdp_max <span class="ot">&lt;-</span> <span class="fu">max</span>(gdp_df<span class="sc">$</span>gdp)</span>
-<span id="cb30-22"><a href="#cb30-22"></a>  <span class="fu">cat</span>(<span class="st">"국가명:"</span>, country_name, <span class="st">" 최소: "</span>, gdp_max, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)  </span>
+<span id="cb30-22"><a href="#cb30-22"></a>  <span class="fu">cat</span>(<span class="st">"국가명:"</span>, country_name, <span class="st">" 최대: "</span>, gdp_max, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)  </span>
 <span id="cb30-23"><a href="#cb30-23"></a>}</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>Rscript code/r-args-ex03.R --min data/canada.csv</code> 명령라인을 살펴보면, <code>r-args-ex03.R</code> R 스크립트를 실행하고, <code>--min</code> 인자로 최소값을 계산하는데, <code>canada.csv</code> 데이터 파일을 이용한다.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript code/r-args-ex03.R <span class="at">--min</span> data/canada.csv</span>
@@ -2882,8 +2888,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./tool-gpt.html" class="pagination-link" aria-label="챗GPT">
-        <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">챗GPT</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./tool-viz.html" class="pagination-link" aria-label="시각화">
+        <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">시각화</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -3544,7 +3550,7 @@ qpyodideCellDetails.map(
       qpyodideCreateCell(entry);
     }
   );
-</script><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
+</script><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
