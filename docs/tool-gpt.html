@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.5.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="이광춘">
-<title>챗GPT 코딩 – 29&nbsp; 챗GPT</title>
+<title>챗GPT 코딩 – 30&nbsp; 챗GPT</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,7 +18,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -28,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./references.html" rel="next">
-<link href="./tool-make.html" rel="prev">
+<link href="./tool-viz.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -38,7 +92,10 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -76,7 +133,9 @@ ga('send', {
   hitType: 'pageview',
   'anonymizeIp': true,
 });
-</script><script defer="" data-domain="r2bit.com/gpt-coding" src="https://plausible.io/js/script.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</script><script defer="" data-domain="r2bit.com/gpt-coding" src="https://plausible.io/js/script.js"></script><meta name="mermaid-theme" content="neutral">
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script><script src="site_libs/quarto-diagram/mermaid-init.js"></script><link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <style type="text/css">
 .monaco-editor pre {
@@ -241,7 +300,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"results":"markup","fig-height":5,"warning":"true","message":"true","read-only":"false","fig-cap":"","context":"interactive","comment":"","output":"true","dpi":72,"out-height":"","fig-width":7,"label":"r-plot-hist","classes":"","out-width":"700px","autorun":"false"},"code":"\nhist(rnorm(100))","id":1},{"options":{"results":"markup","fig-height":5,"warning":"true","message":"true","read-only":"false","fig-cap":"","context":"interactive","comment":"","output":"true","dpi":72,"out-height":"","fig-width":7,"label":"ggplot-plot-hist","classes":"","out-width":"700px","autorun":"false"},"code":"library(ggplot2)\n\n# Generate 100 random numbers from a normal distribution\ndata <- data.frame(numbers = rnorm(100))\n\n# Create a histogram\nggplot(data, aes(x = numbers)) +\n  geom_histogram(bins = 30, fill = \"blue\", color = \"black\") +\n  ggtitle(\"Histogram of Randomly Generated Numbers\")\n","id":2}];
+globalThis.qwebrCellDetails = [{"options":{"classes":"","label":"r-plot-hist","fig-cap":"","autorun":"false","warning":"true","results":"markup","fig-width":7,"comment":"","read-only":"false","fig-height":5,"out-width":"700px","output":"true","dpi":72,"message":"true","out-height":"","context":"interactive"},"id":1,"code":"\nhist(rnorm(100))"},{"options":{"classes":"","label":"ggplot-plot-hist","fig-cap":"","autorun":"false","warning":"true","results":"markup","fig-width":7,"comment":"","read-only":"false","fig-height":5,"out-width":"700px","output":"true","dpi":72,"message":"true","out-height":"","context":"interactive"},"id":2,"code":"library(ggplot2)\n\n# Generate 100 random numbers from a normal distribution\ndata <- data.frame(numbers = rnorm(100))\n\n# Create a histogram\nggplot(data, aes(x = numbers)) +\n  geom_histogram(bins = 30, fill = \"blue\", color = \"black\") +\n  ggtitle(\"Histogram of Randomly Generated Numbers\")"}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1113,7 +1172,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"options":{"results":"markup","fig-height":5,"warning":"true","message":"true","read-only":"false","fig-cap":"","context":"interactive","comment":"","label":"py-plot-matplotlib","dpi":72,"classes":"","fig-width":7,"out-height":"","output":"true","out-width":"700px","autorun":""},"code":"import numpy as np\nimport matplotlib.pyplot as plt\n\n# Generate 100 random numbers from a normal distribution\ndata = np.random.normal(size=100)\n\n# Plot a histogram\nplt.hist(data, bins='auto')  # 'bins' can be adjusted for more or less detail\nplt.title('Histogram of Randomly Generated Numbers')\nplt.show()","id":1}];
+globalThis.qpyodideCellDetails = [{"options":{"classes":"","label":"py-plot-matplotlib","fig-cap":"","autorun":"","warning":"true","results":"markup","fig-width":7,"comment":"","read-only":"false","fig-height":5,"out-width":"700px","output":"true","dpi":72,"message":"true","out-height":"","context":"interactive"},"id":1,"code":"import numpy as np\nimport matplotlib.pyplot as plt\n\n# Generate 100 random numbers from a normal distribution\ndata = np.random.normal(size=100)\n\n# Plot a histogram\nplt.hist(data, bins='auto')  # 'bins' can be adjusted for more or less detail\nplt.title('Histogram of Randomly Generated Numbers')\nplt.show()"}];
 
 
 </script><script type="module">
@@ -1281,7 +1340,7 @@ globalThis._qpyodideGetInstance = function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-gpt.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">챗GPT</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-gpt.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">챗GPT</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -1539,8 +1598,14 @@ globalThis._qpyodideGetInstance = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">챗GPT</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">챗GPT</span></span></a>
   </div>
 </li>
       </ul>
@@ -1555,8 +1620,19 @@ globalThis._qpyodideGetInstance = function() {
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
+   
+  <ul>
+<li>
+<a href="#%EC%9E%90%EC%97%B0%EC%96%B4-sql-%EC%BF%BC%EB%A6%AC" id="toc-자연어-sql-쿼리" class="nav-link active" data-scroll-target="#%EC%9E%90%EC%97%B0%EC%96%B4-sql-%EC%BF%BC%EB%A6%AC"><span class="header-section-number">31</span> 자연어 SQL 쿼리</a>
+  <ul class="collapse">
+<li><a href="#%EC%BD%94%EB%94%A9-%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84" id="toc-코딩-패러다임" class="nav-link" data-scroll-target="#%EC%BD%94%EB%94%A9-%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84"><span class="header-section-number">31.1</span> 코딩 패러다임</a></li>
+  <li><a href="#%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-%EA%B3%B5%ED%95%99" id="toc-프롬프트-공학" class="nav-link" data-scroll-target="#%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-%EA%B3%B5%ED%95%99"><span class="header-section-number">31.2</span> 프롬프트 공학</a></li>
+  <li><a href="#%EC%B1%97gui-%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4" id="toc-챗gui-인터페이스" class="nav-link" data-scroll-target="#%EC%B1%97gui-%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4"><span class="header-section-number">31.3</span> 챗GUI 인터페이스</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-gpt.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script><script type="module" id="qwebr-monaco-editor-init">
@@ -1738,8 +1814,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
       'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'
     }
   });
-</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-gpt.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">챗GPT</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="r-automation" class="quarto-section-identifier"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">챗GPT</span></span></h1>
+</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-gpt.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">챗GPT</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="r-automation" class="quarto-section-identifier"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">챗GPT</span></span></h1>
 </div>
 
 
@@ -1759,10 +1835,135 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<section id="자연어-sql-쿼리" class="level1" data-number="31"><h1 data-number="31">
+<span class="header-section-number">31</span> 자연어 SQL 쿼리</h1>
+<p>1950년대부터 본격적으로 컴퓨터가 도입되면서 CLI를 필두로 다양한 사용자 인터페이스(User Interface)가 적용되었다. 스티브 잡스의 애플사는 매킨토시 GUI에 이어 아이폰 모바일 인터페이스를 일반화시켰다면, 최근 챗GPT는 언어 사용자 인터페이스(LUI)를 통해 각 분야에 혁신을 예고하고 있다. 챗GPT<span class="citation" data-cites="vaswani2017attention">(Vaswani 기타 2017)</span> 데이터 과학도 사용자 관점에서 보자. 기존 R, 파이썬, SQL, 엑셀 등 데이터 과학 구문을 머리속에 암기하고 있거나 구글이나 네이버를 통해 중요 키워드를 통해 문제를 해결해야 했었다. 하지만, 이제 챗GPT가 자연어를 이해하기 때문에 데이터 전처리, 통계 작업, 데이터 분석, 시각화, 모형개발 등 데이터 과학 전반에 변화는 필연적이다. <span class="citation" data-cites="wickham2023r wickham2019welcome gozalo2023chatgpt">(Wickham, Çetinkaya-Rundel, 와/과 Grolemund 2023; Wickham 기타 2019; Gozalo-Brizuela 와/과 Garrido-Merchan 2023)</span></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-ui-evolution" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ui-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-ui-evolution">flowchart TB
+    
+    subgraph A["사용자 인터페이스"]
+    direction LR
+        CLI["CLI 1950~&lt;br&gt;Command Line Interface&lt;br&gt; GUI 1970~&lt;br&gt; Graphic User Inferface"]     --&gt; WIMI
+        WIMI["Web Interface &lt;br&gt; 1994~ &lt;br&gt; Mobile Interface &lt;br&gt; 2007~"] --&gt; NUI["LUI 2023~&lt;br&gt; Language &lt;br&gt; User Interface"]
+    end
+
+classDef default fill:#f9f7f7,stroke:#333,stroke-width:2px;
+classDef A font-size:16px;
+
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ui-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;31.1: 사용자 인터페이스 진화
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>챗GPT<span class="citation" data-cites="wu2023brief">(Wu 기타 2023)</span>는 인터넷에서 방대한 양의 데이터를 학습하여 이를 정말 잘 압축한 하나의 저장소로 이해할 수 있다. 따라서, 압축을 풀게 되면 정확히 원본을 복원할 수 있는 부분도 있지만, 그렇지 못한 부분도 당영히 있게 된다.</p>
+<p>챗GPT를 “웹의 흐릿한 JPEG”<span class="citation" data-cites="chiang2023chatgpt">(Chiang 2023)</span>으로 비유하고 있다. JPEC 기술 자체는 손실 압축기술로 무손실 압축기술로 대표적인 PNG와 대비된다. 흐릿한 이미지가 선명하지 않거나 정확하지 않은 것처럼 ChatGPT도 항상 완벽한 답변을 제공하거나 모든 질문을 제대로 이해하는 것도 아니다. 하지만 사용자와의 대화를 기반으로 끊임없이 학습하고 개선하고 있다. 더 많은 사람들이 챗GPT를 사용할수록 사람의 언어를 더 잘 이해하고 반응할 수 있게 개발된 기술이다.</p>
+<section id="코딩-패러다임" class="level2" data-number="31.1"><h2 data-number="31.1" class="anchored" data-anchor-id="코딩-패러다임">
+<span class="header-section-number">31.1</span> 코딩 패러다임</h2>
+<p>코딩 세계는 끊임없이 진화한다. 전통적인 코딩 방식에서 시작하여 기계학습 코딩, 최근 챗GPT와 같은 대규모 언어모델(LLM)을 활용한 프롬프트 기반 코딩에 이르기까지, 새로운 패러다임이 계속해서 등장하고 있다.</p>
+<p>전통적인 코딩은 프로그래머가 직접 모든 코드를 작성하고 논리를 구축하는 방식으로 개발자 전문성과 경험에 크게 의존하며, 코드 품질과 효율성은 프로그래머의 역량에 달렸다. 하지만 이러한 접근법은 시간이 많이 소요되고 반복적인 작업이 많아 생산성이 낮아 통합개발환경(IDE), 소프트웨어 공학, 소프트웨어 아키텍처, 디자인 패턴 등의 방법론과 도구가 발전하며 개선되어 왔고 현재 주류를 형성하고 있다.</p>
+<p>기계학습 코딩은 데이터와 알고리즘을 활용하여 컴퓨터 스스로 코드를 생성하고 최적화할 수 있게 하는 방식으로 전통적인 코딩 방식으로 풀 수 없는 복잡한 문제를 해결할 수 있다. 기계학습 코딩 방식은 대규모 데이터셋과 복잡한 알고리즘을 필요로 하지만, 일단 학습이 완료되면 개발자가 작성한 코드보다 월등한 성능을 보인다. 다만 기계학습 모형의 성능은 데이터의 질과 양, 알고리즘의 복잡성, 컴퓨팅 자원에 따라 크게 좌우된다.</p>
+<p>최근 챗GPT와 같은 대규모 언어모델을 활용한 프롬프트 기반 코딩이 주목받고 있다. 자연어 프롬프트를 입력하면 언어모델이 이해하고 관련 코드를 생성한다는 점에서 일종의 생성형 모형으로 볼 수 있다. 프롬프트 기반 코딩은 전통적인 코딩 방식과 기계학습 코딩의 장점을 결합했다. 프로그래머는 자연어로 의도를 표현할 수 있고, LLM은 의도를 파악하여 코드로 변환해주어 생산성과 효율성을 높일 수 있어 매우 유용하다.</p>
+<div id="fig-coding-paradigms" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-coding-paradigms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/coding_paradigms.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="그림&nbsp;31.2: 코딩 패러다임 변화"><img src="images/coding_paradigms.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-coding-paradigms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;31.2: 코딩 패러다임 변화
+</figcaption></figure>
+</div>
+</section><section id="프롬프트-공학" class="level2" data-number="31.2"><h2 data-number="31.2" class="anchored" data-anchor-id="프롬프트-공학">
+<span class="header-section-number">31.2</span> 프롬프트 공학</h2>
+<p><strong>프롬프트 공학(Prompt Engineering)</strong>은 챗GPT와 같은 AI 언어 모형로부터 구체적이고 정확하며 관련성 있는 응답을 도출하기 위해 프롬프트(Prompt, 지시명령어)를 설계하고 개선하는 과정이다. 프롬프트의 품질이 GPT 모형 출력결과에 큰 영향을 미칠 수 있기 때문에 이 작업은 매우 중요하다. 프롬프트 엔지니어링의 목표는 사용자와 AI 모델 사이 커뮤니케이션을 최적화하여 AI 시스템의 유용성과 효율성을 향상시키는 것이다. </p>
+<p>프롬프트 엔지니어링은 반복적인 작업과정으로 AI의 응답에 따라 프롬프트를 조정하고 개선해야 할 수도 있다는 점을 항상 염두에 두고, 다음 프롬프트 구성요소를 프롬프트에 녹여 제작할 경우 AI 언어 모델이 목표에 부합하는 정확하고 관련성 있는 구체적인 답변을 효과적으로 생성할 수 있다.</p>
+<p>프롬프트 공학을 코딩에 적용할 때의 장점은 자연어로 의도를 표현할 수 있어 코딩 입문자도 쉽게 접근할 수 있고, 수많은 프로그래밍 언어에 대한 장벽이 크게 낮아진 것을 수 있다. 또한 기존 코드를 수정하거나 새로운 코드를 작성할 때 생산성을 높일 수 있고, 언어모델이 제공하는 광범위한 지식을 활용할 수 있어 코드의 품질이 향상되었다. 하지만, 프롬프트를 잘 설계하기 위해서 프롬프트 공학에 대한 지식과 경험이 필요하기 때문에 프롬프트 공학에 대한 깊은 이해가 필요하고, 언어모델 출력 결과가 완벽하지 않기 때문에 필연적으로 전문 개발자의 검토와 수정이 필요하고 저작권을 비롯한 보안 및 윤리 문제가 풀어야 되는 숙제다.</p>
+<p>프롬프트 공학을 코딩에 적용하는 절차는 전통적인 코딩 절차와 별반 다르지 않다. 첫째로 목표를 설정하고, 작성하려는 코드의 정확한 기능과 요구사항을 명시하여 코드가 어떤 입력을 받고, 어떤 출력을 내야 하는지 파악한다. 둘째로 목표를 자연어 프롬프트에 담아낸다. 가능한 상세하고 구체적인 프롬프트를 작성하고 사례, 제약조건 등도 포함한다. 셋째로 프롬프트를 대규모 언어모델에 입력한다. 언어모형이 프롬프트를 이해하고 관련 코드를 생성하는 본 작업을 진행하고 필요한 경우 추가 프롬프트를 언어모형에 피드백을 제공한다. 넷째로 생성된 코드를 주의 깊게 검토하고 오류, 비효율성, 스타일 이슈 등을 반영하여 코드품질을 향상시킨다. 다섯째로 다양한 입력 값으로 코드를 실행하고 출력을 검증하고 발견된 오류는 디버깅하여 수정한다. 마지막으로 테스트 결과를 바탕으로 프롬프트를 개선할 점을 파악하고, 프롬프트를 수정하여 새로운 코드를 생성한 후 결과를 비교하는 과정을 반복한다.</p>
+<div id="fig-gpt-coding-workflow" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-gpt-coding-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/gpt_coding_workflow.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="그림&nbsp;31.3: 챗GPT 코딩 작업흐름"><img src="images/gpt_coding_workflow.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gpt-coding-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;31.3: 챗GPT 코딩 작업흐름
+</figcaption></figure>
+</div>
+<p>챗GPT 코딩 구성요소는 프롬프트와 언어모형으로 구성되어 있다고 보면된다. 자연어 프롬프트를 통해 생성하고자 하는 코드의 목적과 요구사항을 명시하여 언어모형에 전달하면 언어모형은 프롬프트를 이해하고 관련 코드를 생성한다. 몇년전 영어가 가장 뜨거운 프로그래밍 언어라는 주장이 허언은 아닌 것이다.</p>
+<p></p>
+<div id="tweet-69471"></div>
+<script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1617979122625712128","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EThe hottest new programming language is English\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1617979122625712128?ref_src=twsrc%5Etfw\"\u003EJanuary 24, 2023\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-69471").innerHTML = tweet["html"];</script></section><section id="챗gui-인터페이스" class="level2" data-number="31.3"><h2 data-number="31.3" class="anchored" data-anchor-id="챗gui-인터페이스">
+<span class="header-section-number">31.3</span> 챗GUI 인터페이스</h2>
+<p><code>survey.db</code> 데이터베이스 SQL 쿼리를 개발자가 직접 작성하는 것을 지양하고 AI를 사용하여 SQL 쿼리를 제작한다. 현존하는 가장 성능이 높은 AI로 평가받는 OpenAI GPT-4 챗팅 인터페이스를 사용하여 SQL 쿼리를 제작한다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">프롬프트</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">출력결과</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">You</span> are an expert in SQL. The following table definitions have been provided to you. Please convert my query into an appropriate SQL statement.</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">CREATE</span> TABLE Person<span class="er">(</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ident</span>    text,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="ex">personal</span> text,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="ex">family</span>   text</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">);</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">CREATE</span> TABLE Site<span class="er">(</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="ex">name</span> text,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">lat</span>  real,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="ex">long</span> real</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">);</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">CREATE</span> TABLE Visited<span class="er">(</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ident</span> integer,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="ex">site</span>  text,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="ex">dated</span> text</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="kw">);</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">CREATE</span> TABLE Survey<span class="er">(</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="ex">taken</span>   integer,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="ex">person</span>  text,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="ex">quant</span>   text,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="ex">reading</span> real</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">);</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ex">Let</span><span class="st">'s write an SQL query to display the names of scientists on the screen.</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>To write an SQL query that displays the names of scientists, we need to determine which table and column(s) contain the relevant information about the scientists. Based on the provided table definitions, it seems that the <code>Person</code> table holds the information about individuals, which likely includes scientists. The columns <code>personal</code> and <code>family</code> in the <code>Person</code> table seem to be the ones that store the names of individuals.</p>
+<p>The query would be straightforward, as it involves selecting data from a single table without any joins or complex conditions. Here is the SQL statement:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> personal, family</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Person;</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This query will display the personal (given name) and family (surname) of each individual in the <code>Person</code> table. If you need just the full names combined or have other specific requirements, the query can be adjusted accordingly.</p>
+</div>
+</div>
+</div>
 
 
-
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-chiang2023chatgpt" class="csl-entry" role="listitem">
+Chiang, Ted. 2023. <span>“ChatGPT is a blurry JPEG of the web”</span>. <em>The New Yorker</em> 9: 2023.
+</div>
+<div id="ref-gozalo2023chatgpt" class="csl-entry" role="listitem">
+Gozalo-Brizuela, Roberto, 와/과 Eduardo C Garrido-Merchan. 2023. <span>“ChatGPT is not all you need. A State of the Art Review of large Generative AI models”</span>. <em>arXiv preprint arXiv:2301.04655</em>.
+</div>
+<div id="ref-vaswani2017attention" class="csl-entry" role="listitem">
+Vaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, 와/과 Illia Polosukhin. 2017. <span>“Attention is all you need”</span>. <em>Advances in neural information processing systems</em> 30.
+</div>
+<div id="ref-wickham2019welcome" class="csl-entry" role="listitem">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, 기타. 2019. <span>“Welcome to the Tidyverse”</span>. <em>Journal of open source software</em> 4 (43): 1686.
+</div>
+<div id="ref-wickham2023r" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, 와/과 Garrett Grolemund. 2023. <em>R for data science</em>. " O’Reilly Media, Inc.".
+</div>
+<div id="ref-wu2023brief" class="csl-entry" role="listitem">
+Wu, Tianyu, Shizhu He, Jingping Liu, Siqi Sun, Kang Liu, Qing-Long Han, 와/과 Yang Tang. 2023. <span>“A brief overview of ChatGPT: The history, status quo and potential future development”</span>. <em>IEEE/CAA Journal of Automatica Sinica</em> 10 (5): 1122–36.
+</div>
+</div>
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -2188,8 +2389,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./tool-make.html" class="pagination-link" aria-label="작업 자동화">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">작업 자동화</span></span>
+      <a href="./tool-viz.html" class="pagination-link" aria-label="시각화">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">시각화</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -2205,7 +2406,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-gpt.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-gpt.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
 </div>
@@ -2855,7 +3056,32 @@ qpyodideCellDetails.map(
       qpyodideCreateCell(entry);
     }
   );
-</script>
+</script><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
+<script src="https://platform.twitter.com/widgets.js"></script>
 </body></html>

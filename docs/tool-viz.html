@@ -113,7 +113,32 @@ ga('send', {
   hitType: 'pageview',
   'anonymizeIp': true,
 });
-</script><script defer="" data-domain="r2bit.com/gpt-coding" src="https://plausible.io/js/script.js"></script>
+</script><script defer="" data-domain="r2bit.com/gpt-coding" src="https://plausible.io/js/script.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 <body class="nav-sidebar floating slimcontent">
 
@@ -848,11 +873,11 @@ ga('send', {
 <li>동료 개발자나 협업하시는 분: <code>.qmd</code> 파일</li>
 <li>직장상사
 <ul>
-<li>PDF 파일: <code>quarto</code>, <code>pandoc</code>
+<li>PDF 파일: <span class="math inline">\(\LaTeX\)</span>, <code>pandoc</code>, <code>quarto</code>
 </li>
 <li>파워포인트 슬라이스덱: <code>reveal.js</code> 기반 <code>quarto</code>
 </li>
-<li>대쉬보드: <code>flexdashboard</code>
+<li>대쉬보드: <code>flexdashboard</code>를 지나 <code>quarto</code>
 </li>
 </ul>
 </li>
@@ -864,6 +889,17 @@ ga('send', {
 </li>
 <li>책: <code>bookdown</code>을 지나 <code>quarto</code>
 </li>
+</ul>
+</li>
+<li>프로그래밍
+<ul>
+<li>과학기술: 줄리아(julia)</li>
+<li>웹 데이터 시각화: <code>observable JS</code>, <code>plotly</code>, <code>leaflet</code> 등</li>
+<li>데이터 과학: R</li>
+<li>기계학습과 딥러닝: 파이썬</li>
+<li>데이터베이스: SQL</li>
+<li>자동화: 유닉스 쉘</li>
+<li>버전제어와 협업: <code>git</code>, <code>github</code>, <code>gitlab</code>, <code>bitbucket</code> 등</li>
 </ul>
 </li>
 </ul>
