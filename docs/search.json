@@ -1608,7 +1608,7 @@
     "href": "git-ide.html",
     "title": "20  통합개발환경",
     "section": "",
-    "text": "20.1 Challenge",
+    "text": "연습문제",
     "crumbs": [
       "버전제어와 협업",
       "<span class='chapter-number'>20</span>  <span class='chapter-title'>통합개발환경</span>"
@@ -2249,6 +2249,17 @@
     "text": "Chiang, Ted. 2023. “ChatGPT Is a Blurry JPEG of the Web.”\nThe New Yorker 9: 2023.\n\n\nGozalo-Brizuela, Roberto, and Eduardo C Garrido-Merchan. 2023.\n“ChatGPT Is Not All You Need. A State of the Art Review of Large\nGenerative AI Models.” arXiv Preprint arXiv:2301.04655.\n\n\nGreene, Derek, and Pádraig Cunningham. 2006. “Practical Solutions\nto the Problem of Diagonal Dominance in Kernel Document\nClustering.” In Proc. 23rd International Conference on\nMachine Learning (ICML’06), 377–84. ACM Press.\n\n\nPole, Andy, Mike West, and Jeff Harrison. 2018. Applied Bayesian\nForecasting and Time Series Analysis. Chapman; Hall/CRC.\n\n\nStevens, Stanley Smith. 1946. “On the Theory of Scales of\nMeasurement.” Science 103 (2684): 677–80.\n\n\nVaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion\nJones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017.\n“Attention Is All You Need.” Advances in Neural\nInformation Processing Systems 30.\n\n\nWickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy\nD’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.\n“Welcome to the Tidyverse.” Journal of Open Source\nSoftware 4 (43): 1686.\n\n\nWickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.\nR for Data Science. \" O’Reilly Media, Inc.\".\n\n\nWiener, Norbert. 1921. “A New Theory of Measurement: A Study in\nthe Logic of Mathematics.” Proceedings of the London\nMathematical Society 2 (1): 181–205.\n\n\nWu, Tianyu, Shizhu He, Jingping Liu, Siqi Sun, Kang Liu, Qing-Long Han,\nand Yang Tang. 2023. “A Brief Overview of ChatGPT: The History,\nStatus Quo and Potential Future Development.” IEEE/CAA\nJournal of Automatica Sinica 10 (5): 1122–36.\n\n\n이경화. 2020. 고등학교 실용통계. 통계청 통계교육원.",
     "crumbs": [
       "참고문헌"
+    ]
+  },
+  {
+    "objectID": "git-ide.html#연습문제",
+    "href": "git-ide.html#연습문제",
+    "title": "20  통합개발환경",
+    "section": "",
+    "text": "새로운 디렉토리를 만들어서 프로젝트에 graphs 디렉토리를 추가하시오.\n.gitignore 파일을 수정하여 graphs 디렉토리를 버전 제어에서 제외시키시오.",
+    "crumbs": [
+      "버전제어와 협업",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>통합개발환경</span>"
     ]
   }
 ]
