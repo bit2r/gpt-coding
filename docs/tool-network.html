@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.5.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="이광춘">
-<title>챗GPT 코딩 – 25&nbsp; 네트워크 프로그램</title>
+<title>챗GPT 코딩 – 22&nbsp; 네트워크 프로그램</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -256,7 +256,7 @@ ga('send', {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = ['stringr', 'readr', 'purrr', 'httr', 'curl', 'rvest', 'fs', 'ggplot2'];
+globalThis.qwebrInstallRPackagesList = ['stringr', 'readr', 'purrr', 'httr', 'curl', 'rvest', 'fs', 'ggplot2', 'palmerpenguins'];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -278,7 +278,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"r-socket-example","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"false","context":"interactive","fig-height":5},"code":"con <- socketConnection(host = \"data.pr4e.org\", port = 80, blocking = TRUE, open = \"r+b\", timeout = 60)\n\ncmd <- \"GET http://data.pr4e.org/romeo.txt HTTP/1.0\\r\\n\\r\\n\"\n\nwriteLines(cmd, con)\n\nflush(con)\n\nwhile(length(line <- readLines(con, warn = FALSE, n = 1)) > 0) {\n  cat(line, sep = \"\\n\")\n}\n\nclose(con)","id":1},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"r-socket-images","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"false","context":"interactive","fig-height":5},"code":"download.file(\"http://data.pr4e.org/cover3.jpg\", \n              destfile = \"data/cover3.jpg\",\n              mode = \"wb\")","id":2},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"r-httr-package","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"false","context":"interactive","fig-height":5},"code":"library(httr)\n\nurl <- 'http://www.py4inf.com/code/romeo.txt'\n\nresponse <- GET(url)\ncontent <- content(response, \"text\", encoding = \"UTF-8\")\nlines <- strsplit(content, split = \"\\n\")[[1]]\nlines","id":3},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"r-httr-package-output","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"false","context":"interactive","fig-height":5},"code":"library(httr)\n\nurl <- \"http://www.py4inf.com/code/romeo.txt\"\n\nresponse <- GET(url)\ncontent <- content(response, \"text\", , encoding = \"UTF-8\")\n\ncounts <- strsplit(content, \"\\\\s+\") |> \n  unlist() |> \n  table()\n\nprint(counts)","id":4},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"r-httr-extract-urls","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"false","context":"interactive","fig-height":5},"code":"library(stringr)\n\ncat(\"웹사이트 입력 - \")\nurl <- readLines(file(\"stdin\"), 1)\n\nhtml <- readLines(url, warn = FALSE)\nhtml <- paste(html, collapse = \"\\n\")\n\nlinks <- str_extract_all(html, 'href=\"http://[^\"]*\"')[[1]]\nlinks <- str_replace_all(links, 'href=\"', '')\n\nprint(links)","id":5},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"r-httr-rvest-combo","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"false","context":"interactive","fig-height":5},"code":"library(httr)\nlibrary(xml2)\nlibrary(rvest)\n\n\ncat(\"웹사이트 입력 - \")\nurl <- readLines(file(\"stdin\"), 1)\n\nhtml_content <- read_html(GET(url))\n\nhrefs <- html_nodes(html_content, \"a\") |> \n  html_attr(\"href\")\n\nprint(hrefs)","id":6},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"r-rvest-extract-tags","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"false","context":"interactive","fig-height":5},"code":"library(httr)\nlibrary(rvest)\n\ncat(\"웹사이트 입력 - \")\nurl <- readLines(file(\"stdin\"), 1)\n\nresponse <- GET(url)\nhtml_content <- content(response, \"text\", encoding = \"UTF-8\")\n\nhtml <- read_html(html_content)\ntags <- html_nodes(html, \"a\")\n\nfor (tag in tags) {\n  # Tag\n  cat(\"TAG:\", toString(xml2::xml_find_first(tag, xpath = \".\")), \"\\n\")\n  \n  # URL\n  url <- html_attr(tag, \"href\")\n  cat(\"URL:\", url, \"\\n\")\n  \n  # Content\n  content <- html_text(tag)\n  cat(\"Content:\", content, \"\\n\")\n  \n  # Attributes\n  attrs <- html_attrs(tag)\n  cat(\"Attrs:\", paste(names(attrs), attrs, sep=\": \", collapse=\", \"), \"\\n\\n\")\n}","id":7},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"r-download-files","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"false","context":"interactive","fig-height":5},"code":"url <- \"https://www.dr-chuck.com/py4inf/cover.jpg\"\ndestination_file <- \"cover.jpg\"\n\ndownload.file(url, destfile = destination_file, mode = \"wb\")","id":8},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"r-download-big-file","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"false","context":"interactive","fig-height":5},"code":"library(httr)\n\nurl <- 'https://www.fhfa.gov/DataTools/Downloads/Documents/Enterprise-PUDB/National-File-A/2022_SFNationalFileA2022.zip'\nresp <- GET(url, write_disk(\"2022_SFNationalFileA2022.zip\", overwrite = TRUE))\n\n# Check if the request was successful and report the size\nif (status_code(resp) == 200) {\n  file_info <- file.info(\"2022_SFNationalFileA2022.zip\")\n  size <- file_info$size\n  message(size, \"문자 복사완료!\")\n} else {\n  message(\"파일 다운로드 실패!\")\n}\n#> 20232194문자 복사완료!","id":9}];
+globalThis.qwebrCellDetails = [{"id":1,"code":"con <- socketConnection(host = \"data.pr4e.org\", port = 80, blocking = TRUE, open = \"r+b\", timeout = 60)\n\ncmd <- \"GET http://data.pr4e.org/romeo.txt HTTP/1.0\\r\\n\\r\\n\"\n\nwriteLines(cmd, con)\n\nflush(con)\n\nwhile(length(line <- readLines(con, warn = FALSE, n = 1)) > 0) {\n  cat(line, sep = \"\\n\")\n}\n\nclose(con)","options":{"label":"r-socket-example","fig-cap":"","message":"true","autorun":"false","output":"true","warning":"true","fig-height":5,"results":"markup","read-only":"false","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":2,"code":"download.file(\"http://data.pr4e.org/cover3.jpg\", \n              destfile = \"data/cover3.jpg\",\n              mode = \"wb\")","options":{"label":"r-socket-images","fig-cap":"","message":"true","autorun":"false","output":"true","warning":"true","fig-height":5,"results":"markup","read-only":"false","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":3,"code":"library(httr)\n\nurl <- 'http://www.py4inf.com/code/romeo.txt'\n\nresponse <- GET(url)\ncontent <- content(response, \"text\", encoding = \"UTF-8\")\nlines <- strsplit(content, split = \"\\n\")[[1]]\nlines","options":{"label":"r-httr-package","fig-cap":"","message":"true","autorun":"false","output":"true","warning":"true","fig-height":5,"results":"markup","read-only":"false","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":4,"code":"library(httr)\n\nurl <- \"http://www.py4inf.com/code/romeo.txt\"\n\nresponse <- GET(url)\ncontent <- content(response, \"text\", , encoding = \"UTF-8\")\n\ncounts <- strsplit(content, \"\\\\s+\") |> \n  unlist() |> \n  table()\n\nprint(counts)","options":{"label":"r-httr-package-output","fig-cap":"","message":"true","autorun":"false","output":"true","warning":"true","fig-height":5,"results":"markup","read-only":"false","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":5,"code":"library(stringr)\n\ncat(\"웹사이트 입력 - \")\nurl <- readLines(file(\"stdin\"), 1)\n\nhtml <- readLines(url, warn = FALSE)\nhtml <- paste(html, collapse = \"\\n\")\n\nlinks <- str_extract_all(html, 'href=\"http://[^\"]*\"')[[1]]\nlinks <- str_replace_all(links, 'href=\"', '')\n\nprint(links)","options":{"label":"r-httr-extract-urls","fig-cap":"","message":"true","autorun":"false","output":"true","warning":"true","fig-height":5,"results":"markup","read-only":"false","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":6,"code":"library(httr)\nlibrary(xml2)\nlibrary(rvest)\n\n\ncat(\"웹사이트 입력 - \")\nurl <- readLines(file(\"stdin\"), 1)\n\nhtml_content <- read_html(GET(url))\n\nhrefs <- html_nodes(html_content, \"a\") |> \n  html_attr(\"href\")\n\nprint(hrefs)","options":{"label":"r-httr-rvest-combo","fig-cap":"","message":"true","autorun":"false","output":"true","warning":"true","fig-height":5,"results":"markup","read-only":"false","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":7,"code":"library(httr)\nlibrary(rvest)\n\ncat(\"웹사이트 입력 - \")\nurl <- readLines(file(\"stdin\"), 1)\n\nresponse <- GET(url)\nhtml_content <- content(response, \"text\", encoding = \"UTF-8\")\n\nhtml <- read_html(html_content)\ntags <- html_nodes(html, \"a\")\n\nfor (tag in tags) {\n  # Tag\n  cat(\"TAG:\", toString(xml2::xml_find_first(tag, xpath = \".\")), \"\\n\")\n  \n  # URL\n  url <- html_attr(tag, \"href\")\n  cat(\"URL:\", url, \"\\n\")\n  \n  # Content\n  content <- html_text(tag)\n  cat(\"Content:\", content, \"\\n\")\n  \n  # Attributes\n  attrs <- html_attrs(tag)\n  cat(\"Attrs:\", paste(names(attrs), attrs, sep=\": \", collapse=\", \"), \"\\n\\n\")\n}","options":{"label":"r-rvest-extract-tags","fig-cap":"","message":"true","autorun":"false","output":"true","warning":"true","fig-height":5,"results":"markup","read-only":"false","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":8,"code":"url <- \"https://www.dr-chuck.com/py4inf/cover.jpg\"\ndestination_file <- \"cover.jpg\"\n\ndownload.file(url, destfile = destination_file, mode = \"wb\")","options":{"label":"r-download-files","fig-cap":"","message":"true","autorun":"false","output":"true","warning":"true","fig-height":5,"results":"markup","read-only":"false","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":9,"code":"library(httr)\n\nurl <- 'https://www.fhfa.gov/DataTools/Downloads/Documents/Enterprise-PUDB/National-File-A/2022_SFNationalFileA2022.zip'\nresp <- GET(url, write_disk(\"2022_SFNationalFileA2022.zip\", overwrite = TRUE))\n\n# Check if the request was successful and report the size\nif (status_code(resp) == 200) {\n  file_info <- file.info(\"2022_SFNationalFileA2022.zip\")\n  size <- file_info$size\n  message(size, \"문자 복사완료!\")\n} else {\n  message(\"파일 다운로드 실패!\")\n}\n#> 20232194문자 복사완료!","options":{"label":"r-download-big-file","fig-cap":"","message":"true","autorun":"false","output":"true","warning":"true","fig-height":5,"results":"markup","read-only":"false","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1150,7 +1150,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"py-socket-example","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"","context":"interactive","fig-height":5},"code":"import socket\n\nmysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nmysock.connect(('data.pr4e.org', 80))\ncmd = 'GET http://data.pr4e.org/romeo.txt HTTP/1.0\\r\\n\\r\\n'.encode()\nmysock.send(cmd)\n\nwhile True:\n    data = mysock.recv(512)\n    if len(data) < 1:\n        break\n    print(data.decode(),end='')\n\nmysock.close()","id":1},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"py-socket-images","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"","context":"interactive","fig-height":5},"code":"import socket\nimport time\n\nHOST = 'data.pr4e.org'\nPORT = 80\nmysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nmysock.connect((HOST, PORT))\nmysock.sendall(b'GET http://data.pr4e.org/cover3.jpg HTTP/1.0\\r\\n\\r\\n')\ncount = 0\npicture = b\"\"\n\nwhile True:\n    data = mysock.recv(5120)\n    if len(data) < 1: break\n    #time.sleep(0.25)\n    count = count + len(data)\n    print(len(data), count)\n    picture = picture + data\n\nmysock.close()\n\n# 헤더 종료지점 탐색 (2 CRLF)\npos = picture.find(b\"\\r\\n\\r\\n\")\nprint('Header length', pos)\nprint(picture[:pos].decode())\n\n# 헤더를 건너뛰고 사진 데이터 저장\npicture = picture[pos+4:]\nfhand = open(\"images/stuff.jpg\", \"wb\")\nfhand.write(picture)\nfhand.close()","id":2},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"py-httr-package","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"","context":"interactive","fig-height":5},"code":"import urllib.request\n\nfhand = urllib.request.urlopen('http://www.py4inf.com/code/romeo.txt')\nfor line in fhand:\n    print(line.decode().strip())","id":3},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"py-httr-package-output","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"","context":"interactive","fig-height":5},"code":"import urllib.request\n\ncounts = dict()\nfhand = urllib.request.urlopen('http://www.py4inf.com/code/romeo.txt')\n\nfor line in fhand:\n    words = line.decode().strip().split()\n    for word in words:\n        counts[word] = counts.get(word, 0) + 1\n\nprint(counts)","id":4},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"py-httr-extract-urls","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"","context":"interactive","fig-height":5},"code":"import urllib.request\nimport re\n\nurl = input('웹사이트 입력 - ')\nhtml = urllib.request.urlopen(url).read().decode()\nlinks = re.findall('href=\"(http://.*?)\"', html)\nfor link in links:\n    print(link)","id":5},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"py-httr-rvest-combo","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"","context":"interactive","fig-height":5},"code":"import urllib.request\nfrom bs4 import BeautifulSoup\n\nurl = input('웹사이트 입력 - ')\nhtml = urllib.request.urlopen(url).read()\nsoup = BeautifulSoup(html, 'html.parser')\n\ntags = soup('a')\nfor tag in tags:\n    print(tag.get('href', None))","id":6},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"py-rvest-extract-tags","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"","context":"interactive","fig-height":5},"code":"import urllib.request\nfrom bs4 import BeautifulSoup\n\nurl = input('Enter - ')\nhtml = urllib.request.urlopen(url).read()\nsoup = BeautifulSoup(html, 'html.parser')\n\ntags = soup('a')\nfor tag in tags:\n  \n    print('TAG:', tag)\n    print('URL:', tag.get('href', None))\n    content = tag.contents[0] if tag.contents else \"None\"\n    print('Content:', content)\n    print('Attrs:', tag.attrs)","id":7},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"py-download-files","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"","context":"interactive","fig-height":5},"code":"import urllib.request\n\nurl = 'http://www.py4inf.com/cover.jpg'\n\nimg = urllib.request.urlopen(url).read()\nwith open('cover.jpg', 'wb') as fhand:\n    fhand.write(img)","id":8},{"options":{"out-width":"700px","message":"true","classes":"","warning":"true","output":"true","dpi":72,"label":"py-download-big-file","comment":"","results":"markup","out-height":"","fig-cap":"","fig-width":7,"read-only":"false","autorun":"","context":"interactive","fig-height":5},"code":"import urllib.request\n\nurl = 'https://www.fhfa.gov/DataTools/Downloads/Documents/Enterprise-PUDB/National-File-A/2022_SFNationalFileA2022.zip'\nzip_file = urllib.request.urlopen(url)\nfhand = open('2022_SFNationalFileA2022.zip', 'wb')  # Open in binary write mode\nsize = 0\n\nwhile True:\n    info = zip_file.read(100000)\n    if len(info) < 1:\n        break\n    size += len(info)\n    fhand.write(info)\n\nfhand.close()\nprint(size, '문자 복사완료!')\n#> 20232194문자 복사완료!","id":9}];
+globalThis.qpyodideCellDetails = [{"id":1,"code":"import socket\n\nmysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nmysock.connect(('data.pr4e.org', 80))\ncmd = 'GET http://data.pr4e.org/romeo.txt HTTP/1.0\\r\\n\\r\\n'.encode()\nmysock.send(cmd)\n\nwhile True:\n    data = mysock.recv(512)\n    if len(data) < 1:\n        break\n    print(data.decode(),end='')\n\nmysock.close()","options":{"label":"py-socket-example","fig-cap":"","message":"true","read-only":"false","output":"true","autorun":"","fig-height":5,"results":"markup","warning":"true","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":2,"code":"import socket\nimport time\n\nHOST = 'data.pr4e.org'\nPORT = 80\nmysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nmysock.connect((HOST, PORT))\nmysock.sendall(b'GET http://data.pr4e.org/cover3.jpg HTTP/1.0\\r\\n\\r\\n')\ncount = 0\npicture = b\"\"\n\nwhile True:\n    data = mysock.recv(5120)\n    if len(data) < 1: break\n    #time.sleep(0.25)\n    count = count + len(data)\n    print(len(data), count)\n    picture = picture + data\n\nmysock.close()\n\n# 헤더 종료지점 탐색 (2 CRLF)\npos = picture.find(b\"\\r\\n\\r\\n\")\nprint('Header length', pos)\nprint(picture[:pos].decode())\n\n# 헤더를 건너뛰고 사진 데이터 저장\npicture = picture[pos+4:]\nfhand = open(\"images/stuff.jpg\", \"wb\")\nfhand.write(picture)\nfhand.close()","options":{"label":"py-socket-images","fig-cap":"","message":"true","read-only":"false","output":"true","autorun":"","fig-height":5,"results":"markup","warning":"true","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":3,"code":"import urllib.request\n\nfhand = urllib.request.urlopen('http://www.py4inf.com/code/romeo.txt')\nfor line in fhand:\n    print(line.decode().strip())","options":{"label":"py-httr-package","fig-cap":"","message":"true","read-only":"false","output":"true","autorun":"","fig-height":5,"results":"markup","warning":"true","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":4,"code":"import urllib.request\n\ncounts = dict()\nfhand = urllib.request.urlopen('http://www.py4inf.com/code/romeo.txt')\n\nfor line in fhand:\n    words = line.decode().strip().split()\n    for word in words:\n        counts[word] = counts.get(word, 0) + 1\n\nprint(counts)","options":{"label":"py-httr-package-output","fig-cap":"","message":"true","read-only":"false","output":"true","autorun":"","fig-height":5,"results":"markup","warning":"true","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":5,"code":"import urllib.request\nimport re\n\nurl = input('웹사이트 입력 - ')\nhtml = urllib.request.urlopen(url).read().decode()\nlinks = re.findall('href=\"(http://.*?)\"', html)\nfor link in links:\n    print(link)","options":{"label":"py-httr-extract-urls","fig-cap":"","message":"true","read-only":"false","output":"true","autorun":"","fig-height":5,"results":"markup","warning":"true","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":6,"code":"import urllib.request\nfrom bs4 import BeautifulSoup\n\nurl = input('웹사이트 입력 - ')\nhtml = urllib.request.urlopen(url).read()\nsoup = BeautifulSoup(html, 'html.parser')\n\ntags = soup('a')\nfor tag in tags:\n    print(tag.get('href', None))","options":{"label":"py-httr-rvest-combo","fig-cap":"","message":"true","read-only":"false","output":"true","autorun":"","fig-height":5,"results":"markup","warning":"true","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":7,"code":"import urllib.request\nfrom bs4 import BeautifulSoup\n\nurl = input('Enter - ')\nhtml = urllib.request.urlopen(url).read()\nsoup = BeautifulSoup(html, 'html.parser')\n\ntags = soup('a')\nfor tag in tags:\n  \n    print('TAG:', tag)\n    print('URL:', tag.get('href', None))\n    content = tag.contents[0] if tag.contents else \"None\"\n    print('Content:', content)\n    print('Attrs:', tag.attrs)","options":{"label":"py-rvest-extract-tags","fig-cap":"","message":"true","read-only":"false","output":"true","autorun":"","fig-height":5,"results":"markup","warning":"true","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":8,"code":"import urllib.request\n\nurl = 'http://www.py4inf.com/cover.jpg'\n\nimg = urllib.request.urlopen(url).read()\nwith open('cover.jpg', 'wb') as fhand:\n    fhand.write(img)","options":{"label":"py-download-files","fig-cap":"","message":"true","read-only":"false","output":"true","autorun":"","fig-height":5,"results":"markup","warning":"true","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}},{"id":9,"code":"import urllib.request\n\nurl = 'https://www.fhfa.gov/DataTools/Downloads/Documents/Enterprise-PUDB/National-File-A/2022_SFNationalFileA2022.zip'\nzip_file = urllib.request.urlopen(url)\nfhand = open('2022_SFNationalFileA2022.zip', 'wb')  # Open in binary write mode\nsize = 0\n\nwhile True:\n    info = zip_file.read(100000)\n    if len(info) < 1:\n        break\n    size += len(info)\n    fhand.write(info)\n\nfhand.close()\nprint(size, '문자 복사완료!')\n#> 20232194문자 복사완료!","options":{"label":"py-download-big-file","fig-cap":"","message":"true","read-only":"false","output":"true","autorun":"","fig-height":5,"results":"markup","warning":"true","out-width":"700px","comment":"","classes":"","dpi":72,"context":"interactive","fig-width":7,"out-height":""}}];
 
 
 </script><script type="module">
@@ -1318,7 +1318,7 @@ globalThis._qpyodideGetInstance = function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-network.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-network.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -1499,38 +1499,20 @@ globalThis._qpyodideGetInstance = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">협업</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./git-conflict.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-open.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">공개 과학</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">공개 과학과 호스팅</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-licensing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">라이선싱</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./git-hosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">호스팅</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./git-korean.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Git 추가설정</span></span></a>
+  <a href="./git-ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
   </div>
 </li>
       </ul>
@@ -1547,43 +1529,43 @@ globalThis._qpyodideGetInstance = function() {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-network.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
   </div>
 </li>
       </ul>
@@ -1602,15 +1584,15 @@ globalThis._qpyodideGetInstance = function() {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
    
   <ul>
-<li><a href="#network-http" id="toc-network-http" class="nav-link active" data-scroll-target="#network-http"><span class="header-section-number">25.1</span> 하이퍼텍스트 전송 프로토콜</a></li>
-  <li><a href="#network-web-browser" id="toc-network-web-browser" class="nav-link" data-scroll-target="#network-web-browser"><span class="header-section-number">25.2</span> 가장 간단한 웹 브라우져</a></li>
-  <li><a href="#socket-images" id="toc-socket-images" class="nav-link" data-scroll-target="#socket-images"><span class="header-section-number">25.3</span> HTTP 경유 이미지 가져오기</a></li>
-  <li><a href="#httr" id="toc-httr" class="nav-link" data-scroll-target="#httr"><span class="header-section-number">25.4</span> <code>httr</code> 웹페이지 가져오기</a></li>
-  <li><a href="#html-webscraping" id="toc-html-webscraping" class="nav-link" data-scroll-target="#html-webscraping"><span class="header-section-number">25.5</span> HTML 파싱과 웹 스크래핑</a></li>
-  <li><a href="#webscarping-regex" id="toc-webscarping-regex" class="nav-link" data-scroll-target="#webscarping-regex"><span class="header-section-number">25.6</span> 정규 표현식 HTML 파싱</a></li>
-  <li><a href="#rvest-scraping" id="toc-rvest-scraping" class="nav-link" data-scroll-target="#rvest-scraping"><span class="header-section-number">25.7</span> <code>rvest</code> HTML 파싱</a></li>
-  <li><a href="#GET-binary" id="toc-GET-binary" class="nav-link" data-scroll-target="#GET-binary"><span class="header-section-number">25.8</span> 바이너리 파일 읽기</a></li>
-  <li><a href="#network-terminology" id="toc-network-terminology" class="nav-link" data-scroll-target="#network-terminology"><span class="header-section-number">25.9</span> 용어정의</a></li>
+<li><a href="#network-http" id="toc-network-http" class="nav-link active" data-scroll-target="#network-http"><span class="header-section-number">22.1</span> 하이퍼텍스트 전송 프로토콜</a></li>
+  <li><a href="#network-web-browser" id="toc-network-web-browser" class="nav-link" data-scroll-target="#network-web-browser"><span class="header-section-number">22.2</span> 가장 간단한 웹 브라우져</a></li>
+  <li><a href="#socket-images" id="toc-socket-images" class="nav-link" data-scroll-target="#socket-images"><span class="header-section-number">22.3</span> HTTP 경유 이미지 가져오기</a></li>
+  <li><a href="#httr" id="toc-httr" class="nav-link" data-scroll-target="#httr"><span class="header-section-number">22.4</span> <code>httr</code> 웹페이지 가져오기</a></li>
+  <li><a href="#html-webscraping" id="toc-html-webscraping" class="nav-link" data-scroll-target="#html-webscraping"><span class="header-section-number">22.5</span> HTML 파싱과 웹 스크래핑</a></li>
+  <li><a href="#webscarping-regex" id="toc-webscarping-regex" class="nav-link" data-scroll-target="#webscarping-regex"><span class="header-section-number">22.6</span> 정규 표현식 HTML 파싱</a></li>
+  <li><a href="#rvest-scraping" id="toc-rvest-scraping" class="nav-link" data-scroll-target="#rvest-scraping"><span class="header-section-number">22.7</span> <code>rvest</code> HTML 파싱</a></li>
+  <li><a href="#GET-binary" id="toc-GET-binary" class="nav-link" data-scroll-target="#GET-binary"><span class="header-section-number">22.8</span> 바이너리 파일 읽기</a></li>
+  <li><a href="#network-terminology" id="toc-network-terminology" class="nav-link" data-scroll-target="#network-terminology"><span class="header-section-number">22.9</span> 용어정의</a></li>
   <li><a href="#network-ex" id="toc-network-ex" class="nav-link" data-scroll-target="#network-ex">연습문제</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-network.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
@@ -1794,8 +1776,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
       'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'
     }
   });
-</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-network.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="network" class="quarto-section-identifier"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></h1>
+</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-network.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="network" class="quarto-section-identifier"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></h1>
 </div>
 
 
@@ -1820,8 +1802,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<section id="network-http" class="level2" data-number="25.1"><h2 data-number="25.1" class="anchored" data-anchor-id="network-http">
-<span class="header-section-number">25.1</span> 하이퍼텍스트 전송 프로토콜</h2>
+<section id="network-http" class="level2" data-number="22.1"><h2 data-number="22.1" class="anchored" data-anchor-id="network-http">
+<span class="header-section-number">22.1</span> 하이퍼텍스트 전송 프로토콜</h2>
 <p>웹에 동력을 공급하는 네트워크 프로토콜(HyperText Transport Protocol - HTTP)은 실제로 매우 단순하다. 파이썬에는 <code>소켓 (sockets)</code>이라고 불리는 내장 지원 모듈이 있다. 파이썬 프로그램에서 소켓 모듈을 통해서 네트워크 연결을 하고, 데이터 검색을 매우 용이하게 한다.</p>
 <p><strong>소켓(socket)</strong>은 단일 소켓으로 두 프로그램 사이에 양방향 연결을 제공한다는 점을 제외하고 파일과 매우 유사하다. 동일한 소켓에 읽거나 쓸 수 있다. 소켓에 무언가를 쓰게 되면, 소켓의 다른 끝에 있는 응용프로그램에 전송된다. 소켓으로부터 읽게 되면, 다른 응용 프로그램이 전송한 데이터를 받게 된다.</p>
 <p>하지만, 소켓의 다른쪽 끝에 프로그램이 어떠한 데이터도 전송하지 않았는데 소켓을 읽으려고 하면, 단지 앉아서 기다리기만 한다. 만약 어떠한 것도 보내지 않고 양쪽 소켓 끝의 프로그램 모두 기다리기만 한다면, 모두 매우 오랜 시간동안 기다리게 될 것이다.</p>
@@ -1844,8 +1826,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p><code>webr</code> <code>pyodide</code>는 웹 브라우저 샌드박스 환경에서 R, 파이썬을 실행하며, 브라우저 보안 제한으로 인해 일반 R, 파이썬 환경에서와 같은 네트워크 소켓에 대한 직접적인 접근이 불가능하다. 접근을 허용하는 것이 중대한 보안 위험을 초래할 수 있기 때문에 웨브라우저에서 실행이 되지 않게 되어 있어 오류가 나는 것이 정상이다.</p>
 </div>
 </div>
-</section><section id="network-web-browser" class="level2" data-number="25.2"><h2 data-number="25.2" class="anchored" data-anchor-id="network-web-browser">
-<span class="header-section-number">25.2</span> 가장 간단한 웹 브라우져</h2>
+</section><section id="network-web-browser" class="level2" data-number="22.2"><h2 data-number="22.2" class="anchored" data-anchor-id="network-web-browser">
+<span class="header-section-number">22.2</span> 가장 간단한 웹 브라우져</h2>
 <p>아마도 HTTP 프로토콜이 어떻게 작동하는지 알아보는 가장 간단한 방법은 매우 간단한 파이썬 프로그램을 작성하는 것이다. 웹서버에 접속하고 HTTP 프로토콜 규칙에 따라 문서를 요청하고 서버가 다시 보내주는 결과를 보여주는 것이다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -1866,10 +1848,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>처음에 프로그램은 <a href="www.py4e.com">www.py4e.com</a> 서버에 80 포트로 연결한다. “웹 브라우져” 역할로 작성된 프로그램이 하기 때문에 HTTP 프로토콜은 GET 명령어를 공백 라인과 함께 보낸다.</p>
 <div id="fig-network-concept" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-network-concept-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/socket-concept.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="그림&nbsp;25.1: 소켓 개념도"><img src="images/socket-concept.png" class="img-fluid figure-img"></a>
+<a href="images/socket-concept.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="그림&nbsp;22.1: 소켓 개념도"><img src="images/socket-concept.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-network-concept-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;25.1: 소켓 개념도
+그림&nbsp;22.1: 소켓 개념도
 </figcaption></figure>
 </div>
 <p>공백 라인을 보내자 마자, 512 문자 덩어리의 데이터를 소켓에서 받아 더 이상 읽을 데이터가 없을 때까지(즉, recv()이 빈 문자열을 반환한다.) 데이터를 출력하는 루프를 작성한다.</p>
@@ -1895,8 +1877,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>서버가 헤더를 보낸 후에, 빈 라인을 추가해서 헤더 끝임을 표기하고 나서 실제 파일<code>romeo.txt</code>을 보낸다.</p>
 <p>이 예제를 통해서 소켓을 통해서 저수준(low-level) 네트워크 연결을 어떻게 하는지 확인할 수 있다. 소켓을 사용해서 웹서버, 메일 서버 혹은 다른 종류의 서버와 통신할 수 있다. 필요한 것은 프로토콜을 기술하는 문서를 찾고 프로토콜에 따라 데이터를 주고 받는 코드를 작성하는 것이다.</p>
 <p>하지만, 가장 흔히 사용하는 프로토콜은 HTTP (즉, 웹) 프로토콜이기 때문에, 파이썬에는 HTTP 프로토컬을 지원하기 위해 특별히 설계된 라이브러리가 있다. 이것을 통해서 웹상에서 데이터나 문서를 검색을 쉽게 할 수 있다.</p>
-</section><section id="socket-images" class="level2" data-number="25.3"><h2 data-number="25.3" class="anchored" data-anchor-id="socket-images">
-<span class="header-section-number">25.3</span> HTTP 경유 이미지 가져오기</h2>
+</section><section id="socket-images" class="level2" data-number="22.3"><h2 data-number="22.3" class="anchored" data-anchor-id="socket-images">
+<span class="header-section-number">22.3</span> HTTP 경유 이미지 가져오기</h2>
 <p>상기 예제에서는 파일에 새줄(newline)이 있는 일반 텍스트 파일을 가져왔다. 그리고 나서, 프로그램을 실행해서 데이터를 단순히 화면에 복사했다. HTTP를 사용하여 이미지를 가져오도록 비슷하게 프로그램을 작성할 수 있다. 프로그램 실행 시에 화면에 데이터를 복사하는 대신에, 데이터를 문자열로 누적하고, 다음과 같이 헤더를 잘라내고 나서 파일에 이미지 데이터를 저장한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -1968,8 +1950,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Type:</span> image/jpeg</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>recv()</code> 메쏘드 호출의 처음과 마지막을 제외하고, 매번 새로운 데이터를 요청할 때마다 이제 5120 문자가 전송된다.</p>
 <p>서버 <code>send()</code> 요청과 응용프로그램 <code>recv()</code> 요청 사이에 버퍼가 있다. 프로그램에 지연을 넣어 실행하게 될 때, 어느 지점엔가 서버가 소켓 버퍼를 채우고 응용프로그램이 버퍼를 비울 때까지 잠시 멈춰야 된다. 송신하는 응용프로그램 혹은 수신하는 응용프로그램을 멈추게 하는 행위를 “흐름 제어(flow control)”이라고 한다.</p>
-</section><section id="httr" class="level2" data-number="25.4"><h2 data-number="25.4" class="anchored" data-anchor-id="httr">
-<span class="header-section-number">25.4</span> <code>httr</code> 웹페이지 가져오기</h2>
+</section><section id="httr" class="level2" data-number="22.4"><h2 data-number="22.4" class="anchored" data-anchor-id="httr">
+<span class="header-section-number">22.4</span> <code>httr</code> 웹페이지 가져오기</h2>
 <p>수작업으로 소켓 라이브러리를 사용하여 HTTP로 데이터를 주고 받을 수 있지만, <code>httr</code> 패키지를 사용하여 R에서 동일한 작업을 수행하는 좀더 간편한 방식이 있다. <code>httr</code>을 사용하여 파일처럼 웹페이지를 다룰 수가 있다. 단순하게 어느 웹페이지를 가져올 것인지만 지정하면 <code>httr</code> 라이브러리가 모든 HTTP 프로토콜과 헤더 관련 사항을 처리해 준다.</p>
 <p><code>GET()</code> 함수를 사용하여 웹페이지를 열게 되면, 파일처럼 다룰 수 있고 <code>content()</code> 함수를 사용해서 데이터를 읽을 수 있다. 프로그램을 실행하면, 파일 내용 출력결과만을 볼 수 있다. 헤더정보는 여전히 전송되었지만, <code>GET()</code> 함수가 헤더를 받아 내부적으로 처리하고, 사용자에게는 단지 데이터만 반환한다. 파이썬으로 웹에서 <code>romeo.txt</code> 파일을 읽도록 <code>urllib</code>를 사용하여 동일한 기능을 구현할 수 있다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -2006,12 +1988,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p>다시 한번, 웹페이지를 열게 되면, 로컬 파일처럼 웹페이지를 읽을 수 있다.</p>
-</section><section id="html-webscraping" class="level2" data-number="25.5"><h2 data-number="25.5" class="anchored" data-anchor-id="html-webscraping">
-<span class="header-section-number">25.5</span> HTML 파싱과 웹 스크래핑</h2>
+</section><section id="html-webscraping" class="level2" data-number="22.5"><h2 data-number="22.5" class="anchored" data-anchor-id="html-webscraping">
+<span class="header-section-number">22.5</span> HTML 파싱과 웹 스크래핑</h2>
 <p>R <code>httr</code> 패키지를 활용하는 일반적인 사례는 웹 <strong>스크래핑(scraping)</strong>이다. 웹 스크래핑은 웹브라우저를 가장한 프로그램을 작성하는 것이다. 웹페이지를 가져와서, 패턴을 찾아 페이지 내부의 데이터를 꼼꼼히 조사한다. 예로, 구글같은 검색엔진은 웹 페이지의 소스를 조사해서 다른 페이지로 가는 링크를 추출하고, 그 해당 페이지를 가져와서 링크 추출하는 작업을 반복한다. 이러한 기법으로 구글은 웹상의 거의 모든 페이지를 <strong>거미(spiders)</strong>줄처럼 연결한다.</p>
 <p>구글은 또한 발견한 웹페이지에서 특정 페이지로 연결되는 링크 빈도를 사용하여 얼마나 중요한 페이지인지를 측정하고 검색결과에 페이지가 얼마나 높은 순위로 노출되어야 하는지 평가한다.</p>
-</section><section id="webscarping-regex" class="level2" data-number="25.6"><h2 data-number="25.6" class="anchored" data-anchor-id="webscarping-regex">
-<span class="header-section-number">25.6</span> 정규 표현식 HTML 파싱</h2>
+</section><section id="webscarping-regex" class="level2" data-number="22.6"><h2 data-number="22.6" class="anchored" data-anchor-id="webscarping-regex">
+<span class="header-section-number">22.6</span> 정규 표현식 HTML 파싱</h2>
 <p>HTML을 파싱하는 간단한 방식은 정규 표현식을 사용하여 특정한 패턴과 매칭되는 부속 문자열을 반복적으로 찾아 추출하는 것이다.</p>
 <p>여기 간단한 웹페이지가 있다.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>The First Page<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
@@ -2066,8 +2048,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="ex">[17]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://allendowney.com/</span><span class="dt">\"</span><span class="st">"</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>정규 표현식은 HTML이 예측가능하고 잘 구성된 경우에 멋지게 작동한다. 하지만, “망가진” HTML 페이지가 많아서, 정규 표현식만을 사용하는 솔류션은 유효한 링크를 놓치거나 잘못된 데이터만 찾고 끝날 수 있다.</p>
 <p>이 문제는 강건한 HTML 파싱 라이브러리를 사용해서 해결될 수 있다.</p>
-</section><section id="rvest-scraping" class="level2" data-number="25.7"><h2 data-number="25.7" class="anchored" data-anchor-id="rvest-scraping">
-<span class="header-section-number">25.7</span> <code>rvest</code> HTML 파싱</h2>
+</section><section id="rvest-scraping" class="level2" data-number="22.7"><h2 data-number="22.7" class="anchored" data-anchor-id="rvest-scraping">
+<span class="header-section-number">22.7</span> <code>rvest</code> HTML 파싱</h2>
 <p>HTML을 파싱하여 페이지에서 데이터를 추출할 수 있는 R 패키지는 많이 있다. 패키지 각각은 강점과 약점이 있어서 사용자 필요에 따라 취사선택한다.</p>
 <p>예로, 간단하게 HTML 입력을 파싱하여 <strong>rvest</strong> 라이브러리를 사용하여 링크를 추출할 것이다.</p>
 <p>HTML이 XML 처럼 보이고 몇몇 페이지는 XML로 되도록 꼼꼼하게 구축되었지만, 일반적으로 대부분의 HTML이 깨져서 XML 파서가 HTML 전체 페이지를 잘못 구성된 것으로 간주하고 받아들이지 않는다. `rvest`` 패키지는 결점 많은 HTML 페이지에 내성이 있어서 사용자가 필요로하는 데이터를 쉽게 추출할 수 있게 한다.</p>
@@ -2150,8 +2132,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Second</span> Page</span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Attrs:</span> href: http://www.dr-chuck.com/page2.htm</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>HTML을 파싱하는데 <code>rvest</code>가 가진 강력한 기능을 예제로 보여줬다. 좀더 자세한 사항은 <a href="https://rvest.tidyverse.org/" class="uri">https://rvest.tidyverse.org/</a> 에서 문서와 예제를 살펴보세요.</p>
-</section><section id="GET-binary" class="level2" data-number="25.8"><h2 data-number="25.8" class="anchored" data-anchor-id="GET-binary">
-<span class="header-section-number">25.8</span> 바이너리 파일 읽기</h2>
+</section><section id="GET-binary" class="level2" data-number="22.8"><h2 data-number="22.8" class="anchored" data-anchor-id="GET-binary">
+<span class="header-section-number">22.8</span> 바이너리 파일 읽기</h2>
 <p>이미지나 비디오 같은 텍스트가 아닌 (혹은 바이너리) 파일을 가져올 때가 종종 있다. 일반적으로 이런 파일 데이터를 출력하는 것은 유용하지 않다. 하지만, <code><a href="https://rdrr.io/r/utils/download.file.html">download.file()</a></code> 함수를 사용하여, 하드 디스크 로컬 파일에 URL 사본을 쉽게 만들 수 있다.</p>
 <p><code><a href="https://rdrr.io/r/utils/download.file.html">download.file()</a></code> 함수 내부에 인터넷에 공개된 이미지 <code>url</code>을 적고, <code>destfile</code> 에는 로컬파일에 저장할 파일명을 적어준다. 중요한 것은 텍스트가 아니라 바이너리 이미지라 <code>mode = "wb"</code>를 지정한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -2173,10 +2155,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>작성된 프로그램은 네트워크로 모든 데이터를 한번에 읽어서 컴퓨터 <code>cover.jpg</code> 파일을 다운로드 받아 로컬 디스크에 지정한 디렉토리 파일명으로 데이터를 쓴다. 이 방식은 파일 크기가 사용자 컴퓨터의 메모리 크기보다 작다면 정상적으로 작동한다.</p>
 <div id="fig-network-binary" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-network-binary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/py4inf_cover.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="그림&nbsp;25.2: 바이너리 파일 다운로드"><img src="images/py4inf_cover.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="213"></a>
+<a href="images/py4inf_cover.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="그림&nbsp;22.2: 바이너리 파일 다운로드"><img src="images/py4inf_cover.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="213"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-network-binary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;25.2: 바이너리 파일 다운로드
+그림&nbsp;22.2: 바이너리 파일 다운로드
 </figcaption></figure>
 </div>
 <p>하지만, 오디오 혹은 비디오 파일 대용량이면, 상기 프로그램은 멈추거나 사용 자 컴퓨터 메모리가 부족할 때 극단적으로 느려질 수 있다. 메모리 부족을 회피 하기 위해서, 데이터를 블럭 혹은 버퍼로 가져와서, 다음 블럭을 가져오기 전에 디스크에 각각의 블럭을 쓴다. 이런 방식으로 사용자가 가진 모든 메모리를 사 용하지 않고 어떠한 크기 파일도 읽어올 수 있다.</p>
@@ -2199,8 +2181,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p>UNIX 혹은 매킨토시 컴퓨터를 가지고 있다면, 다음과 같이 상기 동작을 수행하는 명령어가 운영체제 자체에 내장되어 있다.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://www.dr-chuck.com/py4inf/cover.jpg</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section><section id="network-terminology" class="level2" data-number="25.9"><h2 data-number="25.9" class="anchored" data-anchor-id="network-terminology">
-<span class="header-section-number">25.9</span> 용어정의</h2>
+</section><section id="network-terminology" class="level2" data-number="22.9"><h2 data-number="22.9" class="anchored" data-anchor-id="network-terminology">
+<span class="header-section-number">22.9</span> 용어정의</h2>
 <ul>
 <li>
 <strong>BeautifulSoup</strong>: 파이썬 라이브러리로 HTML 문서를 파싱하고 브라우저가 일반적으로 생략하는 HTML의 불완전한 부분을 보정하여 HTML 문서에서 데이터를 추출한다. <a href="www.crummy.com">www.crummy.com</a> 사이트에서 BeautifulSoup 코드를 다운로드 받을 수 있다.</li>
@@ -2652,12 +2634,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./tool-regex.html" class="pagination-link" aria-label="정규 표현식">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">정규 표현식</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./tool-web.html" class="pagination-link" aria-label="웹서비스 사용하기">
-        <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -3318,7 +3300,7 @@ qpyodideCellDetails.map(
       qpyodideCreateCell(entry);
     }
   );
-</script><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
+</script><script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
