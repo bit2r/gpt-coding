@@ -8,7 +8,7 @@
 
 <meta name="author" content="이광춘">
 
-<title>챗GPT 코딩 – 12&nbsp; Git 구축 및 설정</title>
+<title>챗GPT 코딩 – 12&nbsp; Git 설정과 저장소</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./git-create.html" rel="next">
+<link href="./git-change.html" rel="next">
 <link href="./git-basics.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -77,6 +77,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -132,7 +135,7 @@ ga('send', {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./git-basics.html">버전제어와 협업</a></li><li class="breadcrumb-item"><a href="./git-setup.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 구축 및 설정</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./git-basics.html">버전제어와 협업</a></li><li class="breadcrumb-item"><a href="./git-setup.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -276,21 +279,18 @@ ga('send', {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버젼제어</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-setup.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 구축 및 설정</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./git-create.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">저장소 생성</span></span></a>
-  </div>
-</li>
+ <span class="menu-text">git-create.qmd</span>
+  </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-change.html" class="sidebar-item-text sidebar-link">
@@ -404,22 +404,23 @@ ga('send', {
     <h2 id="toc-title">목차</h2>
    
   <ul>
-  <li><a href="#git-korean" id="toc-git-korean" class="nav-link active" data-scroll-target="#git-korean"><span class="header-section-number">12.1</span> Git 추가설정</a>
+  <li><a href="#git-korean" id="toc-git-korean" class="nav-link active" data-scroll-target="#git-korean"><span class="header-section-number">12.1</span> Git 추가 설정</a>
   <ul class="collapse">
-  <li><a href="#local-PC-ssh-keys" id="toc-local-PC-ssh-keys" class="nav-link" data-scroll-target="#local-PC-ssh-keys"><span class="header-section-number">12.1.1</span> 로컬 PC와 SSH 키(Key) 연결</a></li>
-  <li><a href="#local-PC-ssh-keys-generate" id="toc-local-PC-ssh-keys-generate" class="nav-link" data-scroll-target="#local-PC-ssh-keys-generate"><span class="header-section-number">12.1.2</span> SSH 공개키/비밀키 생성 </a></li>
+  <li><a href="#local-PC-ssh-keys" id="toc-local-PC-ssh-keys" class="nav-link" data-scroll-target="#local-PC-ssh-keys"><span class="header-section-number">12.1.1</span> 로컬 PC와 SSH 키 연결</a></li>
+  <li><a href="#local-PC-ssh-keys-generate" id="toc-local-PC-ssh-keys-generate" class="nav-link" data-scroll-target="#local-PC-ssh-keys-generate"><span class="header-section-number">12.1.2</span> SSH 공개 키/비밀 키 생성 </a></li>
   <li><a href="#local-PC-ssh-keys-commit" id="toc-local-PC-ssh-keys-commit" class="nav-link" data-scroll-target="#local-PC-ssh-keys-commit"><span class="header-section-number">12.1.3</span> 첫 커밋(commit)</a></li>
-  <li><a href="#local-PC-ssh-keys-push" id="toc-local-PC-ssh-keys-push" class="nav-link" data-scroll-target="#local-PC-ssh-keys-push"><span class="header-section-number">12.1.4</span> 비밀번호 입력없이 푸쉬(push) </a></li>
+  <li><a href="#local-PC-ssh-keys-push" id="toc-local-PC-ssh-keys-push" class="nav-link" data-scroll-target="#local-PC-ssh-keys-push"><span class="header-section-number">12.1.4</span> 비밀번호 없이 푸시하기 </a></li>
   </ul></li>
+  <li><a href="#git-create" id="toc-git-create" class="nav-link" data-scroll-target="#git-create"><span class="header-section-number">12.2</span> 저장소 생성</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/git-setup.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./git-basics.html">버전제어와 협업</a></li><li class="breadcrumb-item"><a href="./git-setup.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 구축 및 설정</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./git-basics.html">버전제어와 협업</a></li><li class="breadcrumb-item"><a href="./git-setup.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="git-setup" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 구축 및 설정</span></span></h1>
+<h1 class="title"><span id="git-setup" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></h1>
 </div>
 
 
@@ -436,36 +437,36 @@ ga('send', {
 </header>
 
 
-<p>처음 Git를 새로운 컴퓨터에 사용할 때, 몇가지 설정이 필요하다. 다음에 Git을 시작할 때, 설정해야 되는 몇가지 사례가 나와있다:</p>
+<p>처음 Git을 새로운 컴퓨터에서 사용할 때는 몇 가지 설정이 필요하다. 다음은 Git을 시작할 때 필수적으로 설정해야 하는 몇 가지 사례다.</p>
 <ul>
 <li>이름과 전자우편 주소</li>
 <li>선호하는 텍스트 편집기 선정</li>
-<li>전역(즉, 모든 프로젝트)으로 이런 설정을 할지 여부</li>
+<li>전역(즉, 모든 프로젝트)으로 설정을 할지 여부</li>
 </ul>
-<p>명령라인에서 Git 명령어는 다음과 같이 작성된다; <code>git verb options</code>, 즉, <code>git 동사 선택옵션</code>. <code>verb</code> 가 실제로 수행하고자 하는 명령어가 되고, <code>options</code>는 <code>verb</code>에 필요할지도 모르는 추가 선택옵션 정보가 된다. 다음에 Dracula가 새로 구입한 노트북에 환경설정하는 방법이 나와있다:</p>
+<p>명령 줄에서 Git 명령어는 다음과 같이 작성된다. <code>git verb options</code>. 여기서 <code>verb</code>는 실제로 수행하고자 하는 명령어이고, <code>options</code>는 <code>verb</code>에 필요할 수 있는 추가 선택 사항 정보가 된다. 다음은 드라큘라(Dracula)가 새로 구입한 노트북에서 환경을 설정하는 방법이다.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> user.name <span class="st">"Vlad Dracula"</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> user.email <span class="st">"vlad@tran.sylvan.ia"</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Dracula 대신에 본인 이름과 본인 전자우편 주소를 사용합니다. 사용자명과 전자우편 주소는 후속 Git 활동과 연관된다. 이것이 의미하는 바는 <a href="https://github.com/">GitHub</a>, <a href="https://bitbucket.org/">BitBucket</a>, <a href="https://gitlab.com/">GitLab</a>, 혹은 Git 호스트 서버에 푸쉬하는 어떤 변경사항도 사용자명과 전자우편 주소를 담게되는 것을 의미한다.</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-줄마침(Line Endings)
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>다른 키보트 타이핑과 마찬가지로, 키보드로 <kbd>Return</kbd>를 치게 되면, 컴퓨터는 엔터값을 문자로 인코딩한다. 줄마침을 표현하기 위해서 운영체제마다 별도 문자를 사용한다. (개행 혹은 줄중단, 영어로 newline 혹은 line breaks를 들어봤을 수도 있다.) Git이 파일을 비교하는데 이러한 문자를 사용하기 때문에, 운영체제가 다른 컴퓨텅에서 파일을 편집할 때 예기치 않은 이슈가 발생될 수 있다. 이 문제는 금번 학습 범위를 넘어서는 것이지만, <a href="https://help.github.com/articles/dealing-with-line-endings/">on this GitHub page</a> 웹페이지에서 좀더 자세한 정보를 얻을 수 있다.</p>
-<p>Git에서 줄마침을 인식하고 인코딩하는 방식을 변경하려면, <code>git config</code>에 <code>core.autocrlf</code> 명령을 사용한다. 권장되는 설정은 다음과 같다:</p>
-<p>맥OS와 리눅스:</p>
+<p>드라큘라(Dracula) 대신에 본인의 이름과 이메일 주소를 사용한다. 사용자명과 이메일 주소는 후속 Git 활동과 연관된다. 이것이 의미하는 바는 <a href="https://github.com/">GitHub</a>, <a href="https://bitbucket.org/">BitBucket</a>, <a href="https://gitlab.com/">GitLab</a> 등 Git 호스팅 서버에 푸시하는 모든 변경 사항에 사용자명과 이메일 주소가 포함됨을 의미한다.</p>
+<p>::: callout-tip ### 줄 바꿈(Line Endings)</p>
+<p>키보드로 <kbd>Return</kbd>을 누르면 컴퓨터는 줄 바꿈을 나타내는 문자로 인코딩한다. (개행 또는 줄 바꿈을 뜻하는 영어 “newline” 혹은 “line breaks”를 들어봤을 수도 있다.) Git은 파일을 비교할 때 이 문자를 사용하기 때문에, 서로 다른 운영체제를 사용하는 컴퓨터에서 파일을 편집하면 예기치 않은 문제가 발생할 수 있다. 이 문제는 이번 학습 범위를 넘어서는 내용이지만, <a href="https://help.github.com/articles/dealing-with-line-endings/">GitHub 페이지</a>에서 더 자세한 정보를 얻을 수 있다.</p>
+<p>Git에서 줄 바꿈을 인식하고 인코딩하는 방식을 변경하려면 <code>git config</code>에서 <code>core.autocrlf</code> 명령을 사용한다. 권장되는 설정은 다음과 같다:</p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<section id="맥os와-리눅스" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="맥os와-리눅스">맥OS와 리눅스</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> core.autocrlf input</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>윈도우:</p>
+</section>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<section id="윈도우" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="윈도우">윈도우</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> core.autocrlf true</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </div>
 </div>
-<p>이번 학습에서, <a href="https://github.com/">GitHub</a>을 사용하게 되는데, 사용되는 전자우편주소는 GitHub 계정을 설정할 때 사용하는 것과 같은 것이 되어야 한다. 만약, 개인정보에 대해 걱정이 된다면, <a href="https://help.github.com/articles/keeping-your-email-address-private/">GitHub’s instructions for keeping your email address private</a>을 참조한다. GitHub에서 사적인 개인 전자우편주소를 선택하기로 했다면, <code>user.email</code>에 동일한 전자우편주소를 사용한다. 즉, <code>username</code>을 GitHub의 설정된 것으로 바꿔놓아 <code>username@users.noreply.github.com</code>게 된다. 나중에 <code>git config</code> 명령어를 사용해서 전자우편 주소를 변경할 수 있다.</p>
-<p>Dracula도 자신이 선호하는 텍스트 편집기를 설정해야 하는데, 다음 표를 참조한다:</p>
+<p>이번 학습에서는 <a href="https://github.com/">GitHub</a>을 사용하는데, 여기에 사용되는 이메일 주소는 GitHub 계정 설정 시 사용한 것과 동일해야 한다. 만약 개인정보가 걱정된다면 <a href="https://help.github.com/articles/keeping-your-email-address-private/">GitHub의 이메일 주소 비공개 지침</a>을 참조하자. GitHub에서 비공개 이메일 주소를 선택했다면 <code>user.email</code>에도 동일한 주소를 사용해야 한다. 즉, GitHub 설정의 <code>username</code>을 <code>username@users.noreply.github.com</code>으로 바꾼다. 나중에 <code>git config</code> 명령어로 이메일 주소를 변경할 수 있다.</p>
+<p>드라큘라도 선호하는 텍스트 편집기를 설정해야 하는데, 다음 표를 참조하면 된다:</p>
 <table class="table">
 <colgroup>
 <col style="width: 28%">
@@ -474,7 +475,7 @@ ga('send', {
 <thead>
 <tr class="header">
 <th style="text-align: left;">편집기</th>
-<th style="text-align: left;">환경설정 명령어</th>
+<th style="text-align: left;">설정 명령어</th>
 </tr>
 </thead>
 <tbody>
@@ -487,7 +488,7 @@ ga('send', {
 <td style="text-align: left;"><code>$ git config --global core.editor "nano -w"</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">BBEdit (Mac, with command line tools)</td>
+<td style="text-align: left;">BBEdit (맥, 명령줄 도구 포함)</td>
 <td style="text-align: left;"><code>$ git config --global core.editor "bbedit -w"</code></td>
 </tr>
 <tr class="even">
@@ -495,19 +496,19 @@ ga('send', {
 <td style="text-align: left;"><code>$ git config --global core.editor "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -n -w"</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Sublime Text (Win, 32-bit install)</td>
+<td style="text-align: left;">Sublime Text (윈도우, 32비트 설치)</td>
 <td style="text-align: left;"><code>$ git config --global core.editor "'c:/program files (x86)/sublime text 3/sublime_text.exe' -w"</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Sublime Text (Win, 64-bit install)</td>
+<td style="text-align: left;">Sublime Text (윈도우, 64비트 설치)</td>
 <td style="text-align: left;"><code>$ git config --global core.editor "'c:/program files/sublime text 3/sublime_text.exe' -w"</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Notepad++ (Win, 32-bit install)</td>
+<td style="text-align: left;">Notepad++ (윈도우, 32비트 설치)</td>
 <td style="text-align: left;"><code>$ git config --global core.editor "'c:/program files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Notepad++ (Win, 64-bit install)</td>
+<td style="text-align: left;">Notepad++ (윈도우, 64비트 설치)</td>
 <td style="text-align: left;"><code>$ git config --global core.editor "'c:/program files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"</code></td>
 </tr>
 <tr class="odd">
@@ -532,28 +533,28 @@ ga('send', {
 </tr>
 <tr class="even">
 <td style="text-align: left;">VS Code</td>
-<td style="text-align: left;">$ git config –global core.editor “code –wait”</td>
+<td style="text-align: left;"><code>$ git config --global core.editor "code --wait"</code></td>
 </tr>
 </tbody>
 </table>
-<p>원할 때마다 Git에 사용할 텍스트 편집기 환경설정을 다시 할 수 있다.</p>
+<p>필요할 때마다 Git에서 사용할 텍스트 편집기 설정을 변경할 수 있다.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Vim 나가기
+Vim 종료하기
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>다수 프로그램에서 Vim이 기본설정된 편집기다. Vim을 예전에 사용한 적이 없고, 변경사항을 저장하지 않고 세션을 빠져나가고자 한다면, <kbd>Esc</kbd> 다음에, <code>:q!</code>를 타이핑하고 나서 <kbd>Return</kbd>를 친다. 변경사항을 저장하고 나가려면, <kbd>Esc</kbd> 다음에, <code>:wq</code>를 타이핑하고 <kbd>Return</kbd>을 친다.</p>
+<p>많은 프로그램에서 Vim이 기본 편집기로 설정되어 있다. Vim을 처음 사용하는 경우 변경 사항을 저장하지 않고 세션을 종료하려면 <kbd>Esc</kbd>를 누른 후 <code>:q!</code>를 입력하고 <kbd>Return</kbd>을 누른다. 변경 사항을 저장하고 종료하려면 <kbd>Esc</kbd>를 누른 후 <code>:wq</code>를 입력하고 <kbd>Return</kbd>을 누른다.</p>
 </div>
 </div>
-<p>앞서 실행한 상기 명령어는 한번만 실행하면 된다: <code>--global</code> 플래그는 Git으로 하여금 해당 컴퓨터에 본인 계정의 모든 프로젝트에 환경설정한 것을 사용하도록 한다.</p>
-<p>본인이 설정한 환경설정 내용은 언제라도 다음 명령어를 입력하여 확인할 수 있다:</p>
+<p>앞서 실행한 상기 명령어는 한번만 실행하면 된다. <code>--global</code> 플래그는 Git으로 하여금 해당 컴퓨터에 본인 계정의 모든 프로젝트에 환경설정한 것을 사용하도록 한다.</p>
+<p>본인이 설정한 환경설정 내용은 언제라도 다음 명령어를 입력하여 확인할 수 있다.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--list</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>원하는 만큼 환경설정을 바꿀 수도 있다: 편집기를 바꾸거나 전자우편주소를 갱신할 때 동일한 명령어를 사용하면 된다.</p>
+<p>원하는 대로 설정을 변경할 수 있다. 편집기를 바꾸거나 이메일 주소를 업데이트할 때도 동일한 명령어를 사용하면 된다.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -564,10 +565,10 @@ Vim 나가기
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>일부 네트워크에서 <a href="https://en.wikipedia.org/wiki/Proxy_server">proxy</a>를 사용할 필요가 있다. 이런 경우, Git에게 프록시에 대해 일러줘야 한다:</p>
+<p>일부 네트워크에서는 <a href="https://en.wikipedia.org/wiki/Proxy_server">프록시</a>를 사용해야 한다. 이 경우 Git에 프록시 정보를 설정해야 한다:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> http.proxy proxy-url</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> https.proxy proxy-url</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>프록시를 비활성화 하는 경우, 다음 명령어를 사용한다.</p>
+<p>프록시를 비활성화하려면 다음 명령어를 사용한다.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> <span class="at">--unset</span> http.proxy</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> <span class="at">--unset</span> https.proxy</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -582,54 +583,165 @@ Git 도움말과 매뉴얼
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>항상 기억할 것은 <code>git</code> 명령어를 잊은 경우, <code>-h</code> 선택옵션을 주어 명령어 목록을 볼 수 있고, <code>--help</code>를 사용해서 Git 매뉴얼도 이용할 수 있다:</p>
+<p><code>git</code> 명령어를 잊어버린 경우 <code>-h</code> 옵션으로 명령어 목록을 볼 수 있고, <code>--help</code>로 Git 매뉴얼을 이용할 수 있다는 점을 기억하자.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">-h</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--help</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <section id="git-korean" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="git-korean"><span class="header-section-number">12.1</span> Git 추가설정</h2>
+<h2 data-number="12.1" class="anchored" data-anchor-id="git-korean"><span class="header-section-number">12.1</span> Git 추가 설정</h2>
 <section id="local-PC-ssh-keys" class="level3" data-number="12.1.1">
-<h3 data-number="12.1.1" class="anchored" data-anchor-id="local-PC-ssh-keys"><span class="header-section-number">12.1.1</span> 로컬 PC와 SSH 키(Key) 연결</h3>
-<p><a href="https://github.com/">GitHub</a>에 저장소(repository)를 만들고 여러 PC에서 작업을 진행할 경우 GitHub에 인증작업을 거쳐 진행하는 것이 여러모로 편리하다. 그중 하나의 방식이 공개키(public key)를 GitHub에 등록시켜 작업을 하는 것이 여기에 포함된다.</p>
+<h3 data-number="12.1.1" class="anchored" data-anchor-id="local-PC-ssh-keys"><span class="header-section-number">12.1.1</span> 로컬 PC와 SSH 키 연결</h3>
+<p><a href="https://github.com/">GitHub</a>에 저장소(repository)를 만들고 여러 PC에서 작업할 경우, GitHub 인증 작업을 거치는 것이 여러모로 편리하다. 그 중 하나는 공개 키(public key)를 GitHub에 등록하여 작업하는 방식이다.</p>
 <ol type="1">
-<li>먼저 윈도우를 사용할 경우 <a href="https://gitforwindows.org/">Git for windows</a>를 다운로드 받아 설치한다.</li>
-<li><code>ssh-keygen</code> 명령어로 공개키/비밀키를 생성한다.</li>
-<li>생성된 공개키를 <a href="https://github.com/">GitHub</a> 계정에 등록시킨다.</li>
+<li>윈도우 사용자는 먼저 <a href="https://gitforwindows.org/">Git for Windows</a>를 다운로드하여 설치한다.</li>
+<li><code>ssh-keygen</code> 명령어로 공개 키와 비밀 키를 생성한다.</li>
+<li>생성된 공개 키를 <a href="https://github.com/">GitHub</a> 계정에 등록한다.</li>
 </ol>
 </section>
 <section id="local-PC-ssh-keys-generate" class="level3" data-number="12.1.2">
-<h3 data-number="12.1.2" class="anchored" data-anchor-id="local-PC-ssh-keys-generate"><span class="header-section-number">12.1.2</span> SSH 공개키/비밀키 생성 <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h3>
-<p>SSH 공개키/비밀키를 생성시키고 이를 GitHub 홈페이지에 등록한다. 먼저 <code>ssh-keygen</code> 명령어에 매개변수 인자를 넣고 GitHub 전자우편주소도 함께 지정한다.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ssh-keygen <span class="at">-t</span> rsa <span class="at">-C</span> “your_email@example.com”</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>ssh-keygen</code> 명령어로 생성된 키를 GitHub에 등록한다.</p>
+<h3 data-number="12.1.2" class="anchored" data-anchor-id="local-PC-ssh-keys-generate"><span class="header-section-number">12.1.2</span> SSH 공개 키/비밀 키 생성 <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h3>
+<p>SSH 공개 키와 비밀 키를 생성하고 GitHub에 등록하는 과정은 다음과 같다. 먼저 <code>ssh-keygen</code> 명령어에 매개변수와 GitHub 이메일 주소를 지정한다.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ssh-keygen <span class="at">-t</span> rsa <span class="at">-C</span> <span class="st">"your_email@example.com"</span> </span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>ssh-keygen</code>으로 생성된 키를 GitHub에 등록한다.</p>
 <ul>
-<li>우측상단 [Settings] → [SSH and GPG keys] → [New SSH key]</li>
+<li>우측 상단 [Settings] → [SSH and GPG keys] → [New SSH key]</li>
 </ul>
-<p>[New SSH key]를 클릭하게 되면 Title, Key를 넣는 입력부분이 보인다. Title에 식별가능한 이름을 지정하고 앞서 생성한 <code>id_rsa.pub</code> 내용을 Key에 복사해서 붙여넣는다.</p>
+<p>[New SSH key]를 클릭하면 Title과 Key 입력란이 나타난다. Title에는 식별 가능한 이름을 지정하고, 앞서 생성한 <code>id_rsa.pub</code> 내용을 Key에 복사하여 붙여넣는다.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat ~/.ssh/id_rsa.pub</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-rsa</span> AAAxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxYxY9 email_address@mail.com</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="local-PC-ssh-keys-commit" class="level3" data-number="12.1.3">
 <h3 data-number="12.1.3" class="anchored" data-anchor-id="local-PC-ssh-keys-commit"><span class="header-section-number">12.1.3</span> 첫 커밋(commit)</h3>
-<p>인증작업을 완료한 후에 저장소에서 작업할 파일을 처음 커밋(commit)하는 경우 <code>git add</code>, <code>git commit -m</code>명령어를 이어서 전달시키게 되면 커밋을 때리는 사람이 누구인지를 등록하는 절차가 발생된다. <code>git config</code>를 통해 전자우편과 사용자명을 등록하게 되면 커밋을 정상적으로 진행시킬 수 있게 된다.</p>
+<p>인증을 완료하고 저장소에서 처음 파일을 커밋할 때 <code>git add</code>, <code>git commit -m</code> 명령어를 연속해서 실행하면 커밋 작성자 정보를 등록하라는 메시지가 나타난다. <code>git config</code>로 이메일과 사용자명을 설정하면 정상적으로 커밋할 수 있다.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> user.email <span class="st">"you@example.com"</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="local-PC-ssh-keys-push" class="level3" data-number="12.1.4">
-<h3 data-number="12.1.4" class="anchored" data-anchor-id="local-PC-ssh-keys-push"><span class="header-section-number">12.1.4</span> 비밀번호 입력없이 푸쉬(push) <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></h3>
+<h3 data-number="12.1.4" class="anchored" data-anchor-id="local-PC-ssh-keys-push"><span class="header-section-number">12.1.4</span> 비밀번호 없이 푸시하기 <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></h3>
 <p>다음 단계로 비밀번호 없이 커밋된 내용을 GitHub에 전달하는 방법은 자격인증(credential) 캐싱을 통한 간단한 방법이 있다. 물론 처음에는 사용자명과 비번을 입력하는 과정을 필수적으로 거치게 된다.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config credential.helper store</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git push https://github.com/repo.git</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Username</span> for <span class="st">'https://github.com'</span>: <span class="op">&lt;</span>USERNAME<span class="op">&gt;</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> for <span class="st">'https://USERNAME@github.com'</span>: <span class="op">&lt;</span>PASSWORD<span class="op">&gt;</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>캐쉬에 시간제한을 두어서 7200초 즉 2시간 보안을 강화시킨다.</p>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> for <span class="st">'https://USERNAME@github.com'</span>: <span class="op">&lt;</span>PASSWORD<span class="op">&gt;</span> </span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>보안을 강화하기 위해 캐시 시간 제한을 7200초(2시간)로 설정할 수 있다.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> credential.helper <span class="st">'cache --timeout 7200'</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-
 </section>
+</section>
+<section id="git-create" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="git-create"><span class="header-section-number">12.2</span> 저장소 생성</h2>
+<p>Git 환경설정이 완료되면, Git를 사용할 수 있다. 행성 착륙선을 화성에 보낼 수 있는지 조사를 하고 있는 늑대인간과 드라큘라 이야기를 계속해서 진행해 보자.</p>
+<div id="fig-git-motivation" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-git-motivation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/git/motivatingexample.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="그림&nbsp;12.1: Git 동기 부여 사례"><img src="images/git/motivatingexample.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-git-motivation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;12.1: Git 동기 부여 사례
+</figcaption>
+</figure>
+</div>
+<p>먼저 바탕화면(<code>Desktop</code>)에 작업할 디렉토리를 생성하고, 생성한 디렉토리로 이동하자:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/Desktop</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir planets</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd planets</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>그리고 나서, <code>planets</code>을 <strong>저장소(repository)</strong>로 만든다. 저장소는 Git이 파일에 대한 버전 정보를 저장하는 장소다.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git init</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>git init</code> 명령어가 서브디렉토리(subdirectory)와 파일을 담고 있는 저장소를 생성하는데 주목한다. <code>planets</code> 저장소 내부에 중첩된 별도 저장소를 생성할 필요는 없다. 또한, <code>planets</code> 디렉토리를 생성하고 저장소로 초기화하는 것은 완전히 서로 다른 과정이다.</p>
+<p><code>ls</code>를 사용해서 디렉토리 내용을 살펴보면, 변한 것이 아무것도 없는 것처럼 보인다:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>하지만, 모든 것을 보여주는 <code>-a</code> 플래그를 추가하면, Git은 <code>planets</code> 디렉토리 내부에 <code>.git</code> 로 불리는 숨겨진 디렉토리를 생성한 것을 볼 수 있다:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span>   ..  .git</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Git은 <code>.git</code>이라는 특별한 하위 디렉토리에 프로젝트에 대한 정보를 저장한다. 여기에는 프로젝트 디렉토리 내부에 위치한 모든 파일과 서브 디렉토리가 포함된다. 만약 <code>.git</code>를 삭제하면, 프로젝트 이력을 모두 잃어버리게 된다.</p>
+<p>모든 것이 제대로 설정되었는지를 확인하려면, Git에게 다음과 같이 프로젝트 상태를 확인 명령어를 던진다:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git status</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># On branch master</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial commit</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="ex">nothing</span> to commit <span class="er">(</span><span class="ex">create/copy</span> files and use <span class="st">"git add"</span> to track<span class="kw">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>다른 <code>git</code> 버전을 사용할 경우, 출력 결과물이 다소 다를 수 있다.</p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Git 저장소를 생성할 장소
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>(이미 생성한 프로젝트) 행성에 대한 정보를 추적하면서, 드라큘라는 달에 관한 정보도 추적하고자 한다. <code>planets</code> 프로젝트와 관련된 새로운 프로젝트 <code>moons</code>를 시작한다. 늑대인간의 걱정에도 불구하고, Git 저장소 내부에 또 다른 Git 저장소를 생성하려고 다음 순서로 명령어를 입력해 나간다.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/Desktop   <span class="co"># 바탕화면 디렉토리로 되돌아 간다.</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd planets     <span class="co"># planets 디렉토리로 들어간다.</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span>          <span class="co"># planets 디렉토리에 .git 서브 디렉토리가 있는지 확인한다.</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir moons    <span class="co"># planets/moons 서브 디렉토릴르 생성한다.</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd moons       <span class="co"># moons 서브 디렉토리로 이동한다.</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git init       <span class="co"># Git 저장소를 moons 하위디렉토리에 생성한다.</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span>          <span class="co"># 새로운 Git 저장소가 .git 하위 디렉토리에 있는지 확인한다.</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>moons</code> 서브 디렉토리에 저장된 파일을 추적하기 위해 <code>moons</code> 디렉토리 안에서 <code>git init</code> 명령을 실행해야 할까?</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+해답
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>아니다. <code>moons</code> 서브 디렉토리에 Git 저장소를 만들 필요는 없다. 왜냐하면, <code>planets</code> 저장소가 이미 모든 파일, 서브 디렉토리, <code>planets</code> 디렉토리 아래 서브 디렉토리 파일 모두를 추적하기 때문이다. 따라서, 달에 관한 모든 정보를 추정하는데, 드랴큘라는 <code>planets</code> 디렉토리 아래 <code>moons</code> 서브 디렉토리를 추가하는 것으로 충분하다.</p>
+<p>추가적으로, 만약 Git 저장소가 중첩(nested)되면, Git 저장소는 서로 방해할 수 있다. 바깥 저장소가 내부 저장소 버전관리를 하게 된다. 따라서, 별도 디렉토리에 서로 다른 신규 Git 저장소를 생성하는게 최선이다.</p>
+<p>디렉토리에 저장소가 서로 충돌하지 않도록 하려면, <code>git status</code> 출력물을 점검하면 된다. 만약, 다음과 같은 출력물이 생성되게 되면 신규 저장소를 생성하는 것이 권장된다:</p>
+<pre><code>$ git status
+
+fatal: Not a git repository (or any of the parent directories): .git</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<code>git init</code> 실수 올바르게 고치기
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>늑대인간은 드라큘라에게 중첩된 저장소가 중복되어 불필요할 뿐만 아니라 향후 혼란을 야기할 수 있다고 설명했다. 드라큘라는 중첩된 저장소를 제거하고자 한다.</p>
+<p><code>moons</code> 서브 디렉터리에서 마지막으로 실행한 <code>git init</code> 명령어를 어떻게 취소할 수 있을까?</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+해답 – 주의해서 사용할 것!
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>이러한 사소한 실수를 되돌리려면, 드라큘라는 <code>planets</code> 디렉토리에서 다음 명령어를 실행하여 <code>.git</code> 디렉토리를 제거하기만 하면 된다:</p>
+<pre><code>$ rm -rf moons/.git</code></pre>
+<p>하지만, 주의할 것! 디렉토리를 잘못 입력하게 되면, 보관해야 하는 프로젝트 정보를 담고 있는 Git 이력 전체가 삭제될 수 있다. 따라서, <code>pwd</code> 명령어를 사용해서 현재 작업 디렉토리를 항상 확인한다.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
@@ -1068,13 +1180,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./git-basics.html" class="pagination-link" aria-label="자동화된 버젼제어">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버젼제어</span></span>
+      <a href="./git-basics.html" class="pagination-link" aria-label="자동화된 버전 관리">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./git-create.html" class="pagination-link" aria-label="저장소 생성">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">저장소 생성</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./git-change.html" class="pagination-link" aria-label="변경사항 추적">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1092,6 +1204,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 
