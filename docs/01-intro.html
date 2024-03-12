@@ -278,7 +278,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"options":{"results":"markup","autorun":"false","comment":"","message":"true","read-only":"false","label":"r-intro-hello-world-again","classes":"","out-height":"","context":"interactive","warning":"true","fig-cap":"","fig-height":5,"dpi":72,"output":"true","out-width":"700px","fig-width":7},"code":"print(\"헬로 R!\")"},{"id":2,"options":{"results":"markup","autorun":"false","comment":"","message":"true","read-only":"false","label":"r-intro-conversation","classes":"","out-height":"","context":"interactive","warning":"true","fig-cap":"","fig-height":5,"dpi":72,"output":"true","out-width":"700px","fig-width":7},"code":"print('당신은 하늘에서 오는 전설적인 신이 분명합니다')\nprint('오랫동안 당신을 기다려왔습니다')\nprint('전설에 따르면 겨자를 곁들였을 때 아주 맛있을 거라고 해요')\nprint('다른 언급이 없다면, 오늘 밤 잔치를 벌일 것입니다')"},{"id":3,"options":{"results":"markup","autorun":"false","comment":"","message":"true","read-only":"false","label":"r-intro-variable","classes":"","out-height":"","context":"interactive","warning":"true","fig-cap":"","fig-height":5,"dpi":72,"output":"true","out-width":"700px","fig-width":7},"code":"x <- 6\nx\n#> [1] 6\ny <-  x * 7\ny\n#> [1] 42"},{"id":4,"options":{"results":"markup","autorun":"false","comment":"","message":"true","read-only":"false","label":"r-intro-count-words","classes":"","out-height":"","context":"interactive","warning":"true","fig-cap":"","fig-height":5,"dpi":72,"output":"true","out-width":"700px","fig-width":7},"code":"library(stringr)\n\ntext_v <- paste(\"the clown ran after the car and the car ran into\",\n                \"the tent and the tent fell down on the clown and the car\")\nsplit_word <- str_split(text_v, \" \") %>% unlist()\ntable(split_word) |> sort(decreasing=TRUE) |> head(1)"},{"id":5,"options":{"results":"markup","autorun":"false","comment":"","message":"true","read-only":"false","label":"r-intro-ex-variable","classes":"","out-height":"","context":"interactive","warning":"true","fig-cap":"","fig-height":5,"dpi":72,"output":"true","out-width":"700px","fig-width":7},"code":"x <- 76\nx <- x + 1\nx"}];
+globalThis.qwebrCellDetails = [{"id":1,"options":{"label":"r-intro-hello-world-again","message":"true","results":"markup","out-width":"700px","warning":"true","context":"interactive","classes":"","read-only":"false","autorun":"false","fig-height":5,"out-height":"","output":"true","fig-width":7,"fig-cap":"","comment":"","dpi":72},"code":"print(\"헬로 R!\")"},{"id":2,"options":{"label":"r-intro-conversation","message":"true","results":"markup","out-width":"700px","warning":"true","context":"interactive","classes":"","read-only":"false","autorun":"false","fig-height":5,"out-height":"","output":"true","fig-width":7,"fig-cap":"","comment":"","dpi":72},"code":"print('당신은 하늘에서 오는 전설적인 신이 분명합니다')\nprint('오랫동안 당신을 기다려왔습니다')\nprint('전설에 따르면 겨자를 곁들였을 때 아주 맛있을 거라고 해요')\nprint('다른 언급이 없다면, 오늘 밤 잔치를 벌일 것입니다')"},{"id":3,"options":{"label":"r-intro-variable","message":"true","results":"markup","out-width":"700px","warning":"true","context":"interactive","classes":"","read-only":"false","autorun":"false","fig-height":5,"out-height":"","output":"true","fig-width":7,"fig-cap":"","comment":"","dpi":72},"code":"x <- 6\nx\n#> [1] 6\ny <-  x * 7\ny\n#> [1] 42"},{"id":4,"options":{"label":"r-intro-count-words","message":"true","results":"markup","out-width":"700px","warning":"true","context":"interactive","classes":"","read-only":"false","autorun":"false","fig-height":5,"out-height":"","output":"true","fig-width":7,"fig-cap":"","comment":"","dpi":72},"code":"library(stringr)\n\ntext_v <- paste(\"the clown ran after the car and the car ran into\",\n                \"the tent and the tent fell down on the clown and the car\")\nsplit_word <- str_split(text_v, \" \") %>% unlist()\ntable(split_word) |> sort(decreasing=TRUE) |> head(1)"},{"id":5,"options":{"label":"r-intro-ex-variable","message":"true","results":"markup","out-width":"700px","warning":"true","context":"interactive","classes":"","read-only":"false","autorun":"false","fig-height":5,"out-height":"","output":"true","fig-width":7,"fig-cap":"","comment":"","dpi":72},"code":"x <- 76\nx <- x + 1\nx"}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1150,7 +1150,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"id":1,"options":{"results":"markup","autorun":"","comment":"","message":"true","read-only":"false","label":"","classes":"","out-height":"","context":"interactive","warning":"true","fig-cap":"","fig-height":5,"dpi":72,"output":"true","out-width":"700px","fig-width":7},"code":"print(\"헬로 파이썬!\")"},{"id":2,"options":{"results":"markup","autorun":"","comment":"","message":"true","read-only":"false","label":"py-intro-conversation","classes":"","out-height":"","context":"interactive","warning":"true","fig-cap":"","fig-height":5,"dpi":72,"output":"true","out-width":"700px","fig-width":7},"code":"print('You must be the legendary god that comes from the sky')\nprint('We have been waiting for you for a long time')\nprint('Our legend says you will be very tasty with mustard')\nprint('We will have a feast tonight unless you say')"},{"id":3,"options":{"results":"markup","autorun":"","comment":"","message":"true","read-only":"false","label":"","classes":"","out-height":"","context":"interactive","warning":"true","fig-cap":"","fig-height":5,"dpi":72,"output":"true","out-width":"700px","fig-width":7},"code":"text = 'the clown ran after the car and the car ran into the tent and the tent fell down on the clown and the car'\n\nwords = text.split()\ncounts = dict()\n\nfor word in words:\n  counts[word] = counts.get(word,0) + 1\n\nbigcount = None\nbigword = None\n\nfor word,count in counts.items():\n  if bigcount is None or count > bigcount:\n    bigword = word\n    bigcount = count\n\nprint(bigword, bigcount)"}];
+globalThis.qpyodideCellDetails = [{"id":1,"options":{"label":"","message":"true","results":"markup","out-width":"700px","warning":"true","context":"interactive","classes":"","read-only":"false","autorun":"","fig-height":5,"out-height":"","output":"true","fig-width":7,"fig-cap":"","comment":"","dpi":72},"code":"print(\"헬로 파이썬!\")"},{"id":2,"options":{"label":"py-intro-conversation","message":"true","results":"markup","out-width":"700px","warning":"true","context":"interactive","classes":"","read-only":"false","autorun":"","fig-height":5,"out-height":"","output":"true","fig-width":7,"fig-cap":"","comment":"","dpi":72},"code":"print('You must be the legendary god that comes from the sky')\nprint('We have been waiting for you for a long time')\nprint('Our legend says you will be very tasty with mustard')\nprint('We will have a feast tonight unless you say')"},{"id":3,"options":{"label":"","message":"true","results":"markup","out-width":"700px","warning":"true","context":"interactive","classes":"","read-only":"false","autorun":"","fig-height":5,"out-height":"","output":"true","fig-width":7,"fig-cap":"","comment":"","dpi":72},"code":"text = 'the clown ran after the car and the car ran into the tent and the tent fell down on the clown and the car'\n\nwords = text.split()\ncounts = dict()\n\nfor word in words:\n  counts[word] = counts.get(word,0) + 1\n\nbigcount = None\nbigword = None\n\nfor word,count in counts.items():\n  if bigcount is None or count > bigcount:\n    bigword = word\n    bigcount = count\n\nprint(bigword, bigcount)"}];
 
 
 </script><script type="module">
@@ -1449,7 +1449,7 @@ globalThis._qpyodideGetInstance = function() {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">버전제어와 협업</span></a>
+ <span class="menu-text"><strong>2부</strong> 버전제어와 협업</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1458,43 +1458,43 @@ globalThis._qpyodideGetInstance = function() {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버젼제어</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 구축 및 설정</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./git-create.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">저장소 생성</span></span></a>
+  <a href="./git-setup-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-change.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-history.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">추적대상에서 제외</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">추적 대상에서 제외</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GitHub 원격작업</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GitHub 원격 작업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">공개 과학과 호스팅</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1505,14 +1505,8 @@ globalThis._qpyodideGetInstance = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">공개 과학과 호스팅</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./git-ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
   </div>
 </li>
       </ul>
@@ -1529,43 +1523,43 @@ globalThis._qpyodideGetInstance = function() {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
   </div>
 </li>
       </ul>
@@ -3354,7 +3348,7 @@ qpyodideCellDetails.map(
       qpyodideCreateCell(entry);
     }
   );
-</script><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false});
+</script><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","loop":false,"selector":".lightbox","closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

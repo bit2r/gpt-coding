@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.5.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="이광춘">
-<title>챗GPT 코딩 – 25&nbsp; 작업 자동화</title>
+<title>챗GPT 코딩 – 24&nbsp; 작업 자동화</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -298,7 +298,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"code":"library(fs)\n\ncwd <- fs::path_wd()\ncwd\n#> C:/swc/gpt-coding","options":{"results":"markup","message":"true","read-only":"false","fig-cap":"","autorun":"false","label":"r-task-fs","context":"interactive","warning":"true","out-width":"700px","classes":"","fig-width":7,"fig-height":5,"dpi":72,"output":"true","out-height":"","comment":""}},{"id":2,"code":"file.create(\"index.qmd\")\n#> [1] TRUE\nfs::path_abs(\"index.qmd\")\n#> D:/swc/gpt-coding/index.qmd","options":{"results":"markup","message":"true","read-only":"false","fig-cap":"","autorun":"false","label":"r-show-abs-path","context":"interactive","warning":"true","out-width":"700px","classes":"","fig-width":7,"fig-height":5,"dpi":72,"output":"true","out-height":"","comment":""}},{"id":3,"code":"# 'music' 디렉토리 생성\ndir_create(\"music\", showWarnings = FALSE)\n\n# 'memo.txt' 파일 생성\nfile_create(\"memo.txt\")\n\n# 파일 및 디렉토리 존재 여부 확인\nfile_exists(\"memo.txt\") \n#> TRUE\ndir_exists(\"memo.txt\")\n#> FALSE\ndir_exists(\"music\")\n#> TRUE","options":{"results":"markup","message":"true","read-only":"false","fig-cap":"","autorun":"false","label":"r-file-dir-exist","context":"interactive","warning":"true","out-width":"700px","classes":"","fig-width":7,"fig-height":5,"dpi":72,"output":"true","out-height":"","comment":""}},{"id":4,"code":"dir_ls(cwd)\n#> /home/web_user/memo.txt /home/web_user/music","options":{"results":"markup","message":"true","read-only":"false","fig-cap":"","autorun":"false","label":"r-tasks-dir-ls","context":"interactive","warning":"true","out-width":"700px","classes":"","fig-width":7,"fig-height":5,"dpi":72,"output":"true","out-height":"","comment":""}}];
+globalThis.qwebrCellDetails = [{"options":{"warning":"true","comment":"","fig-height":5,"fig-cap":"","output":"true","results":"markup","classes":"","label":"r-task-fs","autorun":"false","dpi":72,"read-only":"false","context":"interactive","fig-width":7,"message":"true","out-width":"700px","out-height":""},"id":1,"code":"library(fs)\n\ncwd <- fs::path_wd()\ncwd\n#> C:/swc/gpt-coding"},{"options":{"warning":"true","comment":"","fig-height":5,"fig-cap":"","output":"true","results":"markup","classes":"","label":"r-show-abs-path","autorun":"false","dpi":72,"read-only":"false","context":"interactive","fig-width":7,"message":"true","out-width":"700px","out-height":""},"id":2,"code":"file.create(\"index.qmd\")\n#> [1] TRUE\nfs::path_abs(\"index.qmd\")\n#> D:/swc/gpt-coding/index.qmd"},{"options":{"warning":"true","comment":"","fig-height":5,"fig-cap":"","output":"true","results":"markup","classes":"","label":"r-file-dir-exist","autorun":"false","dpi":72,"read-only":"false","context":"interactive","fig-width":7,"message":"true","out-width":"700px","out-height":""},"id":3,"code":"# 'music' 디렉토리 생성\ndir_create(\"music\", showWarnings = FALSE)\n\n# 'memo.txt' 파일 생성\nfile_create(\"memo.txt\")\n\n# 파일 및 디렉토리 존재 여부 확인\nfile_exists(\"memo.txt\") \n#> TRUE\ndir_exists(\"memo.txt\")\n#> FALSE\ndir_exists(\"music\")\n#> TRUE"},{"options":{"warning":"true","comment":"","fig-height":5,"fig-cap":"","output":"true","results":"markup","classes":"","label":"r-tasks-dir-ls","autorun":"false","dpi":72,"read-only":"false","context":"interactive","fig-width":7,"message":"true","out-width":"700px","out-height":""},"id":4,"code":"dir_ls(cwd)\n#> /home/web_user/memo.txt /home/web_user/music"}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1170,7 +1170,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"id":1,"code":"import os\n\ncwd = os.getcwd()\nprint(cwd)","options":{"results":"markup","message":"true","read-only":"false","fig-cap":"","autorun":"","label":"py-task-fs","context":"interactive","warning":"true","out-width":"700px","classes":"","fig-width":7,"fig-height":5,"dpi":72,"output":"true","out-height":"","comment":""}},{"id":2,"code":"import os\n\nfile_name = \"index.qmd\"\nwith open(file_name, 'w') as file:\n    pass\n\nabs_path = os.path.abspath(file_name)\nprint(abs_path)","options":{"results":"markup","message":"true","read-only":"false","fig-cap":"","autorun":"","label":"py-show-abs-path","context":"interactive","warning":"true","out-width":"700px","classes":"","fig-width":7,"fig-height":5,"dpi":72,"output":"true","out-height":"","comment":""}},{"id":3,"code":"# music 디렉토리 생성, memo.txt 파일 생성\nos.makedirs('music', exist_ok=True)\n\nfile_name = \"memo.txt\"\nwith open(file_name, 'w') as file:\n    pass\n\nos.path.exists('memo.txt')\n#> True\nos.path.isdir('memo.txt')\n#> False\nos.path.isdir('music')\n#> True","options":{"results":"markup","message":"true","read-only":"false","fig-cap":"","autorun":"","label":"py-file-dir-exist","context":"interactive","warning":"true","out-width":"700px","classes":"","fig-width":7,"fig-height":5,"dpi":72,"output":"true","out-height":"","comment":""}},{"id":4,"code":"os.listdir(cwd)\n#> ['.matplotlib', 'music', 'memo.txt']","options":{"results":"markup","message":"true","read-only":"false","fig-cap":"","autorun":"","label":"py-tasks-dir-ls","context":"interactive","warning":"true","out-width":"700px","classes":"","fig-width":7,"fig-height":5,"dpi":72,"output":"true","out-height":"","comment":""}}];
+globalThis.qpyodideCellDetails = [{"options":{"warning":"true","comment":"","fig-height":5,"fig-cap":"","output":"true","results":"markup","classes":"","label":"py-task-fs","autorun":"","dpi":72,"read-only":"false","context":"interactive","fig-width":7,"message":"true","out-width":"700px","out-height":""},"id":1,"code":"import os\n\ncwd = os.getcwd()\nprint(cwd)"},{"options":{"warning":"true","comment":"","fig-height":5,"fig-cap":"","output":"true","results":"markup","classes":"","label":"py-show-abs-path","autorun":"","dpi":72,"read-only":"false","context":"interactive","fig-width":7,"message":"true","out-width":"700px","out-height":""},"id":2,"code":"import os\n\nfile_name = \"index.qmd\"\nwith open(file_name, 'w') as file:\n    pass\n\nabs_path = os.path.abspath(file_name)\nprint(abs_path)"},{"options":{"warning":"true","comment":"","fig-height":5,"fig-cap":"","output":"true","results":"markup","classes":"","label":"py-file-dir-exist","autorun":"","dpi":72,"read-only":"false","context":"interactive","fig-width":7,"message":"true","out-width":"700px","out-height":""},"id":3,"code":"# music 디렉토리 생성, memo.txt 파일 생성\nos.makedirs('music', exist_ok=True)\n\nfile_name = \"memo.txt\"\nwith open(file_name, 'w') as file:\n    pass\n\nos.path.exists('memo.txt')\n#> True\nos.path.isdir('memo.txt')\n#> False\nos.path.isdir('music')\n#> True"},{"options":{"warning":"true","comment":"","fig-height":5,"fig-cap":"","output":"true","results":"markup","classes":"","label":"py-tasks-dir-ls","autorun":"","dpi":72,"read-only":"false","context":"interactive","fig-width":7,"message":"true","out-width":"700px","out-height":""},"id":4,"code":"os.listdir(cwd)\n#> ['.matplotlib', 'music', 'memo.txt']"}];
 
 
 </script><script type="module">
@@ -1363,7 +1363,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-make.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">작업 자동화</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-make.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">작업 자동화</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -1494,7 +1494,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">버전제어와 협업</span></a>
+ <span class="menu-text"><strong>2부</strong> 버전제어와 협업</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1503,43 +1503,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버젼제어</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 구축 및 설정</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./git-create.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">저장소 생성</span></span></a>
+  <a href="./git-setup-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-change.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-history.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">추적대상에서 제외</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">추적 대상에서 제외</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GitHub 원격작업</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GitHub 원격 작업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">공개 과학과 호스팅</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1550,14 +1550,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">공개 과학과 호스팅</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./git-ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
   </div>
 </li>
       </ul>
@@ -1574,43 +1568,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-make.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
   </div>
 </li>
       </ul>
@@ -1629,36 +1623,36 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
    
   <ul>
-<li><a href="#r-paths" id="toc-r-paths" class="nav-link active" data-scroll-target="#r-paths"><span class="header-section-number">25.1</span> 파일 이름과 경로</a></li>
-  <li><a href="#bbc-%EB%89%B4%EC%8A%A4-%EC%82%AC%EB%A1%80" id="toc-bbc-뉴스-사례" class="nav-link" data-scroll-target="#bbc-%EB%89%B4%EC%8A%A4-%EC%82%AC%EB%A1%80"><span class="header-section-number">25.2</span> BBC 뉴스 사례</a></li>
+<li><a href="#r-paths" id="toc-r-paths" class="nav-link active" data-scroll-target="#r-paths"><span class="header-section-number">24.1</span> 파일 이름과 경로</a></li>
+  <li><a href="#bbc-%EB%89%B4%EC%8A%A4-%EC%82%AC%EB%A1%80" id="toc-bbc-뉴스-사례" class="nav-link" data-scroll-target="#bbc-%EB%89%B4%EC%8A%A4-%EC%82%AC%EB%A1%80"><span class="header-section-number">24.2</span> BBC 뉴스 사례</a></li>
   <li>
-<a href="#tasks-pipe" id="toc-tasks-pipe" class="nav-link" data-scroll-target="#tasks-pipe"><span class="header-section-number">25.3</span> 파이프(Pipes)</a>
+<a href="#tasks-pipe" id="toc-tasks-pipe" class="nav-link" data-scroll-target="#tasks-pipe"><span class="header-section-number">24.3</span> 파이프(Pipes)</a>
   <ul class="collapse">
-<li><a href="#tasks-pipe-unix" id="toc-tasks-pipe-unix" class="nav-link" data-scroll-target="#tasks-pipe-unix"><span class="header-section-number">25.3.1</span> 유닉스 철학과 파이프</a></li>
+<li><a href="#tasks-pipe-unix" id="toc-tasks-pipe-unix" class="nav-link" data-scroll-target="#tasks-pipe-unix"><span class="header-section-number">24.3.1</span> 유닉스 철학과 파이프</a></li>
   </ul>
 </li>
   <li>
-<a href="#tasks-commandline" id="toc-tasks-commandline" class="nav-link" data-scroll-target="#tasks-commandline"><span class="header-section-number">25.4</span> 명령 줄 인자</a>
+<a href="#tasks-commandline" id="toc-tasks-commandline" class="nav-link" data-scroll-target="#tasks-commandline"><span class="header-section-number">24.4</span> 명령 줄 인자</a>
   <ul class="collapse">
-<li><a href="#install-env" id="toc-install-env" class="nav-link" data-scroll-target="#install-env"><span class="header-section-number">25.4.1</span> R 스크립트 실행환경</a></li>
-  <li><a href="#exec-rscript" id="toc-exec-rscript" class="nav-link" data-scroll-target="#exec-rscript"><span class="header-section-number">25.4.2</span> R 스크립트 실행</a></li>
+<li><a href="#install-env" id="toc-install-env" class="nav-link" data-scroll-target="#install-env"><span class="header-section-number">24.4.1</span> R 스크립트 실행환경</a></li>
+  <li><a href="#exec-rscript" id="toc-exec-rscript" class="nav-link" data-scroll-target="#exec-rscript"><span class="header-section-number">24.4.2</span> R 스크립트 실행</a></li>
   </ul>
 </li>
   <li>
-<a href="#tasks-swcarpentry" id="toc-tasks-swcarpentry" class="nav-link" data-scroll-target="#tasks-swcarpentry"><span class="header-section-number">25.5</span> R 스크립트</a>
+<a href="#tasks-swcarpentry" id="toc-tasks-swcarpentry" class="nav-link" data-scroll-target="#tasks-swcarpentry"><span class="header-section-number">24.5</span> R 스크립트</a>
   <ul class="collapse">
-<li><a href="#make-rscript" id="toc-make-rscript" class="nav-link" data-scroll-target="#make-rscript"><span class="header-section-number">25.5.1</span> 한줄 R스크립트 작성</a></li>
-  <li><a href="#sessionInfo-save" id="toc-sessionInfo-save" class="nav-link" data-scroll-target="#sessionInfo-save"><span class="header-section-number">25.5.2</span> 출력결과 파일저장</a></li>
+<li><a href="#make-rscript" id="toc-make-rscript" class="nav-link" data-scroll-target="#make-rscript"><span class="header-section-number">24.5.1</span> 한줄 R스크립트 작성</a></li>
+  <li><a href="#sessionInfo-save" id="toc-sessionInfo-save" class="nav-link" data-scroll-target="#sessionInfo-save"><span class="header-section-number">24.5.2</span> 출력결과 파일저장</a></li>
   </ul>
 </li>
   <li>
-<a href="#task-args" id="toc-task-args" class="nav-link" data-scroll-target="#task-args"><span class="header-section-number">25.6</span> 국가별 GDP 사례</a>
+<a href="#task-args" id="toc-task-args" class="nav-link" data-scroll-target="#task-args"><span class="header-section-number">24.6</span> 국가별 GDP 사례</a>
   <ul class="collapse">
-<li><a href="#task-args-rscript" id="toc-task-args-rscript" class="nav-link" data-scroll-target="#task-args-rscript"><span class="header-section-number">25.6.1</span> 인자 받는 R 스크립트</a></li>
-  <li><a href="#task-rscript-gdp" id="toc-task-rscript-gdp" class="nav-link" data-scroll-target="#task-rscript-gdp"><span class="header-section-number">25.6.2</span> 데이터 변경 R 스크립트</a></li>
+<li><a href="#task-args-rscript" id="toc-task-args-rscript" class="nav-link" data-scroll-target="#task-args-rscript"><span class="header-section-number">24.6.1</span> 인자 받는 R 스크립트</a></li>
+  <li><a href="#task-rscript-gdp" id="toc-task-rscript-gdp" class="nav-link" data-scroll-target="#task-rscript-gdp"><span class="header-section-number">24.6.2</span> 데이터 변경 R 스크립트</a></li>
   </ul>
 </li>
-  <li><a href="#tasks-terminology" id="toc-tasks-terminology" class="nav-link" data-scroll-target="#tasks-terminology"><span class="header-section-number">25.7</span> 용어정의</a></li>
+  <li><a href="#tasks-terminology" id="toc-tasks-terminology" class="nav-link" data-scroll-target="#tasks-terminology"><span class="header-section-number">24.7</span> 용어정의</a></li>
   <li><a href="#tasks-exercise" id="toc-tasks-exercise" class="nav-link" data-scroll-target="#tasks-exercise">연습문제</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-make.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
@@ -1842,8 +1836,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
       'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'
     }
   });
-</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-make.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">작업 자동화</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="r-automation" class="quarto-section-identifier"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></h1>
+</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-make.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">작업 자동화</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="r-automation" class="quarto-section-identifier"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></h1>
 </div>
 
 
@@ -1860,8 +1854,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header><p>파일, 네트워크, 서비스, 그리고 데이터베이스에서 데이터를 읽어왔다. R은 또한 여러분의 로컬 컴퓨터 디렉토리와 폴더를 훑어서 파일도 읽어온다.</p>
 <p>이번 장에서, 여러분의 로컬 컴퓨터를 스캔하고 각 파일에 대해서 연산을 수행하는 프로그램을 작성한다. 파일은 디렉토리(또한 “폴더”라고도 부른다.)에 정렬되어 보관된다. 간단한 R 스크립트로 전체 로컬 컴퓨터나 디렉토리 여기저기 뒤져야 찾아지는 수백 수천개 파일에 대한 단순한 작업을 짧게 수행한다.</p>
 <p>트리상의 디렉토리나 파일을 여기저기 돌아다니기 위해서 <code>list.files</code>과 <code>for</code> 루프를 사용한다. <code>readLines</code>이 파일 콘텐츠를 읽는 루프를 작성하는 것과 비슷하게, <code>websocket</code>은 네트워크 연결된 콘텐츠를 읽는 루프를 작성하고, <code>httr</code>은 웹문서를 열어 콘텐츠를 루프를 통해서 읽어오게 한다.</p>
-<section id="r-paths" class="level2" data-number="25.1"><h2 data-number="25.1" class="anchored" data-anchor-id="r-paths">
-<span class="header-section-number">25.1</span> 파일 이름과 경로</h2>
+<section id="r-paths" class="level2" data-number="24.1"><h2 data-number="24.1" class="anchored" data-anchor-id="r-paths">
+<span class="header-section-number">24.1</span> 파일 이름과 경로</h2>
 <p>모든 실행 프로그램은 “현재 디렉토리”를 가지고 있는데 작업 대부분을 수행하는 디폴트 디렉토리가 된다. 예를 들어, 읽기 위해서 파일을 연다면, R은 현재 디렉토리에서 파일을 찾는다.</p>
 <p><code>libuv</code> C 라이브러리에 기반한 <a href="https://cran.r-project.org/web/packages/fs/index.html"><code>fs</code></a> 패키지는 파일과 디렉토리를 작업하는 함수를 제공한다. <code><a href="https://fs.r-lib.org/reference/path.html">path_wd()</a></code> 함수는 현재 디렉토리 이름을 반환한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -1956,8 +1950,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-</section><section id="bbc-뉴스-사례" class="level2" data-number="25.2"><h2 data-number="25.2" class="anchored" data-anchor-id="bbc-뉴스-사례">
-<span class="header-section-number">25.2</span> BBC 뉴스 사례</h2>
+</section><section id="bbc-뉴스-사례" class="level2" data-number="24.2"><h2 data-number="24.2" class="anchored" data-anchor-id="bbc-뉴스-사례">
+<span class="header-section-number">24.2</span> BBC 뉴스 사례</h2>
 <p>작업 자동화를 별도의 주제로 분리하여 다루는 이유는, <a href="http://mlg.ucd.ie/datasets/bbc.html">BBC 뉴스 데이터셋</a><span class="citation" data-cites="greene06icml">(Greene 와/과 Cunningham 2006)</span>과 같은 파일들이 디렉토리에 저장될 경우, 이를 효과적으로 처리할 수 있기 때문이다. 인공지능의 기반 기술인 기계학습과 딥러닝은, 전 세계 다양한 언어로 수집된 상상을 초월하는 양의 텍스트 데이터를 가공하여 AI 모델 개발의 기초 데이터로 활용한다.</p>
 <p><a href="http://mlg.ucd.ie/datasets/bbc.html">BBC 뉴스 데이터셋</a>은 5개 뉴스 범주에 맞춰 각 뉴스는 <code>001.txt</code>, <code>002.txt</code>, <code>003.txt</code> 등과 같은 파일명으로 저장되어 있다. 먼저 궁금한 점은 BBC 뉴스 데이터가 각 범주별로 몇개의 기사 있는지 빈도수를 확인하는 것이다.</p>
 <div class="cell">
@@ -2083,8 +2077,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-</section><section id="tasks-pipe" class="level2" data-number="25.3"><h2 data-number="25.3" class="anchored" data-anchor-id="tasks-pipe">
-<span class="header-section-number">25.3</span> 파이프(Pipes)</h2>
+</section><section id="tasks-pipe" class="level2" data-number="24.3"><h2 data-number="24.3" class="anchored" data-anchor-id="tasks-pipe">
+<span class="header-section-number">24.3</span> 파이프(Pipes)</h2>
 <p>대부분의 운영 시스템은 <strong>쉘(shell)</strong>로 알려진 명령어 기반 인터페이스를 지원한다. 일반적으로 쉘은 파일 시스템을 탐색하거나 응용 프로그램을 실행하는 명령어를 지원한다. 예를 들어, 유닉스에서 <code>cd</code> 명령어로 디렉토리를 변경하고 <code>ls</code> 명령어로 디렉토리의 콘텐츠를 보여주고, <code>firefox</code>를 타이핑해서 웹브라우저를 실행시킬 수 있다.</p>
 <p>쉘에서 실행시킬 수 있는 어떤 프로그램이나 <strong>파이프(pipe)</strong>를 사용하여 파이썬에서도 실행시킬 수 있다. 파이프는 작동중인 프로세스를 표현하는 객체다. 파이프를 사용하면 프로세스의 입출력을 읽거나 쓸 수 있다.</p>
 <p>예를 들어, 유닉스 명령어<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <code>ls -l</code>는 정상적으로 현재 디렉토리의 콘텐츠(긴 형식으로)를 보여준다. <code><a href="https://rdrr.io/r/base/system2.html">system2()</a></code> 내장함수, 혹은 <a href="https://cran.r-project.org/web/packages/processx/index.html"><code>processx</code></a>, <a href="https://cran.r-project.org/web/packages/sys/index.html"><code>sys</code></a> 패키지를 가지고 <code>ls</code> 를 실행시킬 수 있다. 인자는 쉘 명령어를 포함하는 문자열이다.</p>
@@ -2132,8 +2126,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<section id="tasks-pipe-unix" class="level3" data-number="25.3.1"><h3 data-number="25.3.1" class="anchored" data-anchor-id="tasks-pipe-unix">
-<span class="header-section-number">25.3.1</span> 유닉스 철학과 파이프</h3>
+<section id="tasks-pipe-unix" class="level3" data-number="24.3.1"><h3 data-number="24.3.1" class="anchored" data-anchor-id="tasks-pipe-unix">
+<span class="header-section-number">24.3.1</span> 유닉스 철학과 파이프</h3>
 <p>통계 예측모형, 기계학습, 딥러닝 시스템을 개발할 경우 유닉스/리눅스 운영체제로 환경을 통일하고 텍스트 파일을 모든 프로그램과 시스템이 의사소통하는 기본 인터페이스로 잡고, 이를 파이프로 연결한다.</p>
 <ol type="1">
 <li>텍스트 데이터로 분석에 사용될 혹은 훈련데이터로 준비한다.</li>
@@ -2147,10 +2141,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <div id="fig-make-pipe" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-make-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/parallel-r-pipeline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="그림&nbsp;25.1: R 파이프라인"><img src="images/parallel-r-pipeline.png" class="img-fluid figure-img"></a>
+<a href="images/parallel-r-pipeline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="그림&nbsp;24.1: R 파이프라인"><img src="images/parallel-r-pipeline.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-make-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;25.1: R 파이프라인
+그림&nbsp;24.1: R 파이프라인
 </figcaption></figure>
 </div>
 <div class="callout callout-style-simple callout-tip callout-titled">
@@ -2173,27 +2167,27 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </ul>
 </div>
 </div>
-</section></section><section id="tasks-commandline" class="level2" data-number="25.4"><h2 data-number="25.4" class="anchored" data-anchor-id="tasks-commandline">
-<span class="header-section-number">25.4</span> 명령 줄 인자</h2>
+</section></section><section id="tasks-commandline" class="level2" data-number="24.4"><h2 data-number="24.4" class="anchored" data-anchor-id="tasks-commandline">
+<span class="header-section-number">24.4</span> 명령 줄 인자</h2>
 <p>명령라인 인터페이스에서 R 스크립트를 실행하고 다양한 R 스크립트 실행방법을 살펴보자. 먼저, 유닉스/리눅스/맥OS/윈도우 운영체제가 준비되었다면 R스크립트 실행환경을 준비한다. <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> 윈도우 사용자는 <a href="https://git-scm.com/">깃배쉬(Git Bash)</a>를 설치하면 윈도우에서도 리눅스/맥OS와 동일한 명령어를 사용할 수 있다. 내부적으로 깃배쉬가 <code>mintty</code> 터미널을 사용하고 있어서 리눅스/맥OS와 동일한 명령어를 사용할 수 있다.</p>
 <div id="fig-argv" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-argv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/parallel-r-script-exec.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="그림&nbsp;25.2: R 스크핍트 실행"><img src="images/parallel-r-script-exec.png" class="img-fluid figure-img"></a>
+<a href="images/parallel-r-script-exec.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="그림&nbsp;24.2: R 스크핍트 실행"><img src="images/parallel-r-script-exec.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-argv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;25.2: R 스크핍트 실행
+그림&nbsp;24.2: R 스크핍트 실행
 </figcaption></figure>
 </div>
-<section id="install-env" class="level3" data-number="25.4.1"><h3 data-number="25.4.1" class="anchored" data-anchor-id="install-env">
-<span class="header-section-number">25.4.1</span> R 스크립트 실행환경</h3>
+<section id="install-env" class="level3" data-number="24.4.1"><h3 data-number="24.4.1" class="anchored" data-anchor-id="install-env">
+<span class="header-section-number">24.4.1</span> R 스크립트 실행환경</h3>
 <p>R과 스크립트를 실행할 <code>Rscript</code> 실행프로그램이 위치한 디렉토리를 확인한다. 여기에 사용되는 명령어는 <code>which</code>다. <code>which R</code> 명령어를 통해 R 실행파일이 윈도우 <code>/c/Program Files/R/R-4.3.2/bin/R</code> 디렉토리에 위치한 것을 확인할 수 있다.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> which R</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/c/Program</span> Files/R/R-4.3.2/bin/R</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>which Rscript</code> 명령어를 통해 Rcript 실행파일도 <code>/usr/bin/</code> 디렉토리에 위치한 것을 확인할 수 있다.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> which Rscript</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/c/Program</span> Files/R/R-4.3.2/bin/rscript</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section><section id="exec-rscript" class="level3" data-number="25.4.2"><h3 data-number="25.4.2" class="anchored" data-anchor-id="exec-rscript">
-<span class="header-section-number">25.4.2</span> R 스크립트 실행</h3>
+</section><section id="exec-rscript" class="level3" data-number="24.4.2"><h3 data-number="24.4.2" class="anchored" data-anchor-id="exec-rscript">
+<span class="header-section-number">24.4.2</span> R 스크립트 실행</h3>
 <p><code>.R</code> 스크립트 파일을 명령라인 인터페이스로 실행하는 방법은 다양한다. 먼저 <code>hello_world.R</code> 스크립트 파일을 생성한다.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#! /usr/bin/env Rscript</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2228,10 +2222,10 @@ R 스크립트 파일을 실행하는 다른 방법
 <p><code>R --no-save &lt;&lt;</code> 사용법도 가능하다.</p>
 </div>
 </div>
-</section></section><section id="tasks-swcarpentry" class="level2" data-number="25.5"><h2 data-number="25.5" class="anchored" data-anchor-id="tasks-swcarpentry">
-<span class="header-section-number">25.5</span> R 스크립트</h2>
-<section id="make-rscript" class="level3" data-number="25.5.1"><h3 data-number="25.5.1" class="anchored" data-anchor-id="make-rscript">
-<span class="header-section-number">25.5.1</span> 한줄 R스크립트 작성</h3>
+</section></section><section id="tasks-swcarpentry" class="level2" data-number="24.5"><h2 data-number="24.5" class="anchored" data-anchor-id="tasks-swcarpentry">
+<span class="header-section-number">24.5</span> R 스크립트</h2>
+<section id="make-rscript" class="level3" data-number="24.5.1"><h3 data-number="24.5.1" class="anchored" data-anchor-id="make-rscript">
+<span class="header-section-number">24.5.1</span> 한줄 R스크립트 작성</h3>
 <p><code>Rscript r_session_info.R</code> 명령어를 실행해서 실제로 RStudio나 R 콘솔을 열지 않고도 R 세션정보를 명령라인 인터페이스에서 처리하는 R 스크립트를 작성한다. <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> 텍스트 편집기를 열고, <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code>를 적고 파일명을 <code>r_session_info.R</code>로 저장한다.</p>
 <div class="cell">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2253,8 +2247,8 @@ R 스크립트 파일을 실행하는 다른 방법
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="ex">attached</span> base packages:</span>
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[1]</span> stats     graphics  grDevices utils     datasets  methods   base  </span>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section><section id="sessionInfo-save" class="level3" data-number="25.5.2"><h3 data-number="25.5.2" class="anchored" data-anchor-id="sessionInfo-save">
-<span class="header-section-number">25.5.2</span> 출력결과 파일저장</h3>
+</section><section id="sessionInfo-save" class="level3" data-number="24.5.2"><h3 data-number="24.5.2" class="anchored" data-anchor-id="sessionInfo-save">
+<span class="header-section-number">24.5.2</span> 출력결과 파일저장</h3>
 <p><code>&gt;</code> 파이프 연산자를 사용해서 R 스크립트 출력결과를 텍스트 파일로 저장한다.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript r_session_info.R <span class="op">&gt;</span> r_session_info_pipe_output.txt</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2283,23 +2277,23 @@ R 스크립트 파일을 실행하는 다른 방법
 <span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="st">[1] stats     graphics  grDevices utils     datasets  methods   base  </span></span>
 <span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="st">...</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="task-args" class="level2" data-number="25.6"><h2 data-number="25.6" class="anchored" data-anchor-id="task-args">
-<span class="header-section-number">25.6</span> 국가별 GDP 사례</h2>
+</section></section><section id="task-args" class="level2" data-number="24.6"><h2 data-number="24.6" class="anchored" data-anchor-id="task-args">
+<span class="header-section-number">24.6</span> 국가별 GDP 사례</h2>
 <p><code>.R</code> 스크립트를 유닉스/리눅스상에서 유연하게 동작시킨다. R 스크립트를 수정하지 않고, 인자를 바꿔 작업을 수행하는 방법을 살펴보자. 국가별 통계를 데이터 파일을 달리하여 R스크립트 통계량을 산출하는 방법을 사례로 구현해보자.</p>
 <div id="fig-make-rscript-args" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-make-rscript-args-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/parallel-r-args.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="그림&nbsp;25.3: R 스크립트 실행"><img src="images/parallel-r-args.png" class="img-fluid figure-img"></a>
+<a href="images/parallel-r-args.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="그림&nbsp;24.3: R 스크립트 실행"><img src="images/parallel-r-args.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-make-rscript-args-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;25.3: R 스크립트 실행
+그림&nbsp;24.3: R 스크립트 실행
 </figcaption></figure>
 </div>
-<section id="task-args-rscript" class="level3" data-number="25.6.1"><h3 data-number="25.6.1" class="anchored" data-anchor-id="task-args-rscript">
-<span class="header-section-number">25.6.1</span> 인자 받는 R 스크립트</h3>
+<section id="task-args-rscript" class="level3" data-number="24.6.1"><h3 data-number="24.6.1" class="anchored" data-anchor-id="task-args-rscript">
+<span class="header-section-number">24.6.1</span> 인자 받는 R 스크립트</h3>
 <p>유닉스/GNU리눅스 환경에서 통계모형, 기계학습, 딥러닝 작업을 하게 되면 텍스트 형태 데이터, R스크립트, 출력 산출물을 갖게 되고, 입력 데이터를 출력산출물로 변환시키는데 R이 역할을 하게 된다.</p>
 <p>R 스크립트를 유연하게 만들게 되면 데이터만 바꿔도 산출물을 생성해 내고, 경우에 따라 인자값을 달리하면 원하는 다른 결과를 얻게 된다.</p>
-</section><section id="task-rscript-gdp" class="level3" data-number="25.6.2"><h3 data-number="25.6.2" class="anchored" data-anchor-id="task-rscript-gdp">
-<span class="header-section-number">25.6.2</span> 데이터 변경 R 스크립트</h3>
+</section><section id="task-rscript-gdp" class="level3" data-number="24.6.2"><h3 data-number="24.6.2" class="anchored" data-anchor-id="task-rscript-gdp">
+<span class="header-section-number">24.6.2</span> 데이터 변경 R 스크립트</h3>
 <p><span class="citation" data-cites="pole2018applied">(Pole, West, 와/과 Harrison 2018)</span> 가 집필한 책에 포함된 시계열 데이터 웹사이트 <a href="http://www2.stat.duke.edu/~mw/ts_data_sets.html">SOME TIME SERIES DATA SETS</a>에서 <a href="http://www2.stat.duke.edu/~mw/data-sets/ts_data/gdp">Per capita annual GDP for several countries during 1950-1983 (first row is 1950, last is 1983)</a> 데이터를 사용한다. 데이터를 <code>austria.csv</code>, <code>canada.csv</code>, <code>france.csv</code>와 같이 구분하여 저장한다.</p>
 <section id="rscript-prototype" class="level4"><h4 class="anchored" data-anchor-id="rscript-prototype">R 스크립트 시제품 제작</h4>
 <p>먼저 <code>austria.csv</code> 파일을 불러와서 평균을 계산하는 R스크립트를 작성한다. <code>code</code> 디렉토리 <code>r-args-ex01.R</code> 파일명으로 저장한다.</p>
@@ -2388,8 +2382,8 @@ R 스크립트에 인자를 넘기는 패키지
 </ul>
 </div>
 </div>
-</section></section></section><section id="tasks-terminology" class="level2" data-number="25.7"><h2 data-number="25.7" class="anchored" data-anchor-id="tasks-terminology">
-<span class="header-section-number">25.7</span> 용어정의</h2>
+</section></section></section><section id="tasks-terminology" class="level2" data-number="24.7"><h2 data-number="24.7" class="anchored" data-anchor-id="tasks-terminology">
+<span class="header-section-number">24.7</span> 용어정의</h2>
 <ul>
 <li>
 <strong>절대경로(absolute path)</strong>: 파일이나 디렉토리가 어디에 저장되어 있는지를 저장하는 문자열로 “최상단의 디렉토리”에서 시작해서, 현재 작업 디렉토리에 관계없이 파일이나 디렉토리를 접근하는데 사용할 수 있다.</li>
@@ -2866,12 +2860,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./tool-database.html" class="pagination-link" aria-label="데이터베이스와 SQL">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./tool-viz.html" class="pagination-link" aria-label="시각화">
-        <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">시각화</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">시각화</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -3532,7 +3526,7 @@ qpyodideCellDetails.map(
       qpyodideCreateCell(entry);
     }
   );
-</script><script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom"});
+</script><script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

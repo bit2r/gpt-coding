@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.5.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="이광춘">
-<title>챗GPT 코딩 – 23&nbsp; 웹서비스 사용하기</title>
+<title>챗GPT 코딩 – 22&nbsp; 웹서비스 사용하기</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -278,7 +278,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"library(xml2)\n\ndata <- '\n<person>\n<name>Chuck</name>\n<phone type=\"intl\">\n+1 734 303 4456\n</phone>\n<email hide=\"yes\"/>\n</person>'\n\ndoc <- read_xml(data)\n\nname <- xml_find_first(doc, \".//name\") |> xml_text()\nemail_attr <- xml_find_first(doc, \".//email\") |> xml_attr(\"hide\")\n\nmessage(\"Name:\", name)\n#> Name: Chuck\nmessage(\"Attr:\", email_attr)\n#> Attr: yes","id":1,"options":{"warning":"true","fig-height":5,"comment":"","fig-width":7,"autorun":"false","results":"markup","output":"true","dpi":72,"context":"interactive","fig-cap":"","classes":"","out-height":"","label":"r-xml-parsing","message":"true","read-only":"false","out-width":"700px"}},{"code":"library(xml2)\n\n# XML 데이터 정의\nxml_data <- '\n<stuff>\n    <users>\n        <user x=\"2\">\n            <id>001</id>\n            <name>Chuck</name>\n        </user>\n        <user x=\"7\">\n            <id>009</id>\n            <name>Brent</name>\n        </user>\n    </users>\n</stuff>'\n\n# XML 데이터 파싱\nparsed_xml <- read_xml(xml_data)\n\n# 'user' 노드 찾기\nusers <- xml_find_all(parsed_xml, \".//user\")\n\n# 사용자 수 출력\nmessage('User count:', length(users))\n\n# 각 사용자의 이름, 아이디, 속성 출력\nfor (user in users) {\n  message('Name:', xml_text(xml_find_first(user, \".//name\")))\n  message('Id:', xml_text(xml_find_first(user, \".//id\")))\n  message('Attribute:', xml_attr(user, \"x\"))\n}","id":2,"options":{"warning":"true","fig-height":5,"comment":"","fig-width":7,"autorun":"false","results":"markup","output":"true","dpi":72,"context":"interactive","fig-cap":"","classes":"","out-height":"","label":"r-xml-nodes","message":"true","read-only":"false","out-width":"700px"}},{"code":"library(jsonlite)\n\ninput <- '\n[\n  { \"id\" : \"001\",\n    \"x\" : \"2\",\n    \"name\" : \"Chuck\"\n  } ,\n  { \"id\" : \"009\",\n    \"x\" : \"7\",\n    \"name\" : \"Chuck\"\n  } \n]'\n\ninfo <- fromJSON(input)\n\nmessage('User count:', nrow(info))\n\nfor (i in seq_len(nrow(info))) {\n    item <- info[i, ]\n    message('Name:', item$name)\n    message('Id:', item$id)\n    message('Attribute:', item$x)\n}","id":3,"options":{"warning":"true","fig-height":5,"comment":"","fig-width":7,"autorun":"false","results":"markup","output":"true","dpi":72,"context":"interactive","fig-cap":"","classes":"","out-height":"","label":"r-jsonlite","message":"true","read-only":"false","out-width":"700px"}},{"code":"library(httr)\nlibrary(jsonlite)\n\n# usethis::edit_r_environ()\n\n# 주소를 지정합니다. \nkpmg_addr <- '서울특별시 강남구 역삼동 737' \n\n# HTTP 요청을 실행합니다. \nkpmg_res <- GET(url = 'https://dapi.kakao.com/v2/local/search/address.json',\n                query = list(query = kpmg_addr),\n                add_headers(Authorization = paste0(\"KakaoAK \", Sys.getenv(\"KAKAO_MAP_API_KEY\"))))\n\n# KPMG 지리정보 데이터프레임\nkpmg_list <- kpmg_res |> \n  content(as = 'text') |> \n  fromJSON()\n\n## 도로명주소\nkpmg_list$documents$road_address |> \n  select(주소 = address_name, 경도 = x, 위도 = y)\n#>                       주소             경도             위도\n#> 1 서울 강남구 테헤란로 152 127.036508620542 37.5000242405515","id":4,"options":{"warning":"true","fig-height":5,"comment":"","fig-width":7,"autorun":"false","results":"markup","output":"true","dpi":72,"context":"interactive","fig-cap":"","classes":"","out-height":"","label":"r-daum-kakao-code","message":"true","read-only":"false","out-width":"700px"}},{"code":"library(httr)\nlibrary(jsonlite)\n\n# api_address.R \ncat(\"주소를 입력하세요 - \")\naddress <- readLines(file(\"stdin\", encoding = \"utf-8\"), 1) \n\n# address <- \"서울특별시 강남구 역삼동 737\"\n\n# HTTP 요청을 실행합니다.\naddress_res <-\n  GET(url = 'https://dapi.kakao.com/v2/local/search/address.json',\n      query = list(query = address),\n      add_headers(Authorization = paste0(\"KakaoAK \",\n                                        Sys.getenv(\"KAKAO_MAP_API_KEY\"))) )\n\n# 지리정보 데이터프레임 변환\naddress_list <- address_res |>\n  content(as = 'text') |>\n  fromJSON()\n\n## 도로명주소\naddress_list$documents$road_address |>\n  select(주소 = address_name, 경도 = x, 위도=y)","id":5,"options":{"warning":"true","fig-height":5,"comment":"","fig-width":7,"autorun":"false","results":"markup","output":"true","dpi":72,"context":"interactive","fig-cap":"","classes":"","out-height":"","label":"r-daum-kakao-api-input","message":"true","read-only":"false","out-width":"700px"}}];
+globalThis.qwebrCellDetails = [{"options":{"output":"true","fig-width":7,"dpi":72,"fig-cap":"","comment":"","results":"markup","read-only":"false","warning":"true","context":"interactive","out-width":"700px","message":"true","autorun":"false","fig-height":5,"classes":"","out-height":"","label":"r-xml-parsing"},"code":"library(xml2)\n\ndata <- '\n<person>\n<name>Chuck</name>\n<phone type=\"intl\">\n+1 734 303 4456\n</phone>\n<email hide=\"yes\"/>\n</person>'\n\ndoc <- read_xml(data)\n\nname <- xml_find_first(doc, \".//name\") |> xml_text()\nemail_attr <- xml_find_first(doc, \".//email\") |> xml_attr(\"hide\")\n\nmessage(\"Name:\", name)\n#> Name: Chuck\nmessage(\"Attr:\", email_attr)\n#> Attr: yes","id":1},{"options":{"output":"true","fig-width":7,"dpi":72,"fig-cap":"","comment":"","results":"markup","read-only":"false","warning":"true","context":"interactive","out-width":"700px","message":"true","autorun":"false","fig-height":5,"classes":"","out-height":"","label":"r-xml-nodes"},"code":"library(xml2)\n\n# XML 데이터 정의\nxml_data <- '\n<stuff>\n    <users>\n        <user x=\"2\">\n            <id>001</id>\n            <name>Chuck</name>\n        </user>\n        <user x=\"7\">\n            <id>009</id>\n            <name>Brent</name>\n        </user>\n    </users>\n</stuff>'\n\n# XML 데이터 파싱\nparsed_xml <- read_xml(xml_data)\n\n# 'user' 노드 찾기\nusers <- xml_find_all(parsed_xml, \".//user\")\n\n# 사용자 수 출력\nmessage('User count:', length(users))\n\n# 각 사용자의 이름, 아이디, 속성 출력\nfor (user in users) {\n  message('Name:', xml_text(xml_find_first(user, \".//name\")))\n  message('Id:', xml_text(xml_find_first(user, \".//id\")))\n  message('Attribute:', xml_attr(user, \"x\"))\n}","id":2},{"options":{"output":"true","fig-width":7,"dpi":72,"fig-cap":"","comment":"","results":"markup","read-only":"false","warning":"true","context":"interactive","out-width":"700px","message":"true","autorun":"false","fig-height":5,"classes":"","out-height":"","label":"r-jsonlite"},"code":"library(jsonlite)\n\ninput <- '\n[\n  { \"id\" : \"001\",\n    \"x\" : \"2\",\n    \"name\" : \"Chuck\"\n  } ,\n  { \"id\" : \"009\",\n    \"x\" : \"7\",\n    \"name\" : \"Chuck\"\n  } \n]'\n\ninfo <- fromJSON(input)\n\nmessage('User count:', nrow(info))\n\nfor (i in seq_len(nrow(info))) {\n    item <- info[i, ]\n    message('Name:', item$name)\n    message('Id:', item$id)\n    message('Attribute:', item$x)\n}","id":3},{"options":{"output":"true","fig-width":7,"dpi":72,"fig-cap":"","comment":"","results":"markup","read-only":"false","warning":"true","context":"interactive","out-width":"700px","message":"true","autorun":"false","fig-height":5,"classes":"","out-height":"","label":"r-daum-kakao-code"},"code":"library(httr)\nlibrary(jsonlite)\n\n# usethis::edit_r_environ()\n\n# 주소를 지정합니다. \nkpmg_addr <- '서울특별시 강남구 역삼동 737' \n\n# HTTP 요청을 실행합니다. \nkpmg_res <- GET(url = 'https://dapi.kakao.com/v2/local/search/address.json',\n                query = list(query = kpmg_addr),\n                add_headers(Authorization = paste0(\"KakaoAK \", Sys.getenv(\"KAKAO_MAP_API_KEY\"))))\n\n# KPMG 지리정보 데이터프레임\nkpmg_list <- kpmg_res |> \n  content(as = 'text') |> \n  fromJSON()\n\n## 도로명주소\nkpmg_list$documents$road_address |> \n  select(주소 = address_name, 경도 = x, 위도 = y)\n#>                       주소             경도             위도\n#> 1 서울 강남구 테헤란로 152 127.036508620542 37.5000242405515","id":4},{"options":{"output":"true","fig-width":7,"dpi":72,"fig-cap":"","comment":"","results":"markup","read-only":"false","warning":"true","context":"interactive","out-width":"700px","message":"true","autorun":"false","fig-height":5,"classes":"","out-height":"","label":"r-daum-kakao-api-input"},"code":"library(httr)\nlibrary(jsonlite)\n\n# api_address.R \ncat(\"주소를 입력하세요 - \")\naddress <- readLines(file(\"stdin\", encoding = \"utf-8\"), 1) \n\n# address <- \"서울특별시 강남구 역삼동 737\"\n\n# HTTP 요청을 실행합니다.\naddress_res <-\n  GET(url = 'https://dapi.kakao.com/v2/local/search/address.json',\n      query = list(query = address),\n      add_headers(Authorization = paste0(\"KakaoAK \",\n                                        Sys.getenv(\"KAKAO_MAP_API_KEY\"))) )\n\n# 지리정보 데이터프레임 변환\naddress_list <- address_res |>\n  content(as = 'text') |>\n  fromJSON()\n\n## 도로명주소\naddress_list$documents$road_address |>\n  select(주소 = address_name, 경도 = x, 위도=y)","id":5}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1150,7 +1150,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"code":"import xml.etree.ElementTree as ET\n\ndata = '''\n<person>\n<name>Chuck</name>\n<phone type=\"intl\">\n+1 734 303 4456\n</phone>\n<email hide=\"yes\"/>\n</person>'''\n\ntree = ET.fromstring(data)\nprint('Name:', tree.find('name').text)\nprint('Attr:', tree.find('email').get('hide'))\n#> Name: Chuck\n#> Attr: yes","id":1,"options":{"warning":"true","fig-height":5,"comment":"","fig-width":7,"autorun":"","results":"markup","output":"true","dpi":72,"context":"interactive","out-width":"700px","classes":"","out-height":"","read-only":"false","message":"true","fig-cap":"","label":"py-xml-parsing"}},{"code":"import xml.etree.ElementTree as ET\n\ninput_xml = '''\n<stuff>\n    <users>\n        <user x=\"2\">\n            <id>001</id>\n            <name>Chuck</name>\n        </user>\n        <user x=\"7\">\n            <id>009</id>\n            <name>Brent</name>\n        </user>\n    </users>\n</stuff>'''\n\nstuff = ET.fromstring(input_xml)\nlst = stuff.findall('users/user')\nprint('User count:', len(lst))\nfor item in lst:\n    print('Name', item.find('name').text)\n    print('Id', item.find('id').text)\n    print('Attribute', item.get('x'))\n\n#> User count: 2\n#> Name Chuck\n#> Id 001\n#> Attribute 2\n#> Name Brent\n#> Id 009\n#> Attribute 7","id":2,"options":{"warning":"true","fig-height":5,"comment":"","fig-width":7,"autorun":"","results":"markup","output":"true","dpi":72,"context":"interactive","out-width":"700px","classes":"","out-height":"","read-only":"false","message":"true","fig-cap":"","label":"py-xml-nodes"}},{"code":"import json\n\ninput = '''\n[\n  { \"id\" : \"001\",\n    \"x\" : \"2\",\n    \"name\" : \"Chuck\"\n  } ,\n  { \"id\" : \"009\",\n    \"x\" : \"7\",\n    \"name\" : \"Chuck\"\n  }\n]'''\n\ninfo = json.loads(input)\nprint('User count:', len(info))\n\nfor item in info:\n    print('Name', item['name'])\n    print('Id', item['id'])\n    print('Attribute', item['x'])","id":3,"options":{"warning":"true","fig-height":5,"comment":"","fig-width":7,"autorun":"","results":"markup","output":"true","dpi":72,"context":"interactive","out-width":"700px","classes":"","out-height":"","read-only":"false","message":"true","fig-cap":"","label":"py-jsonlite"}},{"code":"import os\nimport requests\nfrom dotenv import load_dotenv\nimport json\n\n# Load environment variables from a .env file\nload_dotenv()\n\n# Define the address\nkpmg_addr = '서울특별시 강남구 역삼동 737'\n\n# Define the request headers with the API key\nheaders = {\n    'Authorization': f'KakaoAK {os.getenv(\"KAKAO_MAP_API_KEY\")}'\n}\n\n# Execute the HTTP request\nresponse = requests.get(\n    'https://dapi.kakao.com/v2/local/search/address.json',\n    headers=headers,\n    params={'query': kpmg_addr}\n)\n\n# Parse the JSON response\nkpmg_data = response.json()\n\n# Extract and print the road address information\nfor document in kpmg_data.get('documents', []):\n    road_address = document.get('road_address', {})\n    print('주소:', road_address.get('address_name'))\n    print('경도:', road_address.get('x'))\n    print('위도:', road_address.get('y'))\n    \n#> 주소: 서울 강남구 테헤란로 152\n#> 경도: 127.036508620542\n#> 위도: 37.5000242405515    ","id":4,"options":{"warning":"true","fig-height":5,"comment":"","fig-width":7,"autorun":"","results":"markup","output":"true","dpi":72,"context":"interactive","out-width":"700px","classes":"","out-height":"","read-only":"false","message":"true","fig-cap":"","label":"py-daum-kakao-code"}},{"code":"import requests\nimport os\nfrom dotenv import load_dotenv\nimport json\n\nload_dotenv()\n\napi_key = os.getenv('KAKAO_MAP_API_KEY')\n\nurl = 'https://dapi.kakao.com/v2/local/search/address.json'\n\nwhile True:\n    address = input('주소 입력: ')\n    if len(address) < 1:\n        break\n\n    headers = {\n        'Authorization': f'KakaoAK {api_key}'\n    }\n\n    response = requests.get(url, \n                            headers=headers, \n                            params={'query': address})\n\n    if response.status_code == 200:\n        js = response.json()\n        # print(json.dumps(js, indent=4))\n    else:\n        print(\"Failed to retrieve data:\", response.status_code)\n\n    lat = js[\"documents\"][0][\"address\"][\"x\"]\n    lng = js[\"documents\"][0][\"address\"][\"y\"]\n    print('lat', lat, 'lng', lng)  \n\n#> 주소 입력: 서울특별시 강남구 역삼동 737\n#> lat 127.036628730251 lng 37.4998101243238","id":5,"options":{"warning":"true","fig-height":5,"comment":"","fig-width":7,"autorun":"","results":"markup","output":"true","dpi":72,"context":"interactive","out-width":"700px","classes":"","out-height":"","read-only":"false","message":"true","fig-cap":"","label":"py-daum-kakao-api-input"}}];
+globalThis.qpyodideCellDetails = [{"options":{"output":"true","fig-width":7,"dpi":72,"fig-cap":"","comment":"","results":"markup","read-only":"false","warning":"true","context":"interactive","out-width":"700px","message":"true","autorun":"","fig-height":5,"classes":"","out-height":"","label":"py-xml-parsing"},"code":"import xml.etree.ElementTree as ET\n\ndata = '''\n<person>\n<name>Chuck</name>\n<phone type=\"intl\">\n+1 734 303 4456\n</phone>\n<email hide=\"yes\"/>\n</person>'''\n\ntree = ET.fromstring(data)\nprint('Name:', tree.find('name').text)\nprint('Attr:', tree.find('email').get('hide'))\n#> Name: Chuck\n#> Attr: yes","id":1},{"options":{"output":"true","fig-width":7,"dpi":72,"fig-cap":"","comment":"","results":"markup","read-only":"false","warning":"true","context":"interactive","out-width":"700px","message":"true","autorun":"","fig-height":5,"classes":"","out-height":"","label":"py-xml-nodes"},"code":"import xml.etree.ElementTree as ET\n\ninput_xml = '''\n<stuff>\n    <users>\n        <user x=\"2\">\n            <id>001</id>\n            <name>Chuck</name>\n        </user>\n        <user x=\"7\">\n            <id>009</id>\n            <name>Brent</name>\n        </user>\n    </users>\n</stuff>'''\n\nstuff = ET.fromstring(input_xml)\nlst = stuff.findall('users/user')\nprint('User count:', len(lst))\nfor item in lst:\n    print('Name', item.find('name').text)\n    print('Id', item.find('id').text)\n    print('Attribute', item.get('x'))\n\n#> User count: 2\n#> Name Chuck\n#> Id 001\n#> Attribute 2\n#> Name Brent\n#> Id 009\n#> Attribute 7","id":2},{"options":{"output":"true","fig-width":7,"dpi":72,"fig-cap":"","comment":"","results":"markup","read-only":"false","warning":"true","context":"interactive","out-width":"700px","message":"true","autorun":"","fig-height":5,"classes":"","out-height":"","label":"py-jsonlite"},"code":"import json\n\ninput = '''\n[\n  { \"id\" : \"001\",\n    \"x\" : \"2\",\n    \"name\" : \"Chuck\"\n  } ,\n  { \"id\" : \"009\",\n    \"x\" : \"7\",\n    \"name\" : \"Chuck\"\n  }\n]'''\n\ninfo = json.loads(input)\nprint('User count:', len(info))\n\nfor item in info:\n    print('Name', item['name'])\n    print('Id', item['id'])\n    print('Attribute', item['x'])","id":3},{"options":{"output":"true","fig-width":7,"dpi":72,"fig-cap":"","comment":"","results":"markup","read-only":"false","warning":"true","context":"interactive","out-width":"700px","message":"true","autorun":"","fig-height":5,"classes":"","out-height":"","label":"py-daum-kakao-code"},"code":"import os\nimport requests\nfrom dotenv import load_dotenv\nimport json\n\n# Load environment variables from a .env file\nload_dotenv()\n\n# Define the address\nkpmg_addr = '서울특별시 강남구 역삼동 737'\n\n# Define the request headers with the API key\nheaders = {\n    'Authorization': f'KakaoAK {os.getenv(\"KAKAO_MAP_API_KEY\")}'\n}\n\n# Execute the HTTP request\nresponse = requests.get(\n    'https://dapi.kakao.com/v2/local/search/address.json',\n    headers=headers,\n    params={'query': kpmg_addr}\n)\n\n# Parse the JSON response\nkpmg_data = response.json()\n\n# Extract and print the road address information\nfor document in kpmg_data.get('documents', []):\n    road_address = document.get('road_address', {})\n    print('주소:', road_address.get('address_name'))\n    print('경도:', road_address.get('x'))\n    print('위도:', road_address.get('y'))\n    \n#> 주소: 서울 강남구 테헤란로 152\n#> 경도: 127.036508620542\n#> 위도: 37.5000242405515    ","id":4},{"options":{"output":"true","fig-width":7,"dpi":72,"fig-cap":"","comment":"","results":"markup","read-only":"false","warning":"true","context":"interactive","out-width":"700px","message":"true","autorun":"","fig-height":5,"classes":"","out-height":"","label":"py-daum-kakao-api-input"},"code":"import requests\nimport os\nfrom dotenv import load_dotenv\nimport json\n\nload_dotenv()\n\napi_key = os.getenv('KAKAO_MAP_API_KEY')\n\nurl = 'https://dapi.kakao.com/v2/local/search/address.json'\n\nwhile True:\n    address = input('주소 입력: ')\n    if len(address) < 1:\n        break\n\n    headers = {\n        'Authorization': f'KakaoAK {api_key}'\n    }\n\n    response = requests.get(url, \n                            headers=headers, \n                            params={'query': address})\n\n    if response.status_code == 200:\n        js = response.json()\n        # print(json.dumps(js, indent=4))\n    else:\n        print(\"Failed to retrieve data:\", response.status_code)\n\n    lat = js[\"documents\"][0][\"address\"][\"x\"]\n    lng = js[\"documents\"][0][\"address\"][\"y\"]\n    print('lat', lat, 'lng', lng)  \n\n#> 주소 입력: 서울특별시 강남구 역삼동 737\n#> lat 127.036628730251 lng 37.4998101243238","id":5}];
 
 
 </script><script type="module">
@@ -1318,7 +1318,7 @@ globalThis._qpyodideGetInstance = function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-web.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-web.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -1449,7 +1449,7 @@ globalThis._qpyodideGetInstance = function() {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">버전제어와 협업</span></a>
+ <span class="menu-text"><strong>2부</strong> 버전제어와 협업</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1458,43 +1458,43 @@ globalThis._qpyodideGetInstance = function() {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버젼제어</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 구축 및 설정</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./git-create.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">저장소 생성</span></span></a>
+  <a href="./git-setup-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-change.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-history.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">추적대상에서 제외</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">추적 대상에서 제외</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GitHub 원격작업</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GitHub 원격 작업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">공개 과학과 호스팅</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1505,14 +1505,8 @@ globalThis._qpyodideGetInstance = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">공개 과학과 호스팅</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./git-ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
   </div>
 </li>
       </ul>
@@ -1529,43 +1523,43 @@ globalThis._qpyodideGetInstance = function() {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-web.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
   </div>
 </li>
       </ul>
@@ -1584,15 +1578,15 @@ globalThis._qpyodideGetInstance = function() {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
    
   <ul>
-<li><a href="#ws-xml" id="toc-ws-xml" class="nav-link active" data-scroll-target="#ws-xml"><span class="header-section-number">23.1</span> XML</a></li>
-  <li><a href="#ws-xml-parsing" id="toc-ws-xml-parsing" class="nav-link" data-scroll-target="#ws-xml-parsing"><span class="header-section-number">23.2</span> XML 파싱</a></li>
-  <li><a href="#ws-xml-nodes" id="toc-ws-xml-nodes" class="nav-link" data-scroll-target="#ws-xml-nodes"><span class="header-section-number">23.3</span> 노드 반복하기</a></li>
-  <li><a href="#webservice-json" id="toc-webservice-json" class="nav-link" data-scroll-target="#webservice-json"><span class="header-section-number">23.4</span> JSON</a></li>
-  <li><a href="#webservice-json-parsing" id="toc-webservice-json-parsing" class="nav-link" data-scroll-target="#webservice-json-parsing"><span class="header-section-number">23.5</span> JSON 파싱하기</a></li>
-  <li><a href="#ws-api" id="toc-ws-api" class="nav-link" data-scroll-target="#ws-api"><span class="header-section-number">23.6</span> API</a></li>
-  <li><a href="#google-geocoding" id="toc-google-geocoding" class="nav-link" data-scroll-target="#google-geocoding"><span class="header-section-number">23.7</span> 지오코딩 웹서비스</a></li>
-  <li><a href="#ws-security" id="toc-ws-security" class="nav-link" data-scroll-target="#ws-security"><span class="header-section-number">23.8</span> 보안과 API 사용</a></li>
-  <li><a href="#ws-term" id="toc-ws-term" class="nav-link" data-scroll-target="#ws-term"><span class="header-section-number">23.9</span> 용어정의</a></li>
+<li><a href="#ws-xml" id="toc-ws-xml" class="nav-link active" data-scroll-target="#ws-xml"><span class="header-section-number">22.1</span> XML</a></li>
+  <li><a href="#ws-xml-parsing" id="toc-ws-xml-parsing" class="nav-link" data-scroll-target="#ws-xml-parsing"><span class="header-section-number">22.2</span> XML 파싱</a></li>
+  <li><a href="#ws-xml-nodes" id="toc-ws-xml-nodes" class="nav-link" data-scroll-target="#ws-xml-nodes"><span class="header-section-number">22.3</span> 노드 반복하기</a></li>
+  <li><a href="#webservice-json" id="toc-webservice-json" class="nav-link" data-scroll-target="#webservice-json"><span class="header-section-number">22.4</span> JSON</a></li>
+  <li><a href="#webservice-json-parsing" id="toc-webservice-json-parsing" class="nav-link" data-scroll-target="#webservice-json-parsing"><span class="header-section-number">22.5</span> JSON 파싱하기</a></li>
+  <li><a href="#ws-api" id="toc-ws-api" class="nav-link" data-scroll-target="#ws-api"><span class="header-section-number">22.6</span> API</a></li>
+  <li><a href="#google-geocoding" id="toc-google-geocoding" class="nav-link" data-scroll-target="#google-geocoding"><span class="header-section-number">22.7</span> 지오코딩 웹서비스</a></li>
+  <li><a href="#ws-security" id="toc-ws-security" class="nav-link" data-scroll-target="#ws-security"><span class="header-section-number">22.8</span> 보안과 API 사용</a></li>
+  <li><a href="#ws-term" id="toc-ws-term" class="nav-link" data-scroll-target="#ws-term"><span class="header-section-number">22.9</span> 용어정의</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-web.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -1775,8 +1769,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
       'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'
     }
   });
-</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-web.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="r-webservice" class="quarto-section-identifier"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></h1>
+</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html">분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-web.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="r-webservice" class="quarto-section-identifier"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></h1>
 </div>
 
 
@@ -1792,8 +1786,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 </header><p>프로그램을 사용하여 HTTP상에서 문서를 가져와서 파싱하는 것이 익숙해지면, 다른 프로그램(즉, 브라우져에서 HTML로 보여지지 않는 것)에서 활용되도록 특별히 설계된 문서를 생성하는 것은 그다지 오래 걸리지 않는다.</p>
 <p>웹상에서 데이터를 교환할 때 두 가지 형식이 많이 사용된다. XML(“eXtensible Markup Language”)은 오랜 기간 사용되어져 왔고 문서-형식(document-style) 데이터를 교환하는데 가장 적합하다. 딕셔너리, 리스트 혹은 다른 내부 정보를 프로그램으로 서로 교환할 때, JSON(JavaScript Object Notation, <a href="www.json.org">www.json.org</a>)을 사용한다. 두 가지 형식에 대해 모두 살펴볼 것이다.</p>
-<section id="ws-xml" class="level2" data-number="23.1"><h2 data-number="23.1" class="anchored" data-anchor-id="ws-xml">
-<span class="header-section-number">23.1</span> XML</h2>
+<section id="ws-xml" class="level2" data-number="22.1"><h2 data-number="22.1" class="anchored" data-anchor-id="ws-xml">
+<span class="header-section-number">22.1</span> XML</h2>
 <p>XML(eXtensible Markup Language)은 HTML과 매우 유사하지만, XML이 좀더 HTML보다 구조화되었다. 여기 XML 문서 샘플이 있다.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">person</span>&gt;</span>
@@ -1807,14 +1801,14 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>종종 XML문서를 나무 구조(tree structure)로 생각하는 것이 도움이 된다. 최상단 <code>person</code> 태그가 있고, <code>phone</code> 같은 다른 태그는 부모 노드의 <em>자식(children)</em> 노드로 표현된다.</p>
 <div id="fig-web-xml" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-web-xml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/xml-tree.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="그림&nbsp;23.1: XML 나무구조 도식화"><img src="images/xml-tree.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="843"></a>
+<a href="images/xml-tree.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="그림&nbsp;22.1: XML 나무구조 도식화"><img src="images/xml-tree.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="843"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-web-xml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;23.1: XML 나무구조 도식화
+그림&nbsp;22.1: XML 나무구조 도식화
 </figcaption></figure>
 </div>
-</section><section id="ws-xml-parsing" class="level2" data-number="23.2"><h2 data-number="23.2" class="anchored" data-anchor-id="ws-xml-parsing">
-<span class="header-section-number">23.2</span> XML 파싱</h2>
+</section><section id="ws-xml-parsing" class="level2" data-number="22.2"><h2 data-number="22.2" class="anchored" data-anchor-id="ws-xml-parsing">
+<span class="header-section-number">22.2</span> XML 파싱</h2>
 <p>다음은 XML을 파싱하고 XML에서 데이터 요소를 추출하는 간단한 응용프로그램이다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -1837,8 +1831,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Name:</span>  Chuck </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Attr:</span>  yes </span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>xml2</code>같은 XML 패키지를 사용하는 것은 장점이 있다. 상기 예제의 XML은 매우 간단하지만, 적합한 XML에 관해서 규칙이 많이 있고, XML 구문 규칙에 얽매이지 않고 <code>xml2</code>를 사용해서 XML에서 데이터를 추출할 수 있다.</p>
-</section><section id="ws-xml-nodes" class="level2" data-number="23.3"><h2 data-number="23.3" class="anchored" data-anchor-id="ws-xml-nodes">
-<span class="header-section-number">23.3</span> 노드 반복하기</h2>
+</section><section id="ws-xml-nodes" class="level2" data-number="22.3"><h2 data-number="22.3" class="anchored" data-anchor-id="ws-xml-nodes">
+<span class="header-section-number">22.3</span> 노드 반복하기</h2>
 <p>종종 XML이 다중 노드를 가지고 있어서 모든 노드를 처리하는 루프를 작성할 필요가 있다. 다음 프로그램에서 모든 <code>user</code> 노드를 루프로 반복한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -1864,8 +1858,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Name:</span>  Brent </span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Id:</span>  009 </span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Attribute:</span>  7 </span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section><section id="webservice-json" class="level2" data-number="23.4"><h2 data-number="23.4" class="anchored" data-anchor-id="webservice-json">
-<span class="header-section-number">23.4</span> JSON</h2>
+</section><section id="webservice-json" class="level2" data-number="22.4"><h2 data-number="22.4" class="anchored" data-anchor-id="webservice-json">
+<span class="header-section-number">22.4</span> JSON</h2>
 <p>JSON(JavaScript Object Notation) 형식은 자바스크립트 언어에서 사용되는 객체와 배열 형식에서 영감을 얻었다. 하지만 파이썬이 자바스크립트 이전에 개발되어서 딕셔너리와 리스트의 파이썬 구문이 JSON 구문에 영향을 주었다. 그래서 JSON 포맷이 거의 파이썬 리스트와 딕셔너리의 조합과 일치한다.</p>
 <p>상기 간단한 XML에 대략 상응하는 JSON으로 작성한 것이 다음에 있다.</p>
 <div class="cell">
@@ -1883,8 +1877,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>몇가지 차이점에 주목하세요. 첫째로 XML에서는 “phone” 태그에 “intl”같은 속성을 추가할 수 있다. JSON 에서는 단지 키-값 페어(key-value pair)다. 또한 XML “person” 태그는 사라지고 외부 중괄호 세트로 대체되었다.</p>
 <p>일반적으로 JSON 구조가 XML 보다 간단하다. 왜냐하면, JSON 이 XML보다 적은 역량을 보유하기 때문이다. 하지만 JSON 이 딕셔너리와 리스트의 조합에 <em>직접</em> 매핑된다는 장점이 있다. 그리고, 거의 모든 프로그래밍 언어가 파이썬 딕셔너리와 리스트에 상응하는 것을 갖고 있어서, JSON 이 협업하는 두 프로그램 사이에서 데이터를 교환하는 매우 자연스러운 형식이 된다.</p>
 <p>XML에 비해서 상대적으로 단순하기 때문에, JSON이 응용프로그램 간 거의 모든 데이터를 교환하는데 있어 빠르게 선택되고 있다.</p>
-</section><section id="webservice-json-parsing" class="level2" data-number="23.5"><h2 data-number="23.5" class="anchored" data-anchor-id="webservice-json-parsing">
-<span class="header-section-number">23.5</span> JSON 파싱하기</h2>
+</section><section id="webservice-json-parsing" class="level2" data-number="22.5"><h2 data-number="22.5" class="anchored" data-anchor-id="webservice-json-parsing">
+<span class="header-section-number">22.5</span> JSON 파싱하기</h2>
 <p>딕셔너리(객체)와 리스트를 중첩함으로써 JSON을 생성한다. 이번 예제에서, user 리스트를 표현하는데, 각 user가 키-값 페어(key-value pair, 즉, 딕셔너리)다. 그래서 리스트 딕셔너리가 있다.</p>
 <p>다음 프로그램에서 내장된 <strong>json</strong> 라이브러리를 사용하여 JSON을 파싱하여 데이터를 읽어온다. 이것을 상응하는 XML 데이터, 코드와 비교해 보세요. JSON은 조금 덜 정교해서 사전에 미리 리스트를 가져오고, 리스트가 사용자이고, 각 사용자가 키-값 페어 집합임을 알고 있어야 한다. JSON은 좀더 간략(장점)하고 하지만 좀더 덜 서술적(단점)이다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -1915,24 +1909,24 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Attribute</span> 7</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>일반적으로 웹서비스에 대해서 XML에서 JSON으로 옮겨가는 산업 경향이 뚜렷하다. JSON이 프로그래밍 언어에서 이미 갖고 있는 네이티브 자료 구조와 좀더 직접적이며 간단히 매핑되기 때문에, JSON을 사용할 때 파싱하고 데이터 추출하는 코드가 더욱 간단하고 직접적이다. 하지만 XML 이 JSON 보다 좀더 자기 서술적이고 XML 이 강점을 가지는 몇몇 응용프로그램 분야가 있다. 예를 들어, 대부분의 워드 프로세서는 JSON보다는 XML을 사용하여 내부적으로 문서를 저장한다.</p>
-</section><section id="ws-api" class="level2" data-number="23.6"><h2 data-number="23.6" class="anchored" data-anchor-id="ws-api">
-<span class="header-section-number">23.6</span> API</h2>
+</section><section id="ws-api" class="level2" data-number="22.6"><h2 data-number="22.6" class="anchored" data-anchor-id="ws-api">
+<span class="header-section-number">22.6</span> API</h2>
 <p>이제 HTTP를 사용하여 응용프로그램간에 데이터를 교환할 수 있게 되었다. 또한, XML 혹은 JSON을 사용하여 응용프로그램간에도 복잡한 데이터를 주고 받을 수 있는 방법을 습득했다.</p>
 <p>다음 단계는 상기 학습한 기법을 사용하여 응용프로그램 간에 “계약(contract)”을 정의하고 문서화한다. 응용프로그램-대-응용프로그램 계약에 대한 일반적 명칭은 API <strong>응용 프로그램 인터페이스(Application Program Interface)</strong> 다. API를 사용할 때, 일반적으로 하나의 프로그램이 다른 응용 프로그램에서 사용할 수 있는 가능한 서비스 집합을 생성한다. 또한, 다른 프로그램이 서비스에 접근하여 사용할 때 지켜야하는 API (즉, “규칙”)도 게시한다.</p>
 <p>다른 프로그램에서 제공되는 서비스에 접근을 포함하여 프로그램 기능을 개발할 때, 이러한 개발법을 SOA, <strong>Service-Oriented Architecture(서비스 지향 아키텍처)</strong>라고 부른다. SOA 개발 방식은 전반적인 응용 프로그램이 다른 응용 프로그램 서비스를 사용하는 것이다. 반대로, SOA가 아닌 개발방식은 응용 프로그램이 하나의 독립된 응용 프로그램으로 구현에 필요한 모든 코드를 담고 있다.</p>
 <p>웹을 사용할 때 SOA 사례를 많이 찾아 볼 수 있다. 웹사이트 하나를 방문해서 비행기표, 호텔, 자동차를 단일 사이트에서 예약완료한다. 호텔관련 데이터는 물론 항공사 컴퓨터에 저장되어 있지 않다. 대신에 항공사 컴퓨터는 호텔 컴퓨터와 계약을 맺어 호텔 데이터를 가져와서 사용자에게 보여준다. 항공사 사이트를 통해서 사용자가 호텔 예약을 동의할 경우, 항공사 사이트에서 호텔 시스템의 또다른 웹서비스를 통해서 실제 예약을 한다. 전체 거래(transaction)를 완료하고 카드 결재를 진행할 때, 다른 컴퓨터가 프로세스에 관여하여 처리한다.</p>
 <div id="fig-web-soa" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-web-soa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/soa.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="그림&nbsp;23.2: 서비스 지향 아키텍쳐"><img src="images/soa.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="467"></a>
+<a href="images/soa.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="그림&nbsp;22.2: 서비스 지향 아키텍쳐"><img src="images/soa.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="467"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-web-soa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;23.2: 서비스 지향 아키텍쳐
+그림&nbsp;22.2: 서비스 지향 아키텍쳐
 </figcaption></figure>
 </div>
 <p>서비스 지향 아키텍쳐는 많은 장점이 있다. (1) 항상 단 하나의 데이터만 유지관리한다. 이중으로 중복 예약을 원치 않는 호텔 같은 경우에 매우 중요하다. (2) 데이터 소유자가 데이터 사용에 대한 규칙을 정한다. 이러한 장점으로, SOA 시스템은 좋은 성능과 사용자 요구를 모두 만족하기 위해서 신중하게 설계되어야 한다.</p>
 <p>응응프로그램이 웹상에 이용가능한 API로 서비스 집합을 만들 때, <strong>웹서비스(web services)</strong>라고 부른다.</p>
-</section><section id="google-geocoding" class="level2" data-number="23.7"><h2 data-number="23.7" class="anchored" data-anchor-id="google-geocoding">
-<span class="header-section-number">23.7</span> 지오코딩 웹서비스</h2>
+</section><section id="google-geocoding" class="level2" data-number="22.7"><h2 data-number="22.7" class="anchored" data-anchor-id="google-geocoding">
+<span class="header-section-number">22.7</span> 지오코딩 웹서비스</h2>
 <p>구글이 자체적으로 구축한 대용량 지리 정보 데이터베이스를 누구나 이용할 수 있게 하는 훌륭한 웹서비스가 있다. “Ann Arbor, MI” 같은 지리 검색 문자열을 지오코딩 API 에 넣으면, 검색 문자열이 의미하는 지도상에 위치와 근처 주요 지형지물 정보를 나름 최선을 다해서 예측 제공한다.</p>
 <p>지오코딩 서비스는 무료지만 사용량이 제한되어 있어서, 상업적 응용프로그램에 API를 무제한 사용할 수는 없다. 하지만, 최종 사용자가 자유형식 입력 박스에 위치정보를 입력하는 설문 데이터가 있다면, 구글 API를 사용하여 데이터를 깔끔하게 정리하는데는 유용하다.</p>
 <p>구글 지오코딩 API 같은 무료 API를 사용할 때, 자원 사용에 대한 지침을 준수해야 한다. 너무나 많은 사람이 서비스를 남용하게 되면, 구글은 무료 서비스를 중단하거나, 상당부분 줄일 수 있다. (When you are using a free API like Google’s geocoding API, you need to be respectful in your use of these resources. If too many people abuse the service, Google might drop or significantly curtail its free service.)</p>
@@ -1986,8 +1980,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                      <span class="ex">주소</span>             경도             위도</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> 서울 강남구 테헤란로 152 127.036508620542 37.5000242405515</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>다음카카오 지도 API 외 다른 지오코딩 관련 자세한 사항은 <a href="https://statkclee.github.io/spatial/geo-info-lonlat.html">공간통계를 위한 데이터 사이언스 - 지리정보 API - 주소와 위도경도</a> 웹사이트를 참조한다.</p>
-</section><section id="ws-security" class="level2" data-number="23.8"><h2 data-number="23.8" class="anchored" data-anchor-id="ws-security">
-<span class="header-section-number">23.8</span> 보안과 API 사용</h2>
+</section><section id="ws-security" class="level2" data-number="22.8"><h2 data-number="22.8" class="anchored" data-anchor-id="ws-security">
+<span class="header-section-number">22.8</span> 보안과 API 사용</h2>
 <p>상용업체 API를 사용하기 위해서는 일종의 “API키(API key)”가 일반적으로 필요하다. 서비스 제공자 입장에서 누가 서비스를 사용하고 있으며 각 사용자가 얼마나 사용하고 있는를 알고자 한다. 상용 API 제공업체는 서비스에 대한 무료 사용자와 유료 사용자에 대한 구분을 두고 있다. 특정 기간 동안 한 개인 사용자가 사용할 수 있는 요청수에 대해 제한을 두는 정책을 두고 있다.</p>
 <p>때때로 API키를 얻게 되면, API를 호출할 때 POST 데이터의 일부로 포함하거나 URL의 매개변수로 키를 포함시킨다.</p>
 <p>또 다른 경우에는 업체가 서비스 요청에 대한 보증을 강화해서 공유키와 비밀번호를 암호화된 메시지 형식으로 보내도록 요구한다. 인터넷을 통해서 서비스 요청을 암호화하는 일반적인 기술을 <strong>OAuth</strong>라고 한다. <a href="http://www.oauth.net" class="uri">http://www.oauth.net</a> 사이트에서 OAuth 프로토콜에 대해 더 많은 정보를 만날 수 있다.</p>
@@ -1995,8 +1989,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>그래서 명세서를 읽고 아무것도 없는 상태에서 OAuth 구현하는 것을 필할 수 있게 되었다. 이용 가능한 라이브러리는 복잡성도 다양한만틈 기능적으로도 다양하다. OAuth 웹사이트에서 다양한 OAuth 라이브러리 정보를 확인할 수 있다.</p>
 <p>OAuth 보안 요구사항을 충족하기 위해 추가된 다양한 매개 변수 의미를 좀더 자세히 알고자 한다면, OAuth 명세서를 읽어보기 바란다.</p>
 <p>이와 같은 보안 API키는 누가 트위터 API를 사용하고 어느 정도 수준으로 트위터를 사용하는지에 대해서 트위트가 확고한 신뢰를 갖게 한다. 사용량에 한계를 두고 서비스를 제공하는 방식은 단순히 개인적인 목적으로 데이터 검색을 할 수는 있지만, 하루에 수백만 API 호출로 데이터를 추출하여 제품을 개발 못하게 제한하는 기능도 동시에 한다.</p>
-</section><section id="ws-term" class="level2" data-number="23.9"><h2 data-number="23.9" class="anchored" data-anchor-id="ws-term">
-<span class="header-section-number">23.9</span> 용어정의</h2>
+</section><section id="ws-term" class="level2" data-number="22.9"><h2 data-number="22.9" class="anchored" data-anchor-id="ws-term">
+<span class="header-section-number">22.9</span> 용어정의</h2>
 <ul>
 <li>
 <strong>API</strong>: 응용 프로그램 인터페이스(Application Program Interface) - 두 응용 프로그램 컴포넌트 간에 상호작용하는 패턴을 정의하는 응용 프로그램 간의 계약.</li>
@@ -2440,12 +2434,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./tool-network.html" class="pagination-link" aria-label="네트워크 프로그램">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./tool-database.html" class="pagination-link" aria-label="데이터베이스와 SQL">
-        <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -3106,7 +3100,7 @@ qpyodideCellDetails.map(
       qpyodideCreateCell(entry);
     }
   );
-</script><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+</script><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

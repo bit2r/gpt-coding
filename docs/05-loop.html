@@ -275,7 +275,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"x <- 0\nx <- x + 1","id":1,"options":{"message":"true","fig-height":5,"results":"markup","label":"r-iter-update-init","read-only":"false","context":"interactive","comment":"","fig-cap":"","autorun":"false","warning":"true","output":"true","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"n <- 5\nwhile(n > 0) {\n  print(n)\n  n <- n -1\n}\n\nprint(\"Blastoff(발사)!\")","id":2,"options":{"message":"true","fig-height":5,"results":"markup","label":"r-iter-while","read-only":"false","context":"interactive","comment":"","fig-cap":"","autorun":"false","warning":"true","output":"true","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"n <- 10\n\nwhile(TRUE) {\n  print(n)\n  n <- n - 1\n}\n\nprint('완료!')","id":3,"options":{"message":"true","fig-height":5,"results":"markup","label":"r-iter-break","read-only":"false","context":"interactive","comment":"","fig-cap":"","autorun":"false","warning":"true","output":"true","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"# while_input.R 파일을 $ rscript while_input.R 쉘에서 실행\nwhile(TRUE) {\n  cat(\"> \")\n  user_input <- readLines(file(\"stdin\"), 1)\n  \n  if(user_input == \"done\") {\n    break\n  }\n\n  print(user_input)\n}","id":4,"options":{"message":"true","fig-height":5,"results":"markup","label":"r-iter-break-input","read-only":"false","context":"interactive","comment":"","fig-cap":"","autorun":"false","warning":"true","output":"true","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"# while_input_next.R 파일을 $ rscript while_input_next.R 쉘에서 실행\nwhile(TRUE) {\n  line <- readline(prompt = '> ')\n  if(substr(line,1,1) == \"#\") {\n    next\n  }\n  if(line == 'done') {\n    break\n  }\n  print(line)\n}\nprint(\"완료!\")","id":5,"options":{"message":"true","fig-height":5,"results":"markup","label":"r-iter-break-input-next","read-only":"false","context":"interactive","comment":"","fig-cap":"","autorun":"false","warning":"true","output":"true","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"friends <- c('철수', '정훈', '한표')\n\nfor (friend in friends) {\n  cat('안녕하세요:', friend, \"\\n\")\n}\n\nprint('완료!')","id":6,"options":{"message":"true","fig-height":5,"results":"markup","label":"r-iter-for-loop","read-only":"false","context":"interactive","comment":"","fig-cap":"","autorun":"false","warning":"true","output":"true","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"count <- 0\n\nfor(itervar in c(3, 41, 12, 9, 74, 15)){\n  count <- count + 1\n}\n\nmessage('횟수: ', count)","id":7,"options":{"message":"true","fig-height":5,"results":"markup","label":"r-iter-for-loop-count-webr","read-only":"false","context":"interactive","comment":"","fig-cap":"","autorun":"false","warning":"true","output":"true","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"total <- 0\n\nfor(itervar in c(3, 41, 12, 9, 74, 15)){\n  total <- total + itervar\n}\n\nmessage('합계: ', total)","id":8,"options":{"message":"true","fig-height":5,"results":"markup","label":"r-iter-for-loop-sum-webr","read-only":"false","context":"interactive","comment":"","fig-cap":"","autorun":"false","warning":"true","output":"true","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"largest <- NA\n\ncat('시작 전:', largest, \"\\n\")\n\nfor(itervar in c(3, 41, 12, 9, 74, 15)){\n  if(is.na(largest) || itervar > largest){\n    largest <- itervar\n    cat('반복 중:', itervar, largest, \"\\n\")\n    cat('최대값:', largest, \"\\n\")\n  }\n}\n\ncat('최대값:', largest, \"\\n\")","id":9,"options":{"message":"true","fig-height":5,"results":"markup","label":"r-iter-for-loop-min-max","read-only":"false","context":"interactive","comment":"","fig-cap":"","autorun":"false","warning":"true","output":"true","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"smallest <- NA\n\ncat('시작 전:', smallest, \"\\n\")\n\nfor(itervar in c(3, 41, 12, 9, 74, 15)){\n  if(is.na(smallest) || itervar < smallest){\n    smallest <- itervar\n    cat('최소값:', smallest, \"\\n\")\n  }\n}\n\ncat('최소값:', smallest, \"\\n\")","id":10,"options":{"message":"true","fig-height":5,"results":"markup","label":"r-iter-for-loop-min","read-only":"false","context":"interactive","comment":"","fig-cap":"","autorun":"false","warning":"true","output":"true","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"min <- function(values) {\n  smallest <- NA\n  for(value in values){\n    if(is.na(smallest) || value < smallest){\n      smallest <- value\n    }\n  }\n  return(smallest)      \n}","id":11,"options":{"message":"true","fig-height":5,"results":"markup","label":"r-iter-for-min-function","read-only":"false","context":"interactive","comment":"","fig-cap":"","autorun":"false","warning":"true","output":"true","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}}];
+globalThis.qwebrCellDetails = [{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"r-iter-update-init","out-height":"","output":"true","out-width":"700px","autorun":"false","fig-width":7,"read-only":"false","message":"true","context":"interactive","comment":""},"id":1,"code":"x <- 0\nx <- x + 1"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"r-iter-while","out-height":"","output":"true","out-width":"700px","autorun":"false","fig-width":7,"read-only":"false","message":"true","context":"interactive","comment":""},"id":2,"code":"n <- 5\nwhile(n > 0) {\n  print(n)\n  n <- n -1\n}\n\nprint(\"Blastoff(발사)!\")"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"r-iter-break","out-height":"","output":"true","out-width":"700px","autorun":"false","fig-width":7,"read-only":"false","message":"true","context":"interactive","comment":""},"id":3,"code":"n <- 10\n\nwhile(TRUE) {\n  print(n)\n  n <- n - 1\n}\n\nprint('완료!')"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"r-iter-break-input","out-height":"","output":"true","out-width":"700px","autorun":"false","fig-width":7,"read-only":"false","message":"true","context":"interactive","comment":""},"id":4,"code":"# while_input.R 파일을 $ rscript while_input.R 쉘에서 실행\nwhile(TRUE) {\n  cat(\"> \")\n  user_input <- readLines(file(\"stdin\"), 1)\n  \n  if(user_input == \"done\") {\n    break\n  }\n\n  print(user_input)\n}"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"r-iter-break-input-next","out-height":"","output":"true","out-width":"700px","autorun":"false","fig-width":7,"read-only":"false","message":"true","context":"interactive","comment":""},"id":5,"code":"# while_input_next.R 파일을 $ rscript while_input_next.R 쉘에서 실행\nwhile(TRUE) {\n  line <- readline(prompt = '> ')\n  if(substr(line,1,1) == \"#\") {\n    next\n  }\n  if(line == 'done') {\n    break\n  }\n  print(line)\n}\nprint(\"완료!\")"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"r-iter-for-loop","out-height":"","output":"true","out-width":"700px","autorun":"false","fig-width":7,"read-only":"false","message":"true","context":"interactive","comment":""},"id":6,"code":"friends <- c('철수', '정훈', '한표')\n\nfor (friend in friends) {\n  cat('안녕하세요:', friend, \"\\n\")\n}\n\nprint('완료!')"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"r-iter-for-loop-count-webr","out-height":"","output":"true","out-width":"700px","autorun":"false","fig-width":7,"read-only":"false","message":"true","context":"interactive","comment":""},"id":7,"code":"count <- 0\n\nfor(itervar in c(3, 41, 12, 9, 74, 15)){\n  count <- count + 1\n}\n\nmessage('횟수: ', count)"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"r-iter-for-loop-sum-webr","out-height":"","output":"true","out-width":"700px","autorun":"false","fig-width":7,"read-only":"false","message":"true","context":"interactive","comment":""},"id":8,"code":"total <- 0\n\nfor(itervar in c(3, 41, 12, 9, 74, 15)){\n  total <- total + itervar\n}\n\nmessage('합계: ', total)"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"r-iter-for-loop-min-max","out-height":"","output":"true","out-width":"700px","autorun":"false","fig-width":7,"read-only":"false","message":"true","context":"interactive","comment":""},"id":9,"code":"largest <- NA\n\ncat('시작 전:', largest, \"\\n\")\n\nfor(itervar in c(3, 41, 12, 9, 74, 15)){\n  if(is.na(largest) || itervar > largest){\n    largest <- itervar\n    cat('반복 중:', itervar, largest, \"\\n\")\n    cat('최대값:', largest, \"\\n\")\n  }\n}\n\ncat('최대값:', largest, \"\\n\")"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"r-iter-for-loop-min","out-height":"","output":"true","out-width":"700px","autorun":"false","fig-width":7,"read-only":"false","message":"true","context":"interactive","comment":""},"id":10,"code":"smallest <- NA\n\ncat('시작 전:', smallest, \"\\n\")\n\nfor(itervar in c(3, 41, 12, 9, 74, 15)){\n  if(is.na(smallest) || itervar < smallest){\n    smallest <- itervar\n    cat('최소값:', smallest, \"\\n\")\n  }\n}\n\ncat('최소값:', smallest, \"\\n\")"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"r-iter-for-min-function","out-height":"","output":"true","out-width":"700px","autorun":"false","fig-width":7,"read-only":"false","message":"true","context":"interactive","comment":""},"id":11,"code":"min <- function(values) {\n  smallest <- NA\n  for(value in values){\n    if(is.na(smallest) || value < smallest){\n      smallest <- value\n    }\n  }\n  return(smallest)      \n}"}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1147,7 +1147,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"code":"x = 0\nx = x + 1","id":1,"options":{"message":"true","fig-height":5,"results":"markup","label":"py-iter-update-init","read-only":"false","context":"interactive","comment":"","fig-cap":"","output":"true","warning":"true","autorun":"","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"n = 5\nwhile n > 0:\n    print(n)\n    n = n -1\n\nprint(\"Blastoff(발사)!\")        ","id":2,"options":{"message":"true","fig-height":5,"results":"markup","label":"py-iter-while","read-only":"false","context":"interactive","comment":"","fig-cap":"","output":"true","warning":"true","autorun":"","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"n = 10\n\nwhile True:\n    print(n)\n    n = n - 1\n\nprint('완료!')","id":3,"options":{"message":"true","fig-height":5,"results":"markup","label":"py-iter-break","read-only":"false","context":"interactive","comment":"","fig-cap":"","output":"true","warning":"true","autorun":"","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"while True:\n    line = input(\"> \")\n    if line == 'done':\n        break\n    print(line)","id":4,"options":{"message":"true","fig-height":5,"results":"markup","label":"py-iter-break-input","read-only":"false","context":"interactive","comment":"","fig-cap":"","output":"true","warning":"true","autorun":"","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"while True:\n    line = input('> ')\n    \n    if line.startswith(\"#\"):\n        continue\n\n    if line == 'done':\n        break\n\n    print(line)\n\nprint('완료!')","id":5,"options":{"message":"true","fig-height":5,"results":"markup","label":"py-iter-break-input-next","read-only":"false","context":"interactive","comment":"","fig-cap":"","output":"true","warning":"true","autorun":"","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"friends = ['철수', '정훈', '한표']\n\nfor friend in friends:\n    print(f'안녕하세요: {friend}')\n\nprint('완료!')","id":6,"options":{"message":"true","fig-height":5,"results":"markup","label":"py-iter-for-loop","read-only":"false","context":"interactive","comment":"","fig-cap":"","output":"true","warning":"true","autorun":"","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"count = 0\n\nfor itervar in [3, 41, 12, 9, 74, 15]:\n  count = count + 1\n\nprint(f'횟수: {count}')","id":7,"options":{"message":"true","fig-height":5,"results":"markup","label":"py-iter-for-loop-count","read-only":"false","context":"interactive","comment":"","fig-cap":"","output":"true","warning":"true","autorun":"","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"total = 0\n\nfor itervar in [3, 41, 12, 9, 74, 15]:\n    total += itervar\n\nprint(f'합계: {total}')","id":8,"options":{"message":"true","fig-height":5,"results":"markup","label":"py-iter-for-loop-sum","read-only":"false","context":"interactive","comment":"","fig-cap":"","output":"true","warning":"true","autorun":"","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"largest = None\n\nprint('시작 전:', largest)\n\nfor itervar in [3, 41, 12, 9, 74, 15]:\n    if largest is None or itervar > largest:\n        largest = itervar\n        print('반복 중:', itervar, largest)\n        print('최대값:', largest)\n\nprint('최대값:', largest)","id":9,"options":{"message":"true","fig-height":5,"results":"markup","label":"py-iter-for-loop-min-max","read-only":"false","context":"interactive","comment":"","fig-cap":"","output":"true","warning":"true","autorun":"","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"smallest = None\n\nprint('시작 전:', smallest)\n\nfor itervar in [3, 41, 12, 9, 74, 15]:\n    if smallest is None or itervar < smallest:\n        smallest = itervar\n        print('최소값:', smallest)\n\nprint('최소값:', smallest)","id":10,"options":{"message":"true","fig-height":5,"results":"markup","label":"py-iter-for-loop-min","read-only":"false","context":"interactive","comment":"","fig-cap":"","output":"true","warning":"true","autorun":"","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}},{"code":"def min(values):\n    smallest = None\n    for value in values:\n        if smallest is None or value < smallest:\n            smallest = value\n    return smallest","id":11,"options":{"message":"true","fig-height":5,"results":"markup","label":"py-iter-for-min-function","read-only":"false","context":"interactive","comment":"","fig-cap":"","output":"true","warning":"true","autorun":"","classes":"","dpi":72,"fig-width":7,"out-height":"","out-width":"700px"}}];
+globalThis.qpyodideCellDetails = [{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"py-iter-update-init","out-height":"","output":"true","out-width":"700px","read-only":"false","fig-width":7,"autorun":"","message":"true","context":"interactive","comment":""},"id":1,"code":"x = 0\nx = x + 1"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"py-iter-while","out-height":"","output":"true","out-width":"700px","read-only":"false","fig-width":7,"autorun":"","message":"true","context":"interactive","comment":""},"id":2,"code":"n = 5\nwhile n > 0:\n    print(n)\n    n = n -1\n\nprint(\"Blastoff(발사)!\")        "},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"py-iter-break","out-height":"","output":"true","out-width":"700px","read-only":"false","fig-width":7,"autorun":"","message":"true","context":"interactive","comment":""},"id":3,"code":"n = 10\n\nwhile True:\n    print(n)\n    n = n - 1\n\nprint('완료!')"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"py-iter-break-input","out-height":"","output":"true","out-width":"700px","read-only":"false","fig-width":7,"autorun":"","message":"true","context":"interactive","comment":""},"id":4,"code":"while True:\n    line = input(\"> \")\n    if line == 'done':\n        break\n    print(line)"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"py-iter-break-input-next","out-height":"","output":"true","out-width":"700px","read-only":"false","fig-width":7,"autorun":"","message":"true","context":"interactive","comment":""},"id":5,"code":"while True:\n    line = input('> ')\n    \n    if line.startswith(\"#\"):\n        continue\n\n    if line == 'done':\n        break\n\n    print(line)\n\nprint('완료!')"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"py-iter-for-loop","out-height":"","output":"true","out-width":"700px","read-only":"false","fig-width":7,"autorun":"","message":"true","context":"interactive","comment":""},"id":6,"code":"friends = ['철수', '정훈', '한표']\n\nfor friend in friends:\n    print(f'안녕하세요: {friend}')\n\nprint('완료!')"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"py-iter-for-loop-count","out-height":"","output":"true","out-width":"700px","read-only":"false","fig-width":7,"autorun":"","message":"true","context":"interactive","comment":""},"id":7,"code":"count = 0\n\nfor itervar in [3, 41, 12, 9, 74, 15]:\n  count = count + 1\n\nprint(f'횟수: {count}')"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"py-iter-for-loop-sum","out-height":"","output":"true","out-width":"700px","read-only":"false","fig-width":7,"autorun":"","message":"true","context":"interactive","comment":""},"id":8,"code":"total = 0\n\nfor itervar in [3, 41, 12, 9, 74, 15]:\n    total += itervar\n\nprint(f'합계: {total}')"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"py-iter-for-loop-min-max","out-height":"","output":"true","out-width":"700px","read-only":"false","fig-width":7,"autorun":"","message":"true","context":"interactive","comment":""},"id":9,"code":"largest = None\n\nprint('시작 전:', largest)\n\nfor itervar in [3, 41, 12, 9, 74, 15]:\n    if largest is None or itervar > largest:\n        largest = itervar\n        print('반복 중:', itervar, largest)\n        print('최대값:', largest)\n\nprint('최대값:', largest)"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"py-iter-for-loop-min","out-height":"","output":"true","out-width":"700px","read-only":"false","fig-width":7,"autorun":"","message":"true","context":"interactive","comment":""},"id":10,"code":"smallest = None\n\nprint('시작 전:', smallest)\n\nfor itervar in [3, 41, 12, 9, 74, 15]:\n    if smallest is None or itervar < smallest:\n        smallest = itervar\n        print('최소값:', smallest)\n\nprint('최소값:', smallest)"},{"options":{"classes":"","dpi":72,"fig-cap":"","warning":"true","results":"markup","fig-height":5,"label":"py-iter-for-min-function","out-height":"","output":"true","out-width":"700px","read-only":"false","fig-width":7,"autorun":"","message":"true","context":"interactive","comment":""},"id":11,"code":"def min(values):\n    smallest = None\n    for value in values:\n        if smallest is None or value < smallest:\n            smallest = value\n    return smallest"}];
 
 
 </script><script type="module">
@@ -1446,7 +1446,7 @@ globalThis._qpyodideGetInstance = function() {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">버전제어와 협업</span></a>
+ <span class="menu-text"><strong>2부</strong> 버전제어와 협업</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1455,43 +1455,43 @@ globalThis._qpyodideGetInstance = function() {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버젼제어</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 구축 및 설정</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./git-create.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">저장소 생성</span></span></a>
+  <a href="./git-setup-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-change.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-history.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">추적대상에서 제외</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">추적 대상에서 제외</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GitHub 원격작업</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GitHub 원격 작업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">공개 과학과 호스팅</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1502,14 +1502,8 @@ globalThis._qpyodideGetInstance = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">공개 과학과 호스팅</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./git-ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
   </div>
 </li>
       </ul>
@@ -1526,43 +1520,43 @@ globalThis._qpyodideGetInstance = function() {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
   </div>
 </li>
       </ul>
