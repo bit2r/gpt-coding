@@ -298,7 +298,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"fig-cap":"","autorun":"false","read-only":"false","results":"markup","out-width":"700px","context":"interactive","output":"true","label":"fp-data-structure-typeof","warning":"true","dpi":72,"comment":"","message":"true","fig-width":7,"fig-height":5,"out-height":"","classes":""},"id":1,"code":"a <- list(a = 1:3,\n            b = \"a string\",\n            c = pi,\n            d = list(-1, -5) )\n  \ntypeof(a)\n#> [1] \"list\"\nlength(a)\n#> [1] 4"},{"options":{"fig-cap":"","autorun":"false","read-only":"false","results":"markup","out-width":"700px","context":"interactive","output":"true","label":"fp-data-structure-mode-map","warning":"true","dpi":72,"comment":"","message":"true","fig-width":7,"fig-height":5,"out-height":"","classes":""},"id":2,"code":"map_chr(a, mode)   # sapply(a, mode)\nmap_chr(a, class)  # sapply(a, class)"},{"options":{"fig-cap":"","autorun":"false","read-only":"false","results":"markup","out-width":"700px","context":"interactive","output":"true","label":"fp-data-structure-subset-case-one}","warning":"true","dpi":72,"comment":"","message":"true","fig-width":7,"fig-height":5,"out-height":"","classes":""},"id":3,"code":"str(a[4])"},{"options":{"fig-cap":"","autorun":"false","read-only":"false","results":"markup","out-width":"700px","context":"interactive","output":"true","label":"fp-data-structure-subset-case-two","warning":"true","dpi":72,"comment":"","message":"true","fig-width":7,"fig-height":5,"out-height":"","classes":""},"id":4,"code":"str(a[[4]])"},{"options":{"fig-cap":"","autorun":"false","read-only":"false","results":"markup","out-width":"700px","context":"interactive","output":"true","label":"data-type-ordinal","warning":"true","dpi":72,"comment":"","message":"true","fig-width":7,"fig-height":5,"out-height":"","classes":""},"id":5,"code":"# 범주형 - 명목척도\nanimals_vector <- c(\"Elephant\", \"Giraffe\", \"Donkey\", \"Horse\")\nfactor_animals_vector <- factor(animals_vector)\nfactor_animals_vector\n\n# 범주형 - 서열 척도\ntemperature_vector <- c(\"High\", \"Low\", \"High\",\"Low\", \"Medium\")\nfactor_temperature_vector <- factor(temperature_vector, order = TRUE, levels = c(\"Low\", \"Medium\", \"High\"))\nfactor_temperature_vector"},{"options":{"fig-cap":"","autorun":"false","read-only":"false","results":"markup","out-width":"700px","context":"interactive","output":"true","label":"data-type-factor-level","warning":"true","dpi":72,"comment":"","message":"true","fig-width":7,"fig-height":5,"out-height":"","classes":""},"id":6,"code":"# \"M\", \"F\" 수준\nsurvey_vector <- c(\"M\", \"F\", \"F\", \"M\", \"M\")\nfactor_survey_vector <- factor(survey_vector)\nlevels(factor_survey_vector)\n\n# \"Female\", \"Male\" 로 변환\nlevels(factor_survey_vector) <- c(\"Female\", \"Male\")\nlevels(factor_survey_vector)"},{"options":{"fig-cap":"","autorun":"false","read-only":"false","results":"markup","out-width":"700px","context":"interactive","output":"true","label":"r data-type-factor-summary","warning":"true","dpi":72,"comment":"","message":"true","fig-width":7,"fig-height":5,"out-height":"","classes":""},"id":7,"code":"# 문자형 벡터와 요인 벡터\nsurvey_vector <- c(\"M\", \"F\", \"F\", \"M\", \"M\")\nfactor_survey_vector <- factor(survey_vector)\n\n# 문자형 벡터 요약\nsummary(survey_vector)\n\n# 요인 벡터 요약\nsummary(factor_survey_vector)"},{"options":{"fig-cap":"","autorun":"false","read-only":"false","results":"markup","out-width":"700px","context":"interactive","output":"true","label":"df-create","warning":"true","dpi":72,"comment":"","message":"true","fig-width":7,"fig-height":5,"out-height":"","classes":""},"id":8,"code":"# 벡터를 정의한다.\nname <- c(\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\")\ntype <- c(\"Terrestrial planet\", \"Terrestrial planet\", \"Terrestrial planet\", \n          \"Terrestrial planet\", \"Gas giant\", \"Gas giant\", \"Gas giant\", \"Gas giant\")\ndiameter <- c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007, 3.883)\nrotation <- c(58.64, -243.02, 1, 1.03, 0.41, 0.43, -0.72, 0.67)\nrings <- c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)\n\n# 벡터를 합쳐서 데이터프레임을 생성\nplanets_df <-data.frame(name, type, diameter, rotation, rings)"}];
+globalThis.qwebrCellDetails = [{"id":1,"code":"a <- list(a = 1:3,\n            b = \"a string\",\n            c = pi,\n            d = list(-1, -5) )\n  \ntypeof(a)\n#> [1] \"list\"\nlength(a)\n#> [1] 4","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"fp-data-structure-typeof","autorun":"false","fig-width":7,"fig-height":5}},{"id":2,"code":"map_chr(a, mode)   # sapply(a, mode)\nmap_chr(a, class)  # sapply(a, class)","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"fp-data-structure-mode-map","autorun":"false","fig-width":7,"fig-height":5}},{"id":3,"code":"str(a[4])","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"fp-data-structure-subset-case-one}","autorun":"false","fig-width":7,"fig-height":5}},{"id":4,"code":"str(a[[4]])","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"fp-data-structure-subset-case-two","autorun":"false","fig-width":7,"fig-height":5}},{"id":5,"code":"# 범주형 - 명목척도\nanimals_vector <- c(\"Elephant\", \"Giraffe\", \"Donkey\", \"Horse\")\nfactor_animals_vector <- factor(animals_vector)\nfactor_animals_vector\n\n# 범주형 - 서열 척도\ntemperature_vector <- c(\"High\", \"Low\", \"High\",\"Low\", \"Medium\")\nfactor_temperature_vector <- factor(temperature_vector, order = TRUE, levels = c(\"Low\", \"Medium\", \"High\"))\nfactor_temperature_vector","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"data-type-ordinal","autorun":"false","fig-width":7,"fig-height":5}},{"id":6,"code":"# \"M\", \"F\" 수준\nsurvey_vector <- c(\"M\", \"F\", \"F\", \"M\", \"M\")\nfactor_survey_vector <- factor(survey_vector)\nlevels(factor_survey_vector)\n\n# \"Female\", \"Male\" 로 변환\nlevels(factor_survey_vector) <- c(\"Female\", \"Male\")\nlevels(factor_survey_vector)","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"data-type-factor-level","autorun":"false","fig-width":7,"fig-height":5}},{"id":7,"code":"# 문자형 벡터와 요인 벡터\nsurvey_vector <- c(\"M\", \"F\", \"F\", \"M\", \"M\")\nfactor_survey_vector <- factor(survey_vector)\n\n# 문자형 벡터 요약\nsummary(survey_vector)\n\n# 요인 벡터 요약\nsummary(factor_survey_vector)","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"r data-type-factor-summary","autorun":"false","fig-width":7,"fig-height":5}},{"id":8,"code":"# 벡터를 정의한다.\nname <- c(\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\")\ntype <- c(\"Terrestrial planet\", \"Terrestrial planet\", \"Terrestrial planet\", \n          \"Terrestrial planet\", \"Gas giant\", \"Gas giant\", \"Gas giant\", \"Gas giant\")\ndiameter <- c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007, 3.883)\nrotation <- c(58.64, -243.02, 1, 1.03, 0.41, 0.43, -0.72, 0.67)\nrings <- c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)\n\n# 벡터를 합쳐서 데이터프레임을 생성\nplanets_df <-data.frame(name, type, diameter, rotation, rings)","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"df-create","autorun":"false","fig-width":7,"fig-height":5}}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1275,6 +1275,13 @@ globalThis.qwebrExecuteCode = async function (
   <li><a href="#data-type-vector" id="toc-data-type-vector" class="nav-link" data-scroll-target="#data-type-vector"><span class="header-section-number">10.6</span> 벡터, 행렬, 배열, 데이터프레임</a></li>
   <li><a href="#is-na-null" id="toc-is-na-null" class="nav-link" data-scroll-target="#is-na-null"><span class="header-section-number">10.7</span> <code>NULL</code>과 <code>NA</code></a></li>
   <li><a href="#fp-list-columns" id="toc-fp-list-columns" class="nav-link" data-scroll-target="#fp-list-columns"><span class="header-section-number">10.8</span> 리스트 칼럼</a></li>
+  <li>
+<a href="#%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C" id="toc-연습문제" class="nav-link" data-scroll-target="#%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C">연습문제</a>
+  <ul class="collapse">
+<li><a href="#%EA%B0%9D%EA%B4%80%EC%8B%9D" id="toc-객관식" class="nav-link" data-scroll-target="#%EA%B0%9D%EA%B4%80%EC%8B%9D">객관식</a></li>
+  <li><a href="#%EC%84%9C%EC%88%A0%ED%98%95" id="toc-서술형" class="nav-link" data-scroll-target="#%EC%84%9C%EC%88%A0%ED%98%95">서술형</a></li>
+  </ul>
+</li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/A-dataframe.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -1736,6 +1743,42 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>인덱싱(Indexing) 측면에서는 티블이 데이터프레임과 동일하게 <code>[]</code>, <code>[[]]</code>, <code>$</code> 연산자를 사용하여 원소에 접근할 수 있어, 열 이름이나 위치를 사용하여 원하는 변수나 관측값을 추출할 수 있다.</p>
 <p>연산(Compute) 측면에서도 리스트-칼럼을 포함한 티블에서 <code>mutate()</code>, <code>summarise()</code> 등의 함수를 사용하여 새로운 변수를 생성하거나 요약 통계량을 계산할 수 있으며, 이 과정에서 리스트-칼럼에 대한 연산도 자연스럽게 수행할 수 있다.</p>
 <p>마지막으로 간략화(Simplify) 측면에서는 리스트-칼럼을 포함한 티블을 일반적인 데이터프레임으로 변환할 때, <code>unnest()</code> 함수를 사용할 수 있다. 이를 통해 리스트-칼럼의 각 요소를 개별 행으로 풀어내어, 분석에 더 용이한 형태로 만들 수 있다.</p>
+</section><section id="연습문제" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="연습문제">연습문제</h2>
+<section id="객관식" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="객관식">객관식</h3>
+<ol type="1">
+<li>R에서 벡터 자료형을 주로 어떻게 분류하는가?</li>
+</ol>
+<ol type="a">
+<li>원자 벡터와 리스트</li>
+<li>숫자형과 문자형</li>
+<li>정수형과 실수형</li>
+<li>행렬과 배열</li>
+</ol>
+<ol start="2" type="1">
+<li>데이터프레임에서 특정 변수를 제거하기 위해 사용하는 코드는?</li>
+</ol>
+<ol type="a">
+<li>dataframe$variable == NULL</li>
+<li>dataframe$variable = NULL<br>
+</li>
+<li>dataframe$variable &lt;- NULL</li>
+<li>dataframe &lt;- NULL</li>
+</ol>
+<ol start="3" type="1">
+<li>다음 중 리스트-칼럼 자료구조를 활용하기에 적합하지 않은 경우는?</li>
+</ol>
+<ol type="a">
+<li>정규표현식을 통한 텍스트 문자열 처리</li>
+<li>웹 API로 추출된 JSON, XML 데이터</li>
+<li>분할-적용-병합(Split-Apply-Combine) 전략</li>
+<li>단순한 숫자형 벡터 저장</li>
+</ol></section><section id="서술형" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="서술형">서술형</h3>
+<ol start="4" type="1">
+<li>데이터프레임을 생성하는 함수의 이름과 사용 예시를 간단히 작성하시오.</li>
+</ol>
+<ol start="5" type="1">
+<li>리스트-칼럼 자료구조의 장점을 설명하고, 이를 분석에 활용하는 방법에 대해 서술하시오.</li>
+</ol>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -1752,7 +1795,7 @@ Wiener, Norbert. 1921. <span>“A new theory of measurement: a study in the logi
 이경화. 2020. <em>고등학교 실용통계</em>. 통계청 통계교육원.
 </div>
 </div>
-</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p><a href="https://jennybc.github.io/purrr-tutorial/ls13_list-columns.html">List columns</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p><a href="https://github.com/jennybc/lego-rstats">Photos that depict R data structures and operations via Lego</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -2315,7 +2358,7 @@ qwebrInstance.then(
     );  
   }
 );
-</script><script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom"});
+</script><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
