@@ -298,7 +298,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"code":"a <- list(a = 1:3,\n            b = \"a string\",\n            c = pi,\n            d = list(-1, -5) )\n  \ntypeof(a)\n#> [1] \"list\"\nlength(a)\n#> [1] 4","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"fp-data-structure-typeof","autorun":"false","fig-width":7,"fig-height":5}},{"id":2,"code":"map_chr(a, mode)   # sapply(a, mode)\nmap_chr(a, class)  # sapply(a, class)","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"fp-data-structure-mode-map","autorun":"false","fig-width":7,"fig-height":5}},{"id":3,"code":"str(a[4])","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"fp-data-structure-subset-case-one}","autorun":"false","fig-width":7,"fig-height":5}},{"id":4,"code":"str(a[[4]])","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"fp-data-structure-subset-case-two","autorun":"false","fig-width":7,"fig-height":5}},{"id":5,"code":"# 범주형 - 명목척도\nanimals_vector <- c(\"Elephant\", \"Giraffe\", \"Donkey\", \"Horse\")\nfactor_animals_vector <- factor(animals_vector)\nfactor_animals_vector\n\n# 범주형 - 서열 척도\ntemperature_vector <- c(\"High\", \"Low\", \"High\",\"Low\", \"Medium\")\nfactor_temperature_vector <- factor(temperature_vector, order = TRUE, levels = c(\"Low\", \"Medium\", \"High\"))\nfactor_temperature_vector","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"data-type-ordinal","autorun":"false","fig-width":7,"fig-height":5}},{"id":6,"code":"# \"M\", \"F\" 수준\nsurvey_vector <- c(\"M\", \"F\", \"F\", \"M\", \"M\")\nfactor_survey_vector <- factor(survey_vector)\nlevels(factor_survey_vector)\n\n# \"Female\", \"Male\" 로 변환\nlevels(factor_survey_vector) <- c(\"Female\", \"Male\")\nlevels(factor_survey_vector)","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"data-type-factor-level","autorun":"false","fig-width":7,"fig-height":5}},{"id":7,"code":"# 문자형 벡터와 요인 벡터\nsurvey_vector <- c(\"M\", \"F\", \"F\", \"M\", \"M\")\nfactor_survey_vector <- factor(survey_vector)\n\n# 문자형 벡터 요약\nsummary(survey_vector)\n\n# 요인 벡터 요약\nsummary(factor_survey_vector)","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"r data-type-factor-summary","autorun":"false","fig-width":7,"fig-height":5}},{"id":8,"code":"# 벡터를 정의한다.\nname <- c(\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\")\ntype <- c(\"Terrestrial planet\", \"Terrestrial planet\", \"Terrestrial planet\", \n          \"Terrestrial planet\", \"Gas giant\", \"Gas giant\", \"Gas giant\", \"Gas giant\")\ndiameter <- c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007, 3.883)\nrotation <- c(58.64, -243.02, 1, 1.03, 0.41, 0.43, -0.72, 0.67)\nrings <- c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)\n\n# 벡터를 합쳐서 데이터프레임을 생성\nplanets_df <-data.frame(name, type, diameter, rotation, rings)","options":{"results":"markup","comment":"","fig-cap":"","context":"interactive","out-width":"700px","message":"true","out-height":"","classes":"","warning":"true","dpi":72,"read-only":"false","output":"true","label":"df-create","autorun":"false","fig-width":7,"fig-height":5}}];
+globalThis.qwebrCellDetails = [{"id":1,"code":"a <- list(a = 1:3,\n            b = \"a string\",\n            c = pi,\n            d = list(-1, -5) )\n  \ntypeof(a)\n#> [1] \"list\"\nlength(a)\n#> [1] 4","options":{"results":"markup","comment":"","output":"true","autorun":"false","fig-width":7,"read-only":"false","warning":"true","out-height":"","context":"interactive","label":"fp-data-structure-typeof","classes":"","out-width":"700px","fig-cap":"","fig-height":5,"dpi":72,"message":"true"}},{"id":2,"code":"map_chr(a, mode)   # sapply(a, mode)\nmap_chr(a, class)  # sapply(a, class)","options":{"results":"markup","comment":"","output":"true","autorun":"false","fig-width":7,"read-only":"false","warning":"true","out-height":"","context":"interactive","label":"fp-data-structure-mode-map","classes":"","out-width":"700px","fig-cap":"","fig-height":5,"dpi":72,"message":"true"}},{"id":3,"code":"str(a[4])","options":{"results":"markup","comment":"","output":"true","autorun":"false","fig-width":7,"read-only":"false","warning":"true","out-height":"","context":"interactive","label":"fp-data-structure-subset-case-one}","classes":"","out-width":"700px","fig-cap":"","fig-height":5,"dpi":72,"message":"true"}},{"id":4,"code":"str(a[[4]])","options":{"results":"markup","comment":"","output":"true","autorun":"false","fig-width":7,"read-only":"false","warning":"true","out-height":"","context":"interactive","label":"fp-data-structure-subset-case-two","classes":"","out-width":"700px","fig-cap":"","fig-height":5,"dpi":72,"message":"true"}},{"id":5,"code":"# 범주형 - 명목척도\nanimals_vector <- c(\"Elephant\", \"Giraffe\", \"Donkey\", \"Horse\")\nfactor_animals_vector <- factor(animals_vector)\nfactor_animals_vector\n\n# 범주형 - 서열 척도\ntemperature_vector <- c(\"High\", \"Low\", \"High\",\"Low\", \"Medium\")\nfactor_temperature_vector <- factor(temperature_vector, order = TRUE, levels = c(\"Low\", \"Medium\", \"High\"))\nfactor_temperature_vector","options":{"results":"markup","comment":"","output":"true","autorun":"false","fig-width":7,"read-only":"false","warning":"true","out-height":"","context":"interactive","label":"data-type-ordinal","classes":"","out-width":"700px","fig-cap":"","fig-height":5,"dpi":72,"message":"true"}},{"id":6,"code":"# \"M\", \"F\" 수준\nsurvey_vector <- c(\"M\", \"F\", \"F\", \"M\", \"M\")\nfactor_survey_vector <- factor(survey_vector)\nlevels(factor_survey_vector)\n\n# \"Female\", \"Male\" 로 변환\nlevels(factor_survey_vector) <- c(\"Female\", \"Male\")\nlevels(factor_survey_vector)","options":{"results":"markup","comment":"","output":"true","autorun":"false","fig-width":7,"read-only":"false","warning":"true","out-height":"","context":"interactive","label":"data-type-factor-level","classes":"","out-width":"700px","fig-cap":"","fig-height":5,"dpi":72,"message":"true"}},{"id":7,"code":"# 문자형 벡터와 요인 벡터\nsurvey_vector <- c(\"M\", \"F\", \"F\", \"M\", \"M\")\nfactor_survey_vector <- factor(survey_vector)\n\n# 문자형 벡터 요약\nsummary(survey_vector)\n\n# 요인 벡터 요약\nsummary(factor_survey_vector)","options":{"results":"markup","comment":"","output":"true","autorun":"false","fig-width":7,"read-only":"false","warning":"true","out-height":"","context":"interactive","label":"r data-type-factor-summary","classes":"","out-width":"700px","fig-cap":"","fig-height":5,"dpi":72,"message":"true"}},{"id":8,"code":"# 벡터를 정의한다.\nname <- c(\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\")\ntype <- c(\"Terrestrial planet\", \"Terrestrial planet\", \"Terrestrial planet\", \n          \"Terrestrial planet\", \"Gas giant\", \"Gas giant\", \"Gas giant\", \"Gas giant\")\ndiameter <- c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007, 3.883)\nrotation <- c(58.64, -243.02, 1, 1.03, 0.41, 0.43, -0.72, 0.67)\nrings <- c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)\n\n# 벡터를 합쳐서 데이터프레임을 생성\nplanets_df <-data.frame(name, type, diameter, rotation, rings)","options":{"results":"markup","comment":"","output":"true","autorun":"false","fig-width":7,"read-only":"false","warning":"true","out-height":"","context":"interactive","label":"df-create","classes":"","out-width":"700px","fig-cap":"","fig-height":5,"dpi":72,"message":"true"}}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1471,11 +1471,14 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   
 
 
-</header><p>다른 프로그래밍 언어에서 다루지 않는 독특한 자료구조가 데이터프레임(Dataframe)이다. R도 프로그래밍 언어이기 때문에 다른 언어에서 갖고 있는 자료구조를 대부분 갖추고 있지만, 데이터 분석, 시각화, 모형 개발 등에 꼭 필요한 기본 자료구조가 데이터프레임이다. 데이터프레임을 본격적으로 살펴보기 전에 통계학에서 다루는 측정에 대해 살펴보고, 측정 척도(scale)에 대한 이론적 배경을 이해한다. 척도의 개념에 대응되는 R 자료구조를 통해 데이터프레임과 추후 프로그래밍 과정에서 많이 다뤄지는 리스트에 대한 차별점도 살펴본다.</p>
+</header><p></p>
+<p>다른 프로그래밍 언어에서 다루지 않는 독특한 자료구조가 데이터프레임(Dataframe)이다. R도 프로그래밍 언어이기 때문에 다른 언어에서 갖고 있는 자료구조를 대부분 갖추고 있지만, 데이터 분석, 시각화, 모형 개발 등에 꼭 필요한 기본 자료구조가 데이터프레임이다. 데이터프레임을 본격적으로 살펴보기 전에 통계학에서 다루는 측정에 대해 살펴보고, 측정 척도(scale)에 대한 이론적 배경을 이해한다. 척도의 개념에 대응되는 R 자료구조를 통해 데이터프레임과 추후 프로그래밍 과정에서 많이 다뤄지는 리스트에 대한 차별점도 살펴본다.</p>
 <section id="data-type-for-data-science" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="data-type-for-data-science">
 <span class="header-section-number">10.1</span> 측정 변수의 구분</h2>
+<p></p>
 <p>분석 과정에서 현실 세계의 다양한 사건과 현상들을 관찰하고, 이후 측정 단계를 거쳐 수치나 범주 형태로 자료, 즉 데이터로 생산된다. 이는 복잡한 실제 현상들을 체계적이고 구조화된 데이터로 전환하는 과정으로, 이러한 데이터 분석 과정에서 컴퓨터 활용이 중요하다. 프로그래밍 언어들마다 데이터를 처리하고 관리하기 위한 고유한 자료구조를 가지고 있다. 측정 단계에서 생산된 다양한 데이터를 담아낼 수 있는 자료구조가 데이터프레임이다.</p>
 <p>자료의 고유 특성을 수치화하는 측정 척도로 명목형, 순서형, 구간형, 비율형 4가지 주요 유형으로 분류된다. 측정 척도는 데이터 유형별로 적합한 유의미한 통계량을 결정하는 데 중요한 역할을 한다. <span class="citation" data-cites="stevens1946theory">(Stevens 1946)</span> <span class="citation" data-cites="wiener1921new">(Wiener 1921)</span> <span class="citation" data-cites="lee2020stat">(이경화 2020)</span></p>
+<p> </p>
 <ul>
 <li>명목척도(Nominal): 단순히 개체 특성 분류를 위해 숫자나 부호를 부여한 척도로 숫자는 의미가 없음.
 <ul>
@@ -1505,8 +1508,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </li>
 </ul></section><section id="data-type-basics" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="data-type-basics">
 <span class="header-section-number">10.2</span> 기본 자료구조</h2>
+<p></p>
 <p>측정은 한 번만 이뤄지는 것이 아닌 여러 관측점을 통해 데이터로 표현되기 때문에 이를 담을 수 있는 벡터 자료구조가 필요하다. R 언어에서 벡터 자료형을 주로 <strong>원자 벡터</strong>와 <strong>리스트</strong>로 분류한다. 원자 벡터는 논리형(<code>logical</code>), 정수형(<code>integer</code>), 부동 소수점형(<code>double</code>), 문자형(<code>character</code>), 복소수형(<code>complex</code>), <code>raw</code> 등 여섯 가지 자료형을 포함하며, 이중 논리형, 정수형, 부동 소수점형, 문자형이 주로 사용된다. 리스트는 다양한 자료형을 포함할 수 있는 재귀 벡터(recursive vector)로, 복잡한 데이터 구조를 효과적으로 다루는 데 적합하다.<span class="citation" data-cites="wickham2023r">(Wickham, Çetinkaya-Rundel, 와/과 Grolemund 2023)</span></p>
-<p>R에서 자료형을 <code>type</code>, <code>mode</code>, <code>storage mode</code>로 다르게 표현하는데 데이터 객체의 다양한 측면을 표현하기 위함이다. 자료형(<code>type</code>)은 객체의 내부적인 구현 유형을 표현한다. 예를 들어, 정수형, 부동 소수점형, 문자형을 들 수 있다. 모드(<code>mode</code>)는 객체가 프로그래밍적으로 어떻게 다뤄지는지를 나타내며, <code>type</code>보다 더 일반적인 개념으로 사용자 관점에서 데이터를 어떻게 사용할 수 있는지를 나타낸다. 예를 들어, 자료형이 정수형 혹은 부동 소수점형은 사용자 모드에서 숫자형(<code>numeric</code>)이 훨씬 수월하다. 저장 모드(<code>storage mode</code>)는 객체가 저장되는 방식을 나타내며, 특히 벡터의 경우에는 벡터의 원소 유형을 의미한다. 예를 들어, 정수 벡터 <code>storage mode</code>는 <code>integer</code>가 된다.</p>
+<p>R에서 자료형을 <code>type</code>, <code>mode</code>, <code>storage mode</code>로 다르게 표현하는데 데이터 객체의 다양한 측면을 표현하기 위함이다. 자료형(<code>type</code>)은 객체의 내부적인 구현 유형을 표현한다. 예를 들어, 정수형, 부동 소수점형, 문자형을 들 수 있다. 모드(<code>mode</code>)는 객체가 프로그래밍적으로 어떻게 다뤄지는지를 나타내며, <code>type</code>보다 더 일반적인 개념으로 사용자 관점에서 데이터를 어떻게 사용할 수 있는지를 나타낸다. 예를 들어, 자료형이 정수형 혹은 부동 소수점형은 사용자 모드에서 숫자형(<code>numeric</code>)이 훨씬 수월하다. 저장 모드(<code>storage mode</code>)는 객체가 저장되는 방식을 나타내며, 특히 벡터의 경우에는 벡터의 원소 유형을 의미한다. 예를 들어, 정수 벡터 <code>storage mode</code>는 <code>integer</code>가 된다. </p>
 <table class="table">
 <caption>자료형, 사용자 모드, 저장 모드 비교표</caption>
 <thead><tr class="header">
@@ -1551,7 +1555,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>모드 함수는 객체의 <strong>모드</strong>를 반환하고, 클래스 함수는 <strong>클래스</strong>를 반환한다. 가장 흔하게 만나는 객체 모드는 숫자, 문자, 논리 모드다. 리스트나 데이터프레임과 같이 다양한 모드를 한 객체 안에 포함하는 경우도 있다.</p>
-<p>리스트(List)는 데이터를 저장하는 유연하며 강력한 방법으로 과거 리스트 자료구조를 처리하는 <code>*apply</code> 함수와 함께 가장 빈번하게 사용되는 자료형이다. 현재는 <code>purrr</code> 팩키지 <code>map_*()</code>함수를 사용한다. 리스트형 자료 <code>a</code>를 세 가지 숫자형, 문자형, 숫자형과 리스트 총 네 가지 자료형을 포함하게 작성한다. <code>map_chr()</code> 함수를 이용하여 <code>mode</code>와 <code>class</code> 인자를 넣어줌으로써, 각각 자료형의 모드와 자료형을 확인한다.</p>
+<p>리스트(List)는 데이터를 저장하는 유연하며 강력한 방법으로 과거 리스트 자료구조를 처리하는 <code>*apply</code> 함수와 함께 가장 빈번하게 사용되는 자료형이다. 현재는 <code>purrr</code> 팩키지 <code>map_*()</code>함수를 사용한다. 리스트형 자료 <code>a</code>를 세 가지 숫자형, 문자형, 숫자형과 리스트 총 네 가지 자료형을 포함하게 작성한다. <code>map_chr()</code> 함수를 이용하여 <code>mode</code>와 <code>class</code> 인자를 넣어줌으로써, 각각 자료형의 모드와 자료형을 확인한다. </p>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>리스트에서 원소를 뽑아내는 의미를 살펴보자. 시각적으로 표현하면 다음과 같다. 리스트는 이질적인 객체를 담을 수 있다는 점에서 동질적인 것만 담을 수 있어 한계가 있는 원자벡터보다 쓰임새가 다르다. 회귀분석 결과 산출되는 <code>lm</code> 결과값은 다양한 정보를 담을 수 있는 리스트로 표현된다.</p>
@@ -1578,15 +1582,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<div id="fig-list-diagram" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-list-diagram" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-list-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/ds-fp-list.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="그림&nbsp;10.1: 리스트에서 하위 리스트 뽑아내기 - 출처: 해들리 위컴"><img src="images/ds-fp-list.png" class="img-fluid figure-img" style="width:100.0%"></a>
+<a href="images/ds-fp-list.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="그림&nbsp;10.1: 리스트에서 하위 리스트 뽑아내기 - 출처: 해들리 위컴"><img src="images/ds-fp-list.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="286"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-list-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 그림&nbsp;10.1: 리스트에서 하위 리스트 뽑아내기 - 출처: 해들리 위컴
 </figcaption></figure>
 </div>
-<p>범주형 자료를 R에 저장하기 위해서 요인(Factor) 클래스를 사용하며 요인 클래스를 사용하여 자료를 저장할 경우 저장 공간을 절약할 수 있다. 요인은 내부적으로 숫자(value)로 저장을 하고 레이블(value label)을 사용하여 표시하여 저장 공간을 절약한다.</p>
+<p>범주형 자료를 R에 저장하기 위해서 요인(Factor) 클래스를 사용하며 요인 클래스를 사용하여 자료를 저장할 경우 저장 공간을 절약할 수 있다. 요인은 내부적으로 숫자(value)로 저장을 하고 레이블(value label)을 사용하여 표시하여 저장 공간을 절약한다. </p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1657,9 +1661,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <td style="text-align: center;">생일, 투표일</td>
 </tr>
 </tbody>
-</table></section><section id="data-type-factor" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="data-type-factor">
+</table>
+<p> </p>
+</section><section id="data-type-factor" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="data-type-factor">
 <span class="header-section-number">10.4</span> 범주 자료형</h2>
-<p>명목척도 범주형, 서열척도 범주 자료형을 생성하는 경우 주의를 기울여야 한다. <code>factor</code> 함수를 사용해서 요인형 자료형을 생성하는데, 내부적으로 저장 공간을 효율적으로 사용하고 속도를 빠르게 하는 데 유용하다. 순서를 갖는 범주형의 경우 <code>factor</code> 함수 내부에 <code>levels</code> 인자를 넣어 정의하면 순서 정보가 유지된다.</p>
+<p>명목척도 범주형, 서열척도 범주 자료형을 생성하는 경우 주의를 기울여야 한다. <code>factor</code> 함수를 사용해서 요인형 자료형을 생성하는데, 내부적으로 저장 공간을 효율적으로 사용하고 속도를 빠르게 하는 데 유용하다. 순서를 갖는 범주형의 경우 <code>factor</code> 함수 내부에 <code>levels</code> 인자를 넣어 정의하면 순서 정보가 유지된다. </p>
 <div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>범주형 자료의 경우 범주가 갖는 척도 가독성을 높이기 위해 <code><a href="https://rdrr.io/r/base/levels.html">levels()</a></code> 함수를 사용하기도 한다.</p>
@@ -1670,9 +1676,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section><section id="data-type-dataframe-in-r" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="data-type-dataframe-in-r">
 <span class="header-section-number">10.5</span> 데이터프레임</h2>
-<p><strong>R</strong>은 6가지 기본 벡터로 자료를 저장하지만, 이외에 행렬(matrix), 데이터프레임(data.frame), 리스트(list) 자료구조가 있다. 하지만, 자료분석을 위해서 데이터를 데이터셋의 형태로 구성해야 한다. 데이터셋이 중요한 이유는 자료를 분석하기 위해서 다양한 형태의 개별 자료를 통합적으로 분석하기 위해서다. 이를 위해서 리스트 자료구조로 일단 모으게 된다. 예를 들어 개인 신용분석을 위해서는 개인의 소득, 부채, 성별, 학력 등등의 숫자형, 문자형, 요인(Factor)형 등의 자료를 데이터셋에 담아야 한다. 특히 변수와-관측값(Variable-Observation) 형식의 자료를 분석하기 위해서는 데이터프레임(<code>data.frame</code>)을 사용한다. 데이터프레임은 모든 변수에 대해서 관측값이 같은 길이를 갖도록 만들어 놓은 것이다.</p>
+<p><strong>R</strong>은 6가지 기본 벡터로 자료를 저장하지만, 이외에 행렬(matrix), 데이터프레임(data.frame), 리스트(list) 자료구조가 있다. 하지만, 자료분석을 위해서 데이터를 데이터셋의 형태로 구성해야 한다. 데이터셋이 중요한 이유는 자료를 분석하기 위해서 다양한 형태의 개별 자료를 통합적으로 분석하기 위해서다. 이를 위해서 리스트 자료구조로 일단 모으게 된다. 예를 들어 개인 신용분석을 위해서는 개인의 소득, 부채, 성별, 학력 등등의 숫자형, 문자형, 요인(Factor)형 등의 자료를 데이터셋에 담아야 한다. 특히 변수와-관측값(Variable-Observation) 형식의 자료를 분석하기 위해서는 데이터프레임(<code>data.frame</code>)을 사용한다. 데이터프레임은 모든 변수에 대해서 관측값이 같은 길이를 갖도록 만들어 놓은 것이다. </p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><a href="images/data-handling-list-dataframe.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="리스트와 데이터프레임"><img src="images/data-handling-list-dataframe.png" class="img-fluid figure-img" alt="리스트와 데이터프레임"></a></p>
+<figure class="figure"><p><a href="images/data-handling-list-dataframe.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="리스트와 데이터프레임"><img src="images/data-handling-list-dataframe.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="263" alt="리스트와 데이터프레임"></a></p>
 <figcaption>리스트와 데이터프레임</figcaption></figure>
 </div>
 <p>데이터프레임은 <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> 함수를 사용해서 생성한다. R 객체 구조 파악을 위해서는 간단한 자료의 경우 데이터 형식을 확인할 수 있는 1–2줄 정도의 간단한 스크립트와 명령어를 통해서 확인이 가능하지만, 복잡한 데이터의 구조를 파악하기 위해서는 <code>summary</code> 함수와 <code>str</code> 함수를 통해서 확인해야 한다.</p>
@@ -1680,7 +1686,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section><section id="data-type-vector" class="level2" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="data-type-vector">
 <span class="header-section-number">10.6</span> 벡터, 행렬, 배열, 데이터프레임</h2>
-<p>가장 많이 사용되는 논리형, 문자형, 숫자형을 통해 자료분석 및 모형개발을 진행하게 되고, 경우에 따라서 동일한 자료형을 모은 경우 이를 행렬로 표현할 수 있고, 행렬을 모아 RGB 시각 데이터를 위한 배열(Array)로 표현한다. 데이터프레임은 서로 다른 자료형을 모아 넣은 것이다.</p>
+<p>가장 많이 사용되는 논리형, 문자형, 숫자형을 통해 자료분석 및 모형개발을 진행하게 되고, 경우에 따라서 동일한 자료형을 모은 경우 이를 행렬로 표현할 수 있고, 행렬을 모아 RGB 시각 데이터를 위한 배열(Array)로 표현한다. 데이터프레임은 서로 다른 자료형을 모아 넣은 것이다. </p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><a href="images/ds-data-structure-pictogram.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="R 자료구조 - 벡터, 행렬, 배열, 데이터프레임"><img src="images/ds-data-structure-pictogram.png" class="img-fluid figure-img" style="width:100.0%" alt="R 자료구조 - 벡터, 행렬, 배열, 데이터프레임"></a></p>
 <figcaption>R 자료구조 - 벡터, 행렬, 배열, 데이터프레임</figcaption></figure>
@@ -1688,7 +1694,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section><section id="is-na-null" class="level2" data-number="10.7"><h2 data-number="10.7" class="anchored" data-anchor-id="is-na-null">
 <span class="header-section-number">10.7</span> <code>NULL</code>과 <code>NA</code>
 </h2>
-<p>결측되었다는 없다는 것을 표시하는 방법이 두 가지 필요하다. 하나는 벡터가 없다는 <code>NULL</code>이고, 벡터 내부에 값이 결측되었다는 <code>NA</code>다. <code>dataframe$variable &lt;- NULL</code> 명령문을 사용하면 데이터프레임(<code>dataframe</code>)에 변수(<code>variable</code>)를 날려보내는 효과가 있다. 예를 들어 책장이 아예 없다는 의미(<code>NULL</code>)와 책장에 책이 없다(<code>NA</code>)는 다른 개념을 지칭하고 쓰임새가 다르다.</p>
+<p>결측되었다는 없다는 것을 표시하는 방법이 두 가지 필요하다. 하나는 벡터가 없다는 <code>NULL</code>이고, 벡터 내부에 값이 결측되었다는 <code>NA</code>다. <code>dataframe$variable &lt;- NULL</code> 명령문을 사용하면 데이터프레임(<code>dataframe</code>)에 변수(<code>variable</code>)를 날려보내는 효과가 있다. 예를 들어 책장이 아예 없다는 의미(<code>NULL</code>)와 책장에 책이 없다(<code>NA</code>)는 다른 개념을 지칭하고 쓰임새가 다르다. </p>
 <div class="row">
 <div class="col-md-6">
 <p><strong><code>NULL</code></strong></p>
@@ -1726,7 +1732,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </section><section id="fp-list-columns" class="level2" data-number="10.8"><h2 data-number="10.8" class="anchored" data-anchor-id="fp-list-columns">
 <span class="header-section-number">10.8</span> 리스트 칼럼</h2>
-<p>레고를 통해 살펴본 R 자료구조는 계산 가능한 원자 자료형(논리형, 숫자형, 요인형)으로 크게 볼 수 있다. R에서 정수형과 부동소수점은 그다지 크게 구분을 하지 않는다. 동일 길이를 갖는 벡터를 쭉 붙여넣으면 자료구조형이 <strong>데이터프레임</strong>으로 되고, 길이가 같지 않는 벡터를 한 곳에 모아넣은 자료구조가 <strong>리스트</strong>다. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>레고를 통해 살펴본 R 자료구조는 계산 가능한 원자 자료형(논리형, 숫자형, 요인형)으로 크게 볼 수 있다. R에서 정수형과 부동소수점은 그다지 크게 구분을 하지 않는다. 동일 길이를 갖는 벡터를 쭉 붙여넣으면 자료구조형이 <strong>데이터프레임</strong>으로 되고, 길이가 같지 않는 벡터를 한 곳에 모아넣은 자료구조가 <strong>리스트</strong>다. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> </p>
 <p>데이터프레임이 굳이 모두 원자벡터만을 갖출 필요는 없다. 리스트를 데이터프레임 내부에 갖는 것도 데이터프레임인데 굳이 구별하자면 티블(<code>tibble</code>)이고, 이런 자료구조를 <strong>리스트-칼럼(list-column)</strong>이라고 부른다.</p>
 <div id="fig-dataframe-list-columns" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-dataframe-list-columns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1748,7 +1754,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <ol type="1">
 <li>R에서 벡터 자료형을 주로 어떻게 분류하는가?</li>
 </ol>
-<ol type="a">
+<!-- --><ol type="a">
 <li>원자 벡터와 리스트</li>
 <li>숫자형과 문자형</li>
 <li>정수형과 실수형</li>
@@ -1757,7 +1763,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <ol start="2" type="1">
 <li>데이터프레임에서 특정 변수를 제거하기 위해 사용하는 코드는?</li>
 </ol>
-<ol type="a">
+<!-- --><ol type="a">
 <li>dataframe$variable == NULL</li>
 <li>dataframe$variable = NULL<br>
 </li>
@@ -1767,7 +1773,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <ol start="3" type="1">
 <li>다음 중 리스트-칼럼 자료구조를 활용하기에 적합하지 않은 경우는?</li>
 </ol>
-<ol type="a">
+<!-- --><ol type="a">
 <li>정규표현식을 통한 텍스트 문자열 처리</li>
 <li>웹 API로 추출된 JSON, XML 데이터</li>
 <li>분할-적용-병합(Split-Apply-Combine) 전략</li>
@@ -2358,7 +2364,7 @@ qwebrInstance.then(
     );  
   }
 );
-</script><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
+</script><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","loop":false,"closeEffect":"zoom","selector":".lightbox"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

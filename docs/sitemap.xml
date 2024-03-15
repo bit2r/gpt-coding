@@ -2,111 +2,111 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://r2bit.com/gpt-coding/index.html</loc>
-    <lastmod>2024-03-14T01:45:40.707Z</lastmod>
+    <lastmod>2024-03-15T04:11:26.795Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/01-intro.html</loc>
-    <lastmod>2024-03-12T13:25:37.311Z</lastmod>
+    <lastmod>2024-03-14T03:48:44.031Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/02-var.html</loc>
-    <lastmod>2024-03-12T23:39:46.544Z</lastmod>
+    <lastmod>2024-03-14T04:28:51.993Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/03-cont.html</loc>
-    <lastmod>2024-03-13T00:23:17.684Z</lastmod>
+    <lastmod>2024-03-14T06:26:09.181Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/04-func.html</loc>
-    <lastmod>2024-03-13T01:18:44.351Z</lastmod>
+    <lastmod>2024-03-14T06:51:07.760Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/05-loop.html</loc>
-    <lastmod>2024-03-13T02:08:21.850Z</lastmod>
+    <lastmod>2024-03-14T08:56:57.009Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/06-string.html</loc>
-    <lastmod>2024-03-13T02:42:16.143Z</lastmod>
+    <lastmod>2024-03-14T10:48:16.014Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/07-file.html</loc>
-    <lastmod>2024-03-13T03:17:25.884Z</lastmod>
+    <lastmod>2024-03-14T11:23:05.821Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/08-list.html</loc>
-    <lastmod>2024-03-13T08:03:15.394Z</lastmod>
+    <lastmod>2024-03-14T11:50:08.964Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/09-dictionaries.html</loc>
-    <lastmod>2024-03-13T07:39:57.913Z</lastmod>
+    <lastmod>2024-03-15T03:34:25.429Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/A-dataframe.html</loc>
-    <lastmod>2024-03-13T08:54:32.173Z</lastmod>
+    <lastmod>2024-03-14T12:22:36.553Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/git-basics.html</loc>
-    <lastmod>2024-03-10T09:29:53.275Z</lastmod>
+    <lastmod>2024-03-14T12:54:11.703Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/git-setup-create.html</loc>
-    <lastmod>2024-03-11T00:42:39.967Z</lastmod>
+    <lastmod>2024-03-14T12:53:19.625Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/git-change.html</loc>
-    <lastmod>2024-03-11T13:21:22.509Z</lastmod>
+    <lastmod>2024-03-14T12:56:38.194Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/git-history.html</loc>
-    <lastmod>2024-03-11T14:41:33.661Z</lastmod>
+    <lastmod>2024-03-15T03:55:29.182Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/git-ignore.html</loc>
-    <lastmod>2024-03-11T23:59:06.677Z</lastmod>
+    <lastmod>2024-03-14T23:18:36.624Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/git-github.html</loc>
-    <lastmod>2024-03-12T02:51:19.967Z</lastmod>
+    <lastmod>2024-03-15T00:33:35.432Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/git-open.html</loc>
-    <lastmod>2024-03-12T08:16:58.219Z</lastmod>
+    <lastmod>2024-03-15T00:20:44.165Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/git-conflict.html</loc>
-    <lastmod>2024-03-12T07:58:57.008Z</lastmod>
+    <lastmod>2024-03-15T00:46:10.839Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/git-ide.html</loc>
-    <lastmod>2024-03-10T03:17:57.383Z</lastmod>
+    <lastmod>2024-03-15T00:54:51.914Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/tool-regex.html</loc>
-    <lastmod>2024-03-13T09:42:12.022Z</lastmod>
+    <lastmod>2024-03-15T01:11:00.748Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/tool-network.html</loc>
-    <lastmod>2024-03-13T10:26:01.217Z</lastmod>
+    <lastmod>2024-03-15T01:18:07.036Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/tool-web.html</loc>
-    <lastmod>2024-03-13T13:23:35.225Z</lastmod>
+    <lastmod>2024-03-15T01:42:06.349Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/tool-database.html</loc>
-    <lastmod>2024-03-08T00:04:41.552Z</lastmod>
+    <lastmod>2024-03-15T01:44:09.865Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/tool-make.html</loc>
-    <lastmod>2024-03-13T14:10:08.388Z</lastmod>
+    <lastmod>2024-03-15T01:38:47.756Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/tool-viz.html</loc>
-    <lastmod>2024-03-14T01:35:23.476Z</lastmod>
+    <lastmod>2024-03-15T03:04:13.842Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/tool-gpt.html</loc>
-    <lastmod>2024-03-14T00:55:17.489Z</lastmod>
+    <lastmod>2024-03-15T02:53:13.513Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/references.html</loc>

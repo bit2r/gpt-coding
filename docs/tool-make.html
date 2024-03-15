@@ -298,7 +298,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"autorun":"false","warning":"true","comment":"","results":"markup","context":"interactive","out-width":"700px","label":"r-task-fs","classes":"","dpi":72,"fig-cap":"","output":"true","message":"true","out-height":"","read-only":"false","fig-height":5,"fig-width":7},"id":1,"code":"library(fs)\n\ncwd <- fs::path_wd()\ncwd\n#> C:/swc/gpt-coding"},{"options":{"autorun":"false","warning":"true","comment":"","results":"markup","context":"interactive","out-width":"700px","label":"r-show-abs-path","classes":"","dpi":72,"fig-cap":"","output":"true","message":"true","out-height":"","read-only":"false","fig-height":5,"fig-width":7},"id":2,"code":"file.create(\"index.qmd\")\n#> [1] TRUE\nfs::path_abs(\"index.qmd\")\n#> D:/swc/gpt-coding/index.qmd"},{"options":{"autorun":"false","warning":"true","comment":"","results":"markup","context":"interactive","out-width":"700px","label":"r-file-dir-exist","classes":"","dpi":72,"fig-cap":"","output":"true","message":"true","out-height":"","read-only":"false","fig-height":5,"fig-width":7},"id":3,"code":"# 'music' 디렉토리 생성\ndir_create(\"music\", showWarnings = FALSE)\n\n# 'memo.txt' 파일 생성\nfile_create(\"memo.txt\")\n\n# 파일 및 디렉토리 존재 여부 확인\nfile_exists(\"memo.txt\") \n#> TRUE\ndir_exists(\"memo.txt\")\n#> FALSE\ndir_exists(\"music\")\n#> TRUE"},{"options":{"autorun":"false","warning":"true","comment":"","results":"markup","context":"interactive","out-width":"700px","label":"r-tasks-dir-ls","classes":"","dpi":72,"fig-cap":"","output":"true","message":"true","out-height":"","read-only":"false","fig-height":5,"fig-width":7},"id":4,"code":"dir_ls(cwd)\n#> /home/web_user/memo.txt /home/web_user/music"}];
+globalThis.qwebrCellDetails = [{"id":1,"code":"library(fs)\n\ncwd <- fs::path_wd()\ncwd\n#> C:/swc/gpt-coding","options":{"autorun":"false","dpi":72,"comment":"","fig-width":7,"out-width":"700px","results":"markup","warning":"true","out-height":"","message":"true","fig-cap":"","read-only":"false","context":"interactive","label":"r-task-fs","classes":"","fig-height":5,"output":"true"}},{"id":2,"code":"file.create(\"index.qmd\")\n#> [1] TRUE\nfs::path_abs(\"index.qmd\")\n#> D:/swc/gpt-coding/index.qmd","options":{"autorun":"false","dpi":72,"comment":"","fig-width":7,"out-width":"700px","results":"markup","warning":"true","out-height":"","message":"true","fig-cap":"","read-only":"false","context":"interactive","label":"r-show-abs-path","classes":"","fig-height":5,"output":"true"}},{"id":3,"code":"# 'music' 디렉토리 생성\ndir_create(\"music\", showWarnings = FALSE)\n\n# 'memo.txt' 파일 생성\nfile_create(\"memo.txt\")\n\n# 파일 및 디렉토리 존재 여부 확인\nfile_exists(\"memo.txt\") \n#> TRUE\ndir_exists(\"memo.txt\")\n#> FALSE\ndir_exists(\"music\")\n#> TRUE","options":{"autorun":"false","dpi":72,"comment":"","fig-width":7,"out-width":"700px","results":"markup","warning":"true","out-height":"","message":"true","fig-cap":"","read-only":"false","context":"interactive","label":"r-file-dir-exist","classes":"","fig-height":5,"output":"true"}},{"id":4,"code":"dir_ls(cwd)\n#> /home/web_user/memo.txt /home/web_user/music","options":{"autorun":"false","dpi":72,"comment":"","fig-width":7,"out-width":"700px","results":"markup","warning":"true","out-height":"","message":"true","fig-cap":"","read-only":"false","context":"interactive","label":"r-tasks-dir-ls","classes":"","fig-height":5,"output":"true"}}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1170,7 +1170,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"options":{"autorun":"","warning":"true","comment":"","results":"markup","context":"interactive","out-width":"700px","label":"py-task-fs","classes":"","dpi":72,"fig-cap":"","output":"true","message":"true","out-height":"","read-only":"false","fig-height":5,"fig-width":7},"id":1,"code":"import os\n\ncwd = os.getcwd()\nprint(cwd)"},{"options":{"autorun":"","warning":"true","comment":"","results":"markup","context":"interactive","out-width":"700px","label":"py-show-abs-path","classes":"","dpi":72,"fig-cap":"","output":"true","message":"true","out-height":"","read-only":"false","fig-height":5,"fig-width":7},"id":2,"code":"import os\n\nfile_name = \"index.qmd\"\nwith open(file_name, 'w') as file:\n    pass\n\nabs_path = os.path.abspath(file_name)\nprint(abs_path)"},{"options":{"autorun":"","warning":"true","comment":"","results":"markup","context":"interactive","out-width":"700px","label":"py-file-dir-exist","classes":"","dpi":72,"fig-cap":"","output":"true","message":"true","out-height":"","read-only":"false","fig-height":5,"fig-width":7},"id":3,"code":"# music 디렉토리 생성, memo.txt 파일 생성\nos.makedirs('music', exist_ok=True)\n\nfile_name = \"memo.txt\"\nwith open(file_name, 'w') as file:\n    pass\n\nos.path.exists('memo.txt')\n#> True\nos.path.isdir('memo.txt')\n#> False\nos.path.isdir('music')\n#> True"},{"options":{"autorun":"","warning":"true","comment":"","results":"markup","context":"interactive","out-width":"700px","label":"py-tasks-dir-ls","classes":"","dpi":72,"fig-cap":"","output":"true","message":"true","out-height":"","read-only":"false","fig-height":5,"fig-width":7},"id":4,"code":"os.listdir(cwd)\n#> ['.matplotlib', 'music', 'memo.txt']"}];
+globalThis.qpyodideCellDetails = [{"id":1,"code":"import os\n\ncwd = os.getcwd()\nprint(cwd)","options":{"autorun":"","dpi":72,"comment":"","fig-width":7,"out-width":"700px","results":"markup","warning":"true","out-height":"","message":"true","fig-cap":"","read-only":"false","context":"interactive","label":"py-task-fs","classes":"","fig-height":5,"output":"true"}},{"id":2,"code":"import os\n\nfile_name = \"index.qmd\"\nwith open(file_name, 'w') as file:\n    pass\n\nabs_path = os.path.abspath(file_name)\nprint(abs_path)","options":{"autorun":"","dpi":72,"comment":"","fig-width":7,"out-width":"700px","results":"markup","warning":"true","out-height":"","message":"true","fig-cap":"","read-only":"false","context":"interactive","label":"py-show-abs-path","classes":"","fig-height":5,"output":"true"}},{"id":3,"code":"# music 디렉토리 생성, memo.txt 파일 생성\nos.makedirs('music', exist_ok=True)\n\nfile_name = \"memo.txt\"\nwith open(file_name, 'w') as file:\n    pass\n\nos.path.exists('memo.txt')\n#> True\nos.path.isdir('memo.txt')\n#> False\nos.path.isdir('music')\n#> True","options":{"autorun":"","dpi":72,"comment":"","fig-width":7,"out-width":"700px","results":"markup","warning":"true","out-height":"","message":"true","fig-cap":"","read-only":"false","context":"interactive","label":"py-file-dir-exist","classes":"","fig-height":5,"output":"true"}},{"id":4,"code":"os.listdir(cwd)\n#> ['.matplotlib', 'music', 'memo.txt']","options":{"autorun":"","dpi":72,"comment":"","fig-width":7,"out-width":"700px","results":"markup","warning":"true","out-height":"","message":"true","fig-cap":"","read-only":"false","context":"interactive","label":"py-tasks-dir-ls","classes":"","fig-height":5,"output":"true"}}];
 
 
 </script><script type="module">
@@ -1845,8 +1845,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>트리상의 디렉터리나 파일을 여기저기 돌아다니기 위해서 <code>list.files</code>과 <code>for</code> 루프를 사용한다. <code>readLines</code>이 파일 콘텐츠를 읽는 루프를 작성하는 것과 비슷하게, <code>websocket</code>은 네트워크 연결된 콘텐츠를 읽는 루프를 작성하고, httr`은 웹문서를 열어 콘텐츠를 루프를 통해서 읽어오게 한다.</p>
 <section id="r-paths" class="level2" data-number="24.1"><h2 data-number="24.1" class="anchored" data-anchor-id="r-paths">
 <span class="header-section-number">24.1</span> 파일 이름과 경로</h2>
-<p>모든 실행 프로그램은 “현재 디렉터리”를 가지고 있는데 작업 대부분을 수행하는 디폴트 디렉터리가 된다. 예를 들어, 읽기 위해서 파일을 연다면, R은 현재 디렉터리에서 파일을 찾는다.</p>
-<p><code>libuv</code> C 라이브러리에 기반한 <a href="https://cran.r-project.org/web/packages/fs/index.html"><code>fs</code></a> 패키지는 파일과 디렉터리를 작업하는 함수를 제공한다. <code><a href="https://fs.r-lib.org/reference/path.html">path_wd()</a></code> 함수는 현재 디렉터리 이름을 반환한다.</p>
+<p> </p>
+<p>모든 실행 프로그램은 “현재 디렉터리”를 가지고 있는데 작업 대부분을 수행하는 디폴트 디렉터리가 된다. 예를 들어, 읽기 위해서 파일을 연다면, R은 현재 디렉터리에서 파일을 찾는다. </p>
+<p><code>libuv</code> C 라이브러리에 기반한 <a href="https://cran.r-project.org/web/packages/fs/index.html"><code>fs</code></a> 패키지는 파일과 디렉터리를 작업하는 함수를 제공한다. <code><a href="https://fs.r-lib.org/reference/path.html">path_wd()</a></code> 함수는 현재 디렉터리 이름을 반환한다. </p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li>
@@ -1863,8 +1864,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p><code>cwd</code>는 <strong>current working directory</strong>의 약자로 현재 작업 디렉터리다. 예제의 결과는 <code>C:/swc/gpt-coding</code>인데 현재 작성 중인 전자책 <code>gpt-coding</code>의 홈 디렉터리가 된다.</p>
-<p>파일을 식별하는 <code>cwd</code> 같은 문자열을 경로(path)라고 부른다. <strong>상대경로(relative path)</strong>는 현재 디렉터리에서 시작하고, <strong>절대경로(absolute path)</strong>는 파일 시스템의 가장 최상단의 디렉터리에서 시작한다.</p>
+<p><code>cwd</code>는 <strong>current working directory</strong>의 약자로 현재 작업 디렉터리다. 예제의 결과는 <code>C:/swc/gpt-coding</code>인데 현재 작성 중인 전자책 <code>gpt-coding</code>의 홈 디렉터리가 된다. </p>
+<p>파일을 식별하는 <code>cwd</code> 같은 문자열을 경로(path)라고 부른다. <strong>상대경로(relative path)</strong>는 현재 디렉터리에서 시작하고, <strong>절대경로(absolute path)</strong>는 파일 시스템의 가장 최상단의 디렉터리에서 시작한다. </p>
 <p>지금까지 살펴본 경로는 간단한 파일 이름이어서, 현재 디렉터리에서 상대적이다. 파일의 절대 경로를 알아내기 위해서 <code><a href="https://fs.r-lib.org/reference/path_math.html">fs::path_abs()</a></code> 함수를 사용한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -1882,7 +1883,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p><code>fs</code> 패키지의 <code>file_exists</code> 함수와 기본 내장함수 <code>file.exists</code> 함수는 파일 또는 디렉터리가 존재하는지 여부를 확인한다. 먼저 <code>music</code> 디렉터리와 <code>memo.txt</code> 파일을 생성한 후 <code>memo.txt</code> 파일이나 <code>music</code> 디렉터리가 존재하는지 여부를 확인한다. <code>dir_exists</code>는 디렉터리, <code>file_exists</code>는 파일이 존재하는지 검사한다.</p>
+<p><code>fs</code> 패키지의 <code>file_exists</code> 함수와 기본 내장함수 <code>file.exists</code> 함수는 파일 또는 디렉터리가 존재하는지 여부를 확인한다. 먼저 <code>music</code> 디렉터리와 <code>memo.txt</code> 파일을 생성한 후 <code>memo.txt</code> 파일이나 <code>music</code> 디렉터리가 존재하는지 여부를 확인한다. <code>dir_exists</code>는 디렉터리, <code>file_exists</code>는 파일이 존재하는지 검사한다. </p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">R</a></li>
@@ -1941,6 +1942,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </section><section id="bbc-뉴스-사례" class="level2" data-number="24.2"><h2 data-number="24.2" class="anchored" data-anchor-id="bbc-뉴스-사례">
 <span class="header-section-number">24.2</span> BBC 뉴스 사례</h2>
+<p> </p>
 <p>작업 자동화를 별도의 주제로 분리하여 다루는 이유는, <a href="http://mlg.ucd.ie/datasets/bbc.html">BBC 뉴스 데이터셋</a><span class="citation" data-cites="greene06icml">(Greene 와/과 Cunningham 2006)</span>과 같은 파일들이 디렉터리에 저장될 경우, 이를 효과적으로 처리할 수 있기 때문이다. 인공지능의 기반 기술인 기계학습과 딥러닝은, 전 세계 다양한 언어로 수집된 상상을 초월하는 양의 텍스트 데이터를 가공하여 AI 모델 개발의 기초 데이터로 활용한다.</p>
 <p><a href="http://mlg.ucd.ie/datasets/bbc.html">BBC 뉴스 데이터셋</a>은 5개 뉴스 범주에 맞춰 각 뉴스는 <code>001.txt</code>, <code>002.txt</code>, <code>003.txt</code> 등과 같은 파일명으로 저장되어 있다. 먼저 궁금한 점은 BBC 뉴스 데이터가 각 범주별로 몇 개의 기사가 있는지 빈도수를 확인하는 것이다.</p>
 <div class="cell">
@@ -2068,7 +2070,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </section><section id="tasks-pipe" class="level2" data-number="24.3"><h2 data-number="24.3" class="anchored" data-anchor-id="tasks-pipe">
 <span class="header-section-number">24.3</span> 파이프(Pipes)</h2>
-<p>대부분의 운영 시스템은 <strong>쉘(shell)</strong>로 알려진 명령어 기반 인터페이스를 지원한다. 일반적으로 쉘은 파일 시스템을 탐색하거나 응용 프로그램을 실행하는 명령어를 지원한다. 예를 들어, 유닉스에서 <code>cd</code> 명령어로 디렉터리를 변경하고 <code>ls</code> 명령어로 디렉터리의 콘텐츠를 보여주고, <code>firefox</code>를 타이핑해서 웹 브라우저를 실행시킬 수 있다.</p>
+<p> </p>
+<p>대부분의 운영 시스템은 <strong>쉘(shell)</strong>로 알려진 명령어 기반 인터페이스를 지원한다. 일반적으로 쉘은 파일 시스템을 탐색하거나 응용 프로그램을 실행하는 명령어를 지원한다. 예를 들어, 유닉스에서 <code>cd</code> 명령어로 디렉터리를 변경하고 <code>ls</code> 명령어로 디렉터리의 콘텐츠를 보여주고, <code>firefox</code>를 타이핑해서 웹 브라우저를 실행시킬 수 있다. </p>
 <p>쉘에서 실행시킬 수 있는 어떤 프로그램이나 <strong>파이프(pipe)</strong>를 사용하여 R에서도 실행시킬 수 있다. 파이프는 작동 중인 프로세스를 표현하는 객체다. 파이프를 사용하면 프로세스의 입출력을 읽거나 쓸 수 있다.</p>
 <p>예를 들어, 유닉스 명령어<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <code>ls -l</code>은 정상적으로 현재 디렉터리의 콘텐츠(긴 형식으로)를 보여준다. <code><a href="https://rdrr.io/r/base/system2.html">system2()</a></code> 내장함수, 혹은 <a href="https://cran.r-project.org/web/packages/processx/index.html"><code>processx</code></a>, <a href="https://cran.r-project.org/web/packages/sys/index.html"><code>sys</code></a> 패키지를 가지고 <code>ls</code>를 실행시킬 수 있다. 인자는 쉘 명령어를 포함하는 문자열이다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -2158,6 +2161,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </section></section><section id="tasks-commandline" class="level2" data-number="24.4"><h2 data-number="24.4" class="anchored" data-anchor-id="tasks-commandline">
 <span class="header-section-number">24.4</span> 명령 줄 인자</h2>
+<p> </p>
 <p>명령라인 인터페이스에서 R 스크립트를 실행하고 다양한 R 스크립트 실행방법을 살펴보자. 먼저, 유닉스/리눅스/맥OS/윈도우 운영체제가 준비되었다면 R스크립트 실행환경을 준비한다. <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> 윈도우 사용자는 <a href="https://git-scm.com/">깃배쉬(Git Bash)</a>를 설치하면 윈도우에서도 리눅스/맥OS와 동일한 명령어를 사용할 수 있다. 내부적으로 깃배쉬가 <code>mintty</code> 터미널을 사용하고 있어서 리눅스/맥OS와 동일한 명령어를 사용할 수 있다.</p>
 <div id="fig-argv" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-argv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -2375,23 +2379,24 @@ R 스크립트에 인자를 넘기는 패키지
 <span class="header-section-number">24.7</span> 용어 정의</h2>
 <ul>
 <li>
-<strong>절대경로(absolute path)</strong>: 파일이나 디렉터리가 어디에 저장되어 있는지를 저장하는 문자열로 “최상단의 디렉터리”에서 시작해서, 현재 작업 디렉터리에 관계없이 파일이나 디렉터리를 접근하는 데 사용할 수 있다.</li>
+<strong>절대경로(absolute path)</strong>: 파일이나 디렉터리가 어디에 저장되어 있는지를 저장하는 문자열로 “최상단의 디렉터리”에서 시작해서, 현재 작업 디렉터리에 관계없이 파일이나 디렉터리를 접근하는 데 사용할 수 있다. </li>
 <li>
-<strong>체크썸(checksum)</strong>: <strong>해싱(hashing)</strong>을 참조하세요. “체크썸(checksum)”단어는 네트워크로 데이터가 보내지거나 백업 매체에 쓰여지고 다시 읽어올 때, 데이터가 왜곡되었는지를 검증하는 필요에서 생겨났다. 데이터가 쓰여지거나 보내질 때, 송신 시스템은 체크썸을 계산하고 또한 체크썸도 보낸다. 데이터가 읽혀지거나 받았을 때, 수신 시스템에서 수신된 데이터의 체크썸을 다시 계산하고 받은 체크썸과 비교한다. 만약 체크썸이 매칭되지 않으면, 전송 시에 데이터가 왜곡된 것으로 판단해야 한다.</li>
+<strong>체크썸(checksum)</strong>: <strong>해싱(hashing)</strong>을 참조하세요. “체크썸(checksum)”단어는 네트워크로 데이터가 보내지거나 백업 매체에 쓰여지고 다시 읽어올 때, 데이터가 왜곡되었는지를 검증하는 필요에서 생겨났다. 데이터가 쓰여지거나 보내질 때, 송신 시스템은 체크썸을 계산하고 또한 체크썸도 보낸다. 데이터가 읽혀지거나 받았을 때, 수신 시스템에서 수신된 데이터의 체크썸을 다시 계산하고 받은 체크썸과 비교한다. 만약 체크썸이 매칭되지 않으면, 전송 시에 데이터가 왜곡된 것으로 판단해야 한다. </li>
 <li>
-<strong>명령 줄 인자(command line argument)</strong>: R 스크립트 파일 이름 뒤에 명령 줄에 매개 변수.</li>
+<strong>명령 줄 인자(command line argument)</strong>: R 스크립트 파일 이름 뒤에 명령 줄에 매개 변수. </li>
 <li>
-<strong>현재 작업 디렉터리(current working directory)</strong>: 여러분이 “작업하고 있는” 현재 디렉터리. 명령-줄 인터페이스에서 대부분의 시스템에 <code>cd</code> 명령어를 사용하여 작업 디렉터리를 변경할 수 있다. 경로 정보 없이 파일만을 사용하여 R에서 파일을 열게 될 때, 파일은 프로그램을 실행하고 있는 현재 작업 디렉터리에 있어야 한다.</li>
+<strong>현재 작업 디렉터리(current working directory)</strong>: “작업하고 있는” 현재 디렉터리. 명령-줄 인터페이스에서 대부분의 시스템에 <code>cd</code> 명령어를 사용하여 작업 디렉터리를 변경할 수 있다. 경로 정보 없이 파일만을 사용하여 R에서 파일을 열게 될 때, 파일은 프로그램을 실행하고 있는 현재 작업 디렉터리에 있어야 한다. </li>
 <li>
-<strong>해싱(hashing)</strong>: 가능한 큰 데이터를 읽고 그 데이터에 대해서 유일한 체크썸을 생성하는 것. 최고의 해시 함수는 거의 “충돌(collision)”을 만들지 않는다. 여기서 충돌은 서로 다른 두 데이터 스트림에 해시 함수를 줄 때 동일한 해시값을 돌려받는 것이다. MD5, SHA1, SHA256은 가장 많이 사용되는 해시 함수의 사례다.</li>
+<strong>해싱(hashing)</strong>: 가능한 큰 데이터를 읽고 그 데이터에 대해서 유일한 체크썸을 생성하는 것. 최고의 해시 함수는 거의 “충돌(collision)”을 만들지 않는다. 여기서 충돌은 서로 다른 두 데이터 스트림에 해시 함수를 줄 때 동일한 해시값을 돌려받는 것이다. MD5, SHA1, SHA256은 가장 많이 사용되는 해시 함수의 사례다. <br>
+</li>
 <li>
-<strong>파이프(pipe)</strong>: 파이프는 실행하는 프로그램에 연결이다. 파이프를 사용해서, 데이터를 다른 프로그램에 보내거나 그 프로그램에서 데이터를 받는 프로그램을 작성할 수 있다. 파이프는 <strong>소켓(socket)</strong>과 매우 유사하다. 차이점은 파이프는 동일한 컴퓨터에서 실행되는 프로그램을 연결하는 데만 사용된다는 것이다. (즉, 네트워크를 통해서는 사용할 수 없다.)</li>
+<strong>파이프(pipe)</strong>: 파이프는 실행하는 프로그램에 연결이다. 파이프를 사용해서, 데이터를 다른 프로그램에 보내거나 그 프로그램에서 데이터를 받는 프로그램을 작성할 수 있다. 파이프는 <strong>소켓(socket)</strong>과 매우 유사하다. 차이점은 파이프는 동일한 컴퓨터에서 실행되는 프로그램을 연결하는 데만 사용된다는 것이다. (즉, 네트워크를 통해서는 사용할 수 없다.) </li>
 <li>
-<strong>상대경로(relative path)</strong>: 파일 혹은 디렉터리가 어디에 저장되었는지를 현재 작업 디렉터리에 상대적으로 표현하는 문자열.</li>
+<strong>상대경로(relative path)</strong>: 파일 혹은 디렉터리가 어디에 저장되었는지를 현재 작업 디렉터리에 상대적으로 표현하는 문자열. </li>
 <li>
-<strong>쉘(shell)</strong>: 운영 시스템에 명령줄 인터페이스. 다른 시스템에서는 또한 “터미널 프로그램(terminal program)”이라고 부른다. 이런 인터페이스에서 라인에 명령어와 매개 변수를 타입하고 명령을 실행하기 위해서 “엔터(enter)”를 누른다.</li>
+<strong>쉘(shell)</strong>: 운영 시스템에 명령줄 인터페이스. 다른 시스템에서는 또한 “터미널 프로그램(terminal program)”이라고 부른다. 이런 인터페이스에서 라인에 명령어와 매개 변수를 타입하고 명령을 실행하기 위해서 “엔터(enter)”를 누른다. </li>
 <li>
-<strong>워크(walk)</strong>: 모든 디렉터리를 방문할 때까지 디렉터리, 하위 디렉터리, 하위의 하위 디렉터리 전체 트리를 방문하는 개념을 나타내기 위해서 사용된 용어. 여기서이것을 “디렉터리 트리를 워크”한다고 부른다.</li>
+<strong>워크(walk)</strong>: 모든 디렉터리를 방문할 때까지 디렉터리, 하위 디렉터리, 하위의 하위 디렉터리 전체 트리를 방문하는 개념을 나타내기 위해서 사용된 용어. 여기서이것을 “디렉터리 트리를 워크”한다고 부른다. </li>
 </ul></section><section id="tasks-exercise" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="tasks-exercise">연습문제</h2>
 <p>영화 파일(예를 들어 <code>.avi</code>, <code>.mp4</code>)과 음악 파일(예를 들어 <code>.mp3</code>, <code>.wav</code>)이 다양한 디렉터리에 분산되어 저장되는 경우가 있다. 대규모 파일 컬렉션에서는 동일한 노래가 다른 디렉터리나 파일 이름으로 중복되어 저장되어 있는 경우를 종종 발견한다. 연습문제에서 이와 같은 중복 파일을 찾아내는 것을 목표로 하며, 이를 통해 보다 효율적인 파일 관리와 저장 공간 최적화를 도모할 수 있다.</p>
 <ol type="1">
@@ -2419,7 +2424,7 @@ Pole, Andy, Mike West, 와/과 Jeff Harrison. 2018. <em>Applied Bayesian forecas
 </div>
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1"><p>파이프를 사용하여 <code>ls</code> 같은 운영 시스템 명령어로 대화할 때, 무슨 운영 시스템을 사용하는지 알고 운영 시스템에서 지원되는 명령어로 파이프를 열 수 있다는 것이 중요하다.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>파이프를 사용하여 <code>ls</code> 같은 운영 시스템 명령어로 대화할 때, 무슨 운영 시스템을 사용하는지 알고 운영 시스템에서 지원되는 명령어로 파이프를 열 수 있다는 것이 중요하다. <a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p><a href="http://statkclee.github.io/parallel-r/r-parallel-rscript-exec.html">.R 스크립트를 인자와 함께 실행</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p><a href="http://statkclee.github.io/r-novice-inflammation/05-cmdline-kr.html">R프로그래밍 - 명령-라인 프로그램</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -3515,7 +3520,7 @@ qpyodideCellDetails.map(
       qpyodideCreateCell(entry);
     }
   );
-</script><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});
+</script><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
