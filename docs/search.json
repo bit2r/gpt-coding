@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "챗GPT 코딩",
     "section": "",
-    "text": "서문\n코딩은 챗GPT로 대표되는 인공지능 시대에 필수적인 기술이다. 본 책 “챗GPT 코딩”은 프로그래밍의 기본 개념부터 실무에서 활용할 수 있는 다양한 도구와 기술까지 폭넓게 다룬다. 특히 챗GPT와 같은 최신 AI 기술을 자유자재로 다루기 위해 꼭 필요한 기본기를 상세히 설명한다.\n책의 앞부분에서는 프로그래밍의 기초인 변수, 조건문, 반복문, 함수 등의 핵심 개념과 함께 데이터 과학, 기계 학습, 딥러닝, 나아가 생성형 AI의 기반이 되는 문자열, 파일, 리스트, 딕셔너리, 데이터프레임 등의 자료구조를 기초부터 다루고 있다.\n이어서 프로그래밍과 불가분의 관계인 버전 제어에 대해 다룬다. 버전 제어를 대중화시킨 Git을 소개하고, Git의 기본 사용법부터 GitHub를 통한 원격 작업, 협업, 충돌 해결 등 실무에 필요한 기술을 자세히 안내한다. 공개 과학 기술 및 협업 과정에서 필수적으로 따라오게 되는 공개 과학, 라이선싱, 호스팅, 출처 표시, 통합 개발 환경 등도 소개하고 있다.\n후반부에서는 정규표현식, 네트워크 프로그래밍, 웹서비스 활용, 작업 자동화 등 실무에서 유용한 도구와 기술을 소개하고, 마지막으로 챗GPT를 프로그래밍에 어떻게 활용할 수 있는지 설명하며, 코딩에 대한 새로운 시각을 제시한다.\n본 책을 통해 프로그래밍 전반에 대한 이해를 높이고, AI 기술을 활용한 프로그래밍 작업의 생산성을 극대화할 수 있을 것이다. 지금부터 새로운 코딩 여정을 시작해보길 바란다.",
+    "text": "서문\n코딩은 챗GPT로 대표되는 인공지능 시대에 필수적인 기술이다. 본 책 “챗GPT 코딩”은 프로그래밍의 기본 개념부터 실무에서 활용할 수 있는 다양한 도구와 기술까지 폭넓게 다룬다. 특히 챗GPT와 같은 최신 AI 기술을 자유자재로 다루기 위해 꼭 필요한 기본기를 상세히 설명한다.\n책의 앞부분에서는 프로그래밍의 기초인 변수, 조건문, 반복문, 함수 등의 핵심 개념과 함께 데이터 과학, 기계 학습, 딥러닝, 나아가 생성형 AI의 기반이 되는 문자열, 파일, 리스트, 딕셔너리, 데이터프레임 등의 자료구조를 기초부터 다루고 있다.\n이어서 프로그래밍과 불가분의 관계인 버전 제어에 대해 다룬다. 버전 제어를 대중화시킨 Git을 소개하고, Git의 기본 사용법부터 GitHub를 통한 원격 작업, 협업, 충돌 해결 등 실무에 필요한 기술을 자세히 안내한다. 공개 과학 기술 및 협업 과정에서 필수적으로 따라오게 되는 공개 과학, 라이선싱, 호스팅, 출처 표시, 통합 개발 환경 등도 소개하고 있다.\n후반부에서는 정규표현식, 네트워크 프로그래밍, 웹서비스 활용, 작업 자동화 등 실무에서 유용한 도구와 기술을 소개하고, 마지막으로 챗GPT를 프로그래밍에 어떻게 활용할 수 있는지 설명하며, 코딩에 대한 새로운 시각을 제시한다.\n본 책을 통해 프로그래밍 전반에 대한 이해를 높이고, AI 기술을 활용한 프로그래밍 작업의 생산성을 극대화할 수 있을 것이다. 지금부터 새로운 코딩 여정을 시작해보길 바란다. 1",
     "crumbs": [
       "서문"
     ]
@@ -2347,6 +2347,16 @@
     "text": "Chiang, Ted. 2023. “ChatGPT Is a Blurry JPEG of the Web.”\nThe New Yorker 9: 2023.\n\n\nGonzalez, Ivan, Daisie Huang, Nima Hejazi, Katherine Koziar, and\nMadicken Munk. 2019. “Software Carpentry: Version Control with\nGit.” https://doi.org/10.5281/zenodo.3264950.\n\n\nGozalo-Brizuela, Roberto, and Eduardo C Garrido-Merchan. 2023.\n“ChatGPT Is Not All You Need. A State of the Art Review of Large\nGenerative AI Models.” arXiv Preprint arXiv:2301.04655.\n\n\nGreene, Derek, and Pádraig Cunningham. 2006. “Practical Solutions\nto the Problem of Diagonal Dominance in Kernel Document\nClustering.” In Proc. 23rd International Conference on\nMachine Learning (ICML’06), 377–84. ACM Press.\n\n\nPole, Andy, Mike West, and Jeff Harrison. 2018. Applied Bayesian\nForecasting and Time Series Analysis. Chapman; Hall/CRC.\n\n\nSeverance, Charles Russell. 2015. Python for Informatics: Exploring\nInformation. Translated by Kwangchun Lee. Korean Edition.\nCreateSpace Independent Publishing Platform. http://www.pythonlearn.com.\n\n\nStevens, Stanley Smith. 1946. “On the Theory of Scales of\nMeasurement.” Science 103 (2684): 677–80.\n\n\nVaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion\nJones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017.\n“Attention Is All You Need.” Advances in Neural\nInformation Processing Systems 30.\n\n\nWickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy\nD’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.\n“Welcome to the Tidyverse.” Journal of Open Source\nSoftware 4 (43): 1686.\n\n\nWickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.\nR for Data Science. \" O’Reilly Media, Inc.\".\n\n\nWiener, Norbert. 1921. “A New Theory of Measurement: A Study in\nthe Logic of Mathematics.” Proceedings of the London\nMathematical Society 2 (1): 181–205.\n\n\nWu, Tianyu, Shizhu He, Jingping Liu, Siqi Sun, Kang Liu, Qing-Long Han,\nand Yang Tang. 2023. “A Brief Overview of ChatGPT: The History,\nStatus Quo and Potential Future Development.” IEEE/CAA\nJournal of Automatica Sinica 10 (5): 1122–36.\n\n\n이경화. 2020. 고등학교 실용통계. 통계청 통계교육원.\n\n\n이광춘. 2024a. 챗gpt SQL. 한국 R 사용자회.\n\n\n———. 2024b. 챗gpt 쿼토. 한국 R 사용자회.\n\n\n이광춘, and 신종화. 2023. 챗gpt 유닉스쉘. \"한국 R 사용자회\".",
     "crumbs": [
       "참고문헌"
+    ]
+  },
+  {
+    "objectID": "index.html#footnotes",
+    "href": "index.html#footnotes",
+    "title": "챗GPT 코딩",
+    "section": "",
+    "text": "📦 표지그림: Hedgehog illustrations created by Alison Hill and Allison Horst for RStudio Educational Resources.↩︎",
+    "crumbs": [
+      "서문"
     ]
   }
 ]
