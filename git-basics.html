@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="이광춘(Openai)">
+<meta name="author" content="이광춘">
 
-<title>챗GPT 코딩</title>
+<title>11&nbsp; 자동화된 버전 관리 – 챗GPT 코딩</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ide.html" rel="next">
+<link href="./git-setup-create.html" rel="next">
+<link href="./A-dataframe.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -44,6 +45,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-51eba2ad75c50bd4dffcd83a6d692c13.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -99,7 +103,7 @@ ga('send', {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">서문</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./git-basics.html"><strong>3부</strong> 버전제어와 협업</a></li><li class="breadcrumb-item"><a href="./git-basics.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -134,14 +138,14 @@ ga('send', {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">서문</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>5부</strong> 통합 개발 환경</span></a>
+ <span class="menu-text"><strong>1부</strong> 프로그래밍</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -149,26 +153,197 @@ ga('send', {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">IDE 선택의 여정: 역사부터 미래까지</span></span></a>
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 학습 이유</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-basics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-setup-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-change.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">추적 대상에서 제외</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GitHub 원격 작업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">공개 과학과 협업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-conflict.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide_positron.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Positron: R과 Python을 위한 차세대 데이터 과학 IDE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Positron IDE</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ide_extension.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램: 필요성과 아키텍처</span></span></a>
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ide_setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">IDE 설치 및 환경 설정</span></span></a>
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">작업 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
   </div>
 </li>
       </ul>
@@ -179,73 +354,27 @@ ga('send', {
  <span class="menu-text">참고문헌</span></a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">6부: AI 데이터 과학 환경 구축</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./lang_setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">프로그래밍 언어 설치</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">목차</h2>
-   
-  <ul>
-  <li><a href="#서문" id="toc-서문" class="nav-link active" data-scroll-target="#서문">서문</a>
-  <ul class="collapse">
-  <li><a href="#감사의-글" id="toc-감사의-글" class="nav-link" data-scroll-target="#감사의-글">감사의 글</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./git-basics.html"><strong>3부</strong> 버전제어와 협업</a></li><li class="breadcrumb-item"><a href="./git-basics.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">챗GPT 코딩</h1>
-<p class="subtitle lead">인공지능(LLM)과 동료(Git/GitHub)와 함께 하는 프로그래밍</p>
+<h1 class="title"><span id="git" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></h1>
 </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">저자</div>
-  <div class="quarto-title-meta-heading">소속</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">이광춘(Openai) </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            공익법인 한국 R 사용자회
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
-    <div>
-    <div class="quarto-title-meta-heading">공개</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">2025년 11월 23일</p>
-    </div>
-  </div>
+    
   
     
   </div>
@@ -255,37 +384,84 @@ ga('send', {
 </header>
 
 
-
-<section id="서문" class="level1 unnumbered">
-<h1 class="unnumbered">서문</h1><p><img src="images/book_cover.jpg" title="챗GPT 코딩" class="quarto-cover-image nolightbox img-fluid"></p>
-<p>지난 몇 년간, 인공지능(AI)의 발전은 우리가 코드를 이해하고 데이터를 바라보는 방식을 근본적으로 바꾸어 놓았습니다. AI가 코드 초안을 작성해주고, 막혔던 질문에 길을 터주는 시대에, 어떤 역량을 갖춰야 할까요? 넘쳐나는 정보와 도구 속에서 길을 잃지 않고, 데이터로부터 진정한 가치를 만들어내는 전문가로 성장하려면 무엇을 배워야 할까요?</p>
-<p>많은 이들이 데이터 과학 프로젝트를 ’일회성 실험’으로 생각합니다. 데이터를 가져와 모델을 만들고, 결과를 보고하는 작업은 분명 중요합니다. 하지만 거기서 멈춘다면, 그 노력은 파편적인 코드와 지식으로만 남게 됩니다. AI에게 복잡한 작업을 맡기더라도, 그 결과가 얼마나 믿을 수 있는지, 내일 또 다른 데이터가 들어왔을 때 전체 과정을 손쉽게 반복할 수 있는지 확신하기 어렵습니다.</p>
-<p>이 책은 그 한계를 넘어서기 위한 여정으로의 초대입니다.</p>
-<p>단순히 코딩 문법이나 AI 도구 사용법을 나열하는 데 그치지 않고, 이 책은 <strong>‘스스로 살아 움직이며 가치를 창출하는 지능형 데이터 시스템’</strong> 을 구축하는 전체 과정을 안내합니다. 이 책에서 펼쳐질 여정은 다음과 같습니다.</p>
-<p>첫 단계는 전문가의 작업실처럼 체계적인 프로젝트 관리, <code>git</code>을 활용한 버전 관리, 테스트를 통해 실수를 줄이는 법을 배우며 <strong>견고한 토대</strong>를 다지는 것입니다.</p>
-<p>그 위에서, AI라는 강력한 도구를 단순한 장난감이 아닌, 그 결과물을 검증하고 신뢰할 수 있는 <strong>지적인 동료</strong>로 만드는 방법을 탐구합니다.</p>
-<p>나아가 이 모든 과정을 <strong>자동화</strong>하여, 버튼 클릭 한 번, 혹은 정해진 시간마다 스스로 전체 데이터 작업을 수행하고 결과를 도출하는 효율성의 극치를 경험하게 될 것입니다.</p>
-<p>이 책의 최종 목표는, 이 모든 것을 통합하여 <strong>매일 새로운 데이터를 바탕으로 AI의 지능을 빌려 새로운 지식을 창출하고, 그 결과를 정해진 형태로 만들어내는 하나의 완전한 ’자동화된 지능형 시스템’을 완성하는 것입니다.</strong></p>
-<p>이 책을 덮을 때쯤, 독자 여러분은 단순히 코드를 작성하는 사람을 넘어, 신뢰할 수 있고 자동화된 데이터 시스템을 설계하고 구축하는 전문가로 성장해 있을 것입니다. AI의 시대, 데이터로 진짜 문제를 해결하는 전문가가 되기 위한 여정을 이제 시작하겠습니다.</p>
-<section id="감사의-글" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="감사의-글">감사의 글</h2>
-<style>
-.flushright {
-   text-align: right;
-}
-</style>
-<p>이 책이 탄생할 수 있도록 도움을 주신 여러분께 깊은 감사의 마음을 표합니다.</p>
-<p>공익법인 한국 R 사용자회가 없었다면 데이터 과학분야 챗GPT 시리즈가 세상에 나오지 못했을 것입니다. 한국 R 사용자회의 유충현 회장님, 신종화 사무처장님, 홍성학 감사님, 올해부터 새롭게 공익법인 한국 R 사용자를 이끌어주실 형환희 회장님께 감사드립니다.</p>
-<p>또한 이 책은 2014년 처음 몸담게 된 소프트웨어 카펜트리 그렉 윌슨 박사님과 Python for Informatics 저자인 미시건 대학 찰스 세브란스 교수님을 비롯한 전세계 수많은 익명의 기여자들의 노력과 지원이 있었고, 서울 R 미트업에서 발표해주시고 참여해주신 수많은 분들이 격려와 영감을 주셨기에 가능했습니다.</p>
-<p>이 책이 출간되는데 있어 이들 모든 분들의 도움 없이는 어려웠을 것입니다. 그동안의 관심과 지원에 깊은 감사를 드리며, 이 책이 데이터 과학의 발전과 독자들에게 도움이 될 수 있기를 바라는 마음으로 마무리하겠습니다.</p>
-<div class="flushright">
-<p>2024년 3월 속초 청초호</p>
-<p>이광춘</p>
+<p> </p>
+<p>누군가 무엇을 했는지, 언제 했는지를 추적하기 위해서 버전 관리를 어떻게 사용할 수 있는지 탐색해보자. 다른 사람과 협업을 하지 않더라도, 자동화된 버전 관리가 다음 상황보다 훨씬 더 낫다:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/git/phd101212s.png" class="img-fluid figure-img" width="263"></p>
+<figcaption>Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com/comics/archive_print.php?comicid=1531</figcaption>
+</figure>
+</div>
+<p>이전에 위와 같은 상황에 처했었다. 같은 문서에 대해서 거의 동일한 다수 버전을 관리하는 것은 우스꽝스러워 보인다. 일부 워드프로세서에는 이런 상황을 좀 더 잘 처리하도록 하는 기능이 있다. 예를 들어, 마이크로소프트 워드 “변경 내용 추적(Track Changes)”이나 구글 문서(Google Docs)의 버전 기록 기능이 그것이다.</p>
+<p>버전 관리 시스템은 문서의 기본 버전으로 시작한 후, 각 단계마다 변경한 이력을 저장한다. 테이프로 생각하면 이해하기 쉽다. 테이프를 되감으면 문서를 시작한 지점으로 돌아가고, 각 변경 사항을 다시 적용하면 가장 최신 버전이 된다.</p>
+<div id="fig-play-changes" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-play-changes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/git/play-changes.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="그림&nbsp;11.1: 변경 사항이 순차적으로 저장된다."><img src="images/git/play-changes.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="468"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-play-changes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;11.1: 변경 사항이 순차적으로 저장된다.
+</figcaption>
+</figure>
+</div>
+<p>변경 사항을 문서 그 자체와 별개로 생각하면, 동일한 기반 문서에 서로 다른 변경 사항을 적용해보는 식으로 “재생(playback)”할 수 있고, 이를 별도의 문서 버전을 관리하는 것으로 간주할 수 있다. 예를 들어, 두 사용자가 같은 문서에 독립적으로 변경 작업을 수행할 수 있다.</p>
+<div id="fig-git-playback" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-git-playback-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/git/versions.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="그림&nbsp;11.2: 다른 버전이 저장될 수도 있다."><img src="images/git/versions.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="271"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-git-playback-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;11.2: 다른 버전이 저장될 수도 있다.
+</figcaption>
+</figure>
+</div>
+<p>만약 충돌이 발생하지 않는다면, 심지어 동일한 문서에 두 가지 변경 사항을 모두 적용할 수도 있다.<br>
+</p>
+<div id="fig-merge" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-merge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/git/merge.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="그림&nbsp;11.3: 여러 버전이 병합될 수도 있다."><img src="images/git/merge.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="260"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-merge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;11.3: 여러 버전이 병합될 수도 있다.
+</figcaption>
+</figure>
+</div>
+<p>버전 관리 시스템은 사용자를 대신해서 변경 사항을 기록하고, 파일 버전을 생성하며 파일을 병합하는 데 유용한 도구이다. 버전 관리 시스템을 사용하면 어떤 변경 사항을 다음 버전에 반영할지 결정할 수 있는데, 이를 <strong>커밋(commit)</strong>이라고 부른다. 또한 커밋에 관한 유용한 메타 정보도 보관한다. 특정 프로젝트와 프로젝트 메타 정보에 대한 완전한 커밋 이력은 <strong>저장소(repository)</strong>에 보관된다. 저장소는 협업하는 여러 동료의 컴퓨터 간에 동기화될 수 있다. </p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>버전 관리 시스템의 오랜 역사
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p></p>
+<p>자동화된 버전 관리 시스템은 전혀 새로운 것이 아니다. 1980년대부터 RCS, CVS, Subversion 같은 도구가 존재했고, 많은 대기업에서 사용되어 왔다. 하지만 다양한 기능의 한계로 인해 이들 중 다수는 이제 레거시 시스템(legacy system)으로 간주된다. 최근에 등장한 Git과 <a href="http://swcarpentry.github.io/hg-novice/">Mercurial</a> 같은 도구는 <em>분산(distributed)</em> 기능을 제공한다. 이는 저장소를 반드시 중앙 서버에 둘 필요가 없다는 의미이다. 이러한 최신 시스템에는 동시에 여러 저자가 동일한 파일을 편집하는 것을 가능하게 하는 강력한 병합(merge) 도구도 내장되어 있다.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>논문 작성 시 버전 관리
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p></p>
+<ul>
+<li><p>논문을 작성하면서 정말 멋진 문단을 초안으로 작성했지만, 나중에 망쳐버렸다고 상상해 보자. 어떻게 해야 <em>정말 멋진</em> 결론 부분이 포함된 문서 버전을 되살릴 수 있을까? 과연 가능할까?</p></li>
+<li><p>공동 저자가 5명 있다고 가정해 보자. 이들이 논문에 반영한 변경 사항과 의견(comment)을 어떻게 관리할 수 있을까? 마이크로소프트 워드나 리브레오피스 Writer를 사용한다면 <code>변경 내용 추적</code> 기능으로 변경 사항을 반영하면 어떻게 될까? 이러한 변경 내역을 계속 보관하고 있을 수 있을까?<br>
+</p></li>
+</ul>
+</div>
 </div>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -729,10 +905,13 @@ ga('send', {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./A-dataframe.html" class="pagination-link" aria-label="데이터프레임">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">데이터프레임</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ide.html" class="pagination-link" aria-label="IDE 선택의 여정: 역사부터 미래까지">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">IDE 선택의 여정: 역사부터 미래까지</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./git-setup-create.html" class="pagination-link" aria-label="Git 설정과 저장소">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -744,12 +923,44 @@ ga('send', {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/git-basics.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

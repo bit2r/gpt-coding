@@ -8,7 +8,7 @@
 
 <meta name="author" content="이광춘(Openai)">
 
-<title>챗GPT 코딩</title>
+<title>2&nbsp; Positron: R과 Python을 위한 차세대 데이터 과학 IDE – 챗GPT 코딩</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ide.html" rel="next">
+<link href="./ide_extension.html" rel="next">
+<link href="./ide.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -99,7 +100,7 @@ ga('send', {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">서문</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ide.html"><strong>5부</strong> 통합 개발 환경</a></li><li class="breadcrumb-item"><a href="./ide_positron.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Positron: R과 Python을 위한 차세대 데이터 과학 IDE</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -134,7 +135,7 @@ ga('send', {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">서문</span></a>
   </div>
 </li>
@@ -155,7 +156,7 @@ ga('send', {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ide_positron.html" class="sidebar-item-text sidebar-link">
+  <a href="./ide_positron.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Positron: R과 Python을 위한 차세대 데이터 과학 IDE</span></span></a>
   </div>
 </li>
@@ -206,46 +207,26 @@ ga('send', {
     <h2 id="toc-title">목차</h2>
    
   <ul>
-  <li><a href="#서문" id="toc-서문" class="nav-link active" data-scroll-target="#서문">서문</a>
-  <ul class="collapse">
-  <li><a href="#감사의-글" id="toc-감사의-글" class="nav-link" data-scroll-target="#감사의-글">감사의 글</a></li>
-  </ul></li>
+  <li><a href="#positron의-철학-rstudio와-vs-code의-장점을-결합하다" id="toc-positron의-철학-rstudio와-vs-code의-장점을-결합하다" class="nav-link active" data-scroll-target="#positron의-철학-rstudio와-vs-code의-장점을-결합하다"><span class="header-section-number">2.1</span> Positron의 철학: RStudio와 VS Code의 장점을 결합하다</a></li>
+  <li><a href="#ai-시대-positron은-데이터-과학을-어떻게-바꾸는가" id="toc-ai-시대-positron은-데이터-과학을-어떻게-바꾸는가" class="nav-link" data-scroll-target="#ai-시대-positron은-데이터-과학을-어떻게-바꾸는가"><span class="header-section-number">2.2</span> AI 시대, Positron은 데이터 과학을 어떻게 바꾸는가?</a></li>
+  <li><a href="#rstudio-vs-code와-비교-언제-positron을-선택해야-할까" id="toc-rstudio-vs-code와-비교-언제-positron을-선택해야-할까" class="nav-link" data-scroll-target="#rstudio-vs-code와-비교-언제-positron을-선택해야-할까"><span class="header-section-number">2.3</span> RStudio, VS Code와 비교: 언제 Positron을 선택해야 할까?</a></li>
+  <li><a href="#결론-ai와-함께하는-데이터-과학의-미래" id="toc-결론-ai와-함께하는-데이터-과학의-미래" class="nav-link" data-scroll-target="#결론-ai와-함께하는-데이터-과학의-미래"><span class="header-section-number">2.4</span> 결론: AI와 함께하는 데이터 과학의 미래</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/ide_positron.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ide.html"><strong>5부</strong> 통합 개발 환경</a></li><li class="breadcrumb-item"><a href="./ide_positron.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Positron: R과 Python을 위한 차세대 데이터 과학 IDE</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">챗GPT 코딩</h1>
-<p class="subtitle lead">인공지능(LLM)과 동료(Git/GitHub)와 함께 하는 프로그래밍</p>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Positron: R과 Python을 위한 차세대 데이터 과학 IDE</span></h1>
 </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">저자</div>
-  <div class="quarto-title-meta-heading">소속</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">이광춘(Openai) </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            공익법인 한국 R 사용자회
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
-    <div>
-    <div class="quarto-title-meta-heading">공개</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">2025년 11월 23일</p>
-    </div>
-  </div>
+    
   
     
   </div>
@@ -255,36 +236,102 @@ ga('send', {
 </header>
 
 
-
-<section id="서문" class="level1 unnumbered">
-<h1 class="unnumbered">서문</h1><p><img src="images/book_cover.jpg" title="챗GPT 코딩" class="quarto-cover-image nolightbox img-fluid"></p>
-<p>지난 몇 년간, 인공지능(AI)의 발전은 우리가 코드를 이해하고 데이터를 바라보는 방식을 근본적으로 바꾸어 놓았습니다. AI가 코드 초안을 작성해주고, 막혔던 질문에 길을 터주는 시대에, 어떤 역량을 갖춰야 할까요? 넘쳐나는 정보와 도구 속에서 길을 잃지 않고, 데이터로부터 진정한 가치를 만들어내는 전문가로 성장하려면 무엇을 배워야 할까요?</p>
-<p>많은 이들이 데이터 과학 프로젝트를 ’일회성 실험’으로 생각합니다. 데이터를 가져와 모델을 만들고, 결과를 보고하는 작업은 분명 중요합니다. 하지만 거기서 멈춘다면, 그 노력은 파편적인 코드와 지식으로만 남게 됩니다. AI에게 복잡한 작업을 맡기더라도, 그 결과가 얼마나 믿을 수 있는지, 내일 또 다른 데이터가 들어왔을 때 전체 과정을 손쉽게 반복할 수 있는지 확신하기 어렵습니다.</p>
-<p>이 책은 그 한계를 넘어서기 위한 여정으로의 초대입니다.</p>
-<p>단순히 코딩 문법이나 AI 도구 사용법을 나열하는 데 그치지 않고, 이 책은 <strong>‘스스로 살아 움직이며 가치를 창출하는 지능형 데이터 시스템’</strong> 을 구축하는 전체 과정을 안내합니다. 이 책에서 펼쳐질 여정은 다음과 같습니다.</p>
-<p>첫 단계는 전문가의 작업실처럼 체계적인 프로젝트 관리, <code>git</code>을 활용한 버전 관리, 테스트를 통해 실수를 줄이는 법을 배우며 <strong>견고한 토대</strong>를 다지는 것입니다.</p>
-<p>그 위에서, AI라는 강력한 도구를 단순한 장난감이 아닌, 그 결과물을 검증하고 신뢰할 수 있는 <strong>지적인 동료</strong>로 만드는 방법을 탐구합니다.</p>
-<p>나아가 이 모든 과정을 <strong>자동화</strong>하여, 버튼 클릭 한 번, 혹은 정해진 시간마다 스스로 전체 데이터 작업을 수행하고 결과를 도출하는 효율성의 극치를 경험하게 될 것입니다.</p>
-<p>이 책의 최종 목표는, 이 모든 것을 통합하여 <strong>매일 새로운 데이터를 바탕으로 AI의 지능을 빌려 새로운 지식을 창출하고, 그 결과를 정해진 형태로 만들어내는 하나의 완전한 ’자동화된 지능형 시스템’을 완성하는 것입니다.</strong></p>
-<p>이 책을 덮을 때쯤, 독자 여러분은 단순히 코드를 작성하는 사람을 넘어, 신뢰할 수 있고 자동화된 데이터 시스템을 설계하고 구축하는 전문가로 성장해 있을 것입니다. AI의 시대, 데이터로 진짜 문제를 해결하는 전문가가 되기 위한 여정을 이제 시작하겠습니다.</p>
-<section id="감사의-글" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="감사의-글">감사의 글</h2>
-<style>
-.flushright {
-   text-align: right;
-}
-</style>
-<p>이 책이 탄생할 수 있도록 도움을 주신 여러분께 깊은 감사의 마음을 표합니다.</p>
-<p>공익법인 한국 R 사용자회가 없었다면 데이터 과학분야 챗GPT 시리즈가 세상에 나오지 못했을 것입니다. 한국 R 사용자회의 유충현 회장님, 신종화 사무처장님, 홍성학 감사님, 올해부터 새롭게 공익법인 한국 R 사용자를 이끌어주실 형환희 회장님께 감사드립니다.</p>
-<p>또한 이 책은 2014년 처음 몸담게 된 소프트웨어 카펜트리 그렉 윌슨 박사님과 Python for Informatics 저자인 미시건 대학 찰스 세브란스 교수님을 비롯한 전세계 수많은 익명의 기여자들의 노력과 지원이 있었고, 서울 R 미트업에서 발표해주시고 참여해주신 수많은 분들이 격려와 영감을 주셨기에 가능했습니다.</p>
-<p>이 책이 출간되는데 있어 이들 모든 분들의 도움 없이는 어려웠을 것입니다. 그동안의 관심과 지원에 깊은 감사를 드리며, 이 책이 데이터 과학의 발전과 독자들에게 도움이 될 수 있기를 바라는 마음으로 마무리하겠습니다.</p>
-<div class="flushright">
-<p>2024년 3월 속초 청초호</p>
-<p>이광춘</p>
+<p>데이터 과학의 세계는 빠르게 변화하고 있으며, 이제 R과 Python이라는 두 개의 강력한 언어를 함께 사용하는 것이 표준이 되었습니다. R은 통계 분석과 시각화에 독보적인 강점을 가지고 있으며, Python은 머신러닝, 범용 프로그래밍, 그리고 시스템 통합에 널리 사용됩니다. 하지만 오랫동안 데이터 과학자들은 이 두 언어를 동시에 편안하게 사용할 수 있는 완벽한 통합 개발 환경(IDE)을 찾기 어려웠습니다. R 사용자에게는 RStudio가 있었고, Python 사용자에게는 다양한 선택지가 있었지만, 두 세계를 자연스럽게 넘나들기에는 항상 아쉬움이 남았습니다.</p>
+<p>이러한 문제의식에서 출발한 것이 바로 Posit(과거 RStudio)사가 개발한 차세대 데이터 과학 IDE, <strong>Positron</strong>입니다. Positron은 “하나의 팀, 두 개의 언어”라는 현실을 받아들이고, R과 Python을 모두 일급 시민(first-class citizen)으로 대우하는 현대적인 ‘다국어(polyglot)’ 개발 환경을 지향합니다.</p>
+<section id="positron의-철학-rstudio와-vs-code의-장점을-결합하다" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="positron의-철학-rstudio와-vs-code의-장점을-결합하다"><span class="header-section-number">2.1</span> Positron의 철학: RStudio와 VS Code의 장점을 결합하다</h2>
+<p>Positron의 핵심 철학은 RStudio의 <strong>데이터 과학 전문성</strong>과 Visual Studio Code(VS Code)의 <strong>현대적인 개발 경험</strong>을 결합하는 것입니다. 이를 위해 Positron은 VS Code의 오픈소스 버전인 ’Code OSS’를 기반으로 구축되었습니다. 그 결과, VS Code의 빠르고 유연한 인터페이스, 방대한 확장 기능 생태계, 그리고 강력한 코드 편집 기능을 그대로 가져오면서, RStudio가 수십 년간 쌓아온 데이터 과학 워크플로우에 대한 깊은 이해를 그 위에 녹여냈습니다.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-
-
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>왜 RStudio를 두고 Positron을 만들었을까?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“Positron이 등장했다면, 기존의 RStudio는 이제 사라지는 것일까?”라고 궁금해할 수 있습니다. Posit의 대답은 명확합니다: <strong>“아니요, RStudio는 계속됩니다.”</strong></p>
+<p>Positron의 개발은 RStudio를 대체하기 위함이 아닙니다. 두 IDE는 서로 다른 목표와 사용자를 가지고 있습니다.</p>
+<ul>
+<li><strong>RStudio</strong>는 R 언어에 깊이 집중하는 데이터 분석가와 통계학자를 위한 <strong>최고의 R 개발 환경</strong>으로 계속해서 발전하고 유지될 것입니다.</li>
+<li><strong>Positron</strong>은 R과 Python을 함께 사용하는 <strong>다국어 데이터 과학 팀</strong>과 개발자를 위한 새로운 선택지입니다.</li>
+</ul>
+<p>즉, Positron은 ’R 전용’이라는 RStudio의 성공적인 틀을 넘어, ’R과 Python 모두’를 필요로 하는 현대 데이터 과학의 새로운 요구에 부응하기 위한 Posit의 전략적인 확장인 셈입니다.</p>
+</div>
+</div>
 </section>
+<section id="ai-시대-positron은-데이터-과학을-어떻게-바꾸는가" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="ai-시대-positron은-데이터-과학을-어떻게-바꾸는가"><span class="header-section-number">2.2</span> AI 시대, Positron은 데이터 과학을 어떻게 바꾸는가?</h2>
+<p>Positron의 가장 큰 혁신은 단순한 다국어 지원을 넘어, <strong>AI 기능을 데이터 과학 워크플로우에 깊숙이 통합</strong>했다는 점에 있습니다. Positron의 AI 어시스턴트는 일반적인 코딩 도우미와 달리, 현재 실행 중인 R/Python 세션의 내부 상태(메모리에 올라온 데이터, 변수, 플롯 등)를 직접 파악하고 상호작용할 수 있습니다. 이는 데이터 과학자에게 다음과 같은 새로운 차원의 경험을 제공합니다.</p>
+<ol type="1">
+<li><strong>탐색적 데이터 분석(EDA)의 가속화</strong>: AI에게 “penguins 데이터셋에서 종(species)별로 몸무게(body_mass_g)의 분포를 박스플롯으로 그려줘” 와 같이 자연어로 요청할 수 있습니다. Positron의 AI는 현재 메모리에 있는 <code>penguins</code> 데이터프레임의 구조를 이해하고, 즉시 <code>ggplot2</code>나 <code>matplotlib</code> 코드를 생성하여 실행 결과를 플롯 창에 보여줍니다. 이로써 데이터 탐색의 초기 단계를 매우 빠르게 단축할 수 있습니다.</li>
+<li><strong>복잡한 데이터 전처리 코드의 자동화</strong>: “결측치가 있는 행을 제거하고, ‘bill_length_mm’와 ’bill_depth_mm’ 열만 선택해줘” 와 같은 데이터 전처리(data wrangling) 작업을 AI가 <code>dplyr</code>이나 <code>pandas</code> 코드로 즉시 변환해 줍니다. 개발자는 더 이상 세부적인 문법을 기억하는 데 에너지를 쏟는 대신, 데이터 분석의 큰 그림과 로직에 집중할 수 있습니다.</li>
+<li><strong>코드와 결과에 대한 지능적인 해석</strong>: “방금 실행한 선형 회귀 모델의 R-squared 값은 무엇을 의미하지?” 또는 “이 복잡한 <code>purrr</code> 코드를 단계별로 설명해줘” 와 같이, AI가 코드뿐만 아니라 통계 모델의 결과나 분석 과정에 대한 깊이 있는 해석을 제공합니다. 이는 데이터 과학자가 더 나은 통찰(insight)을 얻도록 돕는 지능형 파트너 역할을 합니다.</li>
+</ol>
+</section>
+<section id="rstudio-vs-code와-비교-언제-positron을-선택해야-할까" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="rstudio-vs-code와-비교-언제-positron을-선택해야-할까"><span class="header-section-number">2.3</span> RStudio, VS Code와 비교: 언제 Positron을 선택해야 할까?</h2>
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">특성</th>
+<th style="text-align: left;">RStudio</th>
+<th style="text-align: left;">VS Code</th>
+<th style="text-align: left;">Positron</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>주력 언어</strong></td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">범용 (모든 언어)</td>
+<td style="text-align: left;">R &amp; Python</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>주요 사용자</strong></td>
+<td style="text-align: left;">R 데이터 분석가, 통계학자</td>
+<td style="text-align: left;">모든 종류의 개발자</td>
+<td style="text-align: left;">다국어 데이터 과학자</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>설정</strong></td>
+<td style="text-align: left;">거의 필요 없음 (R에 최적화)</td>
+<td style="text-align: left;">높은 유연성 (직접 구성 필요)</td>
+<td style="text-align: left;">낮은 설정 (R/Python에 최적화)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>장점</strong></td>
+<td style="text-align: left;">R 생태계와의 완벽한 통합</td>
+<td style="text-align: left;">최고의 유연성과 확장성</td>
+<td style="text-align: left;">R/Python 동시 작업 및 AI 통합</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>단점</strong></td>
+<td style="text-align: left;">Python 지원 제한적</td>
+<td style="text-align: left;">데이터 과학 초기 설정 복잡</td>
+<td style="text-align: left;">일부 고급 기능 아직 개발 중</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>R만 사용한다면</strong>: 여전히 <strong>RStudio</strong>가 가장 안정적이고 편리한 선택입니다.</li>
+<li><strong>웹 개발 등 범용 프로그래밍이 주 목적이라면</strong>: 수많은 확장 기능을 갖춘 <strong>VS Code</strong>가 최고의 유연성을 제공합니다.</li>
+<li><strong>R과 Python을 함께 사용하며, 최신 AI 기능을 적극 활용하고 싶다면</strong>: <strong>Positron</strong>은 두 언어를 매끄럽게 오가며 AI의 지원을 받을 수 있는, 현재 가장 진보적인 환경을 제공합니다.</li>
+</ul>
+</section>
+<section id="결론-ai와-함께하는-데이터-과학의-미래" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="결론-ai와-함께하는-데이터-과학의-미래"><span class="header-section-number">2.4</span> 결론: AI와 함께하는 데이터 과학의 미래</h2>
+<p>Positron은 아직 베타 버전이며 RStudio의 일부 기능(예: R Markdown 프로파일링, 간편한 앱 배포)이 아직 구현되지 않았다는 한계가 있습니다. 하지만 R과 Python이 공존하는 현대 데이터 과학의 흐름을 가장 잘 반영하고, AI를 개발 워크플로우의 핵심으로 가져왔다는 점에서 그 미래가 더욱 기대됩니다.</p>
+<p>Positron은 단순히 새로운 도구가 아니라, Posit 팀이 그리는 ’미래의 데이터 과학 작업 환경’에 대한 청사진입니다. AI와 함께 더 빠르고, 더 깊이 있게 데이터 문제를 해결하고 싶은 데이터 과학자라면, Positron은 그 여정을 함께할 매우 흥미로운 파트너가 될 것입니다.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -729,10 +776,13 @@ ga('send', {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./ide.html" class="pagination-link" aria-label="IDE 선택의 여정: 역사부터 미래까지">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">IDE 선택의 여정: 역사부터 미래까지</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ide.html" class="pagination-link" aria-label="IDE 선택의 여정: 역사부터 미래까지">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">IDE 선택의 여정: 역사부터 미래까지</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ide_extension.html" class="pagination-link" aria-label="IDE 확장 프로그램: 필요성과 아키텍처">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램: 필요성과 아키텍처</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -744,7 +794,7 @@ ga('send', {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/ide_positron.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
 </div>
