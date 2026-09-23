@@ -89,12 +89,10 @@ book:
         - ide_positron.qmd
         - ide_extension.qmd
         - ide_setup.qmd
+        - shortcode.qmd
 
     - references.qmd 
 
-    - part: "6부: AI 데이터 과학 환경 구축"
-      chapters:
-        - lang_setup.qmd
 
 
 # ---------------------------------- #
